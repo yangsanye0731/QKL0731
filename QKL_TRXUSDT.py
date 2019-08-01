@@ -48,7 +48,7 @@ def strategy(name,zhouqi):
         ##############获取12小时数据#############################################################################
         since_time_12h = current_time - limit * 12 * 60 * 60 * 1000
         data_12h = gateio.fetch_ohlcv(symbol=name, timeframe='12h', limit=500, since=since_time_12h)
-        # time.sleep(2)
+        time.sleep(2)
 
         ##############获取30分钟数据#############################################################################
         # since_time_30 = current_time - limit * 1* 30 * 60 * 1000
@@ -193,10 +193,10 @@ def strategy(name,zhouqi):
 
 
     # ############################################ 15分钟均线趋势#############################################
-    # SMA30_15 = ta.SMA(doubleCloseArray, timeperiod=30)
-    # SMA30_15_6 = ta.SMA(doubleCloseArray, timeperiod=6)
-    # SMA30_15_12 = ta.SMA(doubleCloseArray, timeperiod=12)
-    # SMA30_15_24 = ta.SMA(doubleCloseArray, timeperiod=24)
+    SMA30_15 = ta.SMA(doubleCloseArray, timeperiod=30)
+    SMA30_15_6 = ta.SMA(doubleCloseArray, timeperiod=5)
+    SMA30_15_12 = ta.SMA(doubleCloseArray, timeperiod=10)
+    SMA30_15_24 = ta.SMA(doubleCloseArray, timeperiod=20)
     # #print("#####################################################################################15")
     # #print(SMA30_15)
     # str15 = ""
@@ -218,16 +218,16 @@ def strategy(name,zhouqi):
     # # print(SMA30_15_12)
     # # print(SMA30_15_24)
     # str15QuShi = ""
-    # if (SMA30_15_6[-1] > SMA30_15_6[-2] and SMA30_15_12[-1] > SMA30_15_12[-2] and SMA30_15_24[-1] > SMA30_15_24[-2]):
-    #     str15QuShi = "均线1小时坚定买入1"
-    #     if (SMA30_15_6[-2] > SMA30_15_6[-3] and SMA30_15_12[-2] > SMA30_15_12[-3] and SMA30_15_24[-2] > SMA30_15_24[-3]):
-    #         str15QuShi = "均线1小时坚定买入2"
-    # elif (SMA30_15_6[-1] < SMA30_15_6[-2] and SMA30_15_12[-1] < SMA30_15_12[-2] and SMA30_15_24[-1] < SMA30_15_24[-2]):
-    #     str15QuShi = "均线1小时坚定卖出1"
-    #     if (SMA30_15_6[-2] < SMA30_15_6[-3] and SMA30_15_12[-2] < SMA30_15_12[-3] and SMA30_15_24[-2] < SMA30_15_24[-3]):
-    #         str15QuShi = "均线1小时坚定卖出2"
-    # else:
-    #     str15QuShi = "均线1小时坚定空仓"
+    if (SMA30_15_6[-1] > SMA30_15_6[-2] and SMA30_15_12[-1] > SMA30_15_12[-2] and SMA30_15_24[-1] > SMA30_15_24[-2]):
+        str15QuShi = "均线1小时坚定买入1"
+        if (SMA30_15_6[-2] > SMA30_15_6[-3] and SMA30_15_12[-2] > SMA30_15_12[-3] and SMA30_15_24[-2] > SMA30_15_24[-3]):
+            str15QuShi = "均线1小时坚定买入2"
+    elif (SMA30_15_6[-1] < SMA30_15_6[-2] and SMA30_15_12[-1] < SMA30_15_12[-2] and SMA30_15_24[-1] < SMA30_15_24[-2]):
+        str15QuShi = "均线1小时坚定卖出1"
+        if (SMA30_15_6[-2] < SMA30_15_6[-3] and SMA30_15_12[-2] < SMA30_15_12[-3] and SMA30_15_24[-2] < SMA30_15_24[-3]):
+            str15QuShi = "均线1小时坚定卖出2"
+    else:
+        str15QuShi = "均线1小时坚定空仓"
 
 
 
@@ -378,7 +378,7 @@ def strategy(name,zhouqi):
     #         sendMail(name_jian + "%.3f" % closeArray[-1] + strQuShi + strRSI + strMA,
     #                  name_jian + "%.3f" % closeArray[-1] + strQuShi + strRSI + strMA)
     if (zhouqi == '1h'):
-            sendMail(name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1],
-                     name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1])
+            sendMail(name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str15QuShi,
+                     name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str15QuShi)
 
 strategy("EOS/USDT","1h")
