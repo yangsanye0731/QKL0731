@@ -40,10 +40,10 @@ def strategy():
             if (ma5[-1] > ma5[-2] and ma10[-1] > ma10[-2] and ma20[-1] > ma20[-2]):
                 if (ma5[-2] > ma5[-3] and ma10[-2] > ma10[-3] and ma20[-2] > ma20[-3]):
                     continue
-                strResult += "编号:" + codeItem + "名称：" + common.gupiaomingcheng(codeItem) + "<br></br>"
+                strResult += "编号:" + codeItem + "名称：" + common.gupiaomingcheng(codeItem) + "涨跌幅：" + common.zhangdiefu(codeItem) + "<br></br>"
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return strResult
 
 strMailResult = strategy()
-print(strMailResult)
+sendMail(template1(strMailResult), "四线俱升")

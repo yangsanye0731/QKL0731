@@ -25,8 +25,8 @@ def gupiaomingcheng(code):
      if (code == '000001'):
           return '上证指数'
      data_realTime = ts.get_realtime_quotes(code)
-     #nameArray = data_realTime['name']
-     return "he"
+     nameArray = data_realTime['name']
+     return nameArray[0]
 
 
 def shijinglv(code):
