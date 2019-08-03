@@ -38,7 +38,9 @@ str0 = strategy("399006", " 创业")
 str1 = strategy("002281", " 光迅")
 str2 = strategy("000625", " 长安")
 str3 = strategy("300136", " 信维")
+str4 = strategy("300383", " 光环")
+str5 = strategy("600498", " 烽火")
 
-content = str0 + str1 + str2 + str3
-title = str0 + str1 + str2 + str3
+content = str0 + str1 + str2 + str3 + str4 + str5
+title = str0 + str1 + str2 + str3 + str4 + str5
 sendMail (content, title)
