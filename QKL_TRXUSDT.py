@@ -180,15 +180,15 @@ def strategy(name,zhouqi):
 
     str15MQuShi = ""
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2]):
-        str15MQuShi = "均线15分钟坚定买入1"
+        str15MQuShi = "均线15M买入1【关注MACD慢线同步】"
         if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3]):
-            str15MQuShi = "均线15分钟坚定买入2"
+            str15MQuShi = "均线15M买入2【关注MACD慢线同步】"
     elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2]):
-        str15MQuShi = "均线15分钟坚定卖出1"
+        str15MQuShi = "均线15M卖出1【关注MACD慢线同步】"
         if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3]):
-            str15MQuShi = "均线15分钟坚定卖出2"
+            str15MQuShi = "均线15M卖出2【关注MACD慢线同步】"
     else:
-        str15MQuShi = "均线15分钟坚定空仓"
+        str15MQuShi = "均线15M空仓【关注MACD慢线同步】"
 
 
     ############################################# 1小时均线趋势#############################################
@@ -199,15 +199,15 @@ def strategy(name,zhouqi):
 
     str1HQuShi = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2]):
-        str1HQuShi = "均线1小时坚定买入1"
+        str1HQuShi = "均线1H买入1【关注MACD慢线同步】"
         if (SMA30_1h_5[-2] > SMA30_1h_5[-3] and SMA30_1h_10[-2] > SMA30_1h_10[-3] and SMA30_1h_20[-2] > SMA30_1h_20[-3]):
-            str1HQuShi = "均线1小时坚定买入2"
+            str1HQuShi = "均线1H买入2【关注MACD慢线同步】"
     elif (SMA30_1h_5[-1] < SMA30_1h_5[-2] and SMA30_1h_10[-1] < SMA30_1h_10[-2] and SMA30_1h_20[-1] < SMA30_1h_20[-2]):
-        str1HQuShi = "均线1小时坚定卖出1"
+        str1HQuShi = "均线1H卖出1【关注MACD慢线同步】"
         if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3]):
-            str1HQuShi = "均线1小时坚定卖出2"
+            str1HQuShi = "均线1H卖出2【关注MACD慢线同步】"
     else:
-        str1HQuShi = "均线1小时坚定空仓"
+        str1HQuShi = "均线1H空仓【关注MACD慢线同步】"
 
     ############################################ 30分钟均线趋势#############################################
     # SMA30_30 = ta.SMA(doubleCloseArray_30, timeperiod=30)
@@ -276,9 +276,9 @@ def strategy(name,zhouqi):
     ############################################ 04小时STOCHRSI#############################################
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
-
-    strRSI_1H = " 周期1H:" + "%.1f" % fastd_1H[-3] + "/" + "%.1f" % fastd_1H[-2] + "/" + "%.1f" % fastd_1H[-1]
-    strRSI_4H = " 周期4H:" + "%.1f" % fastd_4H[-3] + "/" + "%.1f" % fastd_4H[-2] + "/" + "%.1f" % fastd_4H[-1]
+    strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-3] + "/" + "%.1f" % fastd_1H[-2] + "/" + "%.1f" % fastd_1H[-1]
+    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "/" + "%.1f" % fastd_1H[-2] + "/" + "%.1f" % fastd_1H[-1]
+    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "/" + "%.1f" % fastd_4H[-2] + "/" + "%.1f" % fastd_4H[-1]
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
@@ -300,7 +300,7 @@ def strategy(name,zhouqi):
     upperband = upperband / 1000
     middleband = middleband / 1000
     lowerband = lowerband / 1000
-
+    strBULL4 = "BULL4H:【超上下】" + "%.2f" % upperband[-1] + "/" + "%.2f" % middleband[-1] + "/" + "%.2f" % lowerband[-1]
     #print(lowerband)
 
 
@@ -358,14 +358,16 @@ def strategy(name,zhouqi):
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi,
     #                  name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + \
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi)
+    title = name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title
+    content = name_jian + "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
+                     "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
+    return title, content
 
-    return name_jian + "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
-                     "<br>" + "BULL4H:" + "%.2f" % upperband[-1] + "/" + "%.2f" % middleband[-1] + "/" + "%.2f" % lowerband[-1] + "<br>" + str15MQuShi + "<br>" + str1HQuShi
+title0,content0 = strategy("BTC/USDT","1h")
+title1, content1 = strategy("ETH/USDT","1h")
+title2, content2 = strategy("EOS/USDT","1h")
 
-str0 = strategy("EOS/USDT","1h")
-str1 = strategy("BTC/USDT","1h")
-
-content = str0 + "<br>" +  str1
-title = str0 + "<br>" +  str1
+content = content0 + "<br><hr>" +  content1 + "<br><hr>" + content2
+title = title0 + title1 + title2
 
 sendMail(content, title)
