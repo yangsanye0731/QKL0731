@@ -34,13 +34,15 @@ def strategy(code, name):
      #sendMail(name + "%.1f" % closeArray[-1]  + "_" + str15QuShi, name + "%.1f" % closeArray[-1]  + "_" + str15QuShi)
      return name + str15QuShi
 
-str0 = strategy("399006", " 创业")
+str0 = strategy("399006", "创业")
 str1 = strategy("002281", " 光迅")
 str2 = strategy("000625", " 长安")
 str3 = strategy("300136", " 信维")
 str4 = strategy("300383", " 光环")
 str5 = strategy("600498", " 烽火")
+str6 = strategy("000739", " 普洛")
+str7 = strategy("300328", " 宜安")
 
-content = str0 + str1 + str2 + str3 + str4 + str5
-title = str0 + str1 + str2 + str3 + str4 + str5
+content = str0 + str1 + str2 + str3 + str4 + str5 + str6 + str7
+title = str0 + str1 + str2 + str3 + str4 + str5 + str6 + str7
 sendMail (content, title)
