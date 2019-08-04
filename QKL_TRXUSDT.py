@@ -368,5 +368,4 @@ str1 = strategy("BTC/USDT","1h")
 content = str0 + "<br>" +  str1
 title = str0 + "<br>" +  str1
 
-print(content)
 sendMail(content, title)
