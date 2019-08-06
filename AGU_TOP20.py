@@ -58,16 +58,6 @@ def execute_shanghai_1(days):
     jsonDic1 = sorted(jsonDic.items(),key=lambda x:x[1])
     return jsonDic1
 
-# print("===========================05天：")
-# print (execute_shenzhen_1(5))
-# print("===========================10天：")
-# print(execute_shenzhen_1(10))
-# print("===========================30天：")
-# print(execute_shenzhen_1(30))
-# print("===========================60天：")
-# time.sleep(60)
-# print(execute_shenzhen_1(60))
-
 print("===========================05天：")
 content1 = "===========================深圳05天：<br></br>" + str(execute_shenzhen_1(5)) + "<br></br>"
 print("===========================10天：")
