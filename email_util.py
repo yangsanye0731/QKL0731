@@ -72,7 +72,7 @@ def sendMail(content,title):
     smtp_server = 'smtp.qq.com'
 
     msg = MIMEText(content, 'html', 'utf-8')
-    msg['From'] = _format_addr(u'1看2想大势3快止损 <%s>' % from_addr)
+    msg['From'] = _format_addr(u'====邮件来了==== <%s>' % from_addr)
     msg['To'] = _format_addr(u'管理员 <%s>' % to_addr)
     msg['Subject'] = Header(title, 'utf-8').encode()
 
