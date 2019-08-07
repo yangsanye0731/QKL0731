@@ -372,7 +372,6 @@ def strategy(name,zhouqi):
 title0,content0 = strategy("BTC/USDT","1h")
 title1, content1 = strategy("ETH/USDT","1h")
 title2, content2 = strategy("EOS/USDT","1h")
-
 content = content0 + "<br><hr>" +  content1 + "<br><hr>" + content2
 title = title0 + title1 + title2
 
