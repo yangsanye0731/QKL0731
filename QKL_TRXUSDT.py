@@ -149,6 +149,8 @@ def strategy(name,zhouqi):
     data_4h = data_4h.rename(columns={0: 'open_time', 1: 'open', 2: 'high', 3: 'low', 4: 'close', 5: 'volume'})
     data_4h['open_time'] = pd.to_datetime(data_4h['open_time'], unit='ms') + pd.Timedelta(hours=8)
     closeArray_4h = num.array(data_4h['close'])
+    lowArray_4h = num.array(data_4h['low'])
+    highArray_4h = num.array(data_4h['high'])
     doubleCloseArray_4h = num.asarray(closeArray_4h, dtype='double')
 
 
@@ -307,7 +309,13 @@ def strategy(name,zhouqi):
     middleband = middleband / 1000
     lowerband = lowerband / 1000
     strBULL4 = "BULL4H:【超上下】" + "%.2f" % upperband[-1] + "/" + "%.2f" % middleband[-1] + "/" + "%.2f" % lowerband[-1]
-    #print(lowerband)
+
+    strBULL4_title = "中间"
+    if (highArray_4h[-1] > upperband[-1]):
+        strBULL4_title = "上穿"
+
+    if  (lowArray_4h[-1] < upperband[-1]):
+        strBULL4_title = "下穿"
 
 
 
@@ -364,7 +372,9 @@ def strategy(name,zhouqi):
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi,
     #                  name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + \
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi)
-    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title
+    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
+    if (closeArray[-1] > 100):
+        title = " " + name_jian + round(closeArray[-1]) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     content = name_jian + "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
