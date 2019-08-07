@@ -374,7 +374,7 @@ def strategy(name,zhouqi):
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi)
     title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     if (closeArray[-1] > 100):
-        title = " " + name_jian + round("%.2f" % closeArray[-1]) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
+        title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     content = name_jian + "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
