@@ -314,7 +314,7 @@ def strategy(name,zhouqi):
     if (highArray_4h[-1] > upperband[-1]):
         strBULL4_title = "上穿"
 
-    if  (lowArray_4h[-1] < upperband[-1]):
+    if  (lowArray_4h[-1] < lowerband[-1]):
         strBULL4_title = "下穿"
 
 
