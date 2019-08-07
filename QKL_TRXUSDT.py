@@ -198,16 +198,22 @@ def strategy(name,zhouqi):
     SMA30_1h_30 = ta.SMA(doubleCloseArray, timeperiod=30)
 
     str1HQuShi = ""
+    str1HQuShi_title = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2]):
         str1HQuShi = "均线1H买入1【关注MACD慢线同步】"
+        str1HQuShi_title = "买1"
         if (SMA30_1h_5[-2] > SMA30_1h_5[-3] and SMA30_1h_10[-2] > SMA30_1h_10[-3] and SMA30_1h_20[-2] > SMA30_1h_20[-3]):
             str1HQuShi = "均线1H买入2【关注MACD慢线同步】"
+            str1HQuShi_title = "买2"
     elif (SMA30_1h_5[-1] < SMA30_1h_5[-2] and SMA30_1h_10[-1] < SMA30_1h_10[-2] and SMA30_1h_20[-1] < SMA30_1h_20[-2]):
         str1HQuShi = "均线1H卖出1【关注MACD慢线同步】"
+        str1HQuShi_title = "卖1"
         if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3]):
             str1HQuShi = "均线1H卖出2【关注MACD慢线同步】"
+            str1HQuShi_title = "卖2"
     else:
         str1HQuShi = "均线1H空仓【关注MACD慢线同步】"
+        str1HQuShi_title = "空"
 
     ############################################ 30分钟均线趋势#############################################
     # SMA30_30 = ta.SMA(doubleCloseArray_30, timeperiod=30)
@@ -276,7 +282,7 @@ def strategy(name,zhouqi):
     ############################################ 04小时STOCHRSI#############################################
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
-    strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-3] + "/" + "%.1f" % fastd_1H[-2] + "/" + "%.1f" % fastd_1H[-1]
+    strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
     strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "/" + "%.1f" % fastd_1H[-2] + "/" + "%.1f" % fastd_1H[-1]
     strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "/" + "%.1f" % fastd_4H[-2] + "/" + "%.1f" % fastd_4H[-1]
 
@@ -358,7 +364,7 @@ def strategy(name,zhouqi):
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi,
     #                  name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + \
     #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi)
-    title = name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title
+    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title
     content = name_jian + "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
