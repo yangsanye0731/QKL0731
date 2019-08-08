@@ -40,7 +40,7 @@ if (str1.endswith("买 ")):
 else:
      titleTmp = titleTmp + str1
 
-str2 = strategy("000625", " 长安")
+str2 = strategy("000625", " 长安※")
 if (str2.endswith("买 ")):
      titleTmp = str2 + titleTmp
 else:
