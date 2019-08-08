@@ -88,6 +88,7 @@ if (str9.endswith("买 ")):
 else:
      titleTmp = titleTmp + str9
 
+
 content = str0 + titleTmp
 title = str0 + titleTmp
 sendMail (content, title)
