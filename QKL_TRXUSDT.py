@@ -182,15 +182,15 @@ def strategy(name,zhouqi):
 
     str15MQuShi = ""
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2]):
-        str15MQuShi = "均线15M买入1【关注MACD慢线同步】"
+        str15MQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1【关注MACD慢线同步】"
         if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3]):
-            str15MQuShi = "均线15M买入2【关注MACD慢线同步】"
+            str15MQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>2【关注MACD慢线同步】"
     elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2]):
-        str15MQuShi = "均线15M卖出1【关注MACD慢线同步】"
+        str15MQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1【关注MACD慢线同步】"
         if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3]):
-            str15MQuShi = "均线15M卖出2【关注MACD慢线同步】"
+            str15MQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>2【关注MACD慢线同步】"
     else:
-        str15MQuShi = "均线15M空仓【关注MACD慢线同步】"
+        str15MQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>【关注MACD慢线同步】"
 
 
     ############################################# 1小时均线趋势#############################################
@@ -202,19 +202,19 @@ def strategy(name,zhouqi):
     str1HQuShi = ""
     str1HQuShi_title = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2] and SMA30_1h_30[-1] > SMA30_1h_30[-2]):
-        str1HQuShi = "均线1H买入1【关注MACD慢线同步】"
+        str1HQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>1【关注MACD慢线同步】"
         str1HQuShi_title = "买1"
         if (SMA30_1h_5[-2] > SMA30_1h_5[-3] and SMA30_1h_10[-2] > SMA30_1h_10[-3] and SMA30_1h_20[-2] > SMA30_1h_20[-3] and SMA30_1h_30[-2] > SMA30_1h_30[-3]):
-            str1HQuShi = "均线1H买入2【关注MACD慢线同步】"
+            str1HQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>2【关注MACD慢线同步】"
             str1HQuShi_title = "买2"
     elif (SMA30_1h_5[-1] < SMA30_1h_5[-2] and SMA30_1h_10[-1] < SMA30_1h_10[-2] and SMA30_1h_20[-1] < SMA30_1h_20[-2] and SMA30_1h_30[-1] < SMA30_1h_30[-2]):
-        str1HQuShi = "均线1H卖出1【关注MACD慢线同步】"
+        str1HQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>1【关注MACD慢线同步】"
         str1HQuShi_title = "卖1"
         if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3] and SMA30_1h_30[-2] > SMA30_1h_30[-3]):
-            str1HQuShi = "均线1H卖出2【关注MACD慢线同步】"
+            str1HQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>2【关注MACD慢线同步】"
             str1HQuShi_title = "卖2"
     else:
-        str1HQuShi = "均线1H空仓【关注MACD慢线同步】"
+        str1HQuShi = "均线<span style=\"color:#FF0000;font-weight:bold\">01小时空仓</span>【关注MACD慢线同步】"
         str1HQuShi_title = "空"
 
     ############################################ 30分钟均线趋势#############################################
@@ -286,7 +286,7 @@ def strategy(name,zhouqi):
                                fastd_period=3, fastd_matype=3)
     strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
     strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "<span style=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_1H[-1] + "</span>"
-    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "<span strle=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_4H[-1] + "</span>"
+    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "<span style=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_4H[-1] + "</span>"
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
@@ -316,7 +316,7 @@ def strategy(name,zhouqi):
     if  (lowArray_4h[-1] < lowerband[-1]):
         strBULL4_title = "下穿"
 
-    strBULL4 = "BULL4H【超上下】" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + " " + strBULL4_title
+    strBULL4 = "BULL4H【超上下】" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + " " +  "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL4_title + "</span>"
 
 
     #######################################################################################################
