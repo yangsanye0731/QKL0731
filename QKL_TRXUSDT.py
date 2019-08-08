@@ -285,8 +285,8 @@ def strategy(name,zhouqi):
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
     strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
-    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "/" + "%.1f" % fastd_1H[-2] + "/" + "%.1f" % fastd_1H[-1]
-    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "/" + "%.1f" % fastd_4H[-2] + "/" + "%.1f" % fastd_4H[-1]
+    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "%.1f" % fastd_1H[-1]
+    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "%.1f" % fastd_4H[-1]
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
@@ -375,7 +375,7 @@ def strategy(name,zhouqi):
     title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
-    content = name_jian + "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
+    content = name_jian + " "+ "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
 
@@ -383,8 +383,10 @@ title0,content0 = strategy("BTC/USDT","1h")
 title1, content1 = strategy("ETH/USDT","1h")
 title2, content2 = strategy("EOS/USDT","1h")
 
-mulu = "===================================<br>"
-content = mulu + mulu + mulu + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2
+mulu1 = "=================================<br>"
+mulu2 = "===========圈 子 日 报============<br>"
+mulu3 = "=================================<br>"
+content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2
 title = title0 + title1 + title2
 
 sendMail(content, title)
