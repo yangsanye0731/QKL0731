@@ -361,18 +361,6 @@ def strategy(name,zhouqi):
     #####                                                                                             #####
     #######################################################################################################
     name_jian = name[0:3]
-    # if (zhouqi == '1h'):
-    #     if (fastd[-1] < 50):
-    #         sendMail(name_jian + "%.3f" % closeArray[-1] + strQuShi + strRSI + strMA,
-    #                  name_jian + "%.3f" % closeArray[-1] + strQuShi + strRSI + strMA)
-    #     if (fastd[-1] > 50):
-    #         sendMail(name_jian + "%.3f" % closeArray[-1] + strQuShi + strRSI + strMA,
-    #                  name_jian + "%.3f" % closeArray[-1] + strQuShi + strRSI + strMA)
-    # if (zhouqi == '1h'):
-    #         sendMail(name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + \
-    #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi,
-    #                  name_jian + "%.3f" % closeArray[-1] + " RSI4H:" + "%.1f" % fastd[-3] + "_" + "%.1f" % fastd[-2] + "_" + "%.1f" % fastd[-1] + \
-    #                  " BULL4H:" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + "_" + str1HQuShi)
     title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
