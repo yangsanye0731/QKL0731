@@ -317,6 +317,8 @@ def strategy(name,zhouqi):
         strBULL4_title = "下穿"
 
     strBULL4 = "BULL4H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + " " +  "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL4_title + "</span>"
+    if (closeArray[-1] > 100):
+        strBULL4 = "BULL4H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL4_title + "</span>"
 
 
     #######################################################################################################
@@ -373,7 +375,7 @@ def strategy(name,zhouqi):
     title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
-    content = name_jian + " "+ "%.3f" % closeArray[-1] + "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
+    content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + "</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
 
