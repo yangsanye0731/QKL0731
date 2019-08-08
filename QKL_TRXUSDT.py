@@ -285,8 +285,8 @@ def strategy(name,zhouqi):
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
     strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
-    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "<font color=\"red\">" + "%.1f" % fastd_1H[-1] + "</font>"
-    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "<font color=\"red\">" + "%.1f" % fastd_4H[-1] + "</font>"
+    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "<span style=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_1H[-1] + "</span>"
+    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "<span strle=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_4H[-1] + "</span>"
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
