@@ -384,7 +384,7 @@ title1, content1 = strategy("ETH/USDT","1h")
 title2, content2 = strategy("EOS/USDT","1h")
 
 mulu1 = "=================================<br>"
-mulu2 = "===========圈 子 日 报============<br>"
+mulu2 = "===========圈=子=日=报============<br>"
 mulu3 = "=================================<br>"
 content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2
 title = title0 + title1 + title2
