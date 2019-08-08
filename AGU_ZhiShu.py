@@ -31,7 +31,7 @@ def strategy(code, name):
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      return name + str15QuShi
 
-str0 = strategy("399006", "注意均线形态创业")
+str0 = strategy("399006", "※均线形态创业")
 
 titleTmp = ""
 str1 = strategy("002281", " 光迅")
