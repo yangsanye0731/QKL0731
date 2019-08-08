@@ -199,6 +199,7 @@ def strategy(name,zhouqi):
     SMA30_1h_20 = ta.SMA(doubleCloseArray, timeperiod=20)
     SMA30_1h_30 = ta.SMA(doubleCloseArray, timeperiod=30)
 
+    print(SMA30_1h_5)
     str1HQuShi = ""
     str1HQuShi_title = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2] and SMA30_1h_30[-1] > SMA30_1h_30[-2]):
