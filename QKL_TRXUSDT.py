@@ -285,8 +285,8 @@ def strategy(name,zhouqi):
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
     strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
-    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "%.1f" % fastd_1H[-1]
-    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "%.1f" % fastd_4H[-1]
+    strRSI_1H = " RSI1小时【关注0,100】:" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "<font color=\"red\">" + "%.1f" % fastd_1H[-1] + "</font>"
+    strRSI_4H = " RSI4小时【关注0,100】:" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "<font color=\"red\">" + "%.1f" % fastd_4H[-1] + "</font>"
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
@@ -308,7 +308,6 @@ def strategy(name,zhouqi):
     upperband = upperband / 1000
     middleband = middleband / 1000
     lowerband = lowerband / 1000
-    strBULL4 = "BULL4H:【超上下】" + "%.2f" % upperband[-1] + "/" + "%.2f" % middleband[-1] + "/" + "%.2f" % lowerband[-1]
 
     strBULL4_title = "中间"
     if (highArray_4h[-1] > upperband[-1]):
@@ -317,8 +316,7 @@ def strategy(name,zhouqi):
     if  (lowArray_4h[-1] < lowerband[-1]):
         strBULL4_title = "下穿"
 
-
-
+    strBULL4 = "BULL4H【超上下】" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + " " + strBULL4_title
 
 
     #######################################################################################################
