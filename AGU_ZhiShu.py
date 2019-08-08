@@ -31,7 +31,7 @@ def strategy(code, name):
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      return name + str15QuShi
 
-str0 = strategy("399006", "创业")
+str0 = strategy("399006", "注意均线形态创业")
 
 titleTmp = ""
 str1 = strategy("002281", " 光迅")
@@ -40,7 +40,7 @@ if (str1.endswith("买 ")):
 else:
      titleTmp = titleTmp + str1
 
-str2 = strategy("000625", " 长安※")
+str2 = strategy("000625", " 长安")
 if (str2.endswith("买 ")):
      titleTmp = str2 + titleTmp
 else:
