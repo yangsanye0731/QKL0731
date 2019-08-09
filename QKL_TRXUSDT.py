@@ -153,11 +153,14 @@ def strategy(name,zhouqi):
     highArray_4h = num.array(data_4h['high'])
     doubleCloseArray_4h = num.asarray(closeArray_4h, dtype='double')
 
-
-
-
-
-
+    ############################################ 06小时数据处理############################################
+    data_6h = pd.DataFrame(data_6h)
+    data_6h = data_6h.rename(columns={0: 'open_time', 1: 'open', 2: 'high', 3: 'low', 4: 'close', 5: 'volume'})
+    data_6h['open_time'] = pd.to_datetime(data_6h['open_time'], unit='ms') + pd.Timedelta(hours=8)
+    closeArray_6h = num.array(data_6h['close'])
+    lowArray_6h = num.array(data_6h['low'])
+    highArray_6h = num.array(data_6h['high'])
+    doubleCloseArray_6h = num.asarray(closeArray_6h, dtype='double')
 
     #######################################################################################################
     #####                                                                                             #####
@@ -304,6 +307,7 @@ def strategy(name,zhouqi):
     #
     # strMA = " M15:" + "%.1f" % (macdsignal[-3]*100) + "/" + "%.1f" % (macdsignal[-2]*100) + "/" + "%.1f" % (macdsignal[-1]*100)
     #
+
     ############################################ 4小时布林线    ###############################################
     upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_4h*1000, timeperiod=20, nbdevup=2, nbdevdn=2, matype=0)
     upperband = upperband / 1000
@@ -321,6 +325,25 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         strBULL4 = "BULL4H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL4_title + "</span>"
 
+    ############################################ 6小时布林线    ###############################################
+    upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_6h * 1000, timeperiod=20, nbdevup=2, nbdevdn=2,
+                                                 matype=0)
+    upperband = upperband / 1000
+    middleband = middleband / 1000
+    lowerband = lowerband / 1000
+
+    strBULL6_title = "中间"
+    if (highArray_6h[-1] > upperband[-1]):
+        strBULL6_title = "上穿"
+
+    if (lowArray_6h[-1] < lowerband[-1]):
+        strBULL6_title = "下穿"
+
+    strBULL6 = "BULL6H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[
+        -1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL6_title + "</span>"
+    if (closeArray[-1] > 100):
+        strBULL6 = "BULL6H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + "_" + str(
+            int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL6_title + "</span>"
 
     #######################################################################################################
     #####                                                                                             #####
@@ -365,7 +388,7 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + "</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
-                     "<br>" + strBULL4 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
+                     "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
