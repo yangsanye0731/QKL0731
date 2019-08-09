@@ -46,7 +46,7 @@ if (str2.endswith("买 ")):
 else:
      titleTmp = titleTmp + str2
 
-str3 = strategy("300136", " 信维")
+str3 = strategy("300136", " @信维")
 if (str3.endswith("买 ")):
      titleTmp = str3 + titleTmp
 else:
@@ -87,6 +87,12 @@ if (str9.endswith("买 ")):
      titleTmp = str9 + titleTmp
 else:
      titleTmp = titleTmp + str9
+
+str10 = strategy("300584", " @海辰")
+if (str10.endswith("买 ")):
+     titleTmp = str10 + titleTmp
+else:
+     titleTmp = titleTmp + str10
 
 
 content = str0 + titleTmp
