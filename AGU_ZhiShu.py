@@ -29,7 +29,7 @@ def strategy(code, name):
           str15QuShi = "空 "
 
      ############################################ 60分钟布林线###############################################
-     data_history_60 = ts.get_k_data(code, ktype="D")
+     data_history_60 = ts.get_k_data(code, ktype="60")
 
      closeArray_60 = num.array(data_history_60['close'])
      highArray_60 = num.array(data_history_60['high'])
@@ -53,7 +53,7 @@ def strategy(code, name):
              "%.2f" % lowerband_60[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
              strBULL60_title + "</span>"
      if (closeArray[-1] > 100):
-         strBULL60 = "BULL1D：" + str(int(round(upperband_60[-1]))) + "_" + str(int(round(middleband_60[-1]))) + \
+         strBULL60 = "BULL60：" + str(int(round(upperband_60[-1]))) + "_" + str(int(round(middleband_60[-1]))) + \
                  "_" + str(int(round(lowerband_60[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
                   strBULL60_title + "</span>"
 
