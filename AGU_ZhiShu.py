@@ -28,6 +28,35 @@ def strategy(code, name):
      else:
           str15QuShi = "空 "
 
+     ############################################ 60分钟布林线###############################################
+     data_history_60 = ts.get_k_data(code, ktype="D")
+
+     closeArray_60 = num.array(data_history_60['close'])
+     highArray_60 = num.array(data_history_60['high'])
+     lowArray_60 = num.array(data_history_60['low'])
+
+     doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+     doubleHighArray_60 = num.asarray(highArray_60, dtype='double')
+     doubleLowArray_60 = num.asarray(lowArray_60, dtype='double')
+
+     upperband_60, middleband_60, lowerband_60 = ta.BBANDS(doubleCloseArray_60, timeperiod=20, nbdevup=2, nbdevdn=2,
+                                                     matype=0)
+
+     strBULL60_title = "中间"
+     if (highArray_60[-1] > upperband_60[-1]):
+         strBULL60_title = "上穿"
+
+     if (lowArray_60[-1] < lowerband_60[-1]):
+         strBULL60_title = "下穿"
+
+     strBULL60 = "BULL160：" + "%.2f" % upperband_60[-1] + "_" + "%.2f" % middleband_60[-1] + "_" + \
+             "%.2f" % lowerband_60[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+             strBULL60_title + "</span>"
+     if (closeArray[-1] > 100):
+         strBULL60 = "BULL1D：" + str(int(round(upperband_60[-1]))) + "_" + str(int(round(middleband_60[-1]))) + \
+                 "_" + str(int(round(lowerband_60[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+                  strBULL60_title + "</span>"
+
      ############################################ 1天布林线    ###############################################
      data_history_D = ts.get_k_data(code, ktype="D")
 
@@ -59,7 +88,8 @@ def strategy(code, name):
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + str15QuShi
-     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + "</span>" + "<br>" + strBULL1
+     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + "</span>" + \
+               "<br>" + strBULL60 + "<br>" + strBULL1
 
      return title, content
 
