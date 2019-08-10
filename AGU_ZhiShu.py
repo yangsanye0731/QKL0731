@@ -34,7 +34,7 @@ def strategy(code, name):
      content = name + str15QuShi
      return title, content
 
-str0 = strategy("399006", "※均线形态创业")
+str0,content0 = strategy("399006", "※均线形态创业")
 
 titleTmp = ""
 str1, content1 = strategy("002281", " 光迅")
@@ -108,7 +108,7 @@ title = str0 + titleTmp
 mulu1 = "=================================<br>"
 mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
 mulu3 = "=================================<br>"
-content = mulu1 + mulu2 + mulu3 + content1  + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" \
+content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content1  + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" \
           + content4 + "<br><hr>" + content5 + "<br><hr>" + content6 + "<br><hr>" + content7 + "<br><hr>" \
           + content8 + "<br><hr>" + content9 + "<br><hr>" + content10 + "<br><hr>" + content11
 
