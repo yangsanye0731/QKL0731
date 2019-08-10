@@ -29,7 +29,7 @@ def strategy(code, name):
           str15QuShi = "空 "
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     titile = name + str15QuShi
+     title = name + str15QuShi
 
      content = name + str15QuShi
      return title, content
