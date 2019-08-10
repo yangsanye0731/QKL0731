@@ -7,6 +7,7 @@ import talib as ta
 from email_util import *
 
 def strategy(code, name):
+     ############################################ 15分钟布林线###############################################
      data_history = ts.get_k_data(code, ktype = "15")
 
      closeArray = num.array(data_history['close'])
@@ -17,16 +18,19 @@ def strategy(code, name):
      doubleHighArray = num.asarray(highArray,dtype='double')
      doubleLowArray = num.asarray(lowArray,dtype='double')
 
-     SMA30_15_4 = ta.SMA(doubleCloseArray, timeperiod=5)
-     SMA30_15_8 = ta.SMA(doubleCloseArray, timeperiod=10)
+     SMA30_15_5 = ta.SMA(doubleCloseArray, timeperiod=5)
+     SMA30_15_10 = ta.SMA(doubleCloseArray, timeperiod=10)
      SMA30_15_20 = ta.SMA(doubleCloseArray, timeperiod=20)
 
-     if (SMA30_15_4[-1] > SMA30_15_4[-2] and SMA30_15_8[-1] > SMA30_15_8[-2] and SMA30_15_20[-1] > SMA30_15_20[-2]):
+     if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2]):
           str15QuShi = "买 "
-     elif (SMA30_15_4[-1] < SMA30_15_4[-2] and SMA30_15_8[-1] < SMA30_15_8[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
+          str15QuShi_content = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>"
+     elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
           str15QuShi = "卖 "
+          str15QuShi_content = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>"
      else:
           str15QuShi = "空 "
+          str15QuShi_content = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
 
      ############################################ 60分钟布林线###############################################
      data_history_60 = ts.get_k_data(code, ktype="60")
@@ -89,10 +93,26 @@ def strategy(code, name):
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + str15QuShi
      content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + "</span>" + \
-               "<br>" + strBULL60 + "<br>" + strBULL1
+               "<br>" + strBULL60 + "<br>" + strBULL1 + "<br>" + str15QuShi_content
 
      return title, content
 
+
+#######################################################################################################
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+############################################ 邮件发送###################################################
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#####                                                                                             #####
+#######################################################################################################
 str0,content0 = strategy("399006", "※均线形态创业")
 
 titleTmp = ""
