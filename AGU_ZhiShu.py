@@ -94,6 +94,12 @@ if (str10.endswith("买 ")):
 else:
      titleTmp = titleTmp + str10
 
+str11 = strategy("300664", " @鹏鹞")
+if (str11.endswith("买 ")):
+     titleTmp = str11 + titleTmp
+else:
+     titleTmp = titleTmp + str11
+
 
 content = str0 + titleTmp
 title = str0 + titleTmp
