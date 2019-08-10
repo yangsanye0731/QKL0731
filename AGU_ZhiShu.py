@@ -53,7 +53,7 @@ def strategy(code, name):
      if (lowArray_60[-1] < lowerband_60[-1]):
          strBULL60_title = "下穿"
 
-     strBULL60 = "BULL160：" + "%.2f" % upperband_60[-1] + "_" + "%.2f" % middleband_60[-1] + "_" + \
+     strBULL60 = "BULL60：" + "%.2f" % upperband_60[-1] + "_" + "%.2f" % middleband_60[-1] + "_" + \
              "%.2f" % lowerband_60[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
              strBULL60_title + "</span>"
      if (closeArray[-1] > 100):
@@ -113,7 +113,7 @@ def strategy(code, name):
 #####                                                                                             #####
 #####                                                                                             #####
 #######################################################################################################
-str0,content0 = strategy("399006", "※均线形态创业")
+str0,content0 = strategy("399006", "※创业")
 
 titleTmp = ""
 str1, content1 = strategy("002281", " 光迅")
@@ -185,7 +185,7 @@ else:
 title = str0 + titleTmp
 
 mulu1 = "=================================<br>"
-mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
+mulu2 = "注意均线形态：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
 mulu3 = "=================================<br>"
 content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content1  + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" \
           + content4 + "<br><hr>" + content5 + "<br><hr>" + content6 + "<br><hr>" + content7 + "<br><hr>" \
