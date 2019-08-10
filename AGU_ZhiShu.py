@@ -28,10 +28,39 @@ def strategy(code, name):
      else:
           str15QuShi = "空 "
 
+     ############################################ 1天布林线    ###############################################
+     data_history_D = ts.get_k_data(code, ktype="D")
+
+     closeArray_D = num.array(data_history_D['close'])
+     highArray_D = num.array(data_history_D['high'])
+     lowArray_D = num.array(data_history_D['low'])
+
+     doubleCloseArray_D = num.asarray(closeArray_D, dtype='double')
+     doubleHighArray_D = num.asarray(highArray_D, dtype='double')
+     doubleLowArray_D = num.asarray(lowArray_D, dtype='double')
+
+     upperband_D, middleband_D, lowerband_D = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2, matype=0)
+
+     strBULLD_title = "中间"
+     if (highArray_D[-1] > upperband_D[-1]):
+          strBULLD_title = "上穿"
+
+     if (lowArray_D[-1] < lowerband_D[-1]):
+          strBULLD_title = "下穿"
+
+     strBULL1 = "BULL1D：" + "%.2f" % upperband_D[-1] + "_" + "%.2f" % middleband_D[-1] + "_" + \
+                "%.2f" % lowerband_D[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+                strBULLD_title + "</span>"
+     if (closeArray[-1] > 100):
+          strBULL1 = "BULL1D：" + str(int(round(upperband_D[-1]))) + "_" + str(int(round(middleband_D[-1]))) + \
+                     "_" + str(int(round(lowerband_D[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+                     strBULLD_title + "</span>"
+
+
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + str15QuShi
+     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + "</span>" + "<br>" + strBULL1
 
-     content = name + str15QuShi
      return title, content
 
 str0,content0 = strategy("399006", "※均线形态创业")
