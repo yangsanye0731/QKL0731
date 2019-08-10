@@ -35,17 +35,27 @@ def strategy(name,zhouqi):
         #####                                                                                             #####
         #####                                                                                             #####
         #######################################################################################################
-        ##############获取1小时数据#############################################################################
+        ##############获取15分钟数据############################################################################
+        since_time_15 = current_time - limit * 1 * 15 * 60 * 1000
+        data_15 = huobi.fetch_ohlcv(symbol=name, timeframe='15m', limit=500, since=since_time_15)
+        time.sleep(1)
+
+        ##############获取01小时数据############################################################################
         since_time = current_time - limit * 1* 60 * 60 * 1000
         data = huobi.fetch_ohlcv(symbol=name, timeframe='1h', limit=500, since=since_time)
         time.sleep(1)
 
-        # ##############获取6小时数据#############################################################################
+        ##############获取04小时数据############################################################################
+        since_time_4h = current_time - limit * 4 * 60 * 60 * 1000
+        data_4h = gateio.fetch_ohlcv(symbol=name, timeframe='4h', limit=500, since=since_time_4h)
+        time.sleep(1)
+
+        ###############获取06小时数据###########################################################################
         since_time_6h = current_time - limit * 6 * 60 * 60 * 1000
         data_6h = gateio.fetch_ohlcv(symbol=name, timeframe='6h', limit=500, since=since_time_6h)
         time.sleep(1)
 
-        ##############获取12小时数据#############################################################################
+        ##############获取12小时数据############################################################################
         since_time_12h = current_time - limit * 12 * 60 * 60 * 1000
         data_12h = gateio.fetch_ohlcv(symbol=name, timeframe='12h', limit=500, since=since_time_12h)
         time.sleep(1)
@@ -55,20 +65,10 @@ def strategy(name,zhouqi):
         # data_30 = huobi.fetch_ohlcv(symbol=name, timeframe='30m', limit=500, since=since_time_30)
         # time.sleep(2)
 
-        ##############获取15分钟数据#############################################################################
-        since_time_15 = current_time - limit * 1 * 15 * 60 * 1000
-        data_15 = huobi.fetch_ohlcv(symbol=name, timeframe='15m', limit=500, since=since_time_15)
-        time.sleep(1)
-
         ##############获取05分钟数据#############################################################################
         # since_time_5 = current_time - limit * 1 * 5 * 60 * 1000
         # data_5 = huobi.fetch_ohlcv(symbol=name, timeframe='5m', limit=500, since=since_time_5)
         # time.sleep(2)
-
-        ##############获取04小时数据#############################################################################
-        since_time_4h = current_time - limit * 4 * 60 * 60 * 1000
-        data_4h = gateio.fetch_ohlcv(symbol=name, timeframe='4h', limit=500, since=since_time_4h)
-        time.sleep(1)
 
         zhouqi_ch = "1h"
 
@@ -308,7 +308,29 @@ def strategy(name,zhouqi):
     # strMA = " M15:" + "%.1f" % (macdsignal[-3]*100) + "/" + "%.1f" % (macdsignal[-2]*100) + "/" + "%.1f" % (macdsignal[-1]*100)
     #
 
-    ############################################ 4小时布林线    ###############################################
+    ############################################ 04小时布林线    ###############################################
+    upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray * 1000, timeperiod=20, nbdevup=2, nbdevdn=2,
+                                                 matype=0)
+    upperband = upperband / 1000
+    middleband = middleband / 1000
+    lowerband = lowerband / 1000
+
+    strBULL1_title = "中间"
+    if (highArray[-1] > upperband[-1]):
+        strBULL1_title = "上穿"
+
+    if (lowArray[-1] < lowerband[-1]):
+        strBULL1_title = "下穿"
+
+    strBULL1 = "BULL1H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + \
+               "%.2f" % lowerband[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+               strBULL1_title + "</span>"
+    if (closeArray[-1] > 100):
+        strBULL1 = "BULL1H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + \
+                   "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+                   strBULL1_title + "</span>"
+
+    ############################################ 04小时布林线    ###############################################
     upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_4h*1000, timeperiod=20, nbdevup=2, nbdevdn=2, matype=0)
     upperband = upperband / 1000
     middleband = middleband / 1000
@@ -321,11 +343,15 @@ def strategy(name,zhouqi):
     if  (lowArray_4h[-1] < lowerband[-1]):
         strBULL4_title = "下穿"
 
-    strBULL4 = "BULL4H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[-1] + " " +  "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL4_title + "</span>"
+    strBULL4 = "BULL4H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + \
+               "%.2f" % lowerband[-1] + " " +  "<span style=\"color:#FF0000;font-weight:bold\">" + \
+               strBULL4_title + "</span>"
     if (closeArray[-1] > 100):
-        strBULL4 = "BULL4H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL4_title + "</span>"
+        strBULL4 = "BULL4H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + \
+                   "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+                   strBULL4_title + "</span>"
 
-    ############################################ 6小时布林线    ###############################################
+    ############################################ 06小时布林线    ###############################################
     upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_6h * 1000, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                  matype=0)
     upperband = upperband / 1000
@@ -339,11 +365,13 @@ def strategy(name,zhouqi):
     if (lowArray_6h[-1] < lowerband[-1]):
         strBULL6_title = "下穿"
 
-    strBULL6 = "BULL6H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + "%.2f" % lowerband[
-        -1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL6_title + "</span>"
+    strBULL6 = "BULL6H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + \
+               "%.2f" % lowerband[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
+               strBULL6_title + "</span>"
     if (closeArray[-1] > 100):
-        strBULL6 = "BULL6H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + "_" + str(
-            int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL6_title + "</span>"
+        strBULL6 = "BULL6H：" + str(int(round(upperband[-1]))) + "_" + \
+                   str(int(round(middleband[-1]))) + "_" + str(int(round(lowerband[-1]))) + \
+                   " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL6_title + "</span>"
 
     #######################################################################################################
     #####                                                                                             #####
@@ -388,7 +416,7 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + "</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
-                     "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
+                     "<br>" + strBULL1 + "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
@@ -399,7 +427,7 @@ title4, content4 = strategy("HT/USDT","1h")
 title5, content5 = strategy("XRP/USDT","1h")
 
 mulu1 = "=================================<br>"
-mulu2 = "圈=子=日=报：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
+mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
 mulu3 = "=================================<br>"
 content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" + content4 + "<br><hr>" + content5
 title = title0 + title1 + title2 + title3
