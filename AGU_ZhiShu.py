@@ -103,7 +103,6 @@ if (str11.endswith("买 ")):
 else:
      titleTmp = titleTmp + str11
 
-
 title = str0 + titleTmp
 
 mulu1 = "=================================<br>"
