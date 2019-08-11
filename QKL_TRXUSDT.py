@@ -423,14 +423,16 @@ title0, content0 = strategy("BTC/USDT","1h")
 title1, content1 = strategy("ETH/USDT","1h")
 title2, content2 = strategy("EOS/USDT","1h")
 title3, content3 = strategy("LTC/USDT","1h")
-title30, content30 = strategy("TRX/USDT","1h")
+title30, content30 = strategy("BCH/USDT","1h")
 title4, content4 = strategy("HT/USDT","1h")
 title5, content5 = strategy("XRP/USDT","1h")
+title6, content6 = strategy("BCH/USDT","1h")
 
 mulu1 = "=================================<br>"
 mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
 mulu3 = "=================================<br>"
-content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" +  content30 + "<br><hr>" + content4 + "<br><hr>" + content5
+content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2 + "<br><hr>" + content3 + \
+          "<br><hr>" +  content30 + "<br><hr>" + content4 + "<br><hr>" + content5 + "<br><hr>" + content6
 title = title0 + title1 + title2 + title3
 
 sendMail(content, title)
