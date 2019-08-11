@@ -426,7 +426,7 @@ title3, content3 = strategy("LTC/USDT","1h")
 title30, content30 = strategy("BCH/USDT","1h")
 title4, content4 = strategy("HT/USDT","1h")
 title5, content5 = strategy("XRP/USDT","1h")
-title6, content6 = strategy("BCH/USDT","1h")
+title6, content6 = strategy("TRX/USDT","1h")
 
 mulu1 = "=================================<br>"
 mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
