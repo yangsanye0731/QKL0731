@@ -24,13 +24,13 @@ def strategy(code, name):
 
      if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2]):
           str15QuShi = "买 "
-          str15QuShi_content = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>"
+          str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>"
      elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
           str15QuShi = "卖 "
-          str15QuShi_content = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>"
+          str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>"
      else:
           str15QuShi = "空 "
-          str15QuShi_content = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
+          str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
 
      ############################################ 60分钟布林线###############################################
      data_history_60 = ts.get_k_data(code, ktype="60")
