@@ -7,7 +7,7 @@ import talib as ta
 from email_util import *
 import common
 
-def strategy(code, name):
+def strategy(code, name, fullName):
      ############################################ 15分钟布林线###############################################
      data_history = ts.get_k_data(code, ktype = "15")
 
@@ -94,7 +94,7 @@ def strategy(code, name):
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + str15QuShi
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
-     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + " " + zhangdiefu +  "%</span>" + \
+     content = "<span style=\"color:#FF0000;font-weight:bold\">" + fullName + " "+ "%.3f" % closeArray[-1] + " " + zhangdiefu +  "%</span>" + \
                "<br>" + strBULL60 + "<br>" + strBULL1 + "<br>" + str15QuShi_content
 
      return title, content
@@ -115,70 +115,70 @@ def strategy(code, name):
 #####                                                                                             #####
 #####                                                                                             #####
 #######################################################################################################
-str0,content0 = strategy("399006", "※创业")
+str0,content0 = strategy("399006", "※创业", "※创业板指")
 
 titleTmp = ""
-str1, content1 = strategy("002281", " 光迅")
+str1, content1 = strategy("002281", " 光迅", "光迅科技")
 if (str1.endswith("买 ")):
      titleTmp = str1 + titleTmp
 else:
      titleTmp = titleTmp + str1
 
-str2, content2 = strategy("000625", " 长安")
+str2, content2 = strategy("000625", " 长安", "长安汽车")
 if (str2.endswith("买 ")):
      titleTmp = str2 + titleTmp
 else:
      titleTmp = titleTmp + str2
 
-str3, content3 = strategy("300136", " @信维")
+str3, content3 = strategy("300136", " @信维", "@信维通信")
 if (str3.endswith("买 ")):
      titleTmp = str3 + titleTmp
 else:
      titleTmp = titleTmp + str3
 
-str4, content4 = strategy("002008", " 大族")
+str4, content4 = strategy("002008", " 大族", "大族激光")
 if (str4.endswith("买 ")):
      titleTmp = str4 + titleTmp
 else:
      titleTmp = titleTmp + str4
 
-str5, content5 = strategy("600498", " 烽火")
+str5, content5 = strategy("600498", " 烽火", "烽火通信")
 if (str5.endswith("买 ")):
      titleTmp = str5 + titleTmp
 else:
      titleTmp = titleTmp + str5
 
-str6, content6 = strategy("000739", " 普洛")
+str6, content6 = strategy("000739", " 普洛", "普洛药业")
 if (str6.endswith("买 ")):
      titleTmp = str6 + titleTmp
 else:
      titleTmp = titleTmp + str6
 
-str7, content7 = strategy("300328", " 宜安")
+str7, content7 = strategy("300328", " 宜安", "宜安科技")
 if (str7.endswith("买 ")):
      titleTmp = str7 + titleTmp
 else:
      titleTmp = titleTmp + str7
 
-str8, content8 = strategy("300251", " 光线")
+str8, content8 = strategy("300251", " 光线", "光线传媒")
 if (str8.endswith("买 ")):
      titleTmp = str8 + titleTmp
 else:
      titleTmp = titleTmp + str8
 
-str9, content9 = strategy("300059", " 东方")
+str9, content9 = strategy("300059", " 东方", "东方财富")
 if (str9.endswith("买 ")):
      titleTmp = str9 + titleTmp
 else:
      titleTmp = titleTmp + str9
 
-str10, content10 = strategy("300584", " @海辰")
+str10, content10 = strategy("300584", " @海辰", "@海辰药业")
 if (str10.endswith("买 ")):
      titleTmp = str10 + titleTmp
 else:
      titleTmp = titleTmp + str10
 
-str11, content11 = strategy("300664", " @鹏鹞")
+str11, content11 = strategy("300664", " @鹏鹞", "@鹏鹞环保")
 if (str11.endswith("买 ")):
      titleTmp = str11 + titleTmp
 else:
