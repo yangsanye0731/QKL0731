@@ -415,7 +415,8 @@ def strategy(name,zhouqi):
     title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
-    content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + "</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
+    zhangdiefu = "%.2f" % (((closeArray[-1] - closeArray[-2]) / closeArray[-2]) * 100)
+    content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " " +  zhangdiefu + "%</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL1 + "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
     return title, content
 
