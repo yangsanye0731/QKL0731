@@ -93,7 +93,8 @@ def strategy(code, name):
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + str15QuShi
-     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + "</span>" + \
+     zhangdiefu = (closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2] *100
+     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name + " "+ "%.3f" % closeArray[-1] + " " + zhangdiefu +  "%</span>" + \
                "<br>" + strBULL60 + "<br>" + strBULL1 + "<br>" + str15QuShi_content
 
      return title, content
