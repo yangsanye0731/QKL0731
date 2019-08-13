@@ -62,7 +62,7 @@ def strategy(code, name, fullName):
      strBULL60 = "BULL60：" + "%.2f" % upperband_60[-1] + "_" + "%.2f" % middleband_60[-1] + "_" + \
              "%.2f" % lowerband_60[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
              strBULL60_title + "</span>"
-     if (closeArray[-1] > 100):
+     if (closeArray[-1] > 1000):
          strBULL60 = "BULL60：" + str(int(round(upperband_60[-1]))) + "_" + str(int(round(middleband_60[-1]))) + \
                  "_" + str(int(round(lowerband_60[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
                   strBULL60_title + "</span>"
@@ -120,21 +120,31 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #####                                                                                             #####
 #######################################################################################################
+def pinjie(title, titleTmp):
+     if (title.endswith("买 ")):
+          titleTmp = title + titleTmp
+     else:
+          titleTmp = titleTmp + title
+
+     return titleTmp
+
 str0,content0 = strategy("399006", "※创业", "※创业板指")
 str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
 
 titleTmp = ""
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
-if (str1.endswith("买 ")):
-     titleTmp = str1 + titleTmp
-else:
-     titleTmp = titleTmp + str1
+titleTmp = pinjie(str1, titleTmp)
+# if (str1.endswith("买 ")):
+#      titleTmp = str1 + titleTmp
+# else:
+#      titleTmp = titleTmp + str1
 
 str2, content2 = strategy("000625", " 长安", "长安汽车")
-if (str2.endswith("买 ")):
-     titleTmp = str2 + titleTmp
-else:
-     titleTmp = titleTmp + str2
+titleTmp = pinjie(str2, titleTmp)
+# if (str2.endswith("买 ")):
+#      titleTmp = str2 + titleTmp
+# else:
+#      titleTmp = titleTmp + str2
 
 str3, content3 = strategy("300136", " @信维", "@信维通信")
 if (str3.endswith("买 ")):
@@ -200,3 +210,6 @@ content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>"
           + content8 + "<br><hr>" + content9 + "<br><hr>" + content10 + "<br><hr>" + content11
 
 sendMail (content, title)
+
+
+
