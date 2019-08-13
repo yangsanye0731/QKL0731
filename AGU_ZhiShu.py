@@ -120,11 +120,13 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #####                                                                                             #####
 #######################################################################################################
-def pinjie(title, titleTmp):
+def pinjie(title, titleTmp, content, contentTmp):
      if (title.endswith("买 ")):
           titleTmp = title + titleTmp
+          contentTmp = content + "<br><hr>" + contentTmp
      else:
           titleTmp = titleTmp + title
+          contentTmp = contentTmp + "<br><hr>" + content
 
      return titleTmp
 
@@ -132,47 +134,46 @@ str0,content0 = strategy("399006", "※创业", "※创业板指")
 str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
 
 titleTmp = ""
+contentTmp = ""
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
-titleTmp = pinjie(str1, titleTmp)
+titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
 
 str2, content2 = strategy("000625", " 长安", "长安汽车")
-titleTmp = pinjie(str2, titleTmp)
+titleTmp, contentTmp = pinjie(str2, titleTmp, content2, contentTmp)
 
 str3, content3 = strategy("300136", " @信维", "@信维通信")
-titleTmp = pinjie(str3, titleTmp)
+titleTmp, contentTmp = pinjie(str3, titleTmp, content3, contentTmp)
 
 str4, content4 = strategy("002008", " 大族", "大族激光")
-titleTmp = pinjie(str4, titleTmp)
+titleTmp, contentTmp = pinjie(str4, titleTmp, content4, contentTmp)
 
 str5, content5 = strategy("600498", " 烽火", "烽火通信")
-titleTmp = pinjie(str5, titleTmp)
+titleTmp, contentTmp = pinjie(str5, titleTmp, content5, contentTmp)
 
 str6, content6 = strategy("000739", " 普洛", "普洛药业")
-titleTmp = pinjie(str6, titleTmp)
+titleTmp, contentTmp = pinjie(str6, titleTmp, content6, contentTmp)
 
 str7, content7 = strategy("300328", " 宜安", "宜安科技")
-titleTmp = pinjie(str7, titleTmp)
+titleTmp, contentTmp = pinjie(str7, titleTmp, content7, contentTmp)
 
 str8, content8 = strategy("300251", " 光线", "光线传媒")
-titleTmp = pinjie(str8, titleTmp)
+titleTmp, contentTmp = pinjie(str8, titleTmp, content8, contentTmp)
 
 str9, content9 = strategy("300059", " 东方", "东方财富")
-titleTmp = pinjie(str9, titleTmp)
+titleTmp, contentTmp = pinjie(str9, titleTmp, content9, contentTmp)
 
 str10, content10 = strategy("300584", " @海辰", "@海辰药业")
-titleTmp = pinjie(str10, titleTmp)
+titleTmp, contentTmp = pinjie(str10, titleTmp, content10, contentTmp)
 
 str11, content11 = strategy("300664", " @鹏鹞", "@鹏鹞环保")
-titleTmp = pinjie(str11, titleTmp)
+titleTmp, contentTmp = pinjie(str11, titleTmp, content11, contentTmp)
 
 title = str0 + str00 + titleTmp
 
 mulu1 = "=================================<br>"
 mulu2 = "注意均线形态：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
 mulu3 = "=================================<br>"
-content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>" + content1  + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" \
-          + content4 + "<br><hr>" + content5 + "<br><hr>" + content6 + "<br><hr>" + content7 + "<br><hr>" \
-          + content8 + "<br><hr>" + content9 + "<br><hr>" + content10 + "<br><hr>" + content11
+content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>" + contentTmp
 
 sendMail (content, title)
 
