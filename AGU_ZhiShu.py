@@ -121,6 +121,7 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #######################################################################################################
 str0,content0 = strategy("399006", "※创业", "※创业板指")
+str00,content00 = strategy("399975", "※证券", "※证券公司")
 
 titleTmp = ""
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
@@ -189,12 +190,12 @@ if (str11.endswith("买 ")):
 else:
      titleTmp = titleTmp + str11
 
-title = str0 + titleTmp
+title = str0 + str00 + titleTmp
 
 mulu1 = "=================================<br>"
 mulu2 = "注意均线形态：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
 mulu3 = "=================================<br>"
-content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content1  + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" \
+content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>" + content1  + "<br><hr>" + content2 + "<br><hr>" + content3 + "<br><hr>" \
           + content4 + "<br><hr>" + content5 + "<br><hr>" + content6 + "<br><hr>" + content7 + "<br><hr>" \
           + content8 + "<br><hr>" + content9 + "<br><hr>" + content10 + "<br><hr>" + content11
 
