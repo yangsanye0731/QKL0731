@@ -128,7 +128,7 @@ def pinjie(title, titleTmp, content, contentTmp):
           titleTmp = titleTmp + title
           contentTmp = contentTmp + "<br><hr>" + content
 
-     return titleTmp
+     return titleTmp, contentTmp
 
 str0,content0 = strategy("399006", "※创业", "※创业板指")
 str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
