@@ -90,7 +90,7 @@ def strategy(code, name, fullName):
      strBULL1 = "BULL1D：" + "%.2f" % upperband_D[-1] + "_" + "%.2f" % middleband_D[-1] + "_" + \
                 "%.2f" % lowerband_D[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
                 strBULLD_title + "</span>"
-     if (closeArray[-1] > 100):
+     if (closeArray[-1] > 1000):
           strBULL1 = "BULL1D：" + str(int(round(upperband_D[-1]))) + "_" + str(int(round(middleband_D[-1]))) + \
                      "_" + str(int(round(lowerband_D[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
                      strBULLD_title + "</span>"
@@ -121,7 +121,7 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #######################################################################################################
 str0,content0 = strategy("399006", "※创业", "※创业板指")
-str00,content00 = strategy("399975", "※证券", "※证券公司")
+str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
 
 titleTmp = ""
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
