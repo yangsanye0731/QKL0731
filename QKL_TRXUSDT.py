@@ -185,19 +185,35 @@ def strategy(name,zhouqi):
     SMA30_15M_30 = ta.SMA(doubleCloseArray_15, timeperiod=30)
 
     str15MQuShi = ""
-    if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2]):
-        str15MQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1"
-        if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3]):
-            str15MQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>2"
-    elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2]):
-        str15MQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1"
-        if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3]):
-            str15MQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>2"
+    xingtai = ""
+    if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
+        if (SMA30_15M_5[-1] > SMA30_15M_10[-1] > SMA30_15M_20[-1] > SMA30_15M_30[-1]):
+            xingtai = "上好"
+
+        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1"
+        if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
+            str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>2"
+            if (SMA30_15M_5[-3] > SMA30_15M_5[-4] and SMA30_15M_10[-3] > SMA30_15M_10[-4] and SMA30_15M_20[-3] > SMA30_15M_20[-4] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
+                str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>3"
+
+        str15MQuShi = str15MQuShi + xingtai
+
+    elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
+        if (SMA30_15M_5[-1] < SMA30_15M_10[-1] < SMA30_15M_20[-1] < SMA30_15M_30[-1]):
+            xingtai = "下好"
+
+        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1"
+        if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3] and SMA30_15M_30[-2] < SMA30_15M_30[-3]):
+            str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>2"
+            if (SMA30_15M_5[-3] < SMA30_15M_5[-4] and SMA30_15M_10[-3] < SMA30_15M_10[-4] and SMA30_15M_20[-3] < SMA30_15M_20[-4] and SMA30_15M_30[-3] < SMA30_15M_30[-4]):
+                str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>3"
+
+        str15MQuShi = str15MQuShi + xingtai
     else:
-        str15MQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
+        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
 
 
-    ############################################# 1小时均线趋势#############################################
+    ##################################    ########### 1小时均线趋势#############################################
     SMA30_1h_5 = ta.SMA(doubleCloseArray, timeperiod=5)
     SMA30_1h_10 = ta.SMA(doubleCloseArray, timeperiod=10)
     SMA30_1h_20 = ta.SMA(doubleCloseArray, timeperiod=20)
@@ -207,19 +223,25 @@ def strategy(name,zhouqi):
     str1HQuShi = ""
     str1HQuShi_title = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2] and SMA30_1h_30[-1] > SMA30_1h_30[-2]):
-        str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>1"
+        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>1"
         str1HQuShi_title = "买1"
         if (SMA30_1h_5[-2] > SMA30_1h_5[-3] and SMA30_1h_10[-2] > SMA30_1h_10[-3] and SMA30_1h_20[-2] > SMA30_1h_20[-3] and SMA30_1h_30[-2] > SMA30_1h_30[-3]):
-            str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>2"
+            str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>2"
             str1HQuShi_title = "买2"
+            if (SMA30_1h_5[-3] > SMA30_1h_5[-4] and SMA30_1h_10[-3] > SMA30_1h_10[-4] and SMA30_1h_20[-3] > SMA30_1h_20[-4] and SMA30_1h_30[-3] > SMA30_1h_30[-4]):
+                str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>3"
+                str1HQuShi_title = "买3"
     elif (SMA30_1h_5[-1] < SMA30_1h_5[-2] and SMA30_1h_10[-1] < SMA30_1h_10[-2] and SMA30_1h_20[-1] < SMA30_1h_20[-2] and SMA30_1h_30[-1] < SMA30_1h_30[-2]):
-        str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>1"
+        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>1"
         str1HQuShi_title = "卖1"
-        if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3] and SMA30_1h_30[-2] > SMA30_1h_30[-3]):
-            str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>2"
+        if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3] and SMA30_1h_30[-2] < SMA30_1h_30[-3]):
+            str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>2"
             str1HQuShi_title = "卖2"
+            if (SMA30_1h_5[-3] < SMA30_1h_5[-4] and SMA30_1h_10[-3] < SMA30_1h_10[-4] and SMA30_1h_20[-3] < SMA30_1h_20[-4] and SMA30_1h_30[-3] < SMA30_1h_30[-4]):
+                str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>3"
+                str1HQuShi_title = "卖3"
     else:
-        str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时空仓</span>"
+        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时空仓</span>"
         str1HQuShi_title = "空"
 
     ############################################ 30分钟均线趋势#############################################
@@ -413,9 +435,9 @@ def strategy(name,zhouqi):
     #####                                                                                             #####
     #######################################################################################################
     name_jian = name[0:3]
-    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title
+    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     if (closeArray[-1] > 100):
-        title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title
+        title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " " +  zhangdiefu + "%</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
                      "<br>" + strBULL1 + "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
