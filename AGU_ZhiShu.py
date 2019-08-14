@@ -140,7 +140,7 @@ contentTmp = ""
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
 titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
 
-str2, content2 = strategy("000625", " 长安", "长安汽车")
+str2, content2 = strategy("000625", " 长安(稳)", "长安汽车")
 titleTmp, contentTmp = pinjie(str2, titleTmp, content2, contentTmp)
 
 str3, content3 = strategy("300136", " @信维", "@信维通信")
