@@ -186,7 +186,7 @@ def strategy(name,zhouqi):
     xingtai = ""
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
         if (SMA30_15M_5[-1] > SMA30_15M_10[-1] > SMA30_15M_20[-1] > SMA30_15M_30[-1]):
-            xingtai = "上好"
+            xingtai = "形态好"
 
         str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1"
         if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
@@ -198,7 +198,7 @@ def strategy(name,zhouqi):
 
     elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
         if (SMA30_15M_5[-1] < SMA30_15M_10[-1] < SMA30_15M_20[-1] < SMA30_15M_30[-1]):
-            xingtai = "下好"
+            xingtai = "形态好"
 
         str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1"
         if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3] and SMA30_15M_30[-2] < SMA30_15M_30[-3]):
