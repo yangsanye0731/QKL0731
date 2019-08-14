@@ -457,6 +457,6 @@ mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localti
 mulu3 = "=================================<br>"
 content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2 + "<br><hr>" + content3 + \
           "<br><hr>" +  content30 + "<br><hr>" + content4 + "<br><hr>" + content5 + "<br><hr>" + content6
-title = title0 + title1 + title2 + title3
+title = title0 + title1 + title2
 
 sendMail(content, title)
