@@ -26,6 +26,9 @@ def strategy(code, name, fullName):
 
      if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2] and SMA30_15_30[-1] > SMA30_15_30[-2]):
 
+          if (SMA30_15_5[-1] > SMA30_15_10[-1] > SMA30_15_20[-1] > SMA30_15_30[-1]):
+               xingtai = "形态好"
+
           str15QuShi = "买 "
           str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入1</span>"
           if (SMA30_15_5[-2] > SMA30_15_5[-3] and SMA30_15_10[-2] > SMA30_15_10[-3] and SMA30_15_20[-2] > SMA30_15_20[-3] and SMA30_15_30[-2] > SMA30_15_30[-3]):
@@ -99,7 +102,7 @@ def strategy(code, name, fullName):
 
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     title = name + str15QuShi
+     title = name + str15QuShi + xingtai
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
      content = "<span style=\"color:#FF0000;font-weight:bold\">" + fullName + " "+ "%.3f" % closeArray[-1] + " " + zhangdiefu +  "%</span>" + \
                "<br>" + strBULL60 + "<br>" + strBULL1 + "<br>" + str15QuShi_content
