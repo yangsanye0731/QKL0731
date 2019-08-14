@@ -25,12 +25,14 @@ def strategy(code, name, fullName):
      SMA30_15_30 = ta.SMA(doubleCloseArray, timeperiod=30)
 
      if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2] and SMA30_15_30[-1] > SMA30_15_30[-2]):
+
           str15QuShi = "买 "
           str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入1</span>"
-          if (SMA30_15_5[-2] > SMA30_15_5[-3] and SMA30_15_10[-2] > SMA30_15_10[-3] and SMA30_15_20[-2] > SMA30_15_20[-3]):
+          if (SMA30_15_5[-2] > SMA30_15_5[-3] and SMA30_15_10[-2] > SMA30_15_10[-3] and SMA30_15_20[-2] > SMA30_15_20[-3] and SMA30_15_30[-2] > SMA30_15_30[-3]):
                str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入2</span>"
-               if (SMA30_15_5[-3] > SMA30_15_5[-4] and SMA30_15_10[-3] > SMA30_15_10[-4] and SMA30_15_20[-3] > SMA30_15_20[-4]):
+               if (SMA30_15_5[-3] > SMA30_15_5[-4] and SMA30_15_10[-3] > SMA30_15_10[-4] and SMA30_15_20[-3] > SMA30_15_20[-4] and SMA30_15_30[-3] > SMA30_15_30[-4]):
                     str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入3</span>"
+
      elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
           str15QuShi = "卖 "
           str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>"
@@ -175,6 +177,7 @@ mulu2 = "注意均线形态：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localt
 mulu3 = "=================================<br>"
 content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>" + contentTmp
 
+# 发送邮件
 sendMail (content, title)
 
 
