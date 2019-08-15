@@ -459,6 +459,6 @@ content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>"
 title = title0 + title1 + title2
 
 # 邮件发送
-sendMail(content, title)
+#sendMail(content, title)
 common.dingdingMsg(title)
 common.dingdingMsg(content)
