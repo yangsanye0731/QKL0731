@@ -438,8 +438,8 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
-                     "<br>" + strBULL1 + "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + xingtai + "<br>" + str1HQuShi
+    content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%</span>"+ "\n" + strRSI_1H + "\n" + strRSI_4H + \
+                     "\n" + strBULL1 + "\n" + strBULL4 + "\n" + strBULL6 + "\n" + str15MQuShi + xingtai + "\n" + str1HQuShi
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
@@ -451,14 +451,13 @@ title4, content4 = strategy("HT/USDT","1h")
 title5, content5 = strategy("XRP/USDT","1h")
 title6, content6 = strategy("TRX/USDT","1h")
 
-mulu1 = "=================================<br>"
-mulu2 = "=圈=子=日=报=：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
-mulu3 = "=================================<br>"
-content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" +  content1 + "<br><hr>" + content2 + "<br><hr>" + content3 + \
-          "<br><hr>" +  content30 + "<br><hr>" + content4 + "<br><hr>" + content5 + "<br><hr>" + content6
+mulu = "#### 每日简报\n"
+content = mulu + content0 + "\n" +  content1 + "\n" + content2 + "\n" + content3 + \
+          "\n" +  content30 + "\n" + content4 + "\n" + content5 + "\n" + content6
 title = title0 + title1 + title2
 
 # 邮件发送
 #sendMail(content, title)
-common.dingdingMsg(title)
-common.dingdingMsg(content)
+common.dingding_msg(title)
+common.dingding_msg(content)
+common.dingding_markdown_msg(title, content)

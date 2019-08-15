@@ -105,7 +105,7 @@ def xiaomowangkuozhan(codeItem) :
 
      return xiaomowang
 
-def dingdingMsg(content):
+def dingding_msg(content):
      # WebHook地址
      webhook = 'https://oapi.dingtalk.com/robot/send?access_token=991bba5d439fb424f4ab1645a86aa353ac89e92352d11e1f44846a0bca812862'
      # 初始化机器人小丁
@@ -113,6 +113,16 @@ def dingdingMsg(content):
      # Text消息@所有人
      at_mobiles = ['17706417762']
      xiaoding.send_text(msg=content, is_at_all=False, at_mobiles=at_mobiles)
+
+
+def dingding_markdown_msg(title, text):
+    # WebHook地址
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=991bba5d439fb424f4ab1645a86aa353ac89e92352d11e1f44846a0bca812862'
+    # 初始化机器人小丁
+    xiaoding = DingtalkChatbot(webhook)
+    # Text消息@所有人
+    at_mobiles = ['17706417762']
+    xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
 
 #print zhangdiefu('150212')
