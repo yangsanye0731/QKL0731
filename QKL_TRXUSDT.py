@@ -346,7 +346,7 @@ def strategy(name,zhouqi):
 
     strBULL1 = "BULL1H：" + "%.2f" % upperband[-1] + "\_" + "%.2f" % middleband[-1] + "\_" + \
                "%.2f" % lowerband[-1] + " " + "<font color=red>" + \
-               strBULL1_title + "</font>"
+               strBULL1_title + "</font>\n\n"
     if (closeArray[-1] > 100):
         strBULL1 = "BULL1H：" + str(int(round(upperband[-1]))) + "\_" + str(int(round(middleband[-1]))) + \
                    "\_" + str(int(round(lowerband[-1]))) + " " + "<font color=red>" + \
