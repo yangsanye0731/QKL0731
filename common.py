@@ -3,6 +3,7 @@
 import tushare as ts
 import numpy as num
 import time
+from dingtalkchatbot.chatbot import DingtalkChatbot
 
 # 涨跌幅
 def zhangdiefu(code):
@@ -104,6 +105,15 @@ def xiaomowangkuozhan(codeItem) :
 
      return xiaomowang
 
+def dingdingMsg(content):
+     # WebHook地址
+     webhook = 'https://oapi.dingtalk.com/robot/send?access_token=991bba5d439fb424f4ab1645a86aa353ac89e92352d11e1f44846a0bca812862'
+     # 初始化机器人小丁
+     xiaoding = DingtalkChatbot(webhook)
+     # Text消息@所有人
+     at_mobiles = ['17706417762']
+     xiaoding.send_text(msg=content, is_at_all=False, at_mobiles=at_mobiles)
+
 
 #print zhangdiefu('150212')
 #print gupiaomingcheng('150212')
@@ -112,3 +122,4 @@ def xiaomowangkuozhan(codeItem) :
 #print zuidijiage('600547', 'W')
 #print shijinglv('603068')
 #print zongshizhi('603068')
+#dingdingMsg()

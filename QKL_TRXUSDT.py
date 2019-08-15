@@ -5,6 +5,7 @@ import numpy as num
 import ccxt
 import talib as ta
 from email_util import *
+import common
 
 def strategy(name,zhouqi):
     gateio = ccxt.gateio()
@@ -459,3 +460,5 @@ title = title0 + title1 + title2
 
 # 邮件发送
 sendMail(content, title)
+common.dingdingMsg(title)
+common.dingdingMsg(content)
