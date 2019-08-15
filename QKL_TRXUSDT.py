@@ -329,7 +329,7 @@ def strategy(name,zhouqi):
     # strMA = " M15:" + "%.1f" % (macdsignal[-3]*100) + "/" + "%.1f" % (macdsignal[-2]*100) + "/" + "%.1f" % (macdsignal[-1]*100)
     #
 
-    ############################################ 04小时布林线    ###############################################
+    ############################################ 01小时布林线    ###############################################
     upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray * 1000, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                  matype=0)
     upperband = upperband / 1000

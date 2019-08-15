@@ -105,7 +105,7 @@ def strategy(code, name, fullName):
 
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     title = name + str15QuShi + xingtai
+     title = name + xingtai + str15QuShi
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
      content = "<span style=\"color:#FF0000;font-weight:bold\">" + fullName + " "+ "%.3f" % closeArray[-1] + " " + zhangdiefu +  "%</span>" + \
                "<br>" + strBULL60 + "<br>" + strBULL1 + "<br>" + str15QuShi_content + xingtai
