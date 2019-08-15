@@ -438,7 +438,7 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%</span>"+ "\n" + strRSI_1H + "\n" + strRSI_4H + \
+    content = "**" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%**"+ "\n" + strRSI_1H + "\n" + strRSI_4H + \
                      "\n" + strBULL1 + "\n" + strBULL4 + "\n" + strBULL6 + "\n" + str15MQuShi + xingtai + "\n" + str1HQuShi
     return title, content
 
@@ -451,7 +451,7 @@ title4, content4 = strategy("HT/USDT","1h")
 title5, content5 = strategy("XRP/USDT","1h")
 title6, content6 = strategy("TRX/USDT","1h")
 
-mulu = "#### 每日简报\n"
+mulu = "# 每日简报\n"
 content = mulu + content0 + "\n" +  content1 + "\n" + content2 + "\n" + content3 + \
           "\n" +  content30 + "\n" + content4 + "\n" + content5 + "\n" + content6
 title = title0 + title1 + title2
