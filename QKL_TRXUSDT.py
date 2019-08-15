@@ -438,8 +438,8 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "**" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%**"+ "\n" + strRSI_1H + "\n" + strRSI_4H + \
-                     "\n" + strBULL1 + "\n" + strBULL4 + "\n" + strBULL6 + "\n" + str15MQuShi + xingtai + "\n" + str1HQuShi
+    content = "> **" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%**"+ "> " + strRSI_1H + "> " + strRSI_4H + \
+                     "> " + strBULL1 + "> " + strBULL4 + "> " + strBULL6 + "> " + str15MQuShi + xingtai + "> " + str1HQuShi
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
@@ -452,8 +452,8 @@ title5, content5 = strategy("XRP/USDT","1h")
 title6, content6 = strategy("TRX/USDT","1h")
 
 mulu = "# 每日简报\n"
-content = mulu + content0 + "\n" +  content1 + "\n" + content2 + "\n" + content3 + \
-          "\n" +  content30 + "\n" + content4 + "\n" + content5 + "\n" + content6
+content = mulu + content0 + "> ***" +  content1 + "> ***" + content2 + "> ***" + content3 + \
+          "> ***" +  content30 + "> ***" + content4 + "> ***" + content5 + "> ***" + content6
 title = title0 + title1 + title2
 
 # 邮件发送
