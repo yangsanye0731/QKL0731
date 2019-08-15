@@ -194,22 +194,22 @@ def strategy(name,zhouqi):
 
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
 
-        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1"
+        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1\n\n"
         if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
-            str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>2"
+            str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>2\n\n"
             if (SMA30_15M_5[-3] > SMA30_15M_5[-4] and SMA30_15M_10[-3] > SMA30_15M_10[-4] and SMA30_15M_20[-3] > SMA30_15M_20[-4] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
-                str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>3"
+                str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>3\n\n"
 
     elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
 
-        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1"
+        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1\n\n"
         if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3] and SMA30_15M_30[-2] < SMA30_15M_30[-3]):
-            str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>2"
+            str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>2\n\n"
             if (SMA30_15M_5[-3] < SMA30_15M_5[-4] and SMA30_15M_10[-3] < SMA30_15M_10[-4] and SMA30_15M_20[-3] < SMA30_15M_20[-4] and SMA30_15M_30[-3] < SMA30_15M_30[-4]):
-                str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>3"
+                str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>3\n\n"
 
     else:
-        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
+        str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>\n\n"
 
 
     ##################################    ########### 1小时均线趋势#############################################
@@ -222,25 +222,25 @@ def strategy(name,zhouqi):
     str1HQuShi = ""
     str1HQuShi_title = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2] and SMA30_1h_30[-1] > SMA30_1h_30[-2]):
-        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>1"
+        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>1\n\n"
         str1HQuShi_title = "买1"
         if (SMA30_1h_5[-2] > SMA30_1h_5[-3] and SMA30_1h_10[-2] > SMA30_1h_10[-3] and SMA30_1h_20[-2] > SMA30_1h_20[-3] and SMA30_1h_30[-2] > SMA30_1h_30[-3]):
-            str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>2"
+            str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>2\n\n"
             str1HQuShi_title = "买2"
             if (SMA30_1h_5[-3] > SMA30_1h_5[-4] and SMA30_1h_10[-3] > SMA30_1h_10[-4] and SMA30_1h_20[-3] > SMA30_1h_20[-4] and SMA30_1h_30[-3] > SMA30_1h_30[-4]):
-                str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>3"
+                str1HQuShi = "【关注MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时买入</span>3\n\n"
                 str1HQuShi_title = "买3"
     elif (SMA30_1h_5[-1] < SMA30_1h_5[-2] and SMA30_1h_10[-1] < SMA30_1h_10[-2] and SMA30_1h_20[-1] < SMA30_1h_20[-2] and SMA30_1h_30[-1] < SMA30_1h_30[-2]):
-        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>1"
+        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>1\n\n"
         str1HQuShi_title = "卖1"
         if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3] and SMA30_1h_30[-2] < SMA30_1h_30[-3]):
-            str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>2"
+            str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>2\n\n"
             str1HQuShi_title = "卖2"
             if (SMA30_1h_5[-3] < SMA30_1h_5[-4] and SMA30_1h_10[-3] < SMA30_1h_10[-4] and SMA30_1h_20[-3] < SMA30_1h_20[-4] and SMA30_1h_30[-3] < SMA30_1h_30[-4]):
-                str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>3"
+                str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时卖出</span>3\n\n"
                 str1HQuShi_title = "卖3"
     else:
-        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时空仓</span>"
+        str1HQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">01小时空仓</span>\n\n"
         str1HQuShi_title = "空"
 
     ############################################ 30分钟均线趋势#############################################
@@ -311,8 +311,8 @@ def strategy(name,zhouqi):
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
     strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
-    strRSI_1H = " RSI1小时【关注0,100】：" + "%.1f" % fastd_1H[-3] + "_" + "%.1f" % fastd_1H[-2] + "_" + "<span style=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_1H[-1] + "</span>"
-    strRSI_4H = " RSI4小时【关注0,100】：" + "%.1f" % fastd_4H[-3] + "_" + "%.1f" % fastd_4H[-2] + "_" + "<span style=\"color:#FF0000;font-weight:bold\">" + "%.1f" % fastd_4H[-1] + "</span>"
+    strRSI_1H = "RSI1小时【关注0,100】：" + "%.1f" % fastd_1H[-3] + "\_" + "%.1f" % fastd_1H[-2] + "\_" +  "%.1f" % fastd_1H[-1] + "\n\n"
+    strRSI_4H = "RSI4小时【关注0,100】：" + "%.1f" % fastd_4H[-3] + "\_" + "%.1f" % fastd_4H[-2] + "\_" +  "%.1f" % fastd_4H[-1] + "\n\n"
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
@@ -344,13 +344,13 @@ def strategy(name,zhouqi):
     if (lowArray[-1] < lowerband[-1]):
         strBULL1_title = "下穿"
 
-    strBULL1 = "BULL1H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + \
-               "%.2f" % lowerband[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-               strBULL1_title + "</span>"
+    strBULL1 = "BULL1H：" + "%.2f" % upperband[-1] + "\_" + "%.2f" % middleband[-1] + "\_" + \
+               "%.2f" % lowerband[-1] + " " + "<font color=red>" + \
+               strBULL1_title + "</font>"
     if (closeArray[-1] > 100):
-        strBULL1 = "BULL1H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + \
-                   "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-                   strBULL1_title + "</span>"
+        strBULL1 = "BULL1H：" + str(int(round(upperband[-1]))) + "\_" + str(int(round(middleband[-1]))) + \
+                   "\_" + str(int(round(lowerband[-1]))) + " " + "<font color=red>" + \
+                   strBULL1_title + "</font>\n\n"
 
     ############################################ 04小时布林线    ###############################################
     upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_4h*1000, timeperiod=20, nbdevup=2, nbdevdn=2, matype=0)
@@ -365,13 +365,13 @@ def strategy(name,zhouqi):
     if  (lowArray_4h[-1] < lowerband[-1]):
         strBULL4_title = "下穿"
 
-    strBULL4 = "BULL4H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + \
-               "%.2f" % lowerband[-1] + " " +  "<span style=\"color:#FF0000;font-weight:bold\">" + \
-               strBULL4_title + "</span>"
+    strBULL4 = "BULL4H：" + "%.2f" % upperband[-1] + "\_" + "%.2f" % middleband[-1] + "\_" + \
+               "%.2f" % lowerband[-1] + " " +  "<font color=red>" + \
+               strBULL4_title + "</font>\n\n"
     if (closeArray[-1] > 100):
-        strBULL4 = "BULL4H：" + str(int(round(upperband[-1]))) + "_" + str(int(round(middleband[-1]))) + \
-                   "_" + str(int(round(lowerband[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-                   strBULL4_title + "</span>"
+        strBULL4 = "BULL4H：" + str(int(round(upperband[-1]))) + "\_" + str(int(round(middleband[-1]))) + \
+                   "\_" + str(int(round(lowerband[-1]))) + " " + "<font color=red>" + \
+                   strBULL4_title + "</font>\n\n"
 
     ############################################ 06小时布林线    ###############################################
     upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_6h * 1000, timeperiod=20, nbdevup=2, nbdevdn=2,
@@ -387,13 +387,13 @@ def strategy(name,zhouqi):
     if (lowArray_6h[-1] < lowerband[-1]):
         strBULL6_title = "下穿"
 
-    strBULL6 = "BULL6H：" + "%.2f" % upperband[-1] + "_" + "%.2f" % middleband[-1] + "_" + \
-               "%.2f" % lowerband[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-               strBULL6_title + "</span>"
+    strBULL6 = "BULL6H：" + "%.2f" % upperband[-1] + "\_" + "%.2f" % middleband[-1] + "\_" + \
+               "%.2f" % lowerband[-1] + " " + "<font color=red>" + \
+               strBULL6_title + "</font>\n\n"
     if (closeArray[-1] > 100):
-        strBULL6 = "BULL6H：" + str(int(round(upperband[-1]))) + "_" + \
-                   str(int(round(middleband[-1]))) + "_" + str(int(round(lowerband[-1]))) + \
-                   " " + "<span style=\"color:#FF0000;font-weight:bold\">" + strBULL6_title + "</span>"
+        strBULL6 = "BULL6H：" + str(int(round(upperband[-1]))) + "\_" + \
+                   str(int(round(middleband[-1]))) + "\_" + str(int(round(lowerband[-1]))) + \
+                   " " + "<font color=red>" + strBULL6_title + "</font>\n\n"
 
     #######################################################################################################
     #####                                                                                             #####
@@ -438,8 +438,8 @@ def strategy(name,zhouqi):
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "> **" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%**"+ "> " + strRSI_1H + "> " + strRSI_4H + \
-                     "> " + strBULL1 + "> " + strBULL4 + "> " + strBULL6 + "> " + str15MQuShi + xingtai + "> " + str1HQuShi
+    content = "#### " + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%"+ "\n" + strRSI_1H + strRSI_4H + \
+                     strBULL1 + strBULL4 + strBULL6 + str15MQuShi + xingtai + str1HQuShi
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
@@ -451,13 +451,20 @@ title4, content4 = strategy("HT/USDT","1h")
 title5, content5 = strategy("XRP/USDT","1h")
 title6, content6 = strategy("TRX/USDT","1h")
 
-mulu = "# 每日简报\n"
-content = mulu + content0 + "> ***" +  content1 + "> ***" + content2 + "> ***" + content3 + \
-          "> ***" +  content30 + "> ***" + content4 + "> ***" + content5 + "> ***" + content6
+mulu = "# **每日简报**\n\n"
+content = mulu + \
+          content0 + "***\n\n" + content1 \
+          + "***\n\n" + content2 \
+          + "***\n\n" + content3 \
+          + "***\n\n" + content30 \
+          + "***\n\n" + content4 \
+          + "***\n\n" + content5 \
+          + "***\n\n" + content6
+
 title = title0 + title1 + title2
 
 # 邮件发送
 #sendMail(content, title)
-common.dingding_msg(title)
-common.dingding_msg(content)
+# common.dingding_msg(title)
+# common.dingding_msg(content)
 common.dingding_markdown_msg(title, content)
