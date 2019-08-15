@@ -184,9 +184,14 @@ def strategy(name,zhouqi):
 
     str15MQuShi = ""
     xingtai = ""
+
+    if (SMA30_15M_5[-1] > SMA30_15M_10[-1] > SMA30_15M_20[-1] > SMA30_15M_30[-1]):
+        xingtai = "上好"
+
+    if (SMA30_15M_5[-1] < SMA30_15M_10[-1] < SMA30_15M_20[-1] < SMA30_15M_30[-1]):
+        xingtai = "下好"
+
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
-        if (SMA30_15M_5[-1] > SMA30_15M_10[-1] > SMA30_15M_20[-1] > SMA30_15M_30[-1]):
-            xingtai = "形态好"
 
         str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>1"
         if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
@@ -194,11 +199,7 @@ def strategy(name,zhouqi):
             if (SMA30_15M_5[-3] > SMA30_15M_5[-4] and SMA30_15M_10[-3] > SMA30_15M_10[-4] and SMA30_15M_20[-3] > SMA30_15M_20[-4] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
                 str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入</span>3"
 
-        str15MQuShi = str15MQuShi + xingtai
-
     elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
-        if (SMA30_15M_5[-1] < SMA30_15M_10[-1] < SMA30_15M_20[-1] < SMA30_15M_30[-1]):
-            xingtai = "形态好"
 
         str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>1"
         if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3] and SMA30_15M_30[-2] < SMA30_15M_30[-3]):
@@ -206,7 +207,6 @@ def strategy(name,zhouqi):
             if (SMA30_15M_5[-3] < SMA30_15M_5[-4] and SMA30_15M_10[-3] < SMA30_15M_10[-4] and SMA30_15M_20[-3] < SMA30_15M_20[-4] and SMA30_15M_30[-3] < SMA30_15M_30[-4]):
                 str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>3"
 
-        str15MQuShi = str15MQuShi + xingtai
     else:
         str15MQuShi = "【MACD慢线同步】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
 
@@ -438,7 +438,7 @@ def strategy(name,zhouqi):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
     content = "<span style=\"color:#FF0000;font-weight:bold\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%</span>"+ "<br>" + strRSI_1H + "<br>" + strRSI_4H + \
-                     "<br>" + strBULL1 + "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + "<br>" + str1HQuShi
+                     "<br>" + strBULL1 + "<br>" + strBULL4 + "<br>" + strBULL6 + "<br>" + str15MQuShi + xingtai + "<br>" + str1HQuShi
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
