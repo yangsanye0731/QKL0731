@@ -217,7 +217,7 @@ def strategy(name,zhouqi):
                 str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>3" + xingtai + "**\n\n"
 
     else:
-        str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>**\n\n"
+        str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>" + xingtai + "**\n\n"
 
 
     ##################################    ########### 1小时均线趋势#############################################
@@ -226,7 +226,7 @@ def strategy(name,zhouqi):
     SMA30_1h_20 = ta.SMA(doubleCloseArray, timeperiod=20)
     SMA30_1h_30 = ta.SMA(doubleCloseArray, timeperiod=30)
 
-    xingtai1 = ""
+    xingtai1 = "无形"
 
     if (SMA30_1h_5[-1] > SMA30_1h_10[-1] > SMA30_1h_20[-1] > SMA30_1h_30[-1]):
         xingtai1 = "上好1"
