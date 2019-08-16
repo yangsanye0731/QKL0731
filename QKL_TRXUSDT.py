@@ -435,10 +435,13 @@ def strategy(name,zhouqi):
     #######################################################################################################
     name_jian = name[0:3]
     title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
+    closeNum = "%.3f" % closeArray[-1]
     if (closeArray[-1] > 100):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
+        closeNum = "%.1f" % closeArray[-1]
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "#### **<font color=#FF0000 size=6 face=\"黑体\">" + name_jian + " "+ "%.3f" % closeArray[-1] + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + strRSI_1H + strRSI_4H + \
+
+    content = "#### **<font color=#FF0000 size=6 face=\"黑体\">" + name_jian + " "+  closeNum + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + strRSI_1H + strRSI_4H + \
                      strBULL1 + strBULL4 + strBULL6 + str15MQuShi + xingtai + str1HQuShi
     return title, content
 
