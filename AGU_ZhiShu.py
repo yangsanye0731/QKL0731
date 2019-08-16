@@ -41,19 +41,21 @@ def strategy(code, name, fullName):
 
      if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2] and SMA30_15_30[-1] > SMA30_15_30[-2]):
 
-          str15QuShi = "买 "
-          str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入1</span>"
+          str15QuShi = "1买 "
+          str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>1" + xingtai + "**\n\n"
           if (SMA30_15_5[-2] > SMA30_15_5[-3] and SMA30_15_10[-2] > SMA30_15_10[-3] and SMA30_15_20[-2] > SMA30_15_20[-3] and SMA30_15_30[-2] > SMA30_15_30[-3]):
-               str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入2</span>"
+               str15QuShi = "2买 "
+               str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>2" + xingtai + "**\n\n"
                if (SMA30_15_5[-3] > SMA30_15_5[-4] and SMA30_15_10[-3] > SMA30_15_10[-4] and SMA30_15_20[-3] > SMA30_15_20[-4] and SMA30_15_30[-3] > SMA30_15_30[-4]):
-                    str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟买入3</span>"
+                    str15QuShi = "3买 "
+                    str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>3" + xingtai + "**\n\n"
 
      elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
           str15QuShi = "卖 "
-          str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟卖出</span>"
+          str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>" + xingtai + "**\n\n"
      else:
           str15QuShi = "空 "
-          str15QuShi_content = "【MACD慢线同步与形态】均线<span style=\"color:#FF0000;font-weight:bold\">15分钟空仓</span>"
+          str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>" + xingtai + "**\n\n"
 
      ############################################ 60分钟布林线###############################################
      data_history_60 = ts.get_k_data(code, ktype="60")
@@ -76,13 +78,13 @@ def strategy(code, name, fullName):
      if (lowArray_60[-1] < lowerband_60[-1]):
          strBULL60_title = "下穿"
 
-     strBULL60 = "BULL60：" + "%.2f" % upperband_60[-1] + "_" + "%.2f" % middleband_60[-1] + "_" + \
-             "%.2f" % lowerband_60[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-             strBULL60_title + "</span>"
+     strBULL60 = "BULL60：" + "%.2f" % upperband_60[-1] + "\_" + "%.2f" % middleband_60[-1] + "\_" + \
+             "%.2f" % lowerband_60[-1] + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
+             strBULL60_title + "</font>"
      if (closeArray[-1] > 1000):
-         strBULL60 = "BULL60：" + str(int(round(upperband_60[-1]))) + "_" + str(int(round(middleband_60[-1]))) + \
-                 "_" + str(int(round(lowerband_60[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-                  strBULL60_title + "</span>"
+         strBULL60 = "BULL60：" + str(int(round(upperband_60[-1]))) + "\_" + str(int(round(middleband_60[-1]))) + \
+                 "\_" + str(int(round(lowerband_60[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
+                  strBULL60_title + "</font>"
 
      ############################################ 1天布林线    ###############################################
      data_history_D = ts.get_k_data(code, ktype="D")
@@ -104,20 +106,21 @@ def strategy(code, name, fullName):
      if (lowArray_D[-1] < lowerband_D[-1]):
           strBULLD_title = "下穿"
 
-     strBULL1 = "BULL1D：" + "%.2f" % upperband_D[-1] + "_" + "%.2f" % middleband_D[-1] + "_" + \
-                "%.2f" % lowerband_D[-1] + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-                strBULLD_title + "</span>"
+     strBULL1 = "BULL1D：" + "%.2f" % upperband_D[-1] + "\_" + "%.2f" % middleband_D[-1] + "\_" + \
+                "%.2f" % lowerband_D[-1] + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
+                strBULLD_title + "</font>"
      if (closeArray[-1] > 1000):
-          strBULL1 = "BULL1D：" + str(int(round(upperband_D[-1]))) + "_" + str(int(round(middleband_D[-1]))) + \
-                     "_" + str(int(round(lowerband_D[-1]))) + " " + "<span style=\"color:#FF0000;font-weight:bold\">" + \
-                     strBULLD_title + "</span>"
+          strBULL1 = "BULL1D：" + str(int(round(upperband_D[-1]))) + "\_" + str(int(round(middleband_D[-1]))) + \
+                     "\_" + str(int(round(lowerband_D[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
+                     strBULLD_title + "</font>"
 
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + xingtai + str15QuShi
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
-     content = "<span style=\"color:#FF0000;font-weight:bold\">" + fullName + " "+ "%.3f" % closeArray[-1] + " " + zhangdiefu +  "%</span>" + \
-               "<br>" + strBULL60 + "<br>" + strBULL1 + "<br>" + str15QuShi_content + xingtai
+
+     content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
+               strBULL60 + strBULL1 + str15QuShi_content
 
      return title, content
 
@@ -140,10 +143,10 @@ def strategy(code, name, fullName):
 def pinjie(title, titleTmp, content, contentTmp):
      if (title.endswith("买 ")):
           titleTmp = title + titleTmp
-          contentTmp = content + "<br><hr>" + contentTmp
+          contentTmp = content + "***\n\n***\n\n" + contentTmp
      else:
           titleTmp = titleTmp + title
-          contentTmp = contentTmp + "<br><hr>" + content
+          contentTmp = contentTmp + "***\n\n***\n\n" + content
 
      return titleTmp, contentTmp
 
@@ -187,10 +190,9 @@ titleTmp, contentTmp = pinjie(str11, titleTmp, content11, contentTmp)
 
 title = str0 + str00 + titleTmp
 
-mulu1 = "=================================<br>"
-mulu2 = "注意均线形态：" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "<br>"
-mulu3 = "=================================<br>"
-content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>" + contentTmp
+mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
+
+content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + contentTmp
 
 # 发送邮件
 common.dingding_markdown_msg_2(title,content)
