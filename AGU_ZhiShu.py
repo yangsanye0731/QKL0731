@@ -193,7 +193,8 @@ mulu3 = "=================================<br>"
 content = mulu1 + mulu2 + mulu3 + content0 + "<br><hr>" + content00 + "<br><hr>" + contentTmp
 
 # 发送邮件
-sendMail (content, title)
+common.dingding_markdown_msg_2(title,content)
+#sendMail (content, title)
 
 
 
