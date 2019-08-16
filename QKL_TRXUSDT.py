@@ -187,10 +187,18 @@ def strategy(name,zhouqi):
     xingtai = ""
 
     if (SMA30_15M_5[-1] > SMA30_15M_10[-1] > SMA30_15M_20[-1] > SMA30_15M_30[-1]):
-        xingtai = "上好"
+        xingtai = "上好1"
+        if (SMA30_15M_5[-2] > SMA30_15M_10[-2] > SMA30_15M_20[-2] > SMA30_15M_30[-2]):
+            xingtai = "上好2"
+            if (SMA30_15M_5[-3] > SMA30_15M_10[-3] > SMA30_15M_20[-3] > SMA30_15M_30[-3]):
+                xingtai = "上好3"
 
     if (SMA30_15M_5[-1] < SMA30_15M_10[-1] < SMA30_15M_20[-1] < SMA30_15M_30[-1]):
-        xingtai = "下好"
+        xingtai = "下好1"
+        if (SMA30_15M_5[-2] < SMA30_15M_10[-2] < SMA30_15M_20[-2] < SMA30_15M_30[-2]):
+            xingtai = "下好2"
+            if (SMA30_15M_5[-3] < SMA30_15M_10[-3] < SMA30_15M_20[-3] < SMA30_15M_30[-3]):
+                xingtai = "下好3"
 
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
 
