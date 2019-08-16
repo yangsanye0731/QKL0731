@@ -311,8 +311,8 @@ def strategy(name,zhouqi):
     fastk_4H, fastd_4H = ta.STOCHRSI(num.asarray(doubleCloseArray_4h, dtype='double'), timeperiod=14, fastk_period=14,
                                fastd_period=3, fastd_matype=3)
     strRSI_1H_title = " R:" + "%.1f" % fastd_1H[-1]
-    strRSI_1H = "RSI1小时【关注0,100】：" + "%.1f" % fastd_1H[-3] + "\_" + "%.1f" % fastd_1H[-2] + "\_" +  "%.1f" % fastd_1H[-1] + "\n\n"
-    strRSI_4H = "RSI4小时【关注0,100】：" + "%.1f" % fastd_4H[-3] + "\_" + "%.1f" % fastd_4H[-2] + "\_" +  "%.1f" % fastd_4H[-1] + "\n\n"
+    strRSI_1H = "RSI1小时：" + "%.1f" % fastd_1H[-3] + "\_" + "%.1f" % fastd_1H[-2] + "\_" + "<font color=#FF0000 size=6 face=\"黑体\">" + "%.1f" % fastd_1H[-1] + "</font>\n\n"
+    strRSI_4H = "RSI4小时：" + "%.1f" % fastd_4H[-3] + "\_" + "%.1f" % fastd_4H[-2] + "\_" + "<font color=#FF0000 size=6 face=\"黑体\">" + "%.1f" % fastd_4H[-1] + "</font>\n\n"
 
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
@@ -440,7 +440,6 @@ def strategy(name,zhouqi):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
         closeNum = "%.1f" % closeArray[-1]
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-
     content = "#### **<font color=#FF0000 size=6 face=\"黑体\">" + name_jian + " "+  closeNum + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + strRSI_1H + strRSI_4H + \
                      strBULL1 + strBULL4 + strBULL6 + str15MQuShi + xingtai + str1HQuShi
     return title, content
