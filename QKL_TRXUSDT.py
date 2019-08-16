@@ -476,13 +476,13 @@ title30, content30 = strategy("BCH/USDT","1h")
 title4, content4 = strategy("HT/USDT","1h")
 
 
-mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报</font>**\n\n"
+mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "</font>**\n\n"
 content = mulu + \
-          content0 + "***\n\n" + content1 \
-          + "***\n\n" + content2 \
-          + "***\n\n" + content3 \
-          + "***\n\n" + content30 \
-          + "***\n\n" + content4
+          content0 + "***\n\n***\n\n" + content1 \
+          + "***\n\n***\n\n" + content2 \
+          + "***\n\n***\n\n" + content3 \
+          + "***\n\n***\n\n" + content30 \
+          + "***\n\n***\n\n" + content4
 
 title = title0 + title1 + title2 + title3
 
