@@ -184,7 +184,7 @@ def strategy(name,zhouqi):
     SMA30_15M_30 = ta.SMA(doubleCloseArray_15, timeperiod=30)
 
     str15MQuShi = ""
-    xingtai = ""
+    xingtai = "无形"
 
     if (SMA30_15M_5[-1] > SMA30_15M_10[-1] > SMA30_15M_20[-1] > SMA30_15M_30[-1]):
         xingtai = "上好1"
