@@ -226,29 +226,45 @@ def strategy(name,zhouqi):
     SMA30_1h_20 = ta.SMA(doubleCloseArray, timeperiod=20)
     SMA30_1h_30 = ta.SMA(doubleCloseArray, timeperiod=30)
 
+    xingtai1 = ""
+
+    if (SMA30_1h_5[-1] > SMA30_1h_10[-1] > SMA30_1h_20[-1] > SMA30_1h_30[-1]):
+        xingtai1 = "上好1"
+        if (SMA30_1h_5[-2] > SMA30_1h_10[-2] > SMA30_1h_20[-2] > SMA30_1h_30[-2]):
+            xingtai1 = "上好2"
+            if (SMA30_1h_5[-3] > SMA30_1h_10[-3] > SMA30_1h_20[-3] > SMA30_1h_30[-3]):
+                xingtai1 = "上好3"
+
+    if (SMA30_1h_5[-1] < SMA30_1h_10[-1] < SMA30_1h_20[-1] < SMA30_1h_30[-1]):
+        xingtai1 = "下好1"
+        if (SMA30_1h_5[-2] < SMA30_1h_10[-2] < SMA30_1h_20[-2] < SMA30_1h_30[-2]):
+            xingtai1 = "下好2"
+            if (SMA30_1h_5[-3] < SMA30_1h_10[-3] < SMA30_1h_20[-3] < SMA30_1h_30[-3]):
+                xingtai1 = "下好3"
+
     # print(SMA30_1h_5)
     str1HQuShi = ""
     str1HQuShi_title = ""
     if (SMA30_1h_5[-1] > SMA30_1h_5[-2] and SMA30_1h_10[-1] > SMA30_1h_10[-2] and SMA30_1h_20[-1] > SMA30_1h_20[-2] and SMA30_1h_30[-1] > SMA30_1h_30[-2]):
-        str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时买入</font>1**\n\n"
+        str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时买入</font>1" + xingtai1 + "**\n\n"
         str1HQuShi_title = "买1"
         if (SMA30_1h_5[-2] > SMA30_1h_5[-3] and SMA30_1h_10[-2] > SMA30_1h_10[-3] and SMA30_1h_20[-2] > SMA30_1h_20[-3] and SMA30_1h_30[-2] > SMA30_1h_30[-3]):
-            str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时买入</font>2**\n\n"
+            str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时买入</font>2" + xingtai1 + "**\n\n"
             str1HQuShi_title = "买2"
             if (SMA30_1h_5[-3] > SMA30_1h_5[-4] and SMA30_1h_10[-3] > SMA30_1h_10[-4] and SMA30_1h_20[-3] > SMA30_1h_20[-4] and SMA30_1h_30[-3] > SMA30_1h_30[-4]):
-                str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时买入</font>3**\n\n"
+                str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时买入</font>3" + xingtai1 + "**\n\n"
                 str1HQuShi_title = "买3"
     elif (SMA30_1h_5[-1] < SMA30_1h_5[-2] and SMA30_1h_10[-1] < SMA30_1h_10[-2] and SMA30_1h_20[-1] < SMA30_1h_20[-2] and SMA30_1h_30[-1] < SMA30_1h_30[-2]):
-        str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时卖出</font>1**\n\n"
+        str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时卖出</font>1" + xingtai1 + "**\n\n"
         str1HQuShi_title = "卖1"
         if (SMA30_1h_5[-2] < SMA30_1h_5[-3] and SMA30_1h_10[-2] < SMA30_1h_10[-3] and SMA30_1h_20[-2] < SMA30_1h_20[-3] and SMA30_1h_30[-2] < SMA30_1h_30[-3]):
-            str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时卖出</font>2**\n\n"
+            str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时卖出</font>2" + xingtai1 + "**\n\n"
             str1HQuShi_title = "卖2"
             if (SMA30_1h_5[-3] < SMA30_1h_5[-4] and SMA30_1h_10[-3] < SMA30_1h_10[-4] and SMA30_1h_20[-3] < SMA30_1h_20[-4] and SMA30_1h_30[-3] < SMA30_1h_30[-4]):
-                str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时卖出</font>3**\n\n"
+                str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时卖出</font>3" + xingtai1 + "**\n\n"
                 str1HQuShi_title = "卖3"
     else:
-        str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时空仓</font>**\n\n"
+        str1HQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">01小时空仓</font>" + xingtai1 + "**\n\n"
         str1HQuShi_title = "空"
 
     ############################################ 30分钟均线趋势#############################################
@@ -442,14 +458,14 @@ def strategy(name,zhouqi):
     #####                                                                                             #####
     #######################################################################################################
     name_jian = name[0:3]
-    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
+    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + str1HQuShi_title + strBULL4_title + "\_" + xingtai
     closeNum = "%.3f" % closeArray[-1]
     if (closeArray[-1] > 100):
-        title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
+        title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + "\_" + xingtai
         closeNum = "%.1f" % closeArray[-1]
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "##### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + str15MQuShi + strRSI_1H + strRSI_4H + \
-                     strBULL1 + strBULL4 + strBULL6 + str1HQuShi
+    content = "##### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + str15MQuShi + str1HQuShi + strRSI_1H + strRSI_4H + \
+                     strBULL1 + strBULL4 + strBULL6
     return title, content
 
 title0, content0 = strategy("BTC/USDT","1h")
@@ -471,7 +487,7 @@ content = mulu + \
           + "***\n\n" + content5 \
           + "***\n\n" + content6
 
-title = title0 + title1 + title2
+title = title0 + title1 + title2 + title3
 
 # 邮件发送
 #sendMail(content, title)
