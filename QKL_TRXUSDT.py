@@ -464,7 +464,7 @@ def strategy(name,zhouqi):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + "_" + strBULL4_title + "_" + xingtai
         closeNum = "%.1f" % closeArray[-1]
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">【" + name_jian + "】 "+  closeNum + " 1H：" +  zhangdiefu + "%"+ "</font>**\n" + str15MQuShi + str1HQuShi + strRSI_1H + strRSI_4H + \
+    content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H：" +  zhangdiefu + "%"+ "</font>**\n" + str15MQuShi + str1HQuShi + strRSI_1H + strRSI_4H + \
                      strBULL1 + strBULL4 + strBULL6
     return title, content
 
