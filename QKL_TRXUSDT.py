@@ -474,8 +474,7 @@ title2, content2 = strategy("EOS/USDT","1h")
 title3, content3 = strategy("LTC/USDT","1h")
 title30, content30 = strategy("BCH/USDT","1h")
 title4, content4 = strategy("HT/USDT","1h")
-title5, content5 = strategy("XRP/USDT","1h")
-title6, content6 = strategy("TRX/USDT","1h")
+
 
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报</font>**\n\n"
 content = mulu + \
@@ -483,9 +482,7 @@ content = mulu + \
           + "***\n\n" + content2 \
           + "***\n\n" + content3 \
           + "***\n\n" + content30 \
-          + "***\n\n" + content4 \
-          + "***\n\n" + content5 \
-          + "***\n\n" + content6
+          + "***\n\n" + content4
 
 title = title0 + title1 + title2 + title3
 
