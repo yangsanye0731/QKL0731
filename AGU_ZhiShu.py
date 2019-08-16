@@ -80,11 +80,11 @@ def strategy(code, name, fullName):
 
      strBULL60 = "BULL60：" + "%.2f" % upperband_60[-1] + "\_" + "%.2f" % middleband_60[-1] + "\_" + \
              "%.2f" % lowerband_60[-1] + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-             strBULL60_title + "</font>"
+             strBULL60_title + "</font>\n\n"
      if (closeArray[-1] > 1000):
          strBULL60 = "BULL60：" + str(int(round(upperband_60[-1]))) + "\_" + str(int(round(middleband_60[-1]))) + \
                  "\_" + str(int(round(lowerband_60[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-                  strBULL60_title + "</font>"
+                  strBULL60_title + "</font>\n\n"
 
      ############################################ 1天布林线    ###############################################
      data_history_D = ts.get_k_data(code, ktype="D")
@@ -108,11 +108,11 @@ def strategy(code, name, fullName):
 
      strBULL1 = "BULL1D：" + "%.2f" % upperband_D[-1] + "\_" + "%.2f" % middleband_D[-1] + "\_" + \
                 "%.2f" % lowerband_D[-1] + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-                strBULLD_title + "</font>"
+                strBULLD_title + "</font>\n\n"
      if (closeArray[-1] > 1000):
           strBULL1 = "BULL1D：" + str(int(round(upperband_D[-1]))) + "\_" + str(int(round(middleband_D[-1]))) + \
                      "\_" + str(int(round(lowerband_D[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-                     strBULLD_title + "</font>"
+                     strBULLD_title + "</font>\n\n"
 
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
@@ -120,7 +120,7 @@ def strategy(code, name, fullName):
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
-               strBULL60 + strBULL1 + str15QuShi_content
+               str15QuShi_content + strBULL60 + strBULL1
 
      return title, content
 
