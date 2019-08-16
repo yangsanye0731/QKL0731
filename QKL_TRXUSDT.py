@@ -194,19 +194,19 @@ def strategy(name,zhouqi):
 
     if (SMA30_15M_5[-1] > SMA30_15M_5[-2] and SMA30_15M_10[-1] > SMA30_15M_10[-2] and SMA30_15M_20[-1] > SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
 
-        str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>1**\n\n"
+        str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>1" + xingtai + "**\n\n"
         if (SMA30_15M_5[-2] > SMA30_15M_5[-3] and SMA30_15M_10[-2] > SMA30_15M_10[-3] and SMA30_15M_20[-2] > SMA30_15M_20[-3] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
-            str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>2**\n\n"
+            str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>2" + xingtai + "**\n\n"
             if (SMA30_15M_5[-3] > SMA30_15M_5[-4] and SMA30_15M_10[-3] > SMA30_15M_10[-4] and SMA30_15M_20[-3] > SMA30_15M_20[-4] and SMA30_15M_30[-2] > SMA30_15M_30[-3]):
-                str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>3**\n\n"
+                str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>3" + xingtai + "**\n\n"
 
     elif (SMA30_15M_5[-1] < SMA30_15M_5[-2] and SMA30_15M_10[-1] < SMA30_15M_10[-2] and SMA30_15M_20[-1] < SMA30_15M_20[-2] and SMA30_15M_30[-1] > SMA30_15M_30[-2]):
 
-        str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>1**\n\n"
+        str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>1" + xingtai + "**\n\n"
         if (SMA30_15M_5[-2] < SMA30_15M_5[-3] and SMA30_15M_10[-2] < SMA30_15M_10[-3] and SMA30_15M_20[-2] < SMA30_15M_20[-3] and SMA30_15M_30[-2] < SMA30_15M_30[-3]):
-            str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>2**\n\n"
+            str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>2" + xingtai + "**\n\n"
             if (SMA30_15M_5[-3] < SMA30_15M_5[-4] and SMA30_15M_10[-3] < SMA30_15M_10[-4] and SMA30_15M_20[-3] < SMA30_15M_20[-4] and SMA30_15M_30[-3] < SMA30_15M_30[-4]):
-                str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>3**\n\n"
+                str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>3" + xingtai + "**\n\n"
 
     else:
         str15MQuShi = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>**\n\n"
@@ -440,7 +440,7 @@ def strategy(name,zhouqi):
         title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + str1HQuShi_title + strBULL4_title + xingtai
         closeNum = "%.1f" % closeArray[-1]
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "##### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + xingtai + str15MQuShi + strRSI_1H + strRSI_4H + \
+    content = "##### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H涨跌：" +  zhangdiefu + "%"+ "</font>**\n" + str15MQuShi + strRSI_1H + strRSI_4H + \
                      strBULL1 + strBULL4 + strBULL6 + str1HQuShi
     return title, content
 
