@@ -23,7 +23,7 @@ def strategy(code, name, fullName):
      SMA30_15_10 = ta.SMA(doubleCloseArray, timeperiod=10)
      SMA30_15_20 = ta.SMA(doubleCloseArray, timeperiod=20)
      SMA30_15_30 = ta.SMA(doubleCloseArray, timeperiod=30)
-     xingtai = ""
+     xingtai = "无形"
      if (SMA30_15_5[-1] > SMA30_15_10[-1] > SMA30_15_20[-1] > SMA30_15_30[-1]):
           xingtai = "上好1"
           if (SMA30_15_5[-2] > SMA30_15_10[-2] > SMA30_15_20[-2] > SMA30_15_30[-2]):
