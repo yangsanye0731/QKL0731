@@ -57,6 +57,56 @@ def strategy(code, name, fullName):
           str15QuShi = "空 "
           str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>" + xingtai + "**\n\n"
 
+     ############################################ 30分钟布林线###############################################
+     data_history_30 = ts.get_k_data(code, ktype="30")
+
+     closeArray_30 = num.array(data_history_30['close'])
+     highArray_30 = num.array(data_history_30['high'])
+     lowArray_30 = num.array(data_history_30['low'])
+
+     doubleCloseArray_30 = num.asarray(closeArray_30, dtype='double')
+     doubleHighArray_30 = num.asarray(highArray_30, dtype='double')
+     doubleLowArray_30 = num.asarray(lowArray_30, dtype='double')
+
+     SMA30_30_5 = ta.SMA(doubleCloseArray_30, timeperiod=5)
+     SMA30_30_10 = ta.SMA(doubleCloseArray_30, timeperiod=10)
+     SMA30_30_20 = ta.SMA(doubleCloseArray_30, timeperiod=20)
+     SMA30_30_30 = ta.SMA(doubleCloseArray_30, timeperiod=30)
+     xingtai1 = ""
+     if (SMA30_30_5[-1] > SMA30_30_10[-1] > SMA30_30_20[-1] > SMA30_30_30[-1]):
+          xingtai1 = "上好1"
+          if (SMA30_30_5[-2] > SMA30_30_10[-2] > SMA30_30_20[-2] > SMA30_30_30[-2]):
+               xingtai1 = "上好2"
+               if (SMA30_30_5[-3] > SMA30_30_10[-3] > SMA30_30_20[-3] > SMA30_30_30[-3]):
+                    xingtai1 = "上好3"
+
+     if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
+          xingtai1 = "下好1"
+          if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
+               xingtai1 = "下好2"
+               if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
+                    xingtai1 = "下好3"
+
+     if (SMA30_30_5[-1] > SMA30_30_5[-2] and SMA30_30_10[-1] > SMA30_30_10[-2] and SMA30_30_20[-1] > SMA30_30_20[-2] and SMA30_30_30[-1] > SMA30_30_30[-2]):
+
+          str30QuShi = "1买 "
+          str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>1" + xingtai1 + "**\n\n"
+          if (SMA30_30_5[-2] > SMA30_30_5[-3] and SMA30_30_10[-2] > SMA30_30_10[-3] and SMA30_30_20[-2] >
+                  SMA30_30_20[-3] and SMA30_30_30[-2] > SMA30_30_30[-3]):
+               str30QuShi = "2买 "
+               str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>2" + xingtai1 + "**\n\n"
+               if (SMA30_30_5[-3] > SMA30_30_5[-4] and SMA30_30_10[-3] > SMA30_30_10[-4] and SMA30_30_20[-3] >
+                       SMA30_30_20[-4] and SMA30_30_30[-3] > SMA30_30_30[-4]):
+                    str30QuShi = "3买 "
+                    str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>3" + xingtai1 + "**\n\n"
+
+     elif (SMA30_30_5[-1] < SMA30_30_5[-2] and SMA30_30_10[-1] < SMA30_30_10[-2] and SMA30_30_20[-1] < SMA30_30_20[-2]):
+          str30QuShi = "卖 "
+          str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟卖出</font>" + xingtai1 + "**\n\n"
+     else:
+          str30QuShi = "空 "
+          str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟空仓</font>" + xingtai1 + "**\n\n"
+
      ############################################ 60分钟布林线###############################################
      data_history_60 = ts.get_k_data(code, ktype="60")
 
@@ -120,7 +170,7 @@ def strategy(code, name, fullName):
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
-               str15QuShi_content + strBULL60 + strBULL1
+               str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
 
      return title, content
 
@@ -143,10 +193,10 @@ def strategy(code, name, fullName):
 def pinjie(title, titleTmp, content, contentTmp):
      if (title.endswith("买 ")):
           titleTmp = title + titleTmp
-          contentTmp = content + "***\n\n***\n\n" + contentTmp
+          contentTmp = content + "***\n\n" + contentTmp
      else:
           titleTmp = titleTmp + title
-          contentTmp = contentTmp + "***\n\n***\n\n" + content
+          contentTmp = contentTmp + "***\n\n" + content
 
      return titleTmp, contentTmp
 
