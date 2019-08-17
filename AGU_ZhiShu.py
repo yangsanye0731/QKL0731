@@ -25,19 +25,19 @@ def strategy(code, name, fullName):
      SMA30_15_30 = ta.SMA(doubleCloseArray, timeperiod=30)
      xingtai = ""
      if (SMA30_15_5[-1] > SMA30_15_10[-1] > SMA30_15_20[-1] > SMA30_15_30[-1]):
-          xingtai = "上好1 "
+          xingtai = "上好1"
           if (SMA30_15_5[-2] > SMA30_15_10[-2] > SMA30_15_20[-2] > SMA30_15_30[-2]):
-               xingtai = "上好2 "
+               xingtai = "上好2"
                if (SMA30_15_5[-3] > SMA30_15_10[-3] > SMA30_15_20[-3] > SMA30_15_30[-3]):
-                    xingtai = "上好3 "
+                    xingtai = "上好3"
 
 
      if (SMA30_15_5[-1] < SMA30_15_10[-1] < SMA30_15_20[-1] < SMA30_15_30[-1]):
-          xingtai = "下好1 "
+          xingtai = "下好1"
           if (SMA30_15_5[-1] < SMA30_15_10[-1] < SMA30_15_20[-1] < SMA30_15_30[-1]):
-               xingtai = "下好2 "
+               xingtai = "下好2"
                if (SMA30_15_5[-1] < SMA30_15_10[-1] < SMA30_15_20[-1] < SMA30_15_30[-1]):
-                    xingtai = "下好3 "
+                    xingtai = "下好3"
 
      if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2] and SMA30_15_30[-1] > SMA30_15_30[-2]):
 
@@ -74,18 +74,18 @@ def strategy(code, name, fullName):
      SMA30_30_30 = ta.SMA(doubleCloseArray_30, timeperiod=30)
      xingtai1 = ""
      if (SMA30_30_5[-1] > SMA30_30_10[-1] > SMA30_30_20[-1] > SMA30_30_30[-1]):
-          xingtai1 = "上好1 "
+          xingtai1 = "上好1"
           if (SMA30_30_5[-2] > SMA30_30_10[-2] > SMA30_30_20[-2] > SMA30_30_30[-2]):
-               xingtai1 = "上好2 "
+               xingtai1 = "上好2"
                if (SMA30_30_5[-3] > SMA30_30_10[-3] > SMA30_30_20[-3] > SMA30_30_30[-3]):
-                    xingtai1 = "上好3 "
+                    xingtai1 = "上好3"
 
      if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
-          xingtai1 = "下好1 "
+          xingtai1 = "下好1"
           if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
-               xingtai1 = "下好2 "
+               xingtai1 = "下好2"
                if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
-                    xingtai1 = "下好3 "
+                    xingtai1 = "下好3"
 
      if (SMA30_30_5[-1] > SMA30_30_5[-2] and SMA30_30_10[-1] > SMA30_30_10[-2] and SMA30_30_20[-1] > SMA30_30_20[-2] and SMA30_30_30[-1] > SMA30_30_30[-2]):
 
