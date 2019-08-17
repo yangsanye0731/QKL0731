@@ -238,6 +238,21 @@ titleTmp, contentTmp = pinjie(str10, titleTmp, content10, contentTmp)
 str11, content11 = strategy("300664", " @鹏鹞", "@鹏鹞环保")
 titleTmp, contentTmp = pinjie(str11, titleTmp, content11, contentTmp)
 
+str12, content12 = strategy("300537", " 广信", "广信材料")
+titleTmp, contentTmp = pinjie(str12, titleTmp, content12, contentTmp)
+
+str13, content13 = strategy("300480", " 光力", "光力科技")
+titleTmp, contentTmp = pinjie(str13, titleTmp, content13, contentTmp)
+
+str14, content14 = strategy("300462", " 华铭", "华铭智能")
+titleTmp, contentTmp = pinjie(str14, titleTmp, content14, contentTmp)
+
+str15, content15 = strategy("002020", " 京新", "京新药业")
+titleTmp, contentTmp = pinjie(str15, titleTmp, content15, contentTmp)
+
+str16, content16 = strategy("300576", " 容大", "容大感光")
+titleTmp, contentTmp = pinjie(str16, titleTmp, content16, contentTmp)
+
 title = str0 + str00 + titleTmp
 
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
