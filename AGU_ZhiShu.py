@@ -23,6 +23,7 @@ def strategy(code, name, fullName):
      SMA30_15_10 = ta.SMA(doubleCloseArray, timeperiod=10)
      SMA30_15_20 = ta.SMA(doubleCloseArray, timeperiod=20)
      SMA30_15_30 = ta.SMA(doubleCloseArray, timeperiod=30)
+
      xingtai = ""
      if (SMA30_15_5[-1] > SMA30_15_10[-1] > SMA30_15_20[-1] > SMA30_15_30[-1]):
           xingtai = "上好1"
@@ -72,6 +73,24 @@ def strategy(code, name, fullName):
      SMA30_30_10 = ta.SMA(doubleCloseArray_30, timeperiod=10)
      SMA30_30_20 = ta.SMA(doubleCloseArray_30, timeperiod=20)
      SMA30_30_30 = ta.SMA(doubleCloseArray_30, timeperiod=30)
+     SMA30_30_60 = ta.SMA(doubleCloseArray_30, timeperiod=60)
+
+     MIN30_60MA = ""
+     if (SMA30_30_60[-1] > SMA30_30_60[-2]):
+          MIN30_60MA = "趋势1"
+          if (SMA30_30_60[-2] > SMA30_30_60[-3]):
+               MIN30_60MA = "趋势2"
+               if (SMA30_30_60[-3] > SMA30_30_60[-4]):
+                    MIN30_60MA = "趋势3"
+                    if (SMA30_30_60[-4] > SMA30_30_60[-5]):
+                         MIN30_60MA = "趋势4"
+                         if (SMA30_30_60[-5] > SMA30_30_60[-6]):
+                              MIN30_60MA = "趋势5"
+                              if (SMA30_30_60[-6] > SMA30_30_60[-7]):
+                                   MIN30_60MA = "趋势6"
+                                   if (SMA30_30_60[-6] > SMA30_30_60[-7]):
+                                        MIN30_60MA = "上升，错过"
+
      xingtai1 = ""
      if (SMA30_30_5[-1] > SMA30_30_10[-1] > SMA30_30_20[-1] > SMA30_30_30[-1]):
           xingtai1 = "上好1"
@@ -166,11 +185,11 @@ def strategy(code, name, fullName):
 
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     title = name + xingtai1 + str30QuShi
+     title = name + MIN30_60MA + xingtai1 + str30QuShi
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
-               str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
+               MIN30_60MA + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
 
      return title, content
 
@@ -191,7 +210,7 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #######################################################################################################
 def pinjie(title, titleTmp, content, contentTmp):
-     if ("买" in title):
+     if ("趋势" in title):
           titleTmp = title + titleTmp
           contentTmp = content + "***\n\n" + contentTmp
      else:
@@ -252,6 +271,10 @@ titleTmp, contentTmp = pinjie(str15, titleTmp, content15, contentTmp)
 
 str16, content16 = strategy("300576", " 容大", "容大感光")
 titleTmp, contentTmp = pinjie(str16, titleTmp, content16, contentTmp)
+
+str17, content17 = strategy("002594", " 比亚迪", "比亚迪")
+titleTmp, contentTmp = pinjie(str17, titleTmp, content17, contentTmp)
+
 
 title = str0 + str00 + titleTmp
 
