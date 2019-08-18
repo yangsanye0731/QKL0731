@@ -76,20 +76,28 @@ def strategy(code, name, fullName):
      SMA30_30_60 = ta.SMA(doubleCloseArray_30, timeperiod=60)
 
      MIN30_60MA = ""
+     MIN30_60MA_content = ""
      if (SMA30_30_60[-1] > SMA30_30_60[-2]):
           MIN30_60MA = "趋势1"
+          MIN30_60MA_content = "30分钟60均线趋势走多1\n\n"
           if (SMA30_30_60[-2] > SMA30_30_60[-3]):
                MIN30_60MA = "趋势2"
+               MIN30_60MA_content = "30分钟60均线趋势走多2\n\n"
                if (SMA30_30_60[-3] > SMA30_30_60[-4]):
                     MIN30_60MA = "趋势3"
+                    MIN30_60MA_content = "30分钟60均线趋势走多3\n\n"
                     if (SMA30_30_60[-4] > SMA30_30_60[-5]):
                          MIN30_60MA = "趋势4"
+                         MIN30_60MA_content = "30分钟60均线趋势走多4\n\n"
                          if (SMA30_30_60[-5] > SMA30_30_60[-6]):
                               MIN30_60MA = "趋势5"
+                              MIN30_60MA_content = "30分钟60均线趋势走多5\n\n"
                               if (SMA30_30_60[-6] > SMA30_30_60[-7]):
                                    MIN30_60MA = "趋势6"
+                                   MIN30_60MA_content = "30分钟60均线趋势走多6\n\n"
                                    if (SMA30_30_60[-6] > SMA30_30_60[-7]):
                                         MIN30_60MA = "错过"
+                                        MIN30_60MA_content = "30分钟60均线趋势错过\n\n"
 
      xingtai1 = ""
      if (SMA30_30_5[-1] > SMA30_30_10[-1] > SMA30_30_20[-1] > SMA30_30_30[-1]):
@@ -189,7 +197,7 @@ def strategy(code, name, fullName):
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
-               MIN30_60MA + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
+               MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
 
      return title, content
 
@@ -274,6 +282,9 @@ titleTmp, contentTmp = pinjie(str16, titleTmp, content16, contentTmp)
 
 str17, content17 = strategy("002594", " 比亚迪", "比亚迪")
 titleTmp, contentTmp = pinjie(str17, titleTmp, content17, contentTmp)
+
+str18, content18 = strategy("300691", "联光", "联合光电")
+titleTmp, contentTmp = pinjie(str18, titleTmp, content18, contentTmp)
 
 
 title = str0 + str00 + titleTmp
