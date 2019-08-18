@@ -89,7 +89,7 @@ def strategy(code, name, fullName):
                               if (SMA30_30_60[-6] > SMA30_30_60[-7]):
                                    MIN30_60MA = "趋势6"
                                    if (SMA30_30_60[-6] > SMA30_30_60[-7]):
-                                        MIN30_60MA = "上升，错过"
+                                        MIN30_60MA = "错过"
 
      xingtai1 = ""
      if (SMA30_30_5[-1] > SMA30_30_10[-1] > SMA30_30_20[-1] > SMA30_30_30[-1]):
