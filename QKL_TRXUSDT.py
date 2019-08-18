@@ -59,6 +59,11 @@ def strategy(name,zhouqi):
         data_12h = gateio.fetch_ohlcv(symbol=name, timeframe='12h', limit=500, since=since_time_12h)
         time.sleep(1)
 
+        ##############获取01天数据############################################################################
+        since_time_1d = current_time - limit * 24 * 60 * 60 * 1000
+        data_1d = gateio.fetch_ohlcv(symbol=name, timeframe='1d', limit=500, since=since_time_1d)
+        time.sleep(1)
+
         ##############获取30分钟数据#############################################################################
         # since_time_30 = current_time - limit * 1* 30 * 60 * 1000
         # data_30 = huobi.fetch_ohlcv(symbol=name, timeframe='30m', limit=500, since=since_time_30)
@@ -109,14 +114,7 @@ def strategy(name,zhouqi):
     doubleOpenArray = num.asarray(openArray, dtype='double')
     print(closeArray)
 
-    ############################################ 15分钟数据处理############################################
-    df_6h = pd.DataFrame(data_6h)
-    df_6h = df_6h.rename(columns={0: 'open_time', 1: 'open', 2: 'high', 3: 'low', 4: 'close', 5: 'volume'})
-    df_6h['open_time'] = pd.to_datetime(df_6h['open_time'], unit='ms') + pd.Timedelta(hours=8)
-    closeArray_6h = num.array(df_6h['close'])
-    doubleCloseArray_6h = num.asarray(closeArray_6h, dtype='double')
-
-    ############################################ 15分钟数据处理############################################
+    ############################################ 12小时数据处理############################################
     df_12h = pd.DataFrame(data_12h)
     df_12h = df_12h.rename(columns={0: 'open_time', 1: 'open', 2: 'high', 3: 'low', 4: 'close', 5: 'volume'})
     df_12h['open_time'] = pd.to_datetime(df_12h['open_time'], unit='ms') + pd.Timedelta(hours=8)
@@ -161,6 +159,15 @@ def strategy(name,zhouqi):
     lowArray_6h = num.array(data_6h['low'])
     highArray_6h = num.array(data_6h['high'])
     doubleCloseArray_6h = num.asarray(closeArray_6h, dtype='double')
+
+    ############################################ 01天数据处理############################################
+    data_1d = pd.DataFrame(data_1d)
+    data_1d = data_1d.rename(columns={0: 'open_time', 1: 'open', 2: 'high', 3: 'low', 4: 'close', 5: 'volume'})
+    data_1d['open_time'] = pd.to_datetime(data_1d['open_time'], unit='ms') + pd.Timedelta(hours=8)
+    closeArray_1d = num.array(data_1d['close'])
+    lowArray_1d = num.array(data_1d['low'])
+    highArray_1d = num.array(data_1d['high'])
+    doubleCloseArray_1d = num.asarray(closeArray_1d, dtype='double')
 
     #######################################################################################################
     #####                                                                                             #####
@@ -341,17 +348,26 @@ def strategy(name,zhouqi):
     # strRSI = " 周30:" + "%.1f" % fastd_30[-3] + "/" + "%.1f" % fastd_30[-2] + "/" + "%.1f" % fastd_30[-1] + " "
     #
     #
-    # ############################################ 15分钟MACD    #############################################
-    # # macd 为快线 macdsignal为慢线，macdhist为柱体
-    # # print(doubleCloseArray_15)
-    # macd, macdsignal, macdhist = ta.MACD(num.asarray(doubleCloseArray_15 * 1000, dtype='double'), fastperiod=12,
-    #                                      slowperiod=26,
-    #                                      signalperiod=9)
-    # macd = macd / 1000
-    # macdsignal = macdsignal / 1000
-    # macdhist = macdhist / 1000
-    #
-    # strMA = " M15:" + "%.1f" % (macdsignal[-3]*100) + "/" + "%.1f" % (macdsignal[-2]*100) + "/" + "%.1f" % (macdsignal[-1]*100)
+    ############################################ 1天MACD    #############################################
+    # macd 为快线 macdsignal为慢线，macdhist为柱体
+    macd, macdsignal, macdhist = ta.MACD(num.asarray(doubleCloseArray_1d * 1000, dtype='double'), fastperiod=12,
+                                         slowperiod=26,
+                                         signalperiod=9)
+    macd = macd / 1000
+    macdsignal = macdsignal / 1000
+    macdhist = macdhist / 1000
+
+    macdSignTitle = "趋势不明"
+    macdSign = "**<font color=#FF0000 size=6 face=\"微软雅黑\">MACD日线趋势不明</font>**\n\n"
+    if (macdsignal[-1] < 0 and macdhist[-1] < macdhist[-2]):
+        macdSignTitle = "趋势走空"
+        macdSign = "**<font color=#FF0000 size=6 face=\"微软雅黑\">MACD日线弱势走空</font>**\n\n"
+
+    if (macdsignal[-1] > 0 and macdhist[-1] > macdhist[-2]):
+        macdSignTitle = "趋势走多"
+        macdSign = "**<font color=#FF0000 size=6 face=\"微软雅黑\">MACD日线强势走多</font>**\n\n"
+
+    # strMA = " M1D:" + "%.1f" % (macdsignal[-3]*100) + "/" + "%.1f" % (macdsignal[-2]*100) + "/" + "%.1f" % (macdsignal[-1]*100)
     #
 
     ############################################ 01小时布林线    ###############################################
@@ -458,13 +474,13 @@ def strategy(name,zhouqi):
     #####                                                                                             #####
     #######################################################################################################
     name_jian = name[0:3]
-    title = " " + name_jian + "%.2f" % closeArray[-1] + strRSI_1H_title + "_" + strBULL4_title + "_" + xingtai
+    title = " " + name_jian + "%.2f" % closeArray[-1] + macdSignTitle + "_" + strRSI_1H_title + "_" + strBULL4_title + "_" + xingtai
     closeNum = "%.3f" % closeArray[-1]
     if (closeArray[-1] > 100):
-        title = " " + name_jian + str(int(round(closeArray[-1]))) + strRSI_1H_title + "_" + strBULL4_title + "_" + xingtai
+        title = " " + name_jian + str(int(round(closeArray[-1]))) + macdSignTitle + "_" + strRSI_1H_title + "_" + strBULL4_title + "_" + xingtai
         closeNum = "%.1f" % closeArray[-1]
     zhangdiefu = "%.2f" % (((closeArray[-1] - openArray[-1]) / openArray[-1]) * 100)
-    content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H：" +  zhangdiefu + "%"+ "</font>**\n" + str15MQuShi + str1HQuShi + strRSI_1H + strRSI_4H + \
+    content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + name_jian + " "+  closeNum + " 1H：" +  zhangdiefu + "%"+ "</font>**\n" + macdSign + str15MQuShi + str1HQuShi + strRSI_1H + strRSI_4H + \
                      strBULL1 + strBULL4 + strBULL6
     return title, content
 
