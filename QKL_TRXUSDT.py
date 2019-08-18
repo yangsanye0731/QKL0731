@@ -359,11 +359,11 @@ def strategy(name,zhouqi):
 
     macdSignTitle = "趋势不明"
     macdSign = "**<font color=#FF0000 size=6 face=\"微软雅黑\">MACD日线趋势不明</font>**\n\n"
-    if (macdsignal[-1] < 0 and macdhist[-1] < macdhist[-2]):
+    if (macdhist[-1] < macdhist[-2]):
         macdSignTitle = "趋势走空"
         macdSign = "**<font color=#FF0000 size=6 face=\"微软雅黑\">MACD日线弱势走空</font>**\n\n"
 
-    if (macdsignal[-1] > 0 and macdhist[-1] > macdhist[-2]):
+    if (macdhist[-1] > macdhist[-2]):
         macdSignTitle = "趋势走多"
         macdSign = "**<font color=#FF0000 size=6 face=\"微软雅黑\">MACD日线强势走多</font>**\n\n"
 
