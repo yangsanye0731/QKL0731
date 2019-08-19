@@ -96,7 +96,7 @@ def strategy(code, name, fullName):
                                    MIN30_60MA = "趋势6"
                                    MIN30_60MA_content = "30分钟60均线趋势走多6\n\n"
                                    if (SMA30_30_60[-6] > SMA30_30_60[-7]):
-                                        MIN30_60MA = "过"
+                                        MIN30_60MA = "错过"
                                         MIN30_60MA_content = "30分钟60均线趋势错过\n\n"
 
      xingtai1 = ""
