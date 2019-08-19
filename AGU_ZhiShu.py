@@ -96,7 +96,7 @@ def strategy(code, name, fullName):
                                    MIN30_60MA = "趋势6"
                                    MIN30_60MA_content = "30分钟60均线趋势走多6\n\n"
                                    if (SMA30_30_60[-6] > SMA30_30_60[-7]):
-                                        MIN30_60MA = "错过"
+                                        MIN30_60MA = "过"
                                         MIN30_60MA_content = "30分钟60均线趋势错过\n\n"
 
      xingtai1 = ""
@@ -229,6 +229,7 @@ def pinjie(title, titleTmp, content, contentTmp):
 
 str0,content0 = strategy("399006", "※创业", "※创业板指")
 str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
+str000,content000 = strategy("399975", "※科技", "※科技ETF")
 
 titleTmp = ""
 contentTmp = ""
