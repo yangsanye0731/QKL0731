@@ -287,12 +287,15 @@ titleTmp, contentTmp = pinjie(str17, titleTmp, content17, contentTmp)
 str18, content18 = strategy("300691", "联光", "联合光电")
 titleTmp, contentTmp = pinjie(str18, titleTmp, content18, contentTmp)
 
+str19, content19 = strategy("600489", "中金", "中金黄金")
+titleTmp, contentTmp = pinjie(str19, titleTmp, content19, contentTmp)
 
-title = str0 + str00 + titleTmp
+
+title = str0 + str00 + str000 + titleTmp
 
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
 
-content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + contentTmp
+content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + content000 + "***\n\n***\n\n" + contentTmp
 
 # 发送邮件
 common.dingding_markdown_msg_2(title,content)
