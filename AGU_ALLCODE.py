@@ -51,16 +51,17 @@ def strategy(zhouqi):
                             if (ma60[-4] > ma60[-5]):
                                 if (ma60[-5] > ma60[-6]):
                                     continue
-                # macd 为快线 macdsignal为慢线，macdhist为柱体
-                macd, macdsignal, macdhist = ta.MACD(doubleCloseArray, fastperiod=12, slowperiod=26, signalperiod=9)
-                strMacd = ""
-                if (macdsignal[-1] > macdsignal[-2]):
-                    strMacd = "_MACD升势"
 
-                if (strMa == '形态好'):
-                    print("打印图片")
-                    common_image.plt_image(codeItem, common.gupiaomingcheng(codeItem), "W")
-                strResult += codeItem + "_" + common.gupiaomingcheng(codeItem) + "_" + common.zhangdiefu(codeItem) + strMacd + "_" + strMa + "<br>"
+            # macd 为快线 macdsignal为慢线，macdhist为柱体
+            macd, macdsignal, macdhist = ta.MACD(doubleCloseArray, fastperiod=12, slowperiod=26, signalperiod=9)
+            strMacd = ""
+            if (macdsignal[-1] > macdsignal[-2]):
+                strMacd = "_MACD升势"
+
+            if (strMa == '形态好'):
+                print("打印图片")
+                common_image.plt_image(codeItem, common.gupiaomingcheng(codeItem), "W")
+            strResult += codeItem + "_" + common.gupiaomingcheng(codeItem) + "_" + common.zhangdiefu(codeItem) + strMacd + "_" + strMa + "<br>"
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -72,5 +73,5 @@ strMailResult_W = strategy('W')
 sendMail(template1(strMailResult_W), "周线四线俱升")
 # strMailResult_M = strategy('M')
 # sendMail(template1(strMailResult_M), "月线四线俱升")
-# strMailResult_D = strategy('30')
-# sendMail(template1(strMailResult_D), "30分钟60均线俱升")
+strMailResult_D = strategy('30')
+sendMail(template1(strMailResult_D), "30分钟60均线俱升")
