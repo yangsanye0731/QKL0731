@@ -4,6 +4,9 @@ import tushare as ts
 import numpy as num
 import time
 from dingtalkchatbot.chatbot import DingtalkChatbot
+import matplotlib
+import matplotlib.pyplot as plt
+import os
 
 # 涨跌幅
 def zhangdiefu(code):
@@ -132,7 +135,6 @@ def dingding_markdown_msg_2(title, text):
     # Text消息@所有人
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
-
 
 #print zhangdiefu('150212')
 #print gupiaomingcheng('150212')
