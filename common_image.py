@@ -48,6 +48,6 @@ def plt_image(code, codeName, type):
         os.makedirs(path)
 
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
-    plt.show()
+    # plt.show()
 
 #plt_image("399006", "创业板指", "30")

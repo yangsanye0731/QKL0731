@@ -290,6 +290,9 @@ titleTmp, contentTmp = pinjie(str18, titleTmp, content18, contentTmp)
 str19, content19 = strategy("600489", "中金", "中金黄金")
 titleTmp, contentTmp = pinjie(str19, titleTmp, content19, contentTmp)
 
+str20, content20 = strategy("002230", "讯飞", "科大讯飞")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
 
 title = str0 + str00 + str000 + titleTmp
 
