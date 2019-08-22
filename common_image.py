@@ -43,7 +43,7 @@ def plt_image(code, codeName, type):
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = "./images/" + timeStr1 + "_" + type
+    path = "/root/software/QKL/images/" + timeStr1 + "_" + type
     if not os.path.exists(path):
         os.makedirs(path)
 
