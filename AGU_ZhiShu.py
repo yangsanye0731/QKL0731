@@ -218,7 +218,7 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #######################################################################################################
 def pinjie(title, titleTmp, content, contentTmp):
-     if ("趋势" in title or "上好" in title):
+     if (("趋势" in title or "上好" in title) and "买" in title):
           titleTmp = title + titleTmp
           contentTmp = content + "***\n\n" + contentTmp
      else:
@@ -229,7 +229,6 @@ def pinjie(title, titleTmp, content, contentTmp):
 
 str0,content0 = strategy("399006", "※创业", "※创业板指")
 str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
-str000,content000 = strategy("399975", "※科技", "※科技ETF")
 
 titleTmp = ""
 contentTmp = ""
@@ -294,11 +293,11 @@ str20, content20 = strategy("002230", "讯飞", "科大讯飞")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 
-title = str0 + str00 + str000 + titleTmp
+title = str0 + str00 + titleTmp
 
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
 
-content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + content000 + "***\n\n***\n\n" + contentTmp
+content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + "***\n\n***\n\n" + contentTmp
 
 # 发送邮件
 common.dingding_markdown_msg_2(title,content)
