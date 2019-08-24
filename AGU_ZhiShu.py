@@ -218,7 +218,7 @@ def strategy(code, name, fullName):
 #####                                                                                             #####
 #######################################################################################################
 def pinjie(title, titleTmp, content, contentTmp):
-     if ("趋势" in title):
+     if ("趋势" in title or "上好" in title):
           titleTmp = title + titleTmp
           contentTmp = content + "***\n\n" + contentTmp
      else:
