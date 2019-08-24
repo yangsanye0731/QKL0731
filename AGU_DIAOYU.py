@@ -34,7 +34,7 @@ def diaoyu(code, startTime):
         delta = datetime.timedelta(days=1)
         n_days = n_days + delta
 
-    return code + "已下跌" + str(count) + "天，注意均线趋势"
+    return "今天是" + datetime.datetime.now().strftime("%Y-%m-%d") + ","+ code + "已下跌" + str(count) + "天，注意均线趋势"
 
 str1 = diaoyu("比亚迪","2019-07-29")
 common.dingding_markdown_msg_2(str1, str1)
