@@ -292,11 +292,11 @@ titleTmp, contentTmp = pinjie(str19, titleTmp, content19, contentTmp)
 str20, content20 = strategy("002230", "讯飞", "科大讯飞")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("600036", "招商", "招商银行")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 title = str0 + str00 + titleTmp
-
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
-
 content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + "***\n\n***\n\n" + contentTmp
 
 # 发送邮件
