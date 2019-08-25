@@ -310,6 +310,11 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("000997", "新大陆", "新大陆（电子发票）")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("000877", "天山", "天山股份（一带一路）")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("159934", "黄金ETF", "黄金ETF")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 title = str0 + str00 + titleTmp
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
