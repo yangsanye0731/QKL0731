@@ -153,4 +153,4 @@ print(array1)
 print(array2)
 print(array3)
 
-common.dingding_markdown_msg_2("aaa", array1)
+# common.dingding_markdown_msg_2("aaa", array1)
