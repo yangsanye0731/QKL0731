@@ -298,6 +298,12 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("002236", "大华", "大华股份")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("000603", "盛达矿业", "盛达矿业")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("002074", "国轩", "国轩高科")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
 title = str0 + str00 + titleTmp
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
 content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + "***\n\n***\n\n" + contentTmp
