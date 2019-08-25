@@ -58,7 +58,7 @@ array3 = []
 
 def zhou_chuang_xin_gao_count(curDate):
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:5].index
+    all_code_index = all_code[1:-1].index
     count = 0
     count2 = 0
     all_code_index_x = num.array(all_code_index)
