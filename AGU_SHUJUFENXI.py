@@ -9,56 +9,13 @@ import common
 import common_image
 import datetime
 
-
-def zongshuju(code,endDate):
-    ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
-    pro = ts.pro_api()
-    if code.startswith('6'):
-        code = code + '.SH'
-    if code.startswith('0'):
-        code = code + '.SZ'
-    if code.startswith('3'):
-        code = code + '.SZ'
-    timez = time.strftime('%Y%m%d', time.localtime(time.time()))
-    df = pro.weekly(ts_code=code, start_date='20180101', end_date=endDate, fields='ts_code,trade_date,open,high,low,close,vol,amount')
-    # print(code + "===================================================")
-    # print(df)
-    return df
-
-def yueshuju(code,endDate):
-    ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
-    pro = ts.pro_api()
-    if code.startswith('6'):
-        code = code + '.SH'
-    if code.startswith('0'):
-        code = code + '.SZ'
-    if code.startswith('3'):
-        code = code + '.SZ'
-    timez = time.strftime('%Y%m%d', time.localtime(time.time()))
-    df = pro.monthly(ts_code=code, start_date='20180101', end_date=endDate, fields='ts_code,trade_date,open,high,low,close,vol,amount')
-    return df
-
-def zhishu_rishuju(code,endDate):
-    ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
-    pro = ts.pro_api()
-    if code.startswith('0'):
-        code = code + '.SH'
-    # if code.startswith('01'):
-    #     code = code + '.SZ'
-    if code.startswith('3'):
-        code = code + '.SZ'
-    timez = time.strftime('%Y%m%d', time.localtime(time.time()))
-    df = pro.index_daily(ts_code=code, start_date='20180101', end_date=endDate, fields='ts_code,trade_date,open,high,low,close,vol,amount')
-    return df
-
-
 array1 = []
 array2 = []
 array3 = []
 
 def zhou_chuang_xin_gao_count(curDate):
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:-1].index
+    all_code_index = all_code[1:200].index
     count = 0
     count2 = 0
     all_code_index_x = num.array(all_code_index)
@@ -67,8 +24,8 @@ def zhou_chuang_xin_gao_count(curDate):
     for codeItem in all_code_index_x:
         count = count + 1
         print(count)
-        data_history = zongshuju(codeItem,curDate)
-        data_history_M = yueshuju(codeItem,curDate)
+        data_history = ts.get_k_data(codeItem, ktype="W", start="2019-01-01", end=curDate)
+        data_history_M = ts.get_k_data(codeItem, ktype="M", start="2019-01-01", end=curDate)
 
         try:
             closeArray = num.array(data_history['close'])
@@ -91,38 +48,40 @@ def zhou_chuang_xin_gao_count(curDate):
 
     global array1
     global array2
-    array1.append(count2)
+    array1.append(0)
 
-    data_history_chuangyeban = zhishu_rishuju("399006", curDate)
+    data_history_chuangyeban = ts.get_k_data("399006", ktype="D", start="2019-01-01", end=curDate)
+    print(data_history_chuangyeban)
     closeArray_chuangyeban = num.array(data_history_chuangyeban['close'])
     doubleCloseArray_chuagnyeban = num.asarray(closeArray_chuangyeban, dtype='double')
-    array2.append(doubleCloseArray_chuagnyeban[0])
+    array2.append(doubleCloseArray_chuagnyeban[-1])
 
     array3.append(curDate)
     print(count2)
-    print(doubleCloseArray_chuagnyeban[0])
+    print(doubleCloseArray_chuagnyeban[-1])
 
-    return count2,doubleCloseArray_chuagnyeban[0]
-
-
-countx8 = zhou_chuang_xin_gao_count("20190705")
-countx7 = zhou_chuang_xin_gao_count("20190712")
-countx6 = zhou_chuang_xin_gao_count("20190719")
-countx5 = zhou_chuang_xin_gao_count("20190726")
-countx4 = zhou_chuang_xin_gao_count("20190802")
-countx3 = zhou_chuang_xin_gao_count("20190809")
-countx2 = zhou_chuang_xin_gao_count("20190816")
-countx1 = zhou_chuang_xin_gao_count("20190823")
+    return count2,doubleCloseArray_chuagnyeban[-1]
 
 
+countx9 = zhou_chuang_xin_gao_count("2019-06-28")
+countx10 = zhou_chuang_xin_gao_count("2019-06-21")
+countx11 = zhou_chuang_xin_gao_count("2019-06-14")
+countx12 = zhou_chuang_xin_gao_count("2019-06-07")
+countx8 = zhou_chuang_xin_gao_count("2019-07-05")
+countx7 = zhou_chuang_xin_gao_count("2019-07-12")
+countx6 = zhou_chuang_xin_gao_count("2019-07-19")
+countx5 = zhou_chuang_xin_gao_count("2019-07-26")
+# countx4 = zhou_chuang_xin_gao_count("20190802")
+# countx3 = zhou_chuang_xin_gao_count("20190809")
+# countx2 = zhou_chuang_xin_gao_count("20190816")
+# countx1 = zhou_chuang_xin_gao_count("20190823")
 
 
 
 
-# countx9 = zhou_chuang_xin_gao_count("2019-06-28")
-# countx10 = zhou_chuang_xin_gao_count("2019-06-21")
-# countx11 = zhou_chuang_xin_gao_count("2019-06-14")
-# countx12 = zhou_chuang_xin_gao_count("2019-06-07")
+
+
+
 # countx13 = zhou_chuang_xin_gao_count("2019-05-31")
 # countx14 = zhou_chuang_xin_gao_count("2019-05-24")
 # countx15 = zhou_chuang_xin_gao_count("2019-05-17")
@@ -147,7 +106,7 @@ countx1 = zhou_chuang_xin_gao_count("20190823")
 # countx34 = zhou_chuang_xin_gao_count("2019-01-04")
 
 
-# common_image.plt_image_2(array1, array2, array3)
+common_image.plt_image_2(array1, array2, array3)
 
 print(array1)
 print(array2)

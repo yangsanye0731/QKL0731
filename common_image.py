@@ -1,6 +1,7 @@
 #encoding=utf-8
 
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import mpl_finance as mpf
 from matplotlib.pylab import date2num
@@ -23,7 +24,7 @@ def plt_image(code, codeName, type):
     avg_10 = talib.MA(ts["close"], timeperiod=10)
     avg_20 = talib.MA(ts["close"], timeperiod=20)
     avg_30 = talib.MA(ts["close"], timeperiod=30)
-    # print(avg_5)
+    print(avg_5)
     # print(avg_10)
     # print(avg_20)
     # print(avg_30)
@@ -50,4 +51,31 @@ def plt_image(code, codeName, type):
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
     plt.show()
 
-#plt_image("399006", "创业板指", "30")
+def plt_image_2(array1, array2, array3):
+    matplotlib.rcParams['font.family'] = 'SimHei'
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.plot(array3, array1, '-y')
+    # ax.plot(time, Rn, '-', label='Rn')
+    ax2 = ax.twinx()
+    ax2.plot(array3, array2, '-r')
+    ax.legend(loc=0)
+    ax.grid()
+    ax.set_xlabel(r"日期（周）")
+    ax.set_ylabel(r"创新高家数")
+    ax2.set_ylabel(r"指数曲线")
+    ax2.set_ylim(1000, 2000)
+    ax.set_ylim(-10, 100)
+    ax2.legend(loc=0)
+
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
+    path = "./images/" + timeStr1
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    plt.savefig(path + "/" + timeStr2 + "qushi.png")
+    # plt.show()
+
+# plt_image("399006", "创业板指", "30")
