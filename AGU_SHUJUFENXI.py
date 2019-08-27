@@ -24,8 +24,8 @@ def zhou_chuang_xin_gao_count(curDate):
     for codeItem in all_code_index_x:
         count = count + 1
         print(count)
-        data_history = ts.get_k_data(codeItem, ktype="W", start="2019-01-01", end=curDate)
-        data_history_M = ts.get_k_data(codeItem, ktype="M", start="2019-01-01", end=curDate)
+        data_history = ts.get_k_data(codeItem, ktype="W", start="2018-06-01", end=curDate)
+        data_history_M = ts.get_k_data(codeItem, ktype="M", start="2018-06-01", end=curDate)
 
         try:
             closeArray = num.array(data_history['close'])
@@ -50,7 +50,7 @@ def zhou_chuang_xin_gao_count(curDate):
     global array2
     array1.append(count2)
 
-    data_history_chuangyeban = ts.get_k_data("399006", ktype="D", start="2019-01-01", end=curDate)
+    data_history_chuangyeban = ts.get_k_data("399006", ktype="D", start="2018-06-01", end=curDate)
     closeArray_chuangyeban = num.array(data_history_chuangyeban['close'])
     doubleCloseArray_chuagnyeban = num.asarray(closeArray_chuangyeban, dtype='double')
     array2.append(doubleCloseArray_chuagnyeban[-1])
@@ -63,23 +63,23 @@ def zhou_chuang_xin_gao_count(curDate):
 
 
 
-# countx34 = zhou_chuang_xin_gao_count("2019-01-04")
-# countx33 = zhou_chuang_xin_gao_count("2019-01-11")
-# countx32 = zhou_chuang_xin_gao_count("2019-01-18")
-# countx31 = zhou_chuang_xin_gao_count("2019-01-25")
-# countx30 = zhou_chuang_xin_gao_count("2019-02-01")
-# countx29 = zhou_chuang_xin_gao_count("2019-02-08")
-# countx28 = zhou_chuang_xin_gao_count("2019-02-15")
-# countx27 = zhou_chuang_xin_gao_count("2019-02-22")
-# countx26 = zhou_chuang_xin_gao_count("2019-03-01")
-# countx25 = zhou_chuang_xin_gao_count("2019-03-08")
-# countx24 = zhou_chuang_xin_gao_count("2019-03-15")
-# countx23 = zhou_chuang_xin_gao_count("2019-03-22")
-# countx22 = zhou_chuang_xin_gao_count("2019-03-29")
-# countx21 = zhou_chuang_xin_gao_count("2019-04-05")
-# countx20 = zhou_chuang_xin_gao_count("2019-04-12")
-# countx19 = zhou_chuang_xin_gao_count("2019-04-19")
-# countx18 = zhou_chuang_xin_gao_count("2019-04-26")
+countx34 = zhou_chuang_xin_gao_count("2019-01-04")
+countx33 = zhou_chuang_xin_gao_count("2019-01-11")
+countx32 = zhou_chuang_xin_gao_count("2019-01-18")
+countx31 = zhou_chuang_xin_gao_count("2019-01-25")
+countx30 = zhou_chuang_xin_gao_count("2019-02-01")
+countx29 = zhou_chuang_xin_gao_count("2019-02-08")
+countx28 = zhou_chuang_xin_gao_count("2019-02-15")
+countx27 = zhou_chuang_xin_gao_count("2019-02-22")
+countx26 = zhou_chuang_xin_gao_count("2019-03-01")
+countx25 = zhou_chuang_xin_gao_count("2019-03-08")
+countx24 = zhou_chuang_xin_gao_count("2019-03-15")
+countx23 = zhou_chuang_xin_gao_count("2019-03-22")
+countx22 = zhou_chuang_xin_gao_count("2019-03-29")
+countx21 = zhou_chuang_xin_gao_count("2019-04-05")
+countx20 = zhou_chuang_xin_gao_count("2019-04-12")
+countx19 = zhou_chuang_xin_gao_count("2019-04-19")
+countx18 = zhou_chuang_xin_gao_count("2019-04-26")
 countx17 = zhou_chuang_xin_gao_count("2019-05-03")
 countx16 = zhou_chuang_xin_gao_count("2019-05-10")
 countx15 = zhou_chuang_xin_gao_count("2019-05-17")
