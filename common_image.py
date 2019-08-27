@@ -62,7 +62,7 @@ def plt_image_2(array1, array2, array3):
     ax2.plot(array3, array2, '-r')
     ax.legend(loc=0)
     ax.grid()
-    ax.set_xlabel(r"Date（WEEK）")
+    ax.set_xlabel(r"Date(WEEK)")
     ax.set_ylabel(r"Code Count")
     ax2.set_ylabel(r"CYBZ")
     ax2.set_ylim(1000, 2000)

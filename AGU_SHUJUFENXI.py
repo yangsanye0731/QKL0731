@@ -41,7 +41,7 @@ def zhou_chuang_xin_gao_count(curDate):
             doubleHighArray_M = num.asarray(highArray_M, dtype='double')
 
             if (highArray[-1] > doubleHighArray_M[-1] and highArray[-1] > doubleHighArray_M[-2] and highArray[-1] > doubleHighArray_M[-3]):
-                count2 = count2 + 2
+                count2 = count2 + 1
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
