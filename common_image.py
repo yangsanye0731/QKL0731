@@ -51,20 +51,20 @@ def plt_image(code, codeName, type):
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
     plt.show()
 
-def plt_image_2(array1, array2, array3):
+def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     matplotlib.rcParams['font.family'] = 'SimHei'
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.plot(array3, array1, '-y')
+    ax.plot(riQi, zhiShuShuJu, '-y')
     # ax.plot(time, Rn, '-', label='Rn')
     ax2 = ax.twinx()
-    ax2.plot(array3, array2, '-r')
+    ax2.plot(riQi, xinGaoGeShu, '-r')
     ax.legend(loc=0)
     ax.grid()
     ax.set_xlabel(r"Date(WEEK)")
-    ax.set_ylabel(r"Code Count")
-    ax2.set_ylabel(r"CYBZ")
+    ax.set_ylabel(r"CYBZ")
+    ax2.set_ylabel(r"Code Count")
     ax2.set_ylim(1000, 2000)
     ax.set_ylim(-10, 3500)
     ax2.legend(loc=0)
@@ -74,7 +74,6 @@ def plt_image_2(array1, array2, array3):
     path = "./images/" + timeStr1
     if not os.path.exists(path):
         os.makedirs(path)
-
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
     # plt.show()
 
