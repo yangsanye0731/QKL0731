@@ -66,7 +66,7 @@ def plt_image_2(array1, array2, array3):
     ax.set_ylabel(r"Code Count")
     ax2.set_ylabel(r"CYBZ")
     ax2.set_ylim(1000, 2000)
-    ax.set_ylim(-10, 1500)
+    ax.set_ylim(-10, 3500)
     ax2.legend(loc=0)
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
