@@ -36,11 +36,15 @@ def diaoyu(code, startTime):
 
     return "今天是" + datetime.datetime.now().strftime("%Y-%m-%d") + ","+ code + "已下跌" + str(count) + "天，注意均线趋势"
 
-str1 = diaoyu("比亚迪","2019-07-29")
-common.dingding_markdown_msg_2(str1, str1)
+# str1 = diaoyu("比亚迪","2019-07-29")
+# common.dingding_markdown_msg_2(str1, str1)
 str1 = diaoyu("恒顺酱油","2019-07-02")
 common.dingding_markdown_msg_2(str1, str1)
 str1 = diaoyu("联合光电","2019-08-23")
 common.dingding_markdown_msg_2(str1, str1)
 str1 = diaoyu("鹏鹞环保","2019-08-15")
+common.dingding_markdown_msg_2(str1, str1)
+str1 = diaoyu("招商银行","2019-08-26")
+common.dingding_markdown_msg_2(str1, str1)
+str1 = diaoyu("航天信息","2019-08-23")
 common.dingding_markdown_msg_2(str1, str1)
