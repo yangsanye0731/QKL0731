@@ -54,7 +54,7 @@ def plt_image(code, codeName, type):
 def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     matplotlib.rcParams['font.family'] = 'SimHei'
 
-    fig = plt.figure()
+    fig = plt.figure(figsize=(10,8))
     ax = fig.add_subplot(111)
     ax.plot(riQi, zhiShuShuJu, '-y')
     # ax.plot(time, Rn, '-', label='Rn')
@@ -75,6 +75,7 @@ def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     if not os.path.exists(path):
         os.makedirs(path)
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
+    plt.xticks(rotation=90)
     # plt.show()
 
 # plt_image("399006", "创业板指", "30")

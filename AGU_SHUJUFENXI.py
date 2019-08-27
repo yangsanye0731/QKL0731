@@ -94,6 +94,7 @@ zhou_chuang_xin_gao_count("2019-08-02")
 zhou_chuang_xin_gao_count("2019-08-09")
 zhou_chuang_xin_gao_count("2019-08-16")
 zhou_chuang_xin_gao_count("2019-08-23")
+# zhou_chuang_xin_gao_count("2019-08-30")
 
 common_image.plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi)
 # print(xinGaoGeShu)
