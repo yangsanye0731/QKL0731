@@ -54,7 +54,7 @@ def plt_image(code, codeName, type):
 def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     matplotlib.rcParams['font.family'] = 'SimHei'
 
-    fig = plt.figure(figsize=(10,8))
+    fig = plt.figure(figsize=(15,12))
     ax = fig.add_subplot(111)
     ax.plot(riQi, zhiShuShuJu, 'rs-', )
     # ax.plot(time, Rn, '-', label='Rn')
@@ -70,7 +70,7 @@ def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     ax2.legend(loc=0)
 
     for xtick in ax.get_xticklabels():
-        xtick.set_rotation(50)
+        xtick.set_rotation(90)
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
