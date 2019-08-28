@@ -56,10 +56,10 @@ def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
 
     fig = plt.figure(figsize=(10,8))
     ax = fig.add_subplot(111)
-    ax.plot(riQi, zhiShuShuJu, '-y')
+    ax.plot(riQi, zhiShuShuJu, 'rs-', )
     # ax.plot(time, Rn, '-', label='Rn')
     ax2 = ax.twinx()
-    ax2.plot(riQi, xinGaoGeShu, '-r')
+    ax2.plot(riQi, xinGaoGeShu, 'b.-')
     ax.legend(loc=0)
     ax.grid()
     ax.set_xlabel(r"Date(WEEK)")
