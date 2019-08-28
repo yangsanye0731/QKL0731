@@ -69,13 +69,14 @@ def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     ax.set_ylim(1000, 2000)
     ax2.legend(loc=0)
 
+    plt.xticks(rotation=90)
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1
     if not os.path.exists(path):
         os.makedirs(path)
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
-    plt.xticks(rotation=90)
+
     # plt.show()
 
 # plt_image("399006", "创业板指", "30")
