@@ -60,7 +60,7 @@ def codeEPS(code):
           code = code + '.SZ'
      timez = time.strftime('%Y%m%d', time.localtime(time.time()))
      df = pro.fina_indicator(ts_code=code)
-     return df['eps'][0],df['basic_eps_yoy'][0]
+     return df['eps'][0],df['basic_eps_yoy'][0],df['or_yoy'][0]
 
 def zongshizhi(code):
      ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
@@ -76,6 +76,18 @@ def zongshizhi(code):
                           fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,total_mv')
      nameArray = num.array(df['total_mv'])
      return nameArray[0]
+
+
+def codeName(code):
+     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+     pro = ts.pro_api()
+     timez = time.strftime('%Y%m%d', time.localtime(time.time()))
+     df = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+     df2 = df.loc[df['symbol'] == code]
+     nameArray = num.array(df2['name'])
+     return nameArray[0]
+
+
 
 #是否持有
 def shifouchiyou(code) :
@@ -103,23 +115,6 @@ def zuidijiage(codeCon, type) :
      zuijdijiage = num.array(data_history['low'])
      zuijdijiage = zuijdijiage.astype(num.float)
      return zuijdijiage[-1]
-
-#小魔王扩展
-def xiaomowangkuozhan(codeItem) :
-     # MACD
-     macd_60,macdsignal_60,macdhist_60,jsonResult_60,result_60,mairuresult_60,maichuresult_60  = MACD(codeItem,  '60')
-     macd_D,macdsignal_D,macdhist_D,jsonResult_D,result_D,mairuresult_D,maichuresult_D  = MACD(codeItem,  'D')
-     macd_W,macdsignal_W,macdhist_W,jsonResult_W,result_W,mairuresult_W,maichuresult_W  = MACD(codeItem,  'W')
-
-     # 布林线
-     upperband_60, middleband_60, lowerband_60, jsonResult_b_60, result_bl_60,mairuresult_bl_60,maichuresult_bl_60 = BBANDS(codeItem, '60')
-     upperband_D, middleband_D, lowerband_D, jsonResult_b_D, result_bl_D,mairuresult_bl_D,maichuresult_bl_D = BBANDS(codeItem, 'D')
-
-     xiaomowang = '<br>==============================' + gupiaomingcheng(codeItem)
-     xiaomowang = xiaomowang + '<br>卖出信号：<br>' +  maichuresult_W + '<br>' + maichuresult_D + '<br>' + maichuresult_60 + '<br>' + maichuresult_bl_60 + '<br>' + maichuresult_bl_D
-     xiaomowang = xiaomowang + '<br>买入信号：<br>' +  mairuresult_W + '<br>' + mairuresult_D + '<br> ' + mairuresult_60 + '<br>' + mairuresult_bl_60 + '<br>' + mairuresult_bl_D
-
-     return xiaomowang
 
 def dingding_msg(content):
      # WebHook地址
@@ -158,3 +153,4 @@ def dingding_markdown_msg_2(title, text):
 #print zongshizhi('603068')
 #dingdingMsg()
 # print (codeEPS('002415'))
+# codeName('000020')

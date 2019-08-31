@@ -19,15 +19,15 @@ def code_eps():
     count2 = 0
     all_code_index_x = num.array(all_code_index)
 
-    strResult = ""
+    strResult = "结果：\n\n"
     for codeItem in all_code_index_x:
         count = count + 1
         # print(count)
 
         try:
-            eps, epsup = common.codeEPS(codeItem)
-            if (epsup > 300):
-                strResult = strResult  + codeItem + ",EPS增长率：" + "%.1f" % epsup + "\n\n"
+            eps, epsup,yingyeup = common.codeEPS(codeItem)
+            if (epsup > 100 and yingyeup > 50):
+                strResult = strResult  + common.codeName(codeItem) + ",EPS增长率：" + "%.1f" % epsup + "\n\n"
             time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
