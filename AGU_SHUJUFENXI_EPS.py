@@ -27,7 +27,7 @@ def code_eps():
         try:
             eps, epsup,yingyeup = common.codeEPS(codeItem)
             if (epsup > 100 and yingyeup > 50):
-                strResult = strResult  + common.codeName(codeItem) + ",EPS增长率：" + "%.1f" % epsup + "\n\n"
+                strResult = strResult  + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup +  "LYL:" + "%.1f" % yingyeup + "\n\n"
             time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -35,5 +35,4 @@ def code_eps():
     return strResult
 
 re = code_eps()
-print(re)
 common.dingding_markdown_msg_2("EPS执行完成", re)
