@@ -26,13 +26,14 @@ def code_eps():
 
         try:
             eps, epsup = common.codeEPS(codeItem)
-            if (epsup > 100):
-                print(codeItem)
+            if (epsup > 300):
+                strResult = strResult  + codeItem + ",EPS增长率：" + "%.1f" % epsup + "\n\n"
             time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
 
+    return strResult
 
-
-code_eps()
-common.dingding_markdown_msg_2("新高执行完成", "新高执行完成")
+re = code_eps()
+print(re)
+common.dingding_markdown_msg_2("EPS执行完成", re)
