@@ -51,15 +51,16 @@ def plt_image(code, codeName, type):
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
     plt.show()
 
-def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
+# 百日新高绘图
+def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
     matplotlib.rcParams['font.family'] = 'SimHei'
 
     fig = plt.figure(figsize=(15,12))
     ax = fig.add_subplot(111)
     ax.plot(riQi, zhiShuShuJu, 'rs-', )
-    # ax.plot(time, Rn, '-', label='Rn')
     ax2 = ax.twinx()
     ax2.plot(riQi, xinGaoGeShu, 'b.-')
+
     ax.legend(loc=0)
     ax.grid()
     ax.set_xlabel(r"Date(WEEK)")
@@ -78,7 +79,5 @@ def plt_image_2(xinGaoGeShu, zhiShuShuJu, riQi):
     if not os.path.exists(path):
         os.makedirs(path)
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
-
-    # plt.show()
 
 # plt_image("399006", "创业板指", "30")
