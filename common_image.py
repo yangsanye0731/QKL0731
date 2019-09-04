@@ -53,7 +53,7 @@ def plt_image(code, codeName, type):
 
 # 百日新高绘图
 def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
-    matplotlib.rcParams['font.family'] = 'SimHei'
+    myfont = matplotlib.font_manager.FontProperties(fname="simsun.ttc")
 
     fig = plt.figure(figsize=(15,12))
     ax = fig.add_subplot(111)
@@ -63,9 +63,9 @@ def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
 
     ax.legend(loc=0)
     ax.grid()
-    ax.set_xlabel(r"Date(WEEK)")
-    ax.set_ylabel(r"CYBZ")
-    ax2.set_ylabel(r"Code Count")
+    ax.set_xlabel("日期（周）", fontproperties=myfont)
+    ax.set_ylabel(r"CYBZ", fontproperties=myfont)
+    ax2.set_ylabel(r"Code Count", fontproperties=myfont)
     ax2.set_ylim(-10, 3500)
     ax.set_ylim(1000, 2000)
     ax2.legend(loc=0)
@@ -75,7 +75,7 @@ def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = "./images/" + timeStr1
+    path = "./images/" + timeStr1 + "/baiRiXinGao"
     if not os.path.exists(path):
         os.makedirs(path)
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
