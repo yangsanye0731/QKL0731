@@ -7,6 +7,7 @@ import talib as ta
 import common
 import common_image
 import datetime
+from email_util import *
 
 xinGaoGeShu = []
 zhiShuShuJu = []
@@ -35,11 +36,22 @@ def code_eps():
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
                 strResult_2 = strResult_2 + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2 + "\n\n"
 
+                data_history_W = ts.get_k_data(codeItem, ktype="W")
+                closeArray_W = num.array(data_history_W['close'])
+                doubleCloseArray_W = num.asarray(closeArray_W, dtype='double')
+
+                SMA_W_5 = ta.SMA(data_history_W, timeperiod=5)
+                if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
+                    strResult_2 = strResult_2 + common.codeName(codeItem) + "上季度增长，当前在5周线以下\n\n"
+
+
             time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
 
-    return strResult
+    return strResult, strResult_2
 
-re = code_eps()
-common.dingding_markdown_msg_2("EPS执行完成", re)
+re1, re2 = code_eps()
+sendMail(template1(re1), "A股EPS增长")
+time.sleep(10)
+sendMail(template1(re2), "A股EPS增长")
