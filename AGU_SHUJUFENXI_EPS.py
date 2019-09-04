@@ -36,7 +36,6 @@ def code_eps():
                 SMA_W_5 = ta.SMA(data_history_W, timeperiod=5)
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
                     strResult = strResult + common.codeName(codeItem) + "本期EPS增长50%以上，但当前价格在5周线以下\n\n"
-                time.sleep(3)
             if (eps_2 > 50 and yingyeup_2 > 20):
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
                 strResult_2 = strResult_2 + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2 + "\n\n"
@@ -48,8 +47,8 @@ def code_eps():
                 SMA_W_5 = ta.SMA(data_history_W, timeperiod=5)
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
                     strResult_2 = strResult_2 + common.codeName(codeItem) + "上期EPS增长50%以上，但当前价格在5周线以下\n\n"
-                time.sleep(3)
 
+            time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
 
