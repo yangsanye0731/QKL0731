@@ -28,6 +28,7 @@ def strategy(zhouqi):
             ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
             if (doubleCloseArray[-1] < ma5[-1]):
                 strResult += codeItem + "_" + common.codeName(codeItem) + "_" + "五周线以下" + "<br>"
+                time.sleep(1)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
