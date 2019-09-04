@@ -20,7 +20,7 @@ def code_eps():
     strResult_2 = "上期EPS分析结果：\n\n"
     for codeItem in all_code_index_x:
         count = count + 1
-        # print(count)
+        print(count)
 
         try:
             eps, epsup,yingyeup = common.codeEPS(codeItem)
