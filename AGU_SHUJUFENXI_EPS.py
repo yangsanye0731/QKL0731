@@ -16,18 +16,17 @@ def code_eps():
     count2 = 0
     all_code_index_x = num.array(all_code_index)
 
-    strResult = "EPS分析结果：\n\n"
-    strResult_2 = "上期EPS分析结果：\n\n"
+    strResult = "EPS分析结果：<br>"
+    strResult_2 = "上期EPS分析结果：<br>"
     for codeItem in all_code_index_x:
         count = count + 1
-        print(count)
-
         try:
-            eps, epsup,yingyeup = common.codeEPS(codeItem)
-            eps_2, epsup_2, yingyeup_2 = common.codeEPS(codeItem)
+            eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2  = common.codeEPS(codeItem)
+            print("本期EPS:" + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup + " LYL:" + "%.1f" % yingyeup)
+            print("上期EPS:" + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
             if (epsup > 50 and yingyeup > 20):
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup +  " LYL:" + "%.1f" % yingyeup)
-                strResult = strResult  + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup +  " LYL:" + "%.1f" % yingyeup + "\n\n"
+                strResult = strResult  + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup +  " LYL:" + "%.1f" % yingyeup + "<br>"
 
                 data_history_W = ts.get_k_data(codeItem, ktype="W")
                 closeArray_W = num.array(data_history_W['close'])
@@ -35,10 +34,10 @@ def code_eps():
 
                 SMA_W_5 = ta.SMA(data_history_W, timeperiod=5)
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
-                    strResult = strResult + common.codeName(codeItem) + "本期EPS增长50%以上，但当前价格在5周线以下\n\n"
+                    strResult = strResult + common.codeName(codeItem) + "本期EPS增长50%以上，但当前价格在5周线以下=================================<br>"
             if (eps_2 > 50 and yingyeup_2 > 20):
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
-                strResult_2 = strResult_2 + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2 + "\n\n"
+                strResult_2 = strResult_2 + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2 + "<br>"
 
                 data_history_W = ts.get_k_data(codeItem, ktype="W")
                 closeArray_W = num.array(data_history_W['close'])
@@ -46,7 +45,7 @@ def code_eps():
 
                 SMA_W_5 = ta.SMA(data_history_W, timeperiod=5)
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
-                    strResult_2 = strResult_2 + common.codeName(codeItem) + "上期EPS增长50%以上，但当前价格在5周线以下\n\n"
+                    strResult_2 = strResult_2 + common.codeName(codeItem) + "上期EPS增长50%以上，但当前价格在5周线以下=================================<br>"
 
             time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:

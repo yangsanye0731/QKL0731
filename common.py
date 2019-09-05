@@ -60,21 +60,7 @@ def codeEPS(code):
           code = code + '.SZ'
      timez = time.strftime('%Y%m%d', time.localtime(time.time()))
      df = pro.fina_indicator(ts_code=code)
-     return df['eps'][0],df['basic_eps_yoy'][0],df['or_yoy'][0]
-
-
-def codeEPS_2(code):
-     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
-     pro = ts.pro_api()
-     if code.startswith('6'):
-          code = code + '.SH'
-     if code.startswith('0'):
-          code = code + '.SZ'
-     if code.startswith('3'):
-          code = code + '.SZ'
-     timez = time.strftime('%Y%m%d', time.localtime(time.time()))
-     df = pro.fina_indicator(ts_code=code)
-     return df['eps'][-1], df['basic_eps_yoy'][-1], df['or_yoy'][-1]
+     return df['eps'][0],df['basic_eps_yoy'][0],df['or_yoy'][0],df['eps'][1], df['basic_eps_yoy'][1], df['or_yoy'][1]
 
 def zongshizhi(code):
      ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
