@@ -37,6 +37,7 @@ def code_eps():
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
                     strResult = strResult + codeName + "本期EPS增长50%以上，但当前价格在5周线以下=================================<br>"
                     common_image.plt_image_week5Line(codeItem, codeName, "W")
+
             if (epsup_2 > 50 and yingyeup_2 > 20):
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
                 strResult_2 = strResult_2 + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2 + "<br>"
