@@ -13,13 +13,13 @@ def code_eps():
     all_code = ts.get_stock_basics()
     all_code_index = all_code[1:-1].index
     count = 0
-    count2 = 0
     all_code_index_x = num.array(all_code_index)
 
     strResult = "EPS分析结果：<br>"
     strResult_2 = "上期EPS分析结果：<br>"
     for codeItem in all_code_index_x:
         count = count + 1
+        print(count)
         try:
             eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2  = common.codeEPS(codeItem)
             codeName = common.codeName(codeItem)
