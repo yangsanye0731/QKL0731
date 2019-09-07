@@ -91,7 +91,7 @@ def plt_image_week5Line(code, codeName, type):
 
 # 百日新高绘图
 def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
-    myfont = matplotlib.font_manager.FontProperties(fname="simsun.ttc")
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc")
 
     fig = plt.figure(figsize=(15,12))
     ax = fig.add_subplot(111)
