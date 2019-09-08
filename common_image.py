@@ -70,7 +70,7 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(20,16))
+    fig=plt.subplots(figsize=(15,12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5,color="r")
     plt.plot(avg_10,color="y")
