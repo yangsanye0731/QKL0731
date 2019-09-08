@@ -53,7 +53,7 @@ def plt_image(code, codeName, type):
 
 # 5周线图
 def plt_image_week5Line(code, codeName, type, eps, yoy):
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc")
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
     ts=ts[["open","close","high","low","volume"]]
