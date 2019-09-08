@@ -79,7 +79,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     plt.xticks(rotation=75)
     #设置坐标轴名称
     if (type == "W"):
-        plt.title(codeName + '(' + code  + ')周线均线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
+        plt.title(codeName + '(' + code  + ')跨越5周线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
     plt.ylabel('价格', fontproperties=myfont)
 
