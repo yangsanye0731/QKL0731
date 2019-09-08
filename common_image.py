@@ -51,6 +51,48 @@ def plt_image(code, codeName, type):
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
     plt.show()
 
+
+# 5周线图
+def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+    ts = tushare.get_k_data(code, ktype = type)
+    # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
+    ts=ts[["open","close","high","low","volume"]]
+    #print(ts)
+
+    # 画5日均线图
+    avg_1 = talib.MA(ts["close"], timeperiod=1)
+    avg_5 = talib.MA(ts["close"], timeperiod=5)
+    avg_10 = talib.MA(ts["close"], timeperiod=10)
+    avg_20 = talib.MA(ts["close"], timeperiod=20)
+    avg_30 = talib.MA(ts["close"], timeperiod=30)
+    # print(avg_5)
+    # print(avg_10)
+    # print(avg_20)
+    # print(avg_30)
+
+    fig=plt.subplots(figsize=(15,12))
+    plt.plot(avg_1, "b.-")
+    plt.plot(avg_5,color="r")
+    plt.plot(avg_10,color="y")
+    # plt.plot(avg_20,color="g")
+    # plt.plot(avg_30,color="b")
+    plt.xticks(rotation=75)
+    #设置坐标轴名称
+    if (type == "W"):
+        plt.title(codeName + '(' + code  + ')周线均线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
+    plt.xlabel('日期', fontproperties=myfont)
+    plt.ylabel('价格', fontproperties=myfont)
+    #设置坐标轴范围
+
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
+    path = "./images/" + timeStr1 + "/kuaYueWeek5Line"
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
+
 # 5周线图
 def plt_image_week5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
