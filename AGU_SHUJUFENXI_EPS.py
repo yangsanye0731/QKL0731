@@ -50,7 +50,7 @@ def code_eps():
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
                     strResult_2 = strResult_2 + codeName + "上期EPS增长50%以上，但当前价格在5周线以下=================================<br>"
                     common_image.plt_image_week5Line(codeItem, codeName, "W")
-            time.sleep(3)
+            time.sleep(2)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
 
