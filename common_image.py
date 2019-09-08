@@ -77,7 +77,7 @@ def plt_image_week5Line(code, codeName, type):
     plt.xticks(rotation=75)
     #设置坐标轴名称
     if (type == "W"):
-        plt.title(codeName + '周线均线', fontproperties=myfont)
+        plt.title(codeName + '(' + code  + ')周线均线', fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
     plt.ylabel('价格', fontproperties=myfont)
     #设置坐标轴范围
