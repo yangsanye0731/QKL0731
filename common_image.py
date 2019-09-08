@@ -52,7 +52,7 @@ def plt_image(code, codeName, type):
     plt.show()
 
 
-# 5周线图
+# 跨越5周线图
 def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
