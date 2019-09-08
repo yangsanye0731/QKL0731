@@ -38,7 +38,7 @@ def strategy(zhouqi):
             # print(doubleCloseArray[-1])
             # print(ma5[-1])
             if (doubleHighArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0):
-                print("======================================" + codeItem)
+                print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
                 common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
                 strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
             time.sleep(2)

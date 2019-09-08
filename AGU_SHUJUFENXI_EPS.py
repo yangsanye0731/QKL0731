@@ -23,8 +23,8 @@ def code_eps():
         try:
             eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2  = common.codeEPS(codeItem)
             codeName = common.codeName(codeItem)
-            print("本期EPS:" + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup + " LYL:" + "%.1f" % yingyeup)
-            print("上期EPS:" + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
+            print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "本期EPS:" + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup + " LYL:" + "%.1f" % yingyeup)
+            print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "上期EPS:" + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
             if (epsup > 20 and yingyeup > 20):
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup +  " LYL:" + "%.1f" % yingyeup)
                 strResult = strResult  + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup +  " LYL:" + "%.1f" % yingyeup + "<br>"
