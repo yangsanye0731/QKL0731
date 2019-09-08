@@ -24,7 +24,7 @@ def plt_image(code, codeName, type):
     avg_10 = talib.MA(ts["close"], timeperiod=10)
     avg_20 = talib.MA(ts["close"], timeperiod=20)
     avg_30 = talib.MA(ts["close"], timeperiod=30)
-    print(avg_5)
+    # print(avg_5)
     # print(avg_10)
     # print(avg_20)
     # print(avg_30)
@@ -58,7 +58,6 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     ts = tushare.get_k_data(code, ktype = type)
     # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
     ts=ts[["open","close","high","low","volume"]]
-    #print(ts)
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -83,7 +82,14 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
         plt.title(codeName + '(' + code  + ')周线均线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
     plt.ylabel('价格', fontproperties=myfont)
+
     #设置坐标轴范围
+    changdu = len(ts)
+    print(changdu)
+    if (changdu > 400):
+        plt.xlim(200, changdu)
+    if (changdu > 550):
+        plt.xlim(400, changdu)
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
@@ -125,6 +131,12 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     plt.xlabel('日期', fontproperties=myfont)
     plt.ylabel('价格', fontproperties=myfont)
     #设置坐标轴范围
+    changdu = len(ts)
+    print(changdu)
+    if (changdu > 400):
+        plt.xlim(200, changdu)
+    if (changdu > 550):
+        plt.xlim(400, changdu)
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())

@@ -24,6 +24,9 @@ def strategy(zhouqi):
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
 
+            highArray = num.array(data_history['high'])
+            doubleHighArray = num.asarray(highArray, dtype='double')
+
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
@@ -34,7 +37,7 @@ def strategy(zhouqi):
             # print(codeItem)
             # print(doubleCloseArray[-1])
             # print(ma5[-1])
-            if (doubleCloseArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0):
+            if (doubleHighArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0):
                 print("======================================" + codeItem)
                 common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
                 strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
@@ -45,4 +48,4 @@ def strategy(zhouqi):
     return strResult
 
 strMailResult_W = strategy('W')
-sendMail(template1(strMailResult_W), "周线5周线以下")
+sendMail(template1(strMailResult_W), "跨域5周线")
