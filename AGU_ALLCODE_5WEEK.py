@@ -57,4 +57,5 @@ def strategy(zhouqi):
 strMailResult_W, strResult_2 = strategy('W')
 sendMail(template1(strMailResult_W), "跨域5周线")
 time.sleep(10)
+
 sendMail(template1(strResult_2), "5周线连续下降")
