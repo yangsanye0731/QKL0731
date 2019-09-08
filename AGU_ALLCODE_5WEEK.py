@@ -15,6 +15,7 @@ def strategy(zhouqi):
     all_code_index_x = num.array(all_code_index)
 
     strResult = ""
+    strResult_2 = ""
     for codeItem in all_code_index_x:
         count = count + 1
         print(count)
@@ -41,11 +42,19 @@ def strategy(zhouqi):
                 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
                 common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
                 strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
+
+            if (ma5[-1] < ma5[-2] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4] and epsup > 0 and yingyeup > 0 ):
+                print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
+                common_image.plt_image_lianXuXiaJiangWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
+                strResult_2 += common.codeName(codeItem) + "5周线连续下降" + "<br>"
+
             time.sleep(2)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
-    return strResult
+    return strResult, strResult_2
 
-strMailResult_W = strategy('W')
+strMailResult_W, strResult_2 = strategy('W')
 sendMail(template1(strMailResult_W), "跨域5周线")
+time.sleep(10)
+sendMail(template1(strResult_2), "5周线连续下降")
