@@ -72,7 +72,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
 
     fig=plt.subplots(figsize=(15,12))
     plt.plot(avg_1, "b.-")
-    plt.plot(avg_5,color="r")
+    plt.plot(avg_5, "ko-")
     plt.plot(avg_10,color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
@@ -119,7 +119,7 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
 
     fig=plt.subplots(figsize=(15,12))
     plt.plot(avg_1, "b.-")
-    plt.plot(avg_5,color="r")
+    plt.plot(avg_5, "ko-")
     plt.plot(avg_10,color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
@@ -192,7 +192,7 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
 
     fig=plt.subplots(figsize=(15,12))
     plt.plot(avg_1, "b.-")
-    plt.plot(avg_5,color="r")
+    plt.plot(avg_5,"ko-")
     plt.plot(avg_10,color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
