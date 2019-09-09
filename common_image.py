@@ -10,6 +10,7 @@ import talib
 import tushare
 import time
 import os
+import common
 
 
 def plt_image(code, codeName, type):
@@ -80,7 +81,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     if (type == "W"):
         plt.title(codeName + '(' + code  + ')跨越5周线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
-    plt.ylabel('价格', fontproperties=myfont)
+    plt.ylabel('价格'+ common.zhangdiefu(code), fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)
@@ -127,7 +128,7 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     if (type == "W"):
         plt.title(codeName + '(' + code  + ')周线均线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
-    plt.ylabel('价格', fontproperties=myfont)
+    plt.ylabel('价格' + common.zhangdiefu(code), fontproperties=myfont)
     #设置坐标轴范围
     changdu = len(ts)
     if (changdu > 400):
@@ -200,7 +201,7 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     if (type == "W"):
         plt.title(codeName + '(' + code  + ')5周线连续下降,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
-    plt.ylabel('价格', fontproperties=myfont)
+    plt.ylabel('价格' + common.zhangdiefu(code), fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)

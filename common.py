@@ -10,18 +10,9 @@ import os
 
 # 涨跌幅
 def zhangdiefu(code):
-
-     if (code == '000001'):
-         code = 'sh'
-     data_realTime = ts.get_realtime_quotes(code)
-
-     realTimeArray = num.array(data_realTime['price'])
-     realTimeArray = realTimeArray.astype(num.float)
-
-     pre_close = num.array(data_realTime['pre_close'])
-     pre_close = pre_close.astype(num.float)
-
-     return "%.2f" % (((realTimeArray[0] - pre_close[0]) / pre_close[0]) * 100) + '%'
+     data_history_D = ts.get_k_data(code, ktype="D")
+     closeArray_D = num.array(data_history_D['close'])
+     return "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100) + '%'
 
 #股票名称
 def gupiaomingcheng(code):
