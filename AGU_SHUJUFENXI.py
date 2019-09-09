@@ -61,8 +61,8 @@ def zhou_chuang_xin_gao_count(curDate):
 
     return count2,doubleCloseArray_chuagnyeban[-1]
 
-zhou_chuang_xin_gao_count("2019-01-04")
-zhou_chuang_xin_gao_count("2019-01-11")
+# zhou_chuang_xin_gao_count("2019-01-04")
+# zhou_chuang_xin_gao_count("2019-01-11")
 zhou_chuang_xin_gao_count("2019-01-18")
 zhou_chuang_xin_gao_count("2019-01-25")
 zhou_chuang_xin_gao_count("2019-02-01")
@@ -97,6 +97,7 @@ zhou_chuang_xin_gao_count("2019-08-16")
 zhou_chuang_xin_gao_count("2019-08-23")
 zhou_chuang_xin_gao_count("2019-08-30")
 zhou_chuang_xin_gao_count("2019-09-06")
+zhou_chuang_xin_gao_count("2019-09-13")
 
 common_image.plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi)
 common.dingding_markdown_msg_2("新高执行完成", "新高执行完成")
