@@ -56,7 +56,6 @@ def plt_image(code, codeName, type):
 def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
-    # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
     ts=ts[["open","close","high","low","volume"]]
 
     # 画5日均线图
@@ -103,7 +102,6 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
 def plt_image_week5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
-    # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
     ts=ts[["open","close","high","low","volume"]]
     #print(ts)
 
@@ -132,7 +130,6 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     plt.ylabel('价格', fontproperties=myfont)
     #设置坐标轴范围
     changdu = len(ts)
-    print(changdu)
     if (changdu > 400):
         plt.xlim(200, changdu)
     if (changdu > 550):
@@ -175,13 +172,10 @@ def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
         os.makedirs(path)
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
 
-
-
 # 5周线连续下降
 def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
-    # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
     ts=ts[["open","close","high","low","volume"]]
 
     # 画5日均线图
