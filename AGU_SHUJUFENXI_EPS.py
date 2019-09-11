@@ -19,7 +19,7 @@ def strategy(zhouqi):
     strResult_2 = ""
     for codeItem in all_code_index_x:
         count = count + 1
-        print(count)
+        print("5周线连续下降:" + str(count))
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
@@ -49,7 +49,7 @@ def strategy(zhouqi):
                 common_image.plt_image_lianXuXiaJiangWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
                 strResult_2 += common.codeName(codeItem) + "5周线连续下降" + "<br>"
 
-            time.sleep(2)
+            time.sleep(4)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -66,7 +66,7 @@ def code_eps():
     strResult_2 = "上期EPS分析结果：<br>"
     for codeItem in all_code_index_x:
         count = count + 1
-        print(count)
+        print("EPS:" + str(count))
         try:
             eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2  = common.codeEPS(codeItem)
             codeName = common.codeName(codeItem)
@@ -84,7 +84,7 @@ def code_eps():
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
                     strResult = strResult + codeName + "本期EPS增长50%以上，但当前价格在5周线以下=================================<br>"
                     common_image.plt_image_week5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
-
+            time.sleep(3)
             if (epsup_2 > 20 and yingyeup_2 > 20):
                 print(common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2)
                 strResult_2 = strResult_2 + common.codeName(codeItem) + ",EPS:" + "%.1f" % epsup_2 + " LYL:" + "%.1f" % yingyeup_2 + "<br>"
@@ -97,7 +97,7 @@ def code_eps():
                 if (doubleCloseArray_W[-1] < SMA_W_5[-1]):
                     strResult_2 = strResult_2 + codeName + "上期EPS增长50%以上，但当前价格在5周线以下=================================<br>"
                     common_image.plt_image_week5Line(codeItem, codeName, "W", "%.1f" % epsup_2, "%.1f" % yingyeup_2)
-            time.sleep(2)
+            time.sleep(3)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
 
