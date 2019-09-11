@@ -98,6 +98,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
         os.makedirs(path)
 
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
+    plt.close()
 
 # 5周线图
 def plt_image_week5Line(code, codeName, type, eps, yoy):
@@ -143,6 +144,7 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
         os.makedirs(path)
 
     plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
+    plt.close()
 
 # 百日新高绘图
 def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
@@ -217,6 +219,7 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
+    plt.savefig(path + "/" +  code + "_" + codeName + ".png")
+    plt.close()
 
 # plt_image("399006", "创业板指", "30")
