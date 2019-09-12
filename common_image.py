@@ -55,7 +55,7 @@ def plt_image(code, codeName, type):
 
 # 跨越5周线图
 def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="20")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
 
@@ -78,10 +78,12 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
     #设置坐标轴名称
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(codeName + '(' + code  + ')跨越5周线,EPS:' + eps + ",营业额：" + yoy, fontproperties=myfont)
+        plt.title(timeStr1 + "_" + codeName + '(' + code + ')5周线连续下降,EPS:' + eps + "%,营业额：" + yoy + "%",
+                  fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
-    plt.ylabel('价格'+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)
@@ -91,13 +93,12 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     if (changdu > 550):
         plt.xlim(400, changdu)
 
-    timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1 + "/kuaYueWeek5Line"
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
 # 5周线图
