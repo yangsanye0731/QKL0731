@@ -80,7 +80,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     #设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code + ')5周线连续下降,EPS:' + eps + "%,营业额：" + yoy + "%",
+        plt.title(timeStr1 + "_" + codeName + '(' + code + ')跨越5周线,EPS:' + eps + "%,营业额：" + yoy + "%",
                   fontproperties=myfont)
     plt.xlabel('日期', fontproperties=myfont)
     plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
