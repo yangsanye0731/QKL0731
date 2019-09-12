@@ -55,7 +55,7 @@ def plt_image(code, codeName, type):
 
 # 跨越5周线图
 def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="20")
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
 
@@ -178,7 +178,7 @@ def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
 
 # 5周线连续下降
 def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="20")
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
 
