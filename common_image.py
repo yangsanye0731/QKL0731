@@ -88,10 +88,16 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     #设置坐标轴范围
     changdu = len(ts)
     print(changdu)
-    if (changdu > 400):
+    if (changdu > 200):
+        plt.xlim(100, changdu)
+    if (changdu > 300):
         plt.xlim(200, changdu)
-    if (changdu > 550):
+    if (changdu > 400):
+        plt.xlim(300, changdu)
+    if (changdu > 500):
         plt.xlim(400, changdu)
+    if (changdu > 600):
+        plt.xlim(500, changdu)
 
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1 + "/kuaYueWeek5Line"
@@ -134,10 +140,16 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
     #设置坐标轴范围
     changdu = len(ts)
-    if (changdu > 400):
+    if (changdu > 200):
+        plt.xlim(100, changdu)
+    if (changdu > 300):
         plt.xlim(200, changdu)
-    if (changdu > 550):
+    if (changdu > 400):
+        plt.xlim(300, changdu)
+    if (changdu > 500):
         plt.xlim(400, changdu)
+    if (changdu > 600):
+        plt.xlim(500, changdu)
 
     path = "./images/" + timeStr1 + "/week5Line"
     if not os.path.exists(path):
@@ -209,10 +221,17 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     #设置坐标轴范围
     changdu = len(ts)
     print(changdu)
-    if (changdu > 400):
+
+    if (changdu > 200):
+        plt.xlim(100, changdu)
+    if (changdu > 300):
         plt.xlim(200, changdu)
-    if (changdu > 550):
+    if (changdu > 400):
+        plt.xlim(300, changdu)
+    if (changdu > 500):
         plt.xlim(400, changdu)
+    if (changdu > 600):
+        plt.xlim(500, changdu)
 
     path = "./images/" + timeStr1 + "/lianXuXiaJiangWeek5Line"
     if not os.path.exists(path):
