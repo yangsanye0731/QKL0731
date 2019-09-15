@@ -221,9 +221,9 @@ def pinjie(title, titleTmp, content, contentTmp):
      if (("趋势" in title or "上好" in title) and "买" in title):
           titleTmp = title + titleTmp
           contentTmp = content + "***\n\n" + contentTmp
-     else:
-          titleTmp = titleTmp + title
-          contentTmp = contentTmp + "***\n\n" + content
+     # else:
+     #      titleTmp = titleTmp + title
+     #      contentTmp = contentTmp + "***\n\n" + content
 
      return titleTmp, contentTmp
 
