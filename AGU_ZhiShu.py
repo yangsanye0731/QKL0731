@@ -193,7 +193,7 @@ def strategy(code, name, fullName):
 
 
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     title = name + MIN30_60MA + xingtai1 + str30QuShi
+     title = name + xingtai1 + str30QuShi
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2])/closeArray_D[-2])*100)
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
@@ -320,6 +320,23 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("159934", "黄金ETF", "黄金ETF")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("300203", "聚光", "聚光科技")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("300017", "网宿", "网宿科技")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("300699", "光威复材", "光威复材")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("300068", "南都", "南都电源")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("002812", "恩捷股份", "恩捷股份")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("002182", "云海金属", "云海金属")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 title = str0 + str00 + titleTmp
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
