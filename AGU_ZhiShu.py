@@ -191,7 +191,7 @@ def strategy(code, name, fullName):
                      "\_" + str(int(round(lowerband_D[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
                      strBULLD_title + "</font>\n\n"
 
-     zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)
+     zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)  + "%"
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + zhangdiefu + xingtai1 + str30QuShi
 
