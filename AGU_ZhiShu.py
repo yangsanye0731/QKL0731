@@ -343,7 +343,6 @@ content = mulu + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + "*
 
 # 发送邮件
 common.dingding_markdown_msg_2(title,content)
-#sendMail (content, title)
 
 
 
