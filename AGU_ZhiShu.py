@@ -195,7 +195,7 @@ def strategy(code, name, fullName):
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      title = name + zhangdiefu + xingtai1 + str30QuShi
 
-     content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "%" + "</font>**\n" + \
+     content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
 
      return title, content
