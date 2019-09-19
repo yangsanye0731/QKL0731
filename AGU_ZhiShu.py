@@ -340,7 +340,6 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("512930", "AIETF", "AIETF")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
-
 strx0,contentx0 = strategy("300203", "聚光", "聚光科技")
 
 title = strx0 + str0 + str00 + titleTmp
