@@ -52,10 +52,10 @@ def strategy(code, name, fullName):
                     str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>3" + xingtai + "**\n\n"
 
      elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
-          str15QuShi = "卖 "
+          str15QuShi = "15卖 "
           str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>" + xingtai + "**\n\n"
      else:
-          str15QuShi = "空 "
+          str15QuShi = "15空 "
           str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>" + xingtai + "**\n\n"
 
      ############################################ 30分钟布林线###############################################
@@ -128,10 +128,10 @@ def strategy(code, name, fullName):
                     str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>3" + xingtai1 + "**\n\n"
 
      elif (SMA30_30_5[-1] < SMA30_30_5[-2] and SMA30_30_10[-1] < SMA30_30_10[-2] and SMA30_30_20[-1] < SMA30_30_20[-2]):
-          str30QuShi = "卖 "
+          str30QuShi = "30卖 "
           str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟卖出</font>" + xingtai1 + "**\n\n"
      else:
-          str30QuShi = "空 "
+          str30QuShi = "30空 "
           str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟空仓</font>" + xingtai1 + "**\n\n"
 
      ############################################ 60分钟布林线###############################################
