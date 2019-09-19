@@ -42,13 +42,13 @@ def strategy(code, name, fullName):
 
      if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2] and SMA30_15_30[-1] > SMA30_15_30[-2]):
 
-          str15QuShi = "买1 "
+          str15QuShi = "15买1 "
           str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>1" + xingtai + "**\n\n"
           if (SMA30_15_5[-2] > SMA30_15_5[-3] and SMA30_15_10[-2] > SMA30_15_10[-3] and SMA30_15_20[-2] > SMA30_15_20[-3] and SMA30_15_30[-2] > SMA30_15_30[-3]):
-               str15QuShi = "买2 "
+               str15QuShi = "15买2 "
                str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>2" + xingtai + "**\n\n"
                if (SMA30_15_5[-3] > SMA30_15_5[-4] and SMA30_15_10[-3] > SMA30_15_10[-4] and SMA30_15_20[-3] > SMA30_15_20[-4] and SMA30_15_30[-3] > SMA30_15_30[-4]):
-                    str15QuShi = "买3 "
+                    str15QuShi = "15买3 "
                     str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>3" + xingtai + "**\n\n"
 
      elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
@@ -116,15 +116,15 @@ def strategy(code, name, fullName):
 
      if (SMA30_30_5[-1] > SMA30_30_5[-2] and SMA30_30_10[-1] > SMA30_30_10[-2] and SMA30_30_20[-1] > SMA30_30_20[-2] and SMA30_30_30[-1] > SMA30_30_30[-2]):
 
-          str30QuShi = "买1 "
+          str30QuShi = "30买1 "
           str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>1" + xingtai1 + "**\n\n"
           if (SMA30_30_5[-2] > SMA30_30_5[-3] and SMA30_30_10[-2] > SMA30_30_10[-3] and SMA30_30_20[-2] >
                   SMA30_30_20[-3] and SMA30_30_30[-2] > SMA30_30_30[-3]):
-               str30QuShi = "买2 "
+               str30QuShi = "30买2 "
                str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>2" + xingtai1 + "**\n\n"
                if (SMA30_30_5[-3] > SMA30_30_5[-4] and SMA30_30_10[-3] > SMA30_30_10[-4] and SMA30_30_20[-3] >
                        SMA30_30_20[-4] and SMA30_30_30[-3] > SMA30_30_30[-4]):
-                    str30QuShi = "买3 "
+                    str30QuShi = "30买3 "
                     str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>3" + xingtai1 + "**\n\n"
 
      elif (SMA30_30_5[-1] < SMA30_30_5[-2] and SMA30_30_10[-1] < SMA30_30_10[-2] and SMA30_30_20[-1] < SMA30_30_20[-2]):
@@ -193,7 +193,7 @@ def strategy(code, name, fullName):
 
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)  + "%"
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     title = name + zhangdiefu + xingtai1 + str30QuShi
+     title = name + zhangdiefu + xingtai1 + str15QuShi + str30QuShi
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
