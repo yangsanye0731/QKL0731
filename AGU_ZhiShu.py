@@ -221,7 +221,7 @@ def strategy(code, name, fullName):
 # 买 表示：30分钟 5、10、20、30均线 均处于向上态势
 def pinjie(title, titleTmp, content, contentTmp):
      # if (("趋势" in title or "上好" in title) and "买" in title):
-     if ("买1" in title or "买2" in title):
+     if ("15买1" in title or "30买1" in title or "30买2" in title):
           titleTmp = title + titleTmp
           contentTmp = content + "***\n\n" + contentTmp
      # else:
