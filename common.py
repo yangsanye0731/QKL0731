@@ -128,7 +128,7 @@ def dingding_markdown_msg(title, text):
 
 def dingding_markdown_msg_2(title, text):
     # WebHook地址
-    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=0ad04e257a2ed1347fe52156a3d57b6e527d252f006dd24d92b33be2a64d1304'
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=1d97947e2d9f891a9d35f78b17953affe65250920eec93ade6f50af9b0c301bb'
     # 初始化机器人小丁
     xiaoding = DingtalkChatbot(webhook)
     # Text消息@所有人
