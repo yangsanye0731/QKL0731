@@ -267,8 +267,6 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_macd.set_ylabel("MACD", fontproperties=myfont)
 
     changdu = len(ts)
-    print(changdu)
-
     if (changdu > 200):
         ax_macd.set_xlim(100, changdu)
     if (changdu > 300):
@@ -310,4 +308,4 @@ def plt_image_geGuZhiBiao(code, fullName):
     plt.savefig(path + "/" + timeStr1 + "_" + code + "GeGu.png")
     plt.close()
 
-# plt_image_geGuZhiBiao("300203")
+# plt_image_geGuZhiBiao("002008","dazujiguang")
