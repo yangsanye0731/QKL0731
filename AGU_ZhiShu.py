@@ -199,6 +199,7 @@ def strategy(code, name, fullName):
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
      if (time.localtime().tm_hour > 14):
+        print(time.localtime().tm_hour)
         common_image.plt_image_geGuZhiBiao(code, fullName)
      return title, content
 
@@ -237,18 +238,41 @@ str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表�
 
 titleTmp = ""
 contentTmp = ""
+
+#################################################################################################################GGGGGG
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
 titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
 
+str12, content12 = strategy("300537", " 广信", "广信材料")
+titleTmp, contentTmp = pinjie(str12, titleTmp, content12, contentTmp)
+
+str13, content13 = strategy("300480", " 光力", "光力科技")
+titleTmp, contentTmp = pinjie(str13, titleTmp, content13, contentTmp)
+
+str8, content8 = strategy("300251", " 光线", "光线传媒")
+titleTmp, contentTmp = pinjie(str8, titleTmp, content8, contentTmp)
+
+str20, content20 = strategy("002074", "国轩", "国轩高科")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("300699", "光威复材", "光威复材")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+#################################################################################################################CCCCCC
 str2, content2 = strategy("000625", " 长安(稳)", "长安汽车")
 titleTmp, contentTmp = pinjie(str2, titleTmp, content2, contentTmp)
 
-str3, content3 = strategy("300136", " @信维", "@信维通信")
-titleTmp, contentTmp = pinjie(str3, titleTmp, content3, contentTmp)
-
+#################################################################################################################DDDDDD
 str4, content4 = strategy("002008", " 大族", "大族激光")
 titleTmp, contentTmp = pinjie(str4, titleTmp, content4, contentTmp)
 
+str9, content9 = strategy("300059", " 东方", "东方财富")
+titleTmp, contentTmp = pinjie(str9, titleTmp, content9, contentTmp)
+
+str20, content20 = strategy("002236", "大华", "大华股份")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+#################################################################################################################FFFFFF
 str5, content5 = strategy("600498", " 烽火", "烽火通信")
 titleTmp, contentTmp = pinjie(str5, titleTmp, content5, contentTmp)
 
@@ -258,23 +282,14 @@ titleTmp, contentTmp = pinjie(str6, titleTmp, content6, contentTmp)
 str7, content7 = strategy("300328", " 宜安", "宜安科技")
 titleTmp, contentTmp = pinjie(str7, titleTmp, content7, contentTmp)
 
-str8, content8 = strategy("300251", " 光线", "光线传媒")
-titleTmp, contentTmp = pinjie(str8, titleTmp, content8, contentTmp)
-
-str9, content9 = strategy("300059", " 东方", "东方财富")
-titleTmp, contentTmp = pinjie(str9, titleTmp, content9, contentTmp)
+str3, content3 = strategy("300136", " @信维", "@信维通信")
+titleTmp, contentTmp = pinjie(str3, titleTmp, content3, contentTmp)
 
 str10, content10 = strategy("300584", " @海辰", "@海辰药业")
 titleTmp, contentTmp = pinjie(str10, titleTmp, content10, contentTmp)
 
 str11, content11 = strategy("300664", " @鹏鹞", "@鹏鹞环保")
 titleTmp, contentTmp = pinjie(str11, titleTmp, content11, contentTmp)
-
-str12, content12 = strategy("300537", " 广信", "广信材料")
-titleTmp, contentTmp = pinjie(str12, titleTmp, content12, contentTmp)
-
-str13, content13 = strategy("300480", " 光力", "光力科技")
-titleTmp, contentTmp = pinjie(str13, titleTmp, content13, contentTmp)
 
 str14, content14 = strategy("300462", " 华铭", "华铭智能")
 titleTmp, contentTmp = pinjie(str14, titleTmp, content14, contentTmp)
@@ -300,13 +315,7 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("600036", "招商", "招商银行")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
-str20, content20 = strategy("002236", "大华", "大华股份")
-titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
-
 str20, content20 = strategy("000603", "盛达矿业", "盛达矿业")
-titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
-
-str20, content20 = strategy("002074", "国轩", "国轩高科")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 str20, content20 = strategy("600271", "航天", "航天信息（电子发票）")
@@ -318,16 +327,7 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("000877", "天山", "天山股份（一带一路）")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
-str20, content20 = strategy("159934", "黄金ETF", "黄金ETF")
-titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
-
-str20, content20 = strategy("300203", "聚光", "聚光科技")
-titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
-
 str20, content20 = strategy("300017", "网宿", "网宿科技")
-titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
-
-str20, content20 = strategy("300699", "光威复材", "光威复材")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 str20, content20 = strategy("300068", "南都", "南都电源")
@@ -339,7 +339,26 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("002182", "云海金属", "云海金属")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("000988", "华工科技", "华工科技")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("300294", "博雅", "博雅生物")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("300253", "卫宁", "卫宁健康")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+#################################################################################################################ETFETF
+str20, content20 = strategy("512480", "半导体", "半导体ETF")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("515000", "科技ETF", "科技ETF")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
 str20, content20 = strategy("512930", "AIETF", "AIETF")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("159934", "黄金ETF", "黄金ETF")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 strx0,contentx0 = strategy("300203", "聚光", "聚光科技")
