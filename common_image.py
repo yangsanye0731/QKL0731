@@ -11,6 +11,7 @@ import tushare
 import time
 import os
 import common
+import numpy as num
 
 
 def plt_image(code, codeName, type):
@@ -240,4 +241,73 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     plt.savefig(path + "/" +  timeStr1 + "_" + codeName + "5D.png")
     plt.close()
 
-# plt_image("399006", "创业板指", "30")
+
+# 个股指标
+def plt_image_geGuZhiBiao(code, fullName):
+    codeName = fullName + "(" + code + ")"
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+
+    fig = plt.figure(figsize=(15,12))
+    # 1*1 的第一个图表
+    ax_macd = fig.add_subplot(121)
+    ax_bull = fig.add_subplot(122)
+
+    data = tushare.get_k_data(code, ktype="W")
+    ts = data[["open", "close", "high", "low", "volume"]]
+
+    # 计算MACD指标数据
+    closeArray = num.array(data['close'])
+    doubleCloseArray = num.asarray(closeArray, dtype='double')
+    data["macd"], data["sigal"], data["hist"] = talib.MACD(ts['close'], fastperiod=12, slowperiod=26, signalperiod=9)
+
+    ax_macd.plot(data.index, data["macd"], label="macd")
+    ax_macd.plot(data.index, data["sigal"], label="sigal")
+    ax_macd.bar(data.index, data["hist"] * 2, label="hist")
+    ax_macd.set_xlabel(codeName + "日期（周）", fontproperties=myfont)
+    ax_macd.set_ylabel("MACD", fontproperties=myfont)
+
+    changdu = len(ts)
+    print(changdu)
+
+    if (changdu > 200):
+        ax_macd.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_macd.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_macd.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_macd.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_macd.set_xlim(500, changdu)
+
+
+    data['upperband'], data['middleband'],data['lowerband']  = talib.BBANDS(ts['close'], timeperiod=20, nbdevup=2, nbdevdn=2,
+                                                          matype=0)
+    ax_bull.plot(data.index, data["upperband"], label="UP")
+    ax_bull.plot(data.index, data["middleband"], label="MID")
+    ax_bull.plot(data.index, data["lowerband"], label="LOW")
+    ax_bull.plot(data.index, data["low"], "b.-" , label="Line")
+
+    ax_bull.set_xlabel(codeName + "日期（周）", fontproperties=myfont)
+    ax_bull.set_ylabel("BULL", fontproperties=myfont)
+
+    if (changdu > 200):
+        ax_bull.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_bull.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_bull.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_bull.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_bull.set_xlim(500, changdu)
+
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
+    path = "./images/" + timeStr1 + "/geGuZhiBiao"
+    if not os.path.exists(path):
+        os.makedirs(path)
+    plt.savefig(path + "/" + timeStr1 + "_" + code + "GeGu.png")
+    plt.close()
+
+# plt_image_geGuZhiBiao("300203")
