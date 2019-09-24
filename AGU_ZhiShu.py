@@ -198,8 +198,8 @@ def strategy(code, name, fullName):
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
+     print(time.localtime().tm_hour)
      if (time.localtime().tm_hour > 14):
-        print(time.localtime().tm_hour)
         common_image.plt_image_geGuZhiBiao(code, fullName)
      return title, content
 
