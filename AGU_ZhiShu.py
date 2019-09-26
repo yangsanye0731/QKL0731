@@ -199,7 +199,7 @@ def strategy(code, name, fullName):
      if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
           macd_title = "MACD日线转，关注KDJ"
      else:
-          macd_title = "MACD上下，关注KDJ"
+          macd_title = "MACD上下从容，关注KDJ"
 
      ##################################################################################################################
 
