@@ -192,9 +192,21 @@ def strategy(code, name, fullName):
                      "\_" + str(int(round(lowerband_D[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
                      strBULLD_title + "</font>\n\n"
 
+
+     ##################################################################################################################
+     # macd 为快线 macdsignal为慢线，macdhist为柱体
+     macd, macdsignal, macdhist = ta.MACD(doubleCloseArray_D, fastperiod=12, slowperiod=26, signalperiod=9)
+     if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
+          macd_title = "MACD日线转，关注KDJ"
+     else:
+          macd_title = "MACD上下，关注KDJ"
+
+     ##################################################################################################################
+
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)  + "%"
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     title = name + zhangdiefu + xingtai1 + str15QuShi + str30QuShi
+     # title = name + zhangdiefu + xingtai1 + str15QuShi + str30QuShi
+     title = name + zhangdiefu + macd_title
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
@@ -224,7 +236,7 @@ def strategy(code, name, fullName):
 # 买 表示：30分钟 5、10、20、30均线 均处于向上态势
 def pinjie(title, titleTmp, content, contentTmp):
      # if (("趋势" in title or "上好" in title) and "买" in title):
-     if ("15买1" in title or "30买1" in title or "30买2" in title):
+     if ("转" in title):
           titleTmp = title + titleTmp
           contentTmp = content + "***\n\n" + contentTmp
      # else:
