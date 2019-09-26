@@ -197,9 +197,9 @@ def strategy(code, name, fullName):
      # macd 为快线 macdsignal为慢线，macdhist为柱体
      macd, macdsignal, macdhist = ta.MACD(doubleCloseArray_D, fastperiod=12, slowperiod=26, signalperiod=9)
      if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
-          macd_title = "MACD日线转，关注KDJ"
+          macd_title = "MACD日线转，KDJ"
      else:
-          macd_title = "MACD上下从容，关注KDJ"
+          macd_title = "MACD上下，KDJ"
 
      stock_data = {}
      # 计算KDJ指标
@@ -222,7 +222,7 @@ def strategy(code, name, fullName):
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)  + "%"
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      # title = name + zhangdiefu + xingtai1 + str15QuShi + str30QuShi
-     title = name + zhangdiefu + macd_title + KDJ_J_title
+     title = name + zhangdiefu + macd_title + KDJ_J_title + " "
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
