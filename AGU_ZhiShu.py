@@ -201,12 +201,28 @@ def strategy(code, name, fullName):
      else:
           macd_title = "MACD上下从容，关注KDJ"
 
+     stock_data = {}
+     # 计算KDJ指标
+     low_list = data_history_D.low.rolling(9).min()
+     low_list.fillna(value=data_history_D.low.expanding().min(), inplace=True)
+     high_list = data_history_D.high.rolling(9).max()
+     high_list.fillna(value=data_history_D.high.expanding().max(), inplace=True)
+     rsv = (doubleCloseArray_D - low_list) / (high_list - low_list) * 100
+     # stock_data['KDJ_K'] = pd.ewma(rsv, com=2)
+     stock_data['KDJ_K'] = pd.DataFrame.ewm(rsv, com=2).mean()
+     # stock_data['KDJ_D'] = pd.ewma(stock_data['KDJ_K'], com=2)
+     stock_data['KDJ_D'] = pd.DataFrame.ewm(stock_data['KDJ_K'], com=2).mean()
+     stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']
+     dddd = pd.DataFrame(stock_data)
+
+     KDJ_J_title = "%.2f" % dddd.KDJ_J[len(dddd) - 1]
+     # print("%.2f" % dddd.KDJ_J[len(dddd) - 1])
      ##################################################################################################################
 
      zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)  + "%"
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
      # title = name + zhangdiefu + xingtai1 + str15QuShi + str30QuShi
-     title = name + zhangdiefu + macd_title
+     title = name + zhangdiefu + macd_title + KDJ_J_title
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
