@@ -197,9 +197,9 @@ def strategy(code, name, fullName):
      # macd 为快线 macdsignal为慢线，macdhist为柱体
      macd, macdsignal, macdhist = ta.MACD(doubleCloseArray_D, fastperiod=12, slowperiod=26, signalperiod=9)
      if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
-          macd_title = "MACD日线转，KDJ"
+          macd_title = "M转，KDJ"
      else:
-          macd_title = "MACD上下，KDJ"
+          macd_title = "KDJ"
 
      stock_data = {}
      # 计算KDJ指标
