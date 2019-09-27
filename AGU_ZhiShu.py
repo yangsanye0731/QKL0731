@@ -197,9 +197,9 @@ def strategy(code, name, fullName):
      # macd 为快线 macdsignal为慢线，macdhist为柱体
      macd, macdsignal, macdhist = ta.MACD(doubleCloseArray_D, fastperiod=12, slowperiod=26, signalperiod=9)
      if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
-          macd_title = "M转，KDJ"
+          macd_title = "MA:转"
      else:
-          macd_title = "KDJ"
+          macd_title = "MA:平"
 
      stock_data = {}
      # 计算KDJ指标
@@ -215,7 +215,7 @@ def strategy(code, name, fullName):
      stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']
      dddd = pd.DataFrame(stock_data)
 
-     KDJ_J_title = "%.2f" % dddd.KDJ_J[len(dddd) - 1]
+     KDJ_J_title = "KD:" + "%.2f" % dddd.KDJ_J[len(dddd) - 1]
      # print("%.2f" % dddd.KDJ_J[len(dddd) - 1])
      ##################################################################################################################
 
@@ -226,9 +226,9 @@ def strategy(code, name, fullName):
 
      content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
                MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
-     print(time.localtime().tm_hour)
-     if (time.localtime().tm_hour > 14):
-        common_image.plt_image_geGuZhiBiao(code, fullName)
+     # print(time.localtime().tm_hour)
+     # if (time.localtime().tm_hour > 14):
+     #    common_image.plt_image_geGuZhiBiao(code, fullName)
      return title, content
 
 
@@ -261,12 +261,17 @@ def pinjie(title, titleTmp, content, contentTmp):
 
      return titleTmp, contentTmp
 
-str0,content0 = strategy("399006", "※创业", "※创业板指")
-str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
+# str0,content0 = strategy("399006", "※创业", "※创业板指")
+# str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
 
 titleTmp = ""
 contentTmp = ""
 
+str1, content1 = strategy("399006", " 创业", "创业板指")
+titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
+
+str1, content1 = strategy("399975", " 证券", "证券公司")
+titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
 #################################################################################################################GGGGGG
 str1, content1 = strategy("002281", " 光迅", "光迅科技")
 titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
@@ -389,11 +394,14 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("159934", "黄金ETF", "黄金ETF")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
-strx0,contentx0 = strategy("300203", "聚光", "聚光科技")
+str20, content20 = strategy("300203", "聚光", "聚光科技")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
-title = strx0 + str0 + str00 + titleTmp
+
+
+title = titleTmp
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
-content = mulu + contentx0 + "***\n\n***\n\n" + content0 + "***\n\n***\n\n" + content00 + "***\n\n***\n\n" + "***\n\n***\n\n" + contentTmp
+content = contentTmp
 
 # 发送信息
 # common.dingding_markdown_msg_2(title,content)
