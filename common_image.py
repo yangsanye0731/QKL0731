@@ -108,6 +108,53 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5K.png")
     plt.close()
 
+
+# 30日线上升
+def plt_image_30DayLineUp(code, codeName, type, eps, yoy):
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+    ts = tushare.get_k_data(code, ktype = type)
+    ts=ts[["open","close","high","low","volume"]]
+
+    # 画5日均线图
+    avg_1 = talib.MA(ts["close"], timeperiod=1)
+    # avg_5 = talib.MA(ts["close"], timeperiod=5)
+    # avg_10 = talib.MA(ts["close"], timeperiod=10)
+    avg_20 = talib.MA(ts["close"], timeperiod=20)
+    avg_30 = talib.MA(ts["close"], timeperiod=30)
+    # print(avg_5)
+    # print(avg_10)
+    # print(avg_20)
+    # print(avg_30)
+
+    fig=plt.subplots(figsize=(15,12))
+    plt.plot(avg_1, "b.-")
+    plt.plot(avg_20, "k.-")
+    plt.plot(avg_30,color="y")
+    # plt.plot(avg_20,color="g")
+    # plt.plot(avg_30,color="b")
+    plt.xticks(rotation=75)
+    #设置坐标轴名称
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    if (type == "D"):
+        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%",
+                  fontproperties=myfont)
+    plt.xlabel('日期，规则：30日线上升，30日线线前2期下降', fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+
+    #设置坐标轴范围
+    changdu = len(ts)
+    print(changdu)
+    if (changdu > 200):
+        plt.xlim(changdu-100, changdu)
+
+    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
+    path = "./images/" + timeStr1 + "/30DayLineUp"
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + "30D.png")
+    plt.close()
+
 # 5周线图
 def plt_image_week5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
@@ -264,7 +311,7 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_macd.plot(data.index, data["sigal"], label="sigal")
     ax_macd.bar(data.index, data["hist"] * 2, label="hist")
     ax_macd.set_xlabel(codeName + "日期（周）", fontproperties=myfont)
-    ax_macd.set_ylabel("MACD", fontproperties=myfont)
+    ax_macd.set_ylabel("涨跌幅：" + common.zhangdiefu(code), fontproperties=myfont)
 
     changdu = len(ts)
     if (changdu > 200):
