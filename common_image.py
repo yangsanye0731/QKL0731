@@ -147,7 +147,6 @@ def plt_image_30DayLineUp(code, codeName, type, eps, yoy):
     if (changdu > 200):
         plt.xlim(changdu-100, changdu)
 
-    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1 + "/30DayLineUp"
     if not os.path.exists(path):
         os.makedirs(path)
