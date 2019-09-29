@@ -49,7 +49,7 @@ def strategy():
             if (ma30_D[-1] > ma30_D[-2] and epsup > 0 and yingyeup > 0 and ma30_D[-2] < ma30_D[-3] and ma30_D[-3] < ma30_D[-4]):
                 print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "======================================" + codeItem)
                 common_image.plt_image_30DayLineUp(codeItem, codeName, "D", "%.1f" % epsup, "%.1f" % yingyeup)
-                strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
+                strResult += common.codeName(codeItem) + "30周线向上，且在20日线以上" + "<br>"
 
             # 最高点大于5周线，开点小于5周线，前两周五周线处于下降阶段
             if (doubleHighArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0 and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4]):
