@@ -7,241 +7,44 @@ import talib as ta
 from email_util import *
 import common
 import common_image
+import common_zhibiao
 import mysql_util
 
 def strategy(code, name, fullName, mark):
-     ############################################ 15分钟布林线###############################################
-     data_history = ts.get_k_data(code, ktype = "15")
+     price, MA20_titile, MA30_titile, KDJ_J_title, MACD_title, BULL_title = common_zhibiao.zhibiao(code, 'D')
+     price_60, MA20_titile_60, MA30_titile_60, KDJ_J_title_60, MACD_title_60, BULL_title_60 = common_zhibiao.zhibiao(code, '60')
+     price_30, MA20_titile_30, MA30_titile_30, KDJ_J_title_30, MACD_title_30, BULL_title_30 = common_zhibiao.zhibiao(code, '30')
 
-     closeArray = num.array(data_history['close'])
-     highArray = num.array(data_history['high'])
-     lowArray = num.array(data_history['low'])
-
-     doubleCloseArray = num.asarray(closeArray,dtype='double')
-     doubleHighArray = num.asarray(highArray,dtype='double')
-     doubleLowArray = num.asarray(lowArray,dtype='double')
-
-     SMA30_15_5 = ta.SMA(doubleCloseArray, timeperiod=5)
-     SMA30_15_10 = ta.SMA(doubleCloseArray, timeperiod=10)
-     SMA30_15_20 = ta.SMA(doubleCloseArray, timeperiod=20)
-     SMA30_15_30 = ta.SMA(doubleCloseArray, timeperiod=30)
-
-     xingtai = ""
-     if (SMA30_15_5[-1] > SMA30_15_10[-1] > SMA30_15_20[-1] > SMA30_15_30[-1]):
-          xingtai = "上好1"
-          if (SMA30_15_5[-2] > SMA30_15_10[-2] > SMA30_15_20[-2] > SMA30_15_30[-2]):
-               xingtai = "上好2"
-               if (SMA30_15_5[-3] > SMA30_15_10[-3] > SMA30_15_20[-3] > SMA30_15_30[-3]):
-                    xingtai = "上好3"
-
-
-     if (SMA30_15_5[-1] < SMA30_15_10[-1] < SMA30_15_20[-1] < SMA30_15_30[-1]):
-          xingtai = "下好1"
-          if (SMA30_15_5[-1] < SMA30_15_10[-1] < SMA30_15_20[-1] < SMA30_15_30[-1]):
-               xingtai = "下好2"
-               if (SMA30_15_5[-1] < SMA30_15_10[-1] < SMA30_15_20[-1] < SMA30_15_30[-1]):
-                    xingtai = "下好3"
-
-     if (SMA30_15_5[-1] > SMA30_15_5[-2] and SMA30_15_10[-1] > SMA30_15_10[-2] and SMA30_15_20[-1] > SMA30_15_20[-2] and SMA30_15_30[-1] > SMA30_15_30[-2]):
-
-          str15QuShi = "15买1 "
-          str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>1" + xingtai + "**\n\n"
-          if (SMA30_15_5[-2] > SMA30_15_5[-3] and SMA30_15_10[-2] > SMA30_15_10[-3] and SMA30_15_20[-2] > SMA30_15_20[-3] and SMA30_15_30[-2] > SMA30_15_30[-3]):
-               str15QuShi = "15买2 "
-               str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>2" + xingtai + "**\n\n"
-               if (SMA30_15_5[-3] > SMA30_15_5[-4] and SMA30_15_10[-3] > SMA30_15_10[-4] and SMA30_15_20[-3] > SMA30_15_20[-4] and SMA30_15_30[-3] > SMA30_15_30[-4]):
-                    str15QuShi = "15买3 "
-                    str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟买入</font>3" + xingtai + "**\n\n"
-
-     elif (SMA30_15_5[-1] < SMA30_15_5[-2] and SMA30_15_10[-1] < SMA30_15_10[-2] and SMA30_15_20[-1] < SMA30_15_20[-2]):
-          str15QuShi = "15卖 "
-          str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟卖出</font>" + xingtai + "**\n\n"
-     else:
-          str15QuShi = "15空 "
-          str15QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">15分钟空仓</font>" + xingtai + "**\n\n"
-
-     ############################################ 30分钟布林线###############################################
-     data_history_30 = ts.get_k_data(code, ktype="30")
-
-     closeArray_30 = num.array(data_history_30['close'])
-     highArray_30 = num.array(data_history_30['high'])
-     lowArray_30 = num.array(data_history_30['low'])
-
-     doubleCloseArray_30 = num.asarray(closeArray_30, dtype='double')
-     doubleHighArray_30 = num.asarray(highArray_30, dtype='double')
-     doubleLowArray_30 = num.asarray(lowArray_30, dtype='double')
-
-     SMA30_30_5 = ta.SMA(doubleCloseArray_30, timeperiod=5)
-     SMA30_30_10 = ta.SMA(doubleCloseArray_30, timeperiod=10)
-     SMA30_30_20 = ta.SMA(doubleCloseArray_30, timeperiod=20)
-     SMA30_30_30 = ta.SMA(doubleCloseArray_30, timeperiod=30)
-     SMA30_30_60 = ta.SMA(doubleCloseArray_30, timeperiod=60)
-
-     MIN30_60MA = ""
-     MIN30_60MA_content = ""
-     if (SMA30_30_60[-1] > SMA30_30_60[-2]):
-          MIN30_60MA = "趋势1"
-          MIN30_60MA_content = "30分钟60均线趋势走多1\n\n"
-          if (SMA30_30_60[-2] > SMA30_30_60[-3]):
-               MIN30_60MA = "趋势2"
-               MIN30_60MA_content = "30分钟60均线趋势走多2\n\n"
-               if (SMA30_30_60[-3] > SMA30_30_60[-4]):
-                    MIN30_60MA = "趋势3"
-                    MIN30_60MA_content = "30分钟60均线趋势走多3\n\n"
-                    if (SMA30_30_60[-4] > SMA30_30_60[-5]):
-                         MIN30_60MA = "趋势4"
-                         MIN30_60MA_content = "30分钟60均线趋势走多4\n\n"
-                         if (SMA30_30_60[-5] > SMA30_30_60[-6]):
-                              MIN30_60MA = "趋势5"
-                              MIN30_60MA_content = "30分钟60均线趋势走多5\n\n"
-                              if (SMA30_30_60[-6] > SMA30_30_60[-7]):
-                                   MIN30_60MA = "趋势6"
-                                   MIN30_60MA_content = "30分钟60均线趋势走多6\n\n"
-                                   if (SMA30_30_60[-6] > SMA30_30_60[-7]):
-                                        MIN30_60MA = "错过"
-                                        MIN30_60MA_content = "30分钟60均线趋势错过\n\n"
-
-     xingtai1 = ""
-     if (SMA30_30_5[-1] > SMA30_30_10[-1] > SMA30_30_20[-1] > SMA30_30_30[-1]):
-          xingtai1 = "上好1"
-          if (SMA30_30_5[-2] > SMA30_30_10[-2] > SMA30_30_20[-2] > SMA30_30_30[-2]):
-               xingtai1 = "上好2"
-               if (SMA30_30_5[-3] > SMA30_30_10[-3] > SMA30_30_20[-3] > SMA30_30_30[-3]):
-                    xingtai1 = "上好3"
-
-     if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
-          xingtai1 = "下好1"
-          if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
-               xingtai1 = "下好2"
-               if (SMA30_30_5[-1] < SMA30_30_10[-1] < SMA30_30_20[-1] < SMA30_30_30[-1]):
-                    xingtai1 = "下好3"
-
-     if (SMA30_30_5[-1] > SMA30_30_5[-2] and SMA30_30_10[-1] > SMA30_30_10[-2] and SMA30_30_20[-1] > SMA30_30_20[-2] and SMA30_30_30[-1] > SMA30_30_30[-2]):
-
-          str30QuShi = "30买1 "
-          str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>1" + xingtai1 + "**\n\n"
-          if (SMA30_30_5[-2] > SMA30_30_5[-3] and SMA30_30_10[-2] > SMA30_30_10[-3] and SMA30_30_20[-2] >
-                  SMA30_30_20[-3] and SMA30_30_30[-2] > SMA30_30_30[-3]):
-               str30QuShi = "30买2 "
-               str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>2" + xingtai1 + "**\n\n"
-               if (SMA30_30_5[-3] > SMA30_30_5[-4] and SMA30_30_10[-3] > SMA30_30_10[-4] and SMA30_30_20[-3] >
-                       SMA30_30_20[-4] and SMA30_30_30[-3] > SMA30_30_30[-4]):
-                    str30QuShi = "30买3 "
-                    str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟买入</font>3" + xingtai1 + "**\n\n"
-
-     elif (SMA30_30_5[-1] < SMA30_30_5[-2] and SMA30_30_10[-1] < SMA30_30_10[-2] and SMA30_30_20[-1] < SMA30_30_20[-2]):
-          str30QuShi = "30卖 "
-          str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟卖出</font>" + xingtai1 + "**\n\n"
-     else:
-          str30QuShi = "30空 "
-          str30QuShi_content = "【均线】**<font color=#FF0000 size=6 face=\"微软雅黑\">30分钟空仓</font>" + xingtai1 + "**\n\n"
-
-     ############################################ 60分钟布林线###############################################
-     data_history_60 = ts.get_k_data(code, ktype="60")
-
-     closeArray_60 = num.array(data_history_60['close'])
-     highArray_60 = num.array(data_history_60['high'])
-     lowArray_60 = num.array(data_history_60['low'])
-
-     doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
-     doubleHighArray_60 = num.asarray(highArray_60, dtype='double')
-     doubleLowArray_60 = num.asarray(lowArray_60, dtype='double')
-
-     upperband_60, middleband_60, lowerband_60 = ta.BBANDS(doubleCloseArray_60, timeperiod=20, nbdevup=2, nbdevdn=2,
-                                                     matype=0)
-
-     strBULL60_title = "中间"
-     if (highArray_60[-1] > upperband_60[-1]):
-         strBULL60_title = "上穿"
-
-     if (lowArray_60[-1] < lowerband_60[-1]):
-         strBULL60_title = "下穿"
-
-     strBULL60 = "BULL60：" + "%.2f" % upperband_60[-1] + "\_" + "%.2f" % middleband_60[-1] + "\_" + \
-             "%.2f" % lowerband_60[-1] + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-             strBULL60_title + "</font>\n\n"
-     if (closeArray[-1] > 1000):
-         strBULL60 = "BULL60：" + str(int(round(upperband_60[-1]))) + "\_" + str(int(round(middleband_60[-1]))) + \
-                 "\_" + str(int(round(lowerband_60[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-                  strBULL60_title + "</font>\n\n"
-
-     ############################################ 1天布林线    ###############################################
-     data_history_D = ts.get_k_data(code, ktype="D")
-
-     closeArray_D = num.array(data_history_D['close'])
-     highArray_D = num.array(data_history_D['high'])
-     lowArray_D = num.array(data_history_D['low'])
-
-     doubleCloseArray_D = num.asarray(closeArray_D, dtype='double')
-     doubleHighArray_D = num.asarray(highArray_D, dtype='double')
-     doubleLowArray_D = num.asarray(lowArray_D, dtype='double')
-
-     upperband_D, middleband_D, lowerband_D = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2, matype=0)
-
-     strBULLD_title = "中间"
-     if (highArray_D[-1] > upperband_D[-1]):
-          strBULLD_title = "上穿"
-
-     if (lowArray_D[-1] < lowerband_D[-1]):
-          strBULLD_title = "下穿"
-
-     strBULL1 = "BULL1D：" + "%.2f" % upperband_D[-1] + "\_" + "%.2f" % middleband_D[-1] + "\_" + \
-                "%.2f" % lowerband_D[-1] + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-                strBULLD_title + "</font>\n\n"
-     if (closeArray[-1] > 1000):
-          strBULL1 = "BULL1D：" + str(int(round(upperband_D[-1]))) + "\_" + str(int(round(middleband_D[-1]))) + \
-                     "\_" + str(int(round(lowerband_D[-1]))) + " " + "<font color=#FF0000 size=6 face=\"微软雅黑\">" + \
-                     strBULLD_title + "</font>\n\n"
-
-
-     ##################################################################################################################
-     # macd 为快线 macdsignal为慢线，macdhist为柱体
-     macd, macdsignal, macdhist = ta.MACD(doubleCloseArray_D, fastperiod=12, slowperiod=26, signalperiod=9)
-     if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
-          macd_title = "MA_转 "
-     else:
-          macd_title = "MA_平 "
-
-     stock_data = {}
-     # 计算KDJ指标
-     low_list = data_history_D.low.rolling(9).min()
-     low_list.fillna(value=data_history_D.low.expanding().min(), inplace=True)
-     high_list = data_history_D.high.rolling(9).max()
-     high_list.fillna(value=data_history_D.high.expanding().max(), inplace=True)
-     rsv = (doubleCloseArray_D - low_list) / (high_list - low_list) * 100
-     # stock_data['KDJ_K'] = pd.ewma(rsv, com=2)
-     stock_data['KDJ_K'] = pd.DataFrame.ewm(rsv, com=2).mean()
-     # stock_data['KDJ_D'] = pd.ewma(stock_data['KDJ_K'], com=2)
-     stock_data['KDJ_D'] = pd.DataFrame.ewm(stock_data['KDJ_K'], com=2).mean()
-     stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']
-     dddd = pd.DataFrame(stock_data)
-
-     KDJ_J_title = "KD_" + "%.1f" % dddd.KDJ_J[len(dddd) - 1] + " "
-     # print("%.2f" % dddd.KDJ_J[len(dddd) - 1])
-
-     MA_20 = ta.SMA(doubleCloseArray_D, timeperiod=20)
-
-     MA20_titile = ""
-     if(doubleCloseArray_D[-1] > MA_20[-1] and doubleLowArray_D[-1] < MA_20[-1]):
-          MA20_titile = "20天均线上穿 "
-     ##################################################################################################################
-
-     zhangdiefu = "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100)  + "%"
+     zhangdiefu = common.zhangdiefu(code)
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-     # title = name + zhangdiefu + xingtai1 + str15QuShi + str30QuShi
-     title = name + zhangdiefu + macd_title + KDJ_J_title + MA20_titile + " "
-
-     content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + \
-               MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60 + strBULL1
+     title = name + zhangdiefu + MACD_title + KDJ_J_title + MA20_titile + " "
+     content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName
+               # + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60
      # print(time.localtime().tm_hour)
      # if (time.localtime().tm_hour > 14):
      #    common_image.plt_image_geGuZhiBiao(code, fullName)
      mingcheng = fullName
-     sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `zhangdiefu`, `30zhi`, `60zhi`, `beizhu`, `insert_time`) VALUES (" \
+     sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, `ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, " \
+           "`60_qushi_20junxian`, `60_qushi_30junxian`, `60_MACD`, `60_KDJ`, `60_BULL`, `30_qushi_20junxian`, `30_qushi_30junxian`, `30_MACD`, `30_KDJ`, `30_BULL`,`beizhu`, `insert_time`) VALUES (" \
            "'" + mingcheng + "', " \
            "'" + code + "', " \
+           "'" + price + "', " \
            "'" + zhangdiefu + "', " \
-           "'2', '2', " \
+           "'" + MA20_titile + "', " \
+           "'" + MA30_titile + "', " \
+           "'" + MACD_title + "', " \
+           "'" + KDJ_J_title + "', " \
+           "'" + BULL_title + "', " \
+           "'" + MA20_titile_60 + "', " \
+           "'" + MA30_titile_60 + "', " \
+           "'" + MACD_title_60 + "', " \
+           "'" + KDJ_J_title_60 + "', " \
+           "'" + BULL_title_60 + "', " \
+           "'" + MA20_titile_30 + "', " \
+           "'" + MA30_titile_30 + "', " \
+           "'" + MACD_title_30 + "', " \
+           "'" + KDJ_J_title_30 + "', " \
+           "'" + BULL_title_30 + "', " \
            "'" + mark + "', " \
            "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
      print(sql)
@@ -278,8 +81,6 @@ def pinjie(title, titleTmp, content, contentTmp):
 
      return titleTmp, contentTmp
 
-# str0,content0 = strategy("399006", "※创业", "※创业板指")
-# str00,content00 = strategy("399975", "※证券", "※证券公司（晴雨表）")
 #清空数据库
 mysql_util.deleteRecord()
 
