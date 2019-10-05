@@ -95,8 +95,8 @@ def zhibiao(code, type):
           BULL_title = "下穿布林线下沿"
 
      # 返回20均线是否上传，30均线趋势, KDJ J 是否处于低位， MACD是否转折
-     MA30_titile = MA30_titile + "%.2f" % MA_30[-1] + "_" + "%.2f" % MA_30[-2] + "_" + "%.2f" % MA_30[-3]
-     BULL_title = BULL_title + "%.2f" % lowerband[-1] + "_" + "%.2f" % lowerband[-2] + "_" + "%.2f" % lowerband[-3]
+     # MA30_titile = MA30_titile + "%.2f" % MA_30[-1] + "_" + "%.2f" % MA_30[-2] + "_" + "%.2f" % MA_30[-3]
+     # BULL_title = BULL_title + "%.2f" % lowerband[-1] + "_" + "%.2f" % lowerband[-2] + "_" + "%.2f" % lowerband[-3]
      return price, MA20_titile, MA30_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title
 
 # 返回20均线是否上传，30均线趋势
