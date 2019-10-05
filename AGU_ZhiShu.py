@@ -11,9 +11,9 @@ import common_zhibiao
 import mysql_util
 
 def strategy(code, name, fullName, mark):
-     price, MA20_titile, MA30_titile, KDJ_J_title, MACD_title, BULL_title = common_zhibiao.zhibiao(code, 'D')
-     price_60, MA20_titile_60, MA30_titile_60, KDJ_J_title_60, MACD_title_60, BULL_title_60 = common_zhibiao.zhibiao(code, '60')
-     price_30, MA20_titile_30, MA30_titile_30, KDJ_J_title_30, MACD_title_30, BULL_title_30 = common_zhibiao.zhibiao(code, '30')
+     price, MA20_titile, MA30_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title = common_zhibiao.zhibiao(code, 'D')
+     price_60, MA20_titile_60, MA30_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60 = common_zhibiao.zhibiao(code, '60')
+     price_30, MA20_titile_30, MA30_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30 = common_zhibiao.zhibiao(code, '30')
 
      zhangdiefu = common.zhangdiefu(code)
      print(name + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
@@ -24,24 +24,29 @@ def strategy(code, name, fullName, mark):
      # if (time.localtime().tm_hour > 14):
      #    common_image.plt_image_geGuZhiBiao(code, fullName)
      mingcheng = fullName
-     sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, `ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, " \
-           "`60_qushi_20junxian`, `60_qushi_30junxian`, `60_MACD`, `60_KDJ`, `60_BULL`, `30_qushi_20junxian`, `30_qushi_30junxian`, `30_MACD`, `30_KDJ`, `30_BULL`,`beizhu`, `insert_time`) VALUES (" \
+     sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, " \
+           "`ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_qushi_5_10_20_30`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, " \
+           "`60_qushi_20junxian`, `60_qushi_30junxian`, `60_qushi_5_10_20_30`, `60_MACD`, `60_KDJ`, `60_BULL`, " \
+           "`30_qushi_20junxian`, `30_qushi_30junxian`, `30_qushi_5_10_20_30`, `30_MACD`, `30_KDJ`, `30_BULL`,`beizhu`, `insert_time`) VALUES (" \
            "'" + mingcheng + "', " \
            "'" + code + "', " \
            "'" + price + "', " \
            "'" + zhangdiefu + "', " \
            "'" + MA20_titile + "', " \
            "'" + MA30_titile + "', " \
+           "'" + qushi_5_10_20_30 + "', " \
            "'" + MACD_title + "', " \
            "'" + KDJ_J_title + "', " \
            "'" + BULL_title + "', " \
            "'" + MA20_titile_60 + "', " \
            "'" + MA30_titile_60 + "', " \
+           "'" + qushi_5_10_20_30_60 + "', " \
            "'" + MACD_title_60 + "', " \
            "'" + KDJ_J_title_60 + "', " \
            "'" + BULL_title_60 + "', " \
            "'" + MA20_titile_30 + "', " \
            "'" + MA30_titile_30 + "', " \
+           "'" + qushi_5_10_20_30_30 + "', " \
            "'" + MACD_title_30 + "', " \
            "'" + KDJ_J_title_30 + "', " \
            "'" + BULL_title_30 + "', " \
