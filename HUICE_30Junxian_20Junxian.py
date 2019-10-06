@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
             print(codeItem + '===============================Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
             cerebro.run()
-            cerebro.plot()
+            # cerebro.plot()
             cerebro.runstop()
             print(codeItem + '===============================Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
         except IndexError as e:
