@@ -43,7 +43,7 @@ class QushiStrategy(bt.Strategy):
         self.order = None
 
     def next(self):
-        self.log('Close, %.2f' % self.dataclose[0])
+        # self.log('Close, %.2f' % self.dataclose[0])
         # self.log('SMA5, %.2f' % self.sma5[0])
         # self.log('SMA10, %.2f' % self.sma10[0])
         # self.log('SMA20, %.2f' % self.sma20[0])
@@ -65,9 +65,6 @@ class QushiStrategy(bt.Strategy):
             if (self.datas[0].close > self.bull.top[0]):
                 self.log('SELL CREATE, %.2f' % self.dataclose[0])
                 self.order = self.sell(size=10000)
-            if (self.datas[0].close > self.bull.top[0]):
-                self.log('SELL CREATE, %.2f' % self.dataclose[0])
-                self.order = self.sell(size=10000)
 
 if __name__ == '__main__':
     all_code = ts.get_stock_basics()
@@ -77,29 +74,33 @@ if __name__ == '__main__':
 
     strResult = ""
     for codeItem in all_code_index_x:
-        # 创建回测
-        cerebro = bt.Cerebro()
-        # 设置交易费用
-        cerebro.broker.setcommission(commission=0.001)
-        #  添加策略
-        cerebro.addstrategy(QushiStrategy)
+        try:
+            # 创建回测
+            cerebro = bt.Cerebro()
+            # 设置交易费用
+            cerebro.broker.setcommission(commission=0.001)
+            #  添加策略
+            cerebro.addstrategy(QushiStrategy)
 
-        # 日线数据
-        data_D = ts.get_k_data(codeItem, ktype='D', start="2018-01-01")
-        data_D['datetime'] = data_D['date'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'))
-        data_D['openInterest'] = 0
-        data_D = data_D[["open", "close", "high", "low", "volume", "datetime", "openInterest"]]
-        data_D.set_index("datetime", inplace=True)
-        add_data_D = bt.feeds.PandasData(dataname=data_D)
-        print(add_data_D)
+            # 日线数据
+            data_D = ts.get_k_data(codeItem, ktype='D', start="2018-01-01")
+            data_D['datetime'] = data_D['date'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'))
+            data_D['openInterest'] = 0
+            data_D = data_D[["open", "close", "high", "low", "volume", "datetime", "openInterest"]]
+            data_D.set_index("datetime", inplace=True)
+            add_data_D = bt.feeds.PandasData(dataname=data_D)
+            print(add_data_D)
 
-        # 添加数据
-        cerebro.adddata(add_data_D)
+            # 添加数据
+            cerebro.adddata(add_data_D)
 
-        # 设置初始账户
-        cerebro.broker.setcash(300000.0)
+            # 设置初始账户
+            cerebro.broker.setcash(300000.0)
 
-        print('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
-        cerebro.run()
-        cerebro.plot()
-        print('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
+            print(codeItem + '===============================Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
+            cerebro.run()
+            cerebro.plot()
+            cerebro.runstop()
+            print(codeItem + '===============================Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
+        except IndexError as e:
+            print(e)
