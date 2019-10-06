@@ -58,4 +58,5 @@ common_mysqlUtil.deleteTopRecord("TOP_SZ")
 content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1())+ "<br></br>"
 common_mysqlUtil.deleteTopRecord("TOP_SH")
 content2 = "===========================上海60天：<br></br>" + str(execute_shanghai_1())+ "<br></br>"
+sendMail(content1, "TOP执行完成")
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
