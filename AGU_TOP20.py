@@ -47,7 +47,7 @@ def execute_shenzhen_1(days):
     for key,value in jsonDicCode1:
         codeStr = key[0:6]
         codeName = value
-        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP")
+        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP_SZ")
 
     return jsonDic1
 
@@ -81,13 +81,14 @@ def execute_shanghai_1(days):
     for key, value in jsonDicCode1:
         codeStr = key[0:6]
         codeName = value
-        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP")
+        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP_SH")
 
     return jsonDic1
 
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-common_mysqlUtil.deleteTopRecord()
+common_mysqlUtil.deleteTopRecord("TOP_SZ")
 content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1(60))+ "<br></br>"
 time.sleep(60)
+common_mysqlUtil.deleteTopRecord("TOP_SH")
 content2 = "===========================上海60天：<br></br>" + str(execute_shanghai_1(60))+ "<br></br>"
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))

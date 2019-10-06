@@ -37,7 +37,7 @@ def deleteRecord():
     db.commit()
     db.close()
 
-def deleteTopRecord():
+def deleteTopRecord(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
     # 打开数据库连接
@@ -45,7 +45,7 @@ def deleteTopRecord():
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    deleteSql = "delete from AGU_ZhiShu where type =\'TOP\'"
+    deleteSql = "delete from AGU_ZhiShu where type =\'" + type + "\'"
     cursor.execute(deleteSql)
     db.commit()
     db.close()

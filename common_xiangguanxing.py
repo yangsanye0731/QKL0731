@@ -13,8 +13,6 @@ import pandas as pd
 
 def xiangguanxing(code, code2):
      data_history = ts.get_k_data(code, ktype='D')
-     print(data_history)
-
      closeArray = num.array(data_history['close'])
      highArray = num.array(data_history['high'])
      lowArray = num.array(data_history['low'])
@@ -57,4 +55,4 @@ def xiangguanxing(code, code2):
      xiangsixing = tongxiang / min_length
      return xiangsixing
 
-xiangguanxing('399006', '399006')
+# xiangguanxing('399006', '399006')
