@@ -16,6 +16,11 @@ def strategy():
     data2 = common_mysqlUtil.select_zhishu_count_record()
     print(data2)
 
+    print(len(data2))
+    if (len(data2) == 0):
+        common_mysqlUtil.insert_zhishu_count_record("ZXG")
+        data2 = common_mysqlUtil.select_zhishu_count_record()
+
     # 30MIN上升数大于下降数，且上升数增加
     if (data1[0][5] > data1[0][6] and data1[0][5] > int(data2[0][5])):
         sendMail("30MIN上升数增加", "30MIN上升数增加，买入")
