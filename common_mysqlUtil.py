@@ -24,19 +24,6 @@ def insertRecord(sql):
     db.commit()
     db.close()
 
-def deleteRecord():
-    userName = cf.get("MySql", "userName")
-    password = cf.get("MySql", "password")
-    # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
-    # 使用 cursor() 方法创建一个游标对象 cursor
-    cursor = db.cursor()
-    # 使用 execute()  方法执行 SQL 查询
-    deleteSql = "delete from AGU_ZhiShu where type =\'ZXG\'"
-    cursor.execute(deleteSql)
-    db.commit()
-    db.close()
-
 def deleteTopRecord(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
@@ -59,6 +46,41 @@ def insert_strategy_record(code, strategy_name, chushi_cash, jieshu_cash):
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
     print(sql)
     insertRecord(sql)
+
+def deleteRecord():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    deleteSql = "delete from AGU_ZhiShu where type =\'ZXG\'"
+    cursor.execute(deleteSql)
+    db.commit()
+    db.close()
+
+def selectCountRecord():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "select count(1) AS `总数`," \
+          "count((case when locate('均线5、10、20、30齐升',`agu_zhishu`.`ri_qushi_5_10_20_30`) then 1 else NULL end)) AS `上升数`," \
+          "count((case when locate('均线5、10、20、30齐降',`agu_zhishu`.`ri_qushi_5_10_20_30`) then 1 else NULL end)) AS `下降数`," \
+          "count((case when locate('均线5、10、20、30齐升',`agu_zhishu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60上升数`," \
+          "count((case when locate('均线5、10、20、30齐降',`agu_zhishu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60下降数`," \
+          "count((case when locate('均线5、10、20、30齐升',`agu_zhishu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30上升数`," \
+          "count((case when locate('均线5、10、20、30齐降',`agu_zhishu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30下降数` " \
+          "from `AGU_ZhiShu` where (`agu_zhishu`.`type` = 'ZXG')"
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
 
 def insert_zhishu_record(code, name, fullName, mark, type):
     price, MA20_titile, MA30_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title = common_zhibiao.zhibiao(code, 'D')
@@ -107,6 +129,36 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     insertRecord(sql)
     return title, content
 
+def insert_zhishu_count_record(type):
+    data = selectCountRecord()
+    sql = "INSERT INTO `superman`.`AGU_ZhiShu_Count`(`type`, `count`, `ri_up_count`, `ri_down_count`, `60_up_count`, `60_down_count`, `30_up_count`, `30_down_count`, `insert_time`) VALUES (" \
+          "'" + type + "', " \
+          "'" + str(data[0][0]) + "', " \
+          "'" + str(data[0][1]) + "', " \
+          "'" + str(data[0][2]) + "', " \
+          "'" + str(data[0][3]) + "', " \
+          "'" + str(data[0][4]) + "', " \
+          "'" + str(data[0][5]) + "', " \
+          "'" + str(data[0][6]) + "', " \
+          "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
+    print(sql)
+    insertRecord(sql)
+
+def select_zhishu_count_record():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "SELECT `count`, `ri_up_count`, `ri_down_count`, `60_up_count`, `60_down_count`, `30_up_count`, `30_down_count` FROM `superman`.`AGU_ZhiShu_Count` ORDER BY insert_time ASC limit 1"
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
 def deleteXiangSiDuRecord():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
@@ -131,3 +183,6 @@ def insert_xiangsidu_record(code, name, xiangsidu, zhangdiefu):
     insertRecord(sql)
 
 #insertRecord("INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `zhangdifu`, `30zhi`, `60zhi`) VALUES ('2', '2', '2', '2');")
+# data = select_zhishu_count_record()
+# for count in data:
+#     print(count)
