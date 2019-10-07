@@ -49,11 +49,11 @@ common_mysqlUtil.deleteRecord()
 titleTmp = ""
 contentTmp = ""
 
-str1, content1 = strategy("399006", " 创业板指", "创业板指", " ")
-titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
+str_cy, content_cy = strategy("399006", " 创业板指", "创业板指", " ")
+# titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
 
-str1, content1 = strategy("399001", " 深证成指", "深证成指", " ")
-titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
+str_sz, content_sz = strategy("399001", " 深证成指", "深证成指", " ")
+# titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
 
 str1, content1 = strategy("399975", " 证券公司", "证券公司", " ")
 titleTmp, contentTmp = pinjie(str1, titleTmp, content1, contentTmp)
@@ -224,9 +224,9 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("300203", "聚光科技", "聚光科技", " ")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
-title = titleTmp
+title = str_cy + str_sz + titleTmp
 mulu = "# **<font color=#FF0000 size=6 face=\"微软雅黑\">每日简报 " + time.strftime("%m-%d %H:%M", time.localtime()) + "</font>**\n\n"
-content = contentTmp
+content = content_cy + content_sz + contentTmp
 
 # 发送信息
 # common.dingding_markdown_msg_2(title,content)
