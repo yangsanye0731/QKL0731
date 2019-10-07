@@ -69,13 +69,13 @@ def selectCountRecord():
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
     sql = "select count(1) AS `总数`," \
-          "count((case when locate('均线5、10、20、30齐升',`agu_zhishu`.`ri_qushi_5_10_20_30`) then 1 else NULL end)) AS `上升数`," \
-          "count((case when locate('均线5、10、20、30齐降',`agu_zhishu`.`ri_qushi_5_10_20_30`) then 1 else NULL end)) AS `下降数`," \
-          "count((case when locate('均线5、10、20、30齐升',`agu_zhishu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60上升数`," \
-          "count((case when locate('均线5、10、20、30齐降',`agu_zhishu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60下降数`," \
-          "count((case when locate('均线5、10、20、30齐升',`agu_zhishu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30上升数`," \
-          "count((case when locate('均线5、10、20、30齐降',`agu_zhishu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30下降数` " \
-          "from `AGU_ZhiShu` where (`agu_zhishu`.`type` = 'ZXG')"
+          "count((case when locate('均线5、10、20、30齐升',`AGU_ZhiShu`.`ri_qushi_5_10_20_30`) then 1 else NULL end)) AS `上升数`," \
+          "count((case when locate('均线5、10、20、30齐降',`AGU_ZhiShu`.`ri_qushi_5_10_20_30`) then 1 else NULL end)) AS `下降数`," \
+          "count((case when locate('均线5、10、20、30齐升',`AGU_ZhiShu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60上升数`," \
+          "count((case when locate('均线5、10、20、30齐降',`AGU_ZhiShu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60下降数`," \
+          "count((case when locate('均线5、10、20、30齐升',`AGU_ZhiShu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30上升数`," \
+          "count((case when locate('均线5、10、20、30齐降',`AGU_ZhiShu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30下降数` " \
+          "from `AGU_ZhiShu` where (`AGU_ZhiShu`.`type` = 'ZXG')"
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
