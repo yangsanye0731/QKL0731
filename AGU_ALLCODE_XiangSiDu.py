@@ -23,9 +23,10 @@ def strategy():
 
         try:
             result = common_xiangguanxing.xiangguanxing('399006',codeItem)
-            if (result < 0.5):
+            if (result < 1):
                 print(codeItem + ":" + "%.2f" % result)
                 strResult = strResult + codeItem + ":" + "%.2f" % result + "<br>"
+                time.sleep(1)
                 codeName = common.codeName(codeItem)
                 zhangdiefu = common.zhangdiefu(codeItem)
                 common_mysqlUtil.insert_xiangsidu_record(codeItem, codeName, "%.2f" % result, zhangdiefu)
