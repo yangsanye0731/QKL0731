@@ -107,4 +107,26 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     insertRecord(sql)
     return title, content
 
+def deleteXiangSiDuRecord():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    deleteSql = "delete from AGU_XiangSiDu"
+    cursor.execute(deleteSql)
+    db.commit()
+    db.close()
+
+def insert_xiangsidu_record(code, name, xiangsidu):
+    sql = "INSERT INTO `superman`.`AGU_XiangSiDu`(`code`, `name`, `xiangsidu`, `input_time`) VALUES (" \
+          "'" + code + "', " \
+          "'" + name + "', " \
+          "'" + xiangsidu + "', " \
+          "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
+    print(sql)
+    insertRecord(sql)
+
 #insertRecord("INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `zhangdifu`, `30zhi`, `60zhi`) VALUES ('2', '2', '2', '2');")

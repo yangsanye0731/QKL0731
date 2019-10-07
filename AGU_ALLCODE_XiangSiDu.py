@@ -8,6 +8,7 @@ from email_util import *
 import common
 import common_image
 import common_xiangguanxing
+import common_mysqlUtil
 
 def strategy():
     all_code = ts.get_stock_basics()
@@ -25,9 +26,13 @@ def strategy():
             if (result < 0.5):
                 print(codeItem + ":" + "%.2f" % result)
                 strResult = strResult + codeItem + ":" + "%.2f" % result + "<br>"
+                codeName = common.codeName(codeItem)
+                common_mysqlUtil.insert_xiangsidu_record(codeItem, codeName, "%.2f" % result)
+
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print("")
     return strResult
 
+common_mysqlUtil.deleteXiangSiDuRecord()
 strMailResult = strategy()
-sendMail(strMailResult, "相似度执行完了")
+sendMail(strMailResult, "相似度计算执行完成，请查看")
