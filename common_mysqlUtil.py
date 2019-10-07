@@ -120,11 +120,12 @@ def deleteXiangSiDuRecord():
     db.commit()
     db.close()
 
-def insert_xiangsidu_record(code, name, xiangsidu):
-    sql = "INSERT INTO `superman`.`AGU_XiangSiDu`(`code`, `name`, `xiangsidu`, `input_time`) VALUES (" \
+def insert_xiangsidu_record(code, name, xiangsidu, zhangdiefu):
+    sql = "INSERT INTO `superman`.`AGU_XiangSiDu`(`code`, `name`, `xiangsidu`, `zhangdiefu`, `input_time`) VALUES (" \
           "'" + code + "', " \
           "'" + name + "', " \
           "'" + xiangsidu + "', " \
+          "'" + zhangdiefu + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
     print(sql)
     insertRecord(sql)

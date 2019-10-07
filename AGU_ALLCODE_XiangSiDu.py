@@ -27,7 +27,8 @@ def strategy():
                 print(codeItem + ":" + "%.2f" % result)
                 strResult = strResult + codeItem + ":" + "%.2f" % result + "<br>"
                 codeName = common.codeName(codeItem)
-                common_mysqlUtil.insert_xiangsidu_record(codeItem, codeName, "%.2f" % result)
+                zhangdiefu = common.zhangdiefu(codeItem)
+                common_mysqlUtil.insert_xiangsidu_record(codeItem, codeName, "%.2f" % result, zhangdiefu)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print("")
