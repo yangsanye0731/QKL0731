@@ -66,8 +66,8 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     price_30, MA20_titile_30, MA30_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30 = common_zhibiao.zhibiao(code, '30')
     zhangdiefu = common.zhangdiefu(code)
     print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    title = fullName + zhangdiefu + MACD_title + KDJ_J_title + MA20_titile + " "
-    content = "#### **<font color=#FF0000 size=6 face=\"微软雅黑\">" + fullName
+    title = fullName + zhangdiefu + " "
+    content = fullName + zhangdiefu + qushi_5_10_20_30_30 + "<br>"
     # + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60
     # print(time.localtime().tm_hour)
     # if (time.localtime().tm_hour > 14):

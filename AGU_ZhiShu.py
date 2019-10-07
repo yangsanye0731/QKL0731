@@ -34,9 +34,9 @@ def strategy(code, name, fullName, mark):
 # 买 表示：30分钟 5、10、20、30均线 均处于向上态势
 def pinjie(title, titleTmp, content, contentTmp):
      # if (("趋势" in title or "上好" in title) and "买" in title):
-     if ("转" in title or "上穿" in title):
-          titleTmp = title + "<br>" + titleTmp
-          contentTmp = content + "***\n\n" + contentTmp
+     if ("上升" in content):
+          titleTmp = title + " " + titleTmp
+          contentTmp = content + contentTmp
      # else:
      #      titleTmp = titleTmp + title
      #      contentTmp = contentTmp + "***\n\n" + content
