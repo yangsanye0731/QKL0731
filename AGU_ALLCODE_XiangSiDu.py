@@ -22,7 +22,7 @@ def strategy():
         print(count)
 
         try:
-            result = common_xiangguanxing.xiangguanxing('399006',codeItem)
+            result = common_xiangguanxing.xiangguanxing('600587',codeItem)
             if (result < 1):
                 print(codeItem + ":" + "%.2f" % result)
                 strResult = strResult + codeItem + ":" + "%.2f" % result + "<br>"
