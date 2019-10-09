@@ -69,7 +69,7 @@ class QushiStrategy(bt.Strategy):
 
 if __name__ == '__main__':
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:20].index
+    all_code_index = all_code[1:-1].index
     count = 0
     success_count = 0
     all_code_index_x = num.array(all_code_index)
