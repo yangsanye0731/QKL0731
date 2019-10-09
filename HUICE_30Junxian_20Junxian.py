@@ -5,6 +5,7 @@ import backtrader as bt
 import tushare as ts
 import datetime
 import numpy as num
+from email_util import *
 
 class QushiStrategy(bt.Strategy):
 
@@ -56,10 +57,10 @@ class QushiStrategy(bt.Strategy):
 
         # Check if we are in the market
         if not self.position:
-            if (self.sma30[0] > self.sma30[-1]):
+            if (self.sma30[0] > self.sma30[-1] and self.datas[0].low < self.bull.bot[0]):
             # if (self.MACD.macd[0] > self.MACD.macd[-1]):
-                if(self.dataclose[0] > self.sma20[0] and self.datas[0].open < self.sma20[0] and self.dataclose[-1] < self.sma20[-1]):
-                    self.log('BUY CREATE, %.2f' % self.dataclose[0])
+            #     if(self.dataclose[0] > self.sma20[0] and self.datas[0].open < self.sma20[0] and self.dataclose[-1] < self.sma20[-1]):
+            #         self.log('BUY CREATE, %.2f' % self.dataclose[0])
                     self.order = self.buy(size=10000)
         else:
             if (self.datas[0].close > self.bull.top[0]):
@@ -68,8 +69,9 @@ class QushiStrategy(bt.Strategy):
 
 if __name__ == '__main__':
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:-1].index
+    all_code_index = all_code[1:20].index
     count = 0
+    success_count = 0
     all_code_index_x = num.array(all_code_index)
 
     strResult = ""
@@ -83,8 +85,8 @@ if __name__ == '__main__':
             cerebro.addstrategy(QushiStrategy)
 
             # 日线数据
-            data_D = ts.get_k_data(codeItem, ktype='D', start="2018-01-01")
-            data_D['datetime'] = data_D['date'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'))
+            data_D = ts.get_k_data(codeItem, ktype='30', start="2019-01-01")
+            data_D['datetime'] = data_D['date'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
             data_D['openInterest'] = 0
             data_D = data_D[["open", "close", "high", "low", "volume", "datetime", "openInterest"]]
             data_D.set_index("datetime", inplace=True)
@@ -101,6 +103,13 @@ if __name__ == '__main__':
             cerebro.run()
             # cerebro.plot()
             cerebro.runstop()
+            count = count + 1
+            if (cerebro.broker.getvalue() - 300000 >= 0):
+                success_count = success_count + 1
             print(codeItem + '===============================Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
         except IndexError as e:
             print(e)
+
+    shenglv = "%.2f" % (success_count/count)
+    print(success_count/count)
+    sendMail("策略胜率执行完成", "策略胜率执行完成" + shenglv)
