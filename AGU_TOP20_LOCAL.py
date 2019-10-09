@@ -32,7 +32,7 @@ def execute_shenzhen_1():
     for key,value in jsonDicCode1:
         codeStr = key[0:6]
         codeName = value
-        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP_SZ")
+        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP")
 
 def execute_shanghai_1():
     jsonDicCode = {}
@@ -51,12 +51,11 @@ def execute_shanghai_1():
     for key, value in jsonDicCode1:
         codeStr = key[0:6]
         codeName = value
-        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP_SH")
+        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP")
 
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-common_mysqlUtil.deleteTopRecord("TOP_SZ")
+common_mysqlUtil.deleteTopRecord("TOP")
 content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1())+ "<br></br>"
-common_mysqlUtil.deleteTopRecord("TOP_SH")
 content2 = "===========================上海60天：<br></br>" + str(execute_shanghai_1())+ "<br></br>"
 sendMail(content1, "TOP执行完成")
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
