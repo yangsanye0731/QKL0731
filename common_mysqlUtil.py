@@ -60,7 +60,7 @@ def deleteRecord():
     db.commit()
     db.close()
 
-def selectCountRecord():
+def selectCountRecord(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
     # 打开数据库连接
@@ -75,7 +75,7 @@ def selectCountRecord():
           "count((case when locate('均线5、10、20、30齐降',`AGU_ZhiShu`.`60_qushi_5_10_20_30`) then 1 else NULL end)) AS `60下降数`," \
           "count((case when locate('均线5、10、20、30齐升',`AGU_ZhiShu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30上升数`," \
           "count((case when locate('均线5、10、20、30齐降',`AGU_ZhiShu`.`30_qushi_5_10_20_30`) then 1 else NULL end)) AS `30下降数` " \
-          "from `AGU_ZhiShu` where (`AGU_ZhiShu`.`type` = 'ZXG')"
+          "from `AGU_ZhiShu` where (`AGU_ZhiShu`.`type` = '" + type + "')"
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
@@ -83,9 +83,9 @@ def selectCountRecord():
     return data
 
 def insert_zhishu_record(code, name, fullName, mark, type):
-    price, MA20_titile, MA30_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title = common_zhibiao.zhibiao(code, 'D')
-    price_60, MA20_titile_60, MA30_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60 = common_zhibiao.zhibiao(code, '60')
-    price_30, MA20_titile_30, MA30_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30 = common_zhibiao.zhibiao(code, '30')
+    price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = common_zhibiao.zhibiao(code, 'D')
+    price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao.zhibiao(code, '60')
+    price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao.zhibiao(code, '30')
     zhangdiefu = common.zhangdiefu(code)
     print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     title = fullName + zhangdiefu + " "
@@ -98,7 +98,7 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, `type`, " \
           "`ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_qushi_5_10_20_30`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, " \
           "`60_qushi_20junxian`, `60_qushi_30junxian`, `60_qushi_5_10_20_30`, `60_MACD`, `60_KDJ`, `60_BULL`, " \
-          "`30_qushi_20junxian`, `30_qushi_30junxian`, `30_qushi_5_10_20_30`, `30_MACD`, `30_KDJ`, `30_BULL`,`beizhu`, `insert_time`) VALUES (" \
+          "`30_qushi_20junxian`, `30_qushi_30junxian`, `30_qushi_60junxian`, `30_qushi_5_10_20_30`, `30_MACD`, `30_KDJ`, `30_BULL`, `30_BULL_middle`, `beizhu`, `insert_time`) VALUES (" \
           "'" + mingcheng + "', " \
           "'" + code + "', " \
           "'" + price + "', " \
@@ -118,10 +118,12 @@ def insert_zhishu_record(code, name, fullName, mark, type):
           "'" + BULL_title_60 + "', " \
           "'" + MA20_titile_30 + "', " \
           "'" + MA30_titile_30 + "', " \
+          "'" + MA60_titile_30 + "', " \
           "'" + qushi_5_10_20_30_30 + "', " \
           "'" + MACD_title_30 + "', " \
           "'" + KDJ_J_title_30 + "', " \
           "'" + BULL_title_30 + "', " \
+          "'" + BULL_middleband_30 + "', " \
           "'" + mark + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
 
@@ -130,7 +132,7 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     return title, content
 
 def insert_zhishu_count_record(type):
-    data = selectCountRecord()
+    data = selectCountRecord(type)
     sql = "INSERT INTO `superman`.`AGU_ZhiShu_Count`(`type`, `count`, `ri_up_count`, `ri_down_count`, `60_up_count`, `60_down_count`, `30_up_count`, `30_down_count`, `insert_time`) VALUES (" \
           "'" + type + "', " \
           "'" + str(data[0][0]) + "', " \
@@ -144,7 +146,7 @@ def insert_zhishu_count_record(type):
     print(sql)
     insertRecord(sql)
 
-def select_zhishu_count_record():
+def select_zhishu_count_record(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
     # 打开数据库连接
@@ -152,7 +154,8 @@ def select_zhishu_count_record():
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `count`, `ri_up_count`, `ri_down_count`, `60_up_count`, `60_down_count`, `30_up_count`, `30_down_count` FROM `superman`.`AGU_ZhiShu_Count` ORDER BY insert_time ASC limit 1"
+    sql = "SELECT `count`, `ri_up_count`, `ri_down_count`, `60_up_count`, `60_down_count`, `30_up_count`, `30_down_count` FROM `superman`.`AGU_ZhiShu_Count` WHERE `type` = \'" + type + "\' ORDER BY insert_time ASC limit 1"
+    print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
