@@ -241,6 +241,6 @@ content = content_cy + content_sz + contentTmp
 # 发送信息
 # common.dingding_markdown_msg_2(title,content)
 # 发送邮件
-sendMail(title + "<br><br><br><br>" + content, title)
+# sendMail(title + "<br><br><br><br>" + content, title)
 
 

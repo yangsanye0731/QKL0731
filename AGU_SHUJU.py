@@ -10,16 +10,21 @@ import common_image
 import common_zhibiao
 import common_mysqlUtil
 
-def strategy():
-    data1 = common_mysqlUtil.selectCountRecord()
+def strategy(type):
+
+    # 获取实时数据
+    data1 = common_mysqlUtil.selectCountRecord(type)
     print(data1)
-    data2 = common_mysqlUtil.select_zhishu_count_record()
+
+    # 获取已经入库的历史数据
+    data2 = common_mysqlUtil.select_zhishu_count_record(type)
     print(data2)
 
+    # 如果历史数据为空，插入数据
     print(len(data2))
     if (len(data2) == 0):
-        common_mysqlUtil.insert_zhishu_count_record("ZXG")
-        data2 = common_mysqlUtil.select_zhishu_count_record()
+        common_mysqlUtil.insert_zhishu_count_record(type)
+        data2 = common_mysqlUtil.select_zhishu_count_record(type)
 
     # 30MIN上升数大于下降数，且上升数增加
     if (data1[0][5] > data1[0][6] and data1[0][5] > int(data2[0][5])):
@@ -28,9 +33,12 @@ def strategy():
     # 30MIN上升数小于下降数,且下降数增加
     if (data1[0][5] < data1[0][6] and data1[0][6] > int(data2[0][6])):
         sendMail("30MIN下降数增加", "30MIN下降数增加，强烈卖出")
-    common_mysqlUtil.insert_zhishu_count_record("ZXG")
 
-strategy()
+    # 插入日志信息
+    common_mysqlUtil.insert_zhishu_count_record(type)
+
+strategy("ZXG")
+strategy("TOP")
 # 发送信息
 # common.dingding_markdown_msg_2(title,content)
 # 发送邮件

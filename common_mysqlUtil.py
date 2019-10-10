@@ -129,6 +129,10 @@ def insert_zhishu_record(code, name, fullName, mark, type):
 
     print(sql)
     insertRecord(sql)
+
+    if ("60均线上行" in MA60_titile_30 and "下穿布林线下沿" in BULL_title_30):
+        insert_ZhiShuLog_record(code, name, price, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
+
     return title, content
 
 def insert_zhishu_count_record(type):
@@ -181,6 +185,17 @@ def insert_xiangsidu_record(code, name, xiangsidu, zhangdiefu):
           "'" + name + "', " \
           "'" + xiangsidu + "', " \
           "'" + zhangdiefu + "', " \
+          "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
+    print(sql)
+    insertRecord(sql)
+
+def insert_ZhiShuLog_record(code, name, price, zhangdiefu, chufa):
+    sql = "INSERT INTO `superman`.`AGU_ZhiShu_Log`(`code`, `name`, `price`, `zhangdiefu`, `chufa`, `insert_time`) VALUES (" \
+          "'" + code + "', " \
+          "'" + name + "', " \
+          "'" + price + "', " \
+          "'" + zhangdiefu + "', " \
+          "'" + chufa + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
     print(sql)
     insertRecord(sql)
