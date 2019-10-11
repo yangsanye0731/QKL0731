@@ -132,10 +132,27 @@ def zhibiao(code, type):
 
      # macd 为快线 macdsignal为慢线，macdhist为柱体
      macd, macdsignal, macdhist = ta.MACD(doubleCloseArray, fastperiod=12, slowperiod=26, signalperiod=9)
-     if (macdhist[-1] > macdhist[-2] and macdhist[-3] > macdhist[-2]):
-          MACD_title = "MA_转 "
-     else:
-          MACD_title = "MA_平 "
+     MACD_title=""
+     if (macdsignal[-1] > macdsignal[-2]):
+          MACD_title = "MACD慢线上行1"
+          if (macdsignal[-2] > macdsignal[-3]):
+               MACD_title = "MACD慢线上行2"
+               if (macdsignal[-3] > macdsignal[-4]):
+                    MACD_title = "MACD慢线上行3"
+                    if (macdsignal[-4] > macdsignal[-5]):
+                         MACD_title = "MACD慢线上行4"
+                         if (macdsignal[-5] > macdsignal[-6]):
+                              MACD_title = "MACD慢线上行5"
+                              if (macdsignal[-6] > macdsignal[-7]):
+                                   MACD_title = "MACD慢线上行6"
+                                   if (macdsignal[-7] > macdsignal[-8]):
+                                        MACD_title = "MACD慢线上行7"
+                                        if (macdsignal[-8] > macdsignal[-9]):
+                                             MACD_title = "MACD慢线上行8"
+                                             if (macdsignal[-9] > macdsignal[-10]):
+                                                  MACD_title = "MACD慢线上行9"
+                                                  if (macdsignal[-11] > macdsignal[-12]):
+                                                       MACD_title = "MACD慢线上行10"
 
      upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                         matype=0)
