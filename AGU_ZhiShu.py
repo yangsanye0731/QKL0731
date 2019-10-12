@@ -149,6 +149,9 @@ titleTmp, contentTmp = pinjie(str15, titleTmp, content15, contentTmp)
 str20, content20 = strategy("300203", "聚光科技", "聚光科技", " ")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("000656", "金科股份", "金科股份", " ")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
 #################################################################################################################KKKKKK
 str20, content20 = strategy("002230", "科大讯飞", "科大讯飞", " ")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
@@ -165,6 +168,8 @@ titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 str20, content20 = strategy("300662", "科锐国际", "科锐国际", " ")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
+str20, content20 = strategy("300234", "开尔新材", "开尔新材", " ")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 #################################################################################################################LLLLLL
 str18, content18 = strategy("300691", "联合光电", "联合光电", " ")
@@ -203,6 +208,9 @@ str20, content20 = strategy("000034", "神州数码", "神州数码", " ")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 str20, content20 = strategy("603881", "数据港", "数据港", " ")
+titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
+
+str20, content20 = strategy("002796", "世嘉科技", "世嘉科技", " ")
 titleTmp, contentTmp = pinjie(str20, titleTmp, content20, contentTmp)
 
 #################################################################################################################TTTTTT
