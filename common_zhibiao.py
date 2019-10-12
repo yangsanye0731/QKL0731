@@ -164,7 +164,7 @@ def zhibiao(code, type):
           BULL_middleband = "布林中线趋势下降"
 
      BULL_title = ""
-     if (highArray[-1] > upperband[-1]):
+     if (closeArray[-1] > upperband[-1]):
           BULL_title = "上穿布林线上沿"
 
      if (lowArray[-1] < lowerband[-1] * 1.005):
