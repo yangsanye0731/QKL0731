@@ -135,7 +135,7 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     insertRecord(sql)
 
     if (("均线上行" in MA30_titile_30) and "下穿布林线下沿" in BULL_title_30):
-        insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
+        insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发30分钟30均线上行，下穿30分钟布林线下沿")
 
     if (("60均线上行" in MA60_titile) and "下穿布林线下沿" in BULL_title):
         insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
