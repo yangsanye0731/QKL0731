@@ -37,12 +37,15 @@ def deleteTopRecord(type):
     db.commit()
     db.close()
 
-def insert_strategy_record(code, name, rongzibi, strategy_name, chushi_cash, jieshu_cash):
-    sql = "INSERT INTO `superman`.`HUICE_Strategy`(`strategy_name`, `name`, `code`, `rongzibi`,`chushi_cash`, `jieshu_cash`, `input_date`) VALUES (" \
+def insert_strategy_record(code, name, rongzibi, epsup, yingyeup, wuzhouxian, strategy_name, chushi_cash, jieshu_cash):
+    sql = "INSERT INTO `superman`.`HUICE_Strategy`(`strategy_name`, `name`, `code`, `rongzibi`,`epsup`, `yingyeup`,`wuzhouxian`,`chushi_cash`, `jieshu_cash`, `input_date`) VALUES (" \
           "'" + strategy_name + "', " \
           "'" + name + "', " \
           "'" + code + "', " \
           "'" + rongzibi + "', " \
+          "'" + epsup + "', " \
+          "'" + yingyeup + "', " \
+          "'" + wuzhouxian + "', " \
           "'" + chushi_cash + "', " \
           "'" + jieshu_cash + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
