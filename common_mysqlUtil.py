@@ -37,11 +37,12 @@ def deleteTopRecord(type):
     db.commit()
     db.close()
 
-def insert_strategy_record(code, name, strategy_name, chushi_cash, jieshu_cash):
-    sql = "INSERT INTO `superman`.`HUICE_Strategy`(`strategy_name`, `name`, `code`, `chushi_cash`, `jieshu_cash`, `input_date`) VALUES (" \
+def insert_strategy_record(code, name, rongzibi, strategy_name, chushi_cash, jieshu_cash):
+    sql = "INSERT INTO `superman`.`HUICE_Strategy`(`strategy_name`, `name`, `code`, `rongzibi`,`chushi_cash`, `jieshu_cash`, `input_date`) VALUES (" \
           "'" + strategy_name + "', " \
           "'" + name + "', " \
           "'" + code + "', " \
+          "'" + rongzibi + "', " \
           "'" + chushi_cash + "', " \
           "'" + jieshu_cash + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
@@ -133,7 +134,7 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     print(sql)
     insertRecord(sql)
 
-    if (("60均线上行" in MA60_titile_30) and "下穿布林线下沿" in BULL_title_30):
+    if (("均线上行" in MA30_titile_30) and "下穿布林线下沿" in BULL_title_30):
         insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
 
     if (("60均线上行" in MA60_titile) and "下穿布林线下沿" in BULL_title):

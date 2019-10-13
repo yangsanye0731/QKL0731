@@ -130,9 +130,10 @@ if __name__ == '__main__':
                 success_count = success_count + 1
             if (cerebro.broker.getvalue() - 300000 != 0):
                 count = count + 1
-            # time.sleep(0.5)
-            # name = common.codeName(codeItem)
-            common_mysqlUtil.insert_strategy_record(codeItem, "", "30分钟30均线上升，布林下沿买入，布林上沿或-3%卖出", "300000", "%.2f" % cerebro.broker.getvalue())
+            time.sleep(1)
+            name = common.codeName(codeItem)
+            rongzibi = common.codeRongZiBi(codeItem)
+            common_mysqlUtil.insert_strategy_record(codeItem, name, rongzibi, "30分钟30均线上升，布林下沿买入，布林上沿或-3%卖出", "300000", "%.2f" % cerebro.broker.getvalue())
             print(codeItem + '===============================Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
         except Exception as e:
             print(e)

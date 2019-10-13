@@ -53,6 +53,28 @@ def codeEPS(code):
      df = pro.fina_indicator(ts_code=code)
      return df['eps'][0],df['basic_eps_yoy'][0],df['or_yoy'][0],df['eps'][1], df['basic_eps_yoy'][1], df['or_yoy'][1]
 
+
+def codeRongZiBi(code):
+     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+     pro = ts.pro_api()
+     if code.startswith('6') or code.startswith('5'):
+          code = code + '.SH'
+     if code.startswith('0'):
+          code = code + '.SZ'
+     if code.startswith('3'):
+          code = code + '.SZ'
+     timez = time.strftime('%Y%m%d', time.localtime(time.time()))
+     df = pro.daily_basic(ts_code=code, trade_date='20191010',
+                          fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,total_mv')
+     nameArray = num.array(df['total_mv'])
+
+     df = pro.query('margin_detail', trade_date='20191010')
+     df = df[df.ts_code.isin([code])]
+     rzye = num.array(df['rzye'])
+
+     rongZiBi = rzye[0]/(nameArray[0]*10000)
+     return "%.4f" % rongZiBi
+
 def zongshizhi(code):
      ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
      pro = ts.pro_api()
@@ -145,3 +167,4 @@ def dingding_markdown_msg_2(title, text):
 #dingdingMsg()
 # print (codeEPS('002415'))
 # codeName('000020')
+# print(codeRongZiBi("300203"))
