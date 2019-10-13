@@ -167,7 +167,7 @@ def zhibiao(code, type):
      if (closeArray[-1] > upperband[-1]):
           BULL_title = "上穿布林线上沿"
 
-     if (lowArray[-1] < lowerband[-1] * 1.005):
+     if (lowArray[-1] < lowerband[-1]):
           BULL_title = "下穿布林线下沿"
 
      # 返回20均线是否上传，30均线趋势, KDJ J 是否处于低位， MACD是否转折
