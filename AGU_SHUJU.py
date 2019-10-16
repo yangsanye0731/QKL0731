@@ -43,6 +43,7 @@ def strategy(type):
 
 strategy("ZXG")
 strategy("TOP")
+
 # 发送信息
 # common.dingding_markdown_msg_2(title,content)
 # 发送邮件
