@@ -57,7 +57,7 @@ def execute_shanghai_1():
         common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "TOP_100")
 
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-common_mysqlUtil.deleteTopRecord("TOP")
+common_mysqlUtil.deleteTopRecord("TOP_100")
 content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1())+ "<br></br>"
 content2 = "===========================上海60天：<br></br>" + str(execute_shanghai_1())+ "<br></br>"
 # sendMail(content1, "TOP执行完成")
