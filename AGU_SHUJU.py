@@ -31,7 +31,7 @@ def strategy(type):
     print("上升数：" + str(data1[0][6]))
     print("总数：" + str(data1[0][0]))
     print("总数618：" + str(int(data1[0][0] * 0.6)))
-    if (data1[0][5] > int(data1[0][0] * 0.6) or data1[0][6] > int(data1[0][0] * 0.6)):
+    if (data1[0][5] > int(data1[0][0] * 0.5) or data1[0][6] > int(data1[0][0] * 0.5)):
         sendMail("30MIN上升数，下降数达到618", "30MIN上升数，下降数达到618")
 
     # # 30MIN上升数小于下降数,且下降数增加
