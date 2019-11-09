@@ -221,7 +221,7 @@ def sendMailAttatch(content, title, file_path, file_name):
     server.quit()
 
 #sendMail('<table><br><tr>dfdfdfd</tr></br></table>', 'dafdafdasf')
-#sendMail2(template1("请上午准时出发"))
+#sendMail2(template1("请上午准时出发1"))
 #sendMail3(template1("请上午准时出发"))
 #sendMailWiz(template1("邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件内容测试邮件"), "title")
 #sendMailAttatch(template1('dasfdafdafdafdafdafda'),'dsafdaf', 'test2.txt', 'test2.txt');
