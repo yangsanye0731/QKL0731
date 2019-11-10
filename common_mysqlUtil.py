@@ -138,18 +138,27 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     insertRecord(sql)
 
     if (("60均线上行" in MA60_titile_30) and "下穿布林线下沿" in BULL_title_30):
-        insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
+        insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
 
     if (("60均线上行" in MA60_titile) and "下穿布林线下沿" in BULL_title):
-        insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
+        insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
 
     if ("创业板指" in mingcheng or "深证成指" in mingcheng or "ETF" in mingcheng):
         if ("上穿布林线上沿" in BULL_title_30):
-            insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发上穿30分钟布林线上沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发上穿30分钟布林线上沿")
         if ("上穿布林线上沿" in BULL_title_60):
-            insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发上穿60分钟布林线上沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发上穿60分钟布林线上沿")
         if ("上穿布林线上沿" in BULL_title):
-            insert_ZhiShuLog_record(code, mingcheng, price, zhangdiefu, "触发上穿日数据布林线上沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发上穿日数据布林线上沿")
+
+    if ("ZHISHU" in type):
+        # if ("60均线上行" in MA60_titile):
+        #     common.dingding_markdown_msg_2(mingcheng + "触发60日均线上行", mingcheng + "触发60日均线上行")
+        #     insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发60日均线上行")
+
+        if ("下穿布林线下沿" in BULL_title):
+            common.dingding_markdown_msg_2(mingcheng + "触发下穿日数据布林线下沿", mingcheng + "触发下穿日数据布林线下沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发下穿日数据布林线下沿")
 
     return title, content
 
@@ -207,10 +216,11 @@ def insert_xiangsidu_record(code, name, xiangsidu, zhangdiefu):
     print(sql)
     insertRecord(sql)
 
-def insert_ZhiShuLog_record(code, name, price, zhangdiefu, chufa):
-    sql = "INSERT INTO `superman`.`AGU_ZhiShu_Log`(`code`, `name`, `price`, `zhangdiefu`, `chufa`, `insert_time`) VALUES (" \
+def insert_ZhiShuLog_record(code, name, type, price, zhangdiefu, chufa):
+    sql = "INSERT INTO `superman`.`AGU_ZhiShu_Log`(`code`, `name`, `type`, `price`, `zhangdiefu`, `chufa`, `insert_time`) VALUES (" \
           "'" + code + "', " \
           "'" + name + "', " \
+          "'" + type + "', " \
           "'" + price + "', " \
           "'" + zhangdiefu + "', " \
           "'" + chufa + "', " \
