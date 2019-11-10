@@ -26,7 +26,10 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
      stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']
      dddd = pd.DataFrame(stock_data)
      KDJ_J_title = "KDJ_" + "%.2f" % dddd.KDJ_J[len(dddd) - 1] + " "
-     return KDJ_J_title
+     KDJ_K = "%.2f" % dddd.KDJ_K[len(dddd) - 1]
+     KDJ_D = "%.2f" % dddd.KDJ_D[len(dddd) - 1]
+     KDJ_J = "%.2f" % dddd.KDJ_J[len(dddd) - 1]
+     return KDJ_K, KDJ_D, KDJ_J, KDJ_J_title
 
 
 '''
@@ -47,7 +50,10 @@ def BULL_zhibiao(doubleCloseArray, closeArray, lowArray):
      if (lowArray[-1] < lowerband[-1] * 1.005):
           BULL_title = "下穿布林线下沿"
 
-     return BULL_title, BULL_middleband
+     upperband = "%.2f" % upperband[-1]
+     middleband = "%.2f" % middleband[-1]
+     lowerband = "%.2f" % lowerband[-1]
+     return upperband, middleband, lowerband, BULL_title, BULL_middleband
 
 '''
 公共功能：MACD指标
@@ -205,21 +211,28 @@ def zhibiao(code, type):
      doubleLowArray = num.asarray(lowArray, dtype='double')
      doubleOpenArray = num.asarray(openArray, dtype='double')
 
-     # 股票当前价格
+     ########################################################################################################## 股票价格
      price =  "%.2f" % doubleCloseArray[-1] + "_" + "%.2f" % doubleCloseArray[-2] + "_" + "%.2f" % doubleCloseArray[-3]
-     # KDJ 指标
-     KDJ_J_title = KDJ_zhibiao(data_history, doubleCloseArray)
-     # MACD 指标
+     # print("Price:" + price)
+     ########################################################################################################## KDJ 指标
+     KDJ_K, KDJ_D, KDJ_J, KDJ_J_title = KDJ_zhibiao(data_history, doubleCloseArray)
+     # print("KDJ_K:" + KDJ_K)
+     # print("KDJ_D:" + KDJ_D)
+     # print("KDJ_J:" + KDJ_J)
+     ########################################################################################################## MACD 指标
      MACD_title = MACD_zhibiao(doubleCloseArray)
-     # BULL 指标
-     BULL_title, BULL_middleband = BULL_zhibiao(doubleCloseArray, closeArray, lowArray)
-     # 均线指标
+     ########################################################################################################## BULL 指标
+     upperband, middleband, lowerband, BULL_title, BULL_middleband = BULL_zhibiao(doubleCloseArray, closeArray, lowArray)
+     # print("上沿：" + upperband)
+     # print("中线：" + middleband)
+     # print("下沿：" + lowerband)
+     ########################################################################################################## 均线指标
      MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30 = junxian_zhibiao(doubleCloseArray, doubleOpenArray)
      # 指标返回
      return price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband
 
 # 返回20均线是否上传，30均线趋势
-# price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = zhibiao('002010','D')
+# price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = zhibiao('399006','D')
 # print(price)
 # print(KDJ_J_title)
 # print(MACD_title)
