@@ -156,13 +156,15 @@ def insert_zhishu_record(code, name, fullName, mark, type):
         #     common.dingding_markdown_msg_2(mingcheng + "触发60日均线上行", mingcheng + "触发60日均线上行")
         #     insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发60日均线上行")
 
+        ribull = 0
         if ("下穿布林线下沿" in BULL_title):
             common.dingding_markdown_msg_2(mingcheng + code +  "触发下穿日线布林线下沿", mingcheng + code + "触发下穿日线布林线下沿")
             insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发下穿日线布林线下沿")
+            ribull = 1
 
-        if ("下穿布林线下沿" in BULL_title_60):
-            common.dingding_markdown_msg_2(mingcheng + code +  "触发下穿60分钟布林线下沿", mingcheng + code + "触发下穿60分钟布林线下沿")
-            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发下穿60分钟布林线下沿")
+        # if ("下穿布林线下沿" in BULL_title_60 and ribull == 0):
+        #     common.dingding_markdown_msg_2(mingcheng + code +  "触发下穿60分钟布林线下沿", mingcheng + code + "触发下穿60分钟布林线下沿")
+        #     insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发下穿60分钟布林线下沿")
 
     return title, content
 
