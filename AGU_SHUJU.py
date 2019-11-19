@@ -11,7 +11,6 @@ import common_zhibiao
 import common_mysqlUtil
 
 def strategy(type):
-
     # 获取实时数据
     data1 = common_mysqlUtil.selectCountRecord(type)
     print("实时数据：" + str(data1))
@@ -26,20 +25,28 @@ def strategy(type):
         common_mysqlUtil.insert_zhishu_count_record(type)
         data2 = common_mysqlUtil.select_zhishu_count_record(type)
 
+    # 插入日志信息
+    common_mysqlUtil.insert_zhishu_count_record(type)
+
     # 30MIN上升数大于下降数，且上升数增加
     print("上升数：" + str(data1[0][5]))
     print("上升数：" + str(data1[0][6]))
     print("总数：" + str(data1[0][0]))
     print("总数618：" + str(int(data1[0][0] * 0.6)))
-    if (data1[0][5] >= int(data1[0][0] * 0.5) or data1[0][6] >= int(data1[0][0] * 0.5)):
-        sendMail("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
-
-    # # 30MIN上升数小于下降数,且下降数增加
-    # if (data1[0][5] < data1[0][6] and data1[0][6] > int(data2[0][6])):
-    #     sendMail("30MIN下降数增加", "30MIN下降数增加，强烈卖出")
-
-    # 插入日志信息
-    common_mysqlUtil.insert_zhishu_count_record(type)
+    if (data1[0][5] >= 30 or data1[0][6] >= 30):
+        # sendMail("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
+        common.dingding_markdown_msg_2("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
+        time.sleep(0.5)
+        common.dingding_markdown_msg_2("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
+        time.sleep(0.5)
+        common.dingding_markdown_msg_2("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
+    if (data1[0][3] >= 30 or data1[0][4] >= 30):
+        # sendMail("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
+        common.dingding_markdown_msg_2("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
+        time.sleep(0.5)
+        common.dingding_markdown_msg_2("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
+        time.sleep(0.5)
+        common.dingding_markdown_msg_2("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
 
 strategy("ZXG")
 strategy("TOP")
