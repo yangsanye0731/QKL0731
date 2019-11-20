@@ -208,7 +208,7 @@ def select_xuangubao():
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `code`, `name`, `plate`, `mark` FROM `superman`.`AGU_CODE`"
+    sql = "SELECT `code`, `name`, `plate`, `mark` FROM `superman`.`AGU_Code`"
     print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
