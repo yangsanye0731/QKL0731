@@ -20,12 +20,7 @@ def strategy():
         name = str(data[i][1])
         plate = str(data[i][2])
         mark = str(data[i][3])
-        print(code)
-        print(name)
-        print(plate)
-        print(mark)
         common_mysqlUtil.insert_zhishu_record(code, name, name,  plate, mark, "XGB")
-
 
 strategy()
 
