@@ -22,6 +22,7 @@ def strategy():
         mark = str(data[i][3])
         common_mysqlUtil.insert_zhishu_record(code, name, name,  plate, mark, "XGB")
 
+common_mysqlUtil.deleteTopRecord("XGB")
 strategy()
 
 
