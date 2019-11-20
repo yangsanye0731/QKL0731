@@ -87,7 +87,7 @@ def selectCountRecord(type):
     db.close()
     return data
 
-def insert_zhishu_record(code, name, fullName, mark, type):
+def insert_zhishu_record(code, name, fullName, plate, mark, type):
     price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = common_zhibiao.zhibiao(code, 'D')
     price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao.zhibiao(code, '60')
     price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao.zhibiao(code, '30')
@@ -100,7 +100,7 @@ def insert_zhishu_record(code, name, fullName, mark, type):
     # if (time.localtime().tm_hour > 14):
     #    common_image.plt_image_geGuZhiBiao(code, fullName)
     mingcheng = fullName
-    sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, `type`, " \
+    sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, `type`, `plate`, " \
           "`ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_qushi_60junxian`, `ri_qushi_5_10_20_30`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, `ri_BULL_middle`, " \
           "`60_qushi_20junxian`, `60_qushi_30junxian`, `60_qushi_5_10_20_30`, `60_MACD`, `60_KDJ`, `60_BULL`, " \
           "`30_qushi_20junxian`, `30_qushi_30junxian`, `30_qushi_60junxian`, `30_qushi_5_10_20_30`, `30_MACD`, `30_KDJ`, `30_BULL`, `30_BULL_middle`, `beizhu`, `insert_time`) VALUES (" \
@@ -109,6 +109,7 @@ def insert_zhishu_record(code, name, fullName, mark, type):
           "'" + price + "', " \
           "'" + zhangdiefu + "', " \
           "'" + type + "', " \
+          "'" + plate + "', " \
           "'" + MA20_titile + "', " \
           "'" + MA30_titile + "', " \
           "'" + MA60_titile + "', " \
@@ -199,6 +200,22 @@ def select_zhishu_count_record(type):
     db.close()
     return data
 
+def select_xuangubao():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "SELECT `code`, `name`, `plate`, `mark` FROM `superman`.`AGU_CODE`"
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
 def deleteXiangSiDuRecord():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
@@ -238,3 +255,4 @@ def insert_ZhiShuLog_record(code, name, type, price, zhangdiefu, chufa):
 # data = select_zhishu_count_record()
 # for count in data:
 #     print(count)
+# select_xuangubao()

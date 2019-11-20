@@ -11,7 +11,7 @@ import common_zhibiao
 import common_mysqlUtil
 
 def strategy(code, name, fullName, mark):
-    title, content = common_mysqlUtil.insert_zhishu_record(code, name, fullName, mark,"ZXG")
+    title, content = common_mysqlUtil.insert_zhishu_record(code, name, fullName, " ", mark,"ZXG")
     return title, content
 
 #######################################################################################################

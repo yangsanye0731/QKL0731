@@ -29,7 +29,7 @@ def execute_shenzhen_1():
     for key,value in jsonDicCode1:
         codeStr = key
         codeName = value
-        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", "ZHISHU")
+        common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", " ", "ZHISHU")
 
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 common_mysqlUtil.deleteTopRecord("ZHISHU")
