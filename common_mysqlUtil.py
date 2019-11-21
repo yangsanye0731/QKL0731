@@ -139,18 +139,18 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
     insertRecord(sql)
 
     if (("60均线上行" in MA60_titile_30) and "下穿布林线下沿" in BULL_title_30):
-        insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
+        insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
 
     if (("60均线上行" in MA60_titile) and "下穿布林线下沿" in BULL_title):
-        insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
+        insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
 
     if ("创业板指" in mingcheng or "深证成指" in mingcheng or "ETF" in mingcheng):
         if ("上穿布林线上沿" in BULL_title_30):
-            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发上穿30分钟布林线上沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发上穿30分钟布林线上沿")
         if ("上穿布林线上沿" in BULL_title_60):
-            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发上穿60分钟布林线上沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发上穿60分钟布林线上沿")
         if ("上穿布林线上沿" in BULL_title):
-            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发上穿日数据布林线上沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发上穿日数据布林线上沿")
 
     if ("ZHISHU" in type):
         # if ("60均线上行" in MA60_titile):
@@ -160,7 +160,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         ribull = 0
         if ("下穿布林线下沿" in BULL_title):
             # common.dingding_markdown_msg_2(mingcheng + code +  "触发下穿日线布林线下沿", mingcheng + code + "触发下穿日线布林线下沿")
-            insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发下穿日线布林线下沿")
+            insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发下穿日线布林线下沿")
             ribull = 1
 
         # if ("下穿布林线下沿" in BULL_title_60 and ribull == 0):
@@ -239,12 +239,14 @@ def insert_xiangsidu_record(code, name, xiangsidu, zhangdiefu):
     print(sql)
     insertRecord(sql)
 
-def insert_ZhiShuLog_record(code, name, type, price, zhangdiefu, chufa):
-    sql = "INSERT INTO `superman`.`AGU_ZhiShu_Log`(`code`, `name`, `type`, `price`, `zhangdiefu`, `chufa`, `insert_time`) VALUES (" \
+def insert_ZhiShuLog_record(code, name, type, price, plate, mark, zhangdiefu, chufa):
+    sql = "INSERT INTO `superman`.`AGU_ZhiShu_Log`(`code`, `name`, `type`, `price`, `plate`, `mark`, `zhangdiefu`, `chufa`, `insert_time`) VALUES (" \
           "'" + code + "', " \
           "'" + name + "', " \
           "'" + type + "', " \
           "'" + price + "', " \
+          "'" + plate + "', "\
+          "'" + mark + "', " \
           "'" + zhangdiefu + "', " \
           "'" + chufa + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
