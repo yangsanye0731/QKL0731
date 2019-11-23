@@ -141,7 +141,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
     if (("60均线上行" in MA60_titile_30) and "下穿布林线下沿" in BULL_title_30):
         insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
 
-    if (("60均线上行" in MA60_titile) and "下穿布林线下沿" in BULL_title):
+    if ("下穿布林线下沿" in BULL_title):
         insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
 
     if ("创业板指" in mingcheng or "深证成指" in mingcheng or "ETF" in mingcheng):
