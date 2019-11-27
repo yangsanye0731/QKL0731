@@ -34,7 +34,7 @@ def execute_shenzhen_1():
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 common_mysqlUtil.deleteTopRecord("ZHISHU")
 #insert_ZhiShuLog_record(code, name, type, price, plate, mark, zhangdiefu, chufa):
-common_mysqlUtil.insert_ZhiShuLog_record("====", "====", "====", "====", "====", "====", "====", "====")
+common_mysqlUtil.insert_ZhiShuLog_record("====", "====", "ZHISHU", "====", "====", "====", "====", "====")
 content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1())+ "<br></br>"
 # sendMail(content1, "TOP执行完成")
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
