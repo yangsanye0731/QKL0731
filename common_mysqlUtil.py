@@ -152,6 +152,9 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         if ("上穿布林线上沿" in BULL_title):
             insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发上穿日数据布林线上沿")
 
+    if (float(KDJ_J_title) < 0):
+        insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发KDJ在0度以下" + KDJ_J_title)
+
     # if ("ZHISHU" in type):
         # if ("60均线上行" in MA60_titile):
         #     common.dingding_markdown_msg_2(mingcheng + "触发60日均线上行", mingcheng + "触发60日均线上行")
