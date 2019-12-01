@@ -244,7 +244,7 @@ def zhibiao(code, type):
      ########################################################################################################## 均线指标
      MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30 = junxian_zhibiao(doubleCloseArray, doubleOpenArray)
      # 指标返回
-     return price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband
+     return price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J, MACD_title, BULL_title, BULL_middleband
 
 # 返回20均线是否上传，30均线趋势
 # price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = zhibiao('399006','D')
