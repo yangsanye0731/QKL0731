@@ -12,6 +12,21 @@ import talib as ta
 import pandas as pd
 
 '''
+公共功能：ENE指标
+'''
+def ENE_zhibiao(doubleCloseArray):
+     param_m1 = 11
+     param_m2 = 9
+     param_n = 10
+     sma_n = ta.SMA(doubleCloseArray, param_n)
+     upper = (1 + param_m1 / 100) * sma_n
+     lower = (1 - param_m2 / 100) * sma_n
+     ene = (upper + lower) / 2
+     upper = upper.round(2)
+     ene = ene.round(2)
+     lower = lower.round(2)
+
+'''
 公共功能：KDJ指标
 '''
 def KDJ_zhibiao(data_history, doubleCloseArray):
@@ -239,3 +254,11 @@ def zhibiao(code, type):
 # print(BULL_title)
 # print(BULL_middleband)
 # print(MA20_titile)
+
+# data_history = ts.get_k_data("399006", ktype="W")
+# closeArray = num.array(data_history['close'])
+# highArray = num.array(data_history['high'])
+# lowArray = num.array(data_history['low'])
+# openArray = num.array(data_history['open'])
+# doubleCloseArray = num.asarray(closeArray, dtype='double')
+# ENE_zhibiao(doubleCloseArray)
