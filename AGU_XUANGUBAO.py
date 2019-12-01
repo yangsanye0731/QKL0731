@@ -23,7 +23,7 @@ def strategy():
         common_mysqlUtil.insert_zhishu_record(code, name, name,  plate, mark, "XGB")
 
 common_mysqlUtil.deleteTopRecord("XGB")
-common_mysqlUtil.insert_ZhiShuLog_record("======", "========", "XGB", "============", "====", "====", "======", "")
+common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "XGB", "====", "========", "============", "======", "")
 strategy()
 
 
