@@ -138,11 +138,13 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
     print(sql)
     insertRecord(sql)
 
+    i = 0
     if (("60均线上行" in MA60_titile_30) and "下穿布林线下沿" in BULL_title_30):
         insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发30分钟60均线上行，下穿30分钟布林线下沿")
 
     if ("下穿布林线下沿" in BULL_title):
         insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发60日均线上行，下穿日布林线下沿")
+        i = i + 1
 
     if ("创业板指" in mingcheng or "深证成指" in mingcheng or "ETF" in mingcheng):
         if ("上穿布林线上沿" in BULL_title_30):
@@ -154,6 +156,10 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
 
     if (float(KDJ_J_title) < 0):
         insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发KDJ在0度以下" + KDJ_J_title)
+        i = i + 1
+
+    if (i == 2):
+        common.dingding_markdown_msg_2(mingcheng + "触发下穿日布林线下沿&KDJ在0度以下", mingcheng + "触发下穿日布林线下沿&KDJ在0度以下")
 
     # if ("ZHISHU" in type):
         # if ("60均线上行" in MA60_titile):
