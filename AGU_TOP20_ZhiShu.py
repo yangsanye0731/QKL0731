@@ -16,7 +16,7 @@ import common_mysqlUtil
 说明：
 #################################
 '''
-def execute_shenzhen_1():
+def execute():
     jsonDicCode = {}
     jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'),('399231', '农林指数'), ('399232', '采矿指数'),
                     ('399234', '水电指数'), ('399235', '建筑指数'), ('399239', 'IT指数'),
@@ -35,8 +35,6 @@ def execute_shenzhen_1():
 
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 common_mysqlUtil.deleteTopRecord("ZHISHU")
-#insert_ZhiShuLog_record(code, name, type, price, plate, mark, zhangdiefu, chufa):
 common_mysqlUtil.insert_ZhiShuLog_record("======", "========", "ZHISHU", "============", "====", "====", "======", "")
-content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1())+ "<br></br>"
-# sendMail(content1, "TOP执行完成")
+execute()
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))

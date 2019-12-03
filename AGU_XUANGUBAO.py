@@ -15,7 +15,6 @@ def strategy():
     data = common_mysqlUtil.select_xuangubao()
     # 数据遍历
     for i in range(len(data)):
-
         code = str(data[i][0])
         name = str(data[i][1])
         plate = str(data[i][2])

@@ -90,6 +90,22 @@ def zongshizhi(code):
      nameArray = num.array(df['total_mv'])
      return nameArray[0]
 
+# 基本数据
+def daily_basic(code):
+     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+     pro = ts.pro_api()
+     if code.startswith('6'):
+          code = code + '.SH'
+     if code.startswith('0'):
+          code = code + '.SZ'
+     if code.startswith('3'):
+          code = code + '.SZ'
+     timez = time.strftime('%Y%m%d', time.localtime(time.time()))
+     df = pro.daily_basic(ts_code=code, trade_date="20191202",
+                          fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+     print(df)
+     return df
+
 # 股票名称
 def codeName(code):
      ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
@@ -126,3 +142,5 @@ def dingding_markdown_msg_2(title, text):
     # Text消息@所有人
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
+# daily_basic("002655")

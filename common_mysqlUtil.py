@@ -219,6 +219,28 @@ def select_xuangubao():
     db.close()
     return data
 
+def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code):
+    sql = ""
+    if (len(name) == 0):
+        sql = "UPDATE `superman`.`AGU_Code` SET " \
+              "`shizhi` = '" + shizhi + "', " \
+              "`shiyinglv` = '" + shiyinglv + "', " \
+              "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
+              "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
+              "`huanshoulv` = '" + huanshoulv + "' " \
+              "WHERE `code` = " + code
+    else:
+        sql = "UPDATE `superman`.`AGU_Code` SET " \
+              "`name` = '" + name + "', " \
+              "`shizhi` = '" + shizhi + "', " \
+              "`shiyinglv` = '" + shiyinglv + "', " \
+              "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "', " \
+              "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
+              "`huanshoulv` = '" + huanshoulv + "' " \
+              "WHERE `code` = " + code
+    print(sql)
+    insertRecord(sql)
+
 def deleteXiangSiDuRecord():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
