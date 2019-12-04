@@ -159,23 +159,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         i = i + 1
 
     if (i == 2):
-        common.dingding_markdown_msg_2(mingcheng + "触发下穿日布林线下沿&KDJ在0度以下", mingcheng + "触发下穿日布林线下沿&KDJ在0度以下")
-
-    # if ("ZHISHU" in type):
-        # if ("60均线上行" in MA60_titile):
-        #     common.dingding_markdown_msg_2(mingcheng + "触发60日均线上行", mingcheng + "触发60日均线上行")
-        #     insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发60日均线上行")
-
-        # ribull = 0
-        # if ("下穿布林线下沿" in BULL_title):
-        #     # common.dingding_markdown_msg_2(mingcheng + code +  "触发下穿日线布林线下沿", mingcheng + code + "触发下穿日线布林线下沿")
-        #     insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发下穿日线布林线下沿")
-        #     ribull = 1
-
-        # if ("下穿布林线下沿" in BULL_title_60 and ribull == 0):
-        #     common.dingding_markdown_msg_2(mingcheng + code +  "触发下穿60分钟布林线下沿", mingcheng + code + "触发下穿60分钟布林线下沿")
-        #     insert_ZhiShuLog_record(code, mingcheng, type, price, zhangdiefu, "触发下穿60分钟布林线下沿")
-
+        common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title, mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title)
     return title, content
 
 def insert_zhishu_count_record(type):
