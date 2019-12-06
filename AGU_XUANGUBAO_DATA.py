@@ -31,7 +31,7 @@ def strategy():
         # 换手率
         turnover_rate = num.array(df['turnover_rate'])
         # 名称
-        time.sleep(1)
+        time.sleep(3)
         name = common.codeName(code)
         common_mysqlUtil.update_xuangubao(name, "%.2f" % (total_mv / 10000), "%.2f" % pe, "%.2f" % turnover_rate, code)
         time.sleep(1)
