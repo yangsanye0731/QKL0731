@@ -164,7 +164,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         i = i + 1
 
     if (float(KDJ_J_title_60) < 0):
-        insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发KDJ在0度以下" + KDJ_J_title_60)
+        insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发60分钟KDJ在0度以下" + KDJ_J_title_60)
         j = j + 1
 
     if (i == 2):
