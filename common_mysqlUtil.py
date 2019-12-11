@@ -170,8 +170,8 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
     if (i == 2):
         common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title, mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title)
 
-    if (j == 2):
-        common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60, mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60)
+    # if (j == 2):
+        # common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60, mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60)
     return title, content
 
 def insert_zhishu_count_record(type):
