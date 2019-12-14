@@ -3,6 +3,7 @@ import pymysql
 import configparser
 from os import path
 import common_zhibiao
+import common_zhibiao_BTC
 import common
 import time
 
@@ -88,13 +89,25 @@ def selectCountRecord(type):
     return data
 
 def insert_zhishu_record(code, name, fullName, plate, mark, type):
-    price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = common_zhibiao.zhibiao(code, 'D')
-    price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao.zhibiao(code, '60')
-    price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao.zhibiao(code, '30')
-    zhangdiefu = common.zhangdiefu(code)
-    print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-    title = fullName + zhangdiefu + " "
-    content = fullName + zhangdiefu + qushi_5_10_20_30_30 + "<br>"
+    if ("USDT" in code):
+        price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, MACD_title, BULL_title, BULL_middleband = common_zhibiao_BTC.zhibiao(code, '4h')
+        price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao_BTC.zhibiao(code, '1h')
+        price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao_BTC.zhibiao(code, '30m')
+        zhangdiefu = "0%"
+        print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        title = ""
+        content = ""
+        KDJ_J_title = "10000"
+        KDJ_J_title_60 = "10000"
+        KDJ_J_title_30 = "10000"
+    else:
+        price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = common_zhibiao.zhibiao(code, 'D')
+        price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao.zhibiao(code, '60')
+        price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao.zhibiao(code, '30')
+        zhangdiefu = common.zhangdiefu(code)
+        print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        title = fullName + zhangdiefu + " "
+        content = fullName + zhangdiefu + qushi_5_10_20_30_30 + "<br>"
     # + " " + "%.3f" % closeArray[-1] + " " + zhangdiefu + "</font>**\n" + MIN30_60MA_content + str15QuShi_content + str30QuShi_content + strBULL60
     # print(time.localtime().tm_hour)
     # if (time.localtime().tm_hour > 14):

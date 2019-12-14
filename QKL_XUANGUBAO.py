@@ -2,12 +2,10 @@
 import pandas as pd
 import time
 import numpy as num
-import tushare as ts
+import ccxt
 import talib as ta
 from email_util import *
 import common
-import common_image
-import common_zhibiao
 import common_mysqlUtil
 
 def strategy(type):
@@ -33,7 +31,7 @@ def strategy(type):
     print("下降数：" + str(data1[0][6]))
     print("总数：" + str(data1[0][0]))
     print("总数618：" + str(int(data1[0][0] * 0.6)))
-    if (data1[0][5] >= 30 or data1[0][6] >= 30):
+    if (data1[0][5] >= 4 or data1[0][6] >= 4):
         # sendMail("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
         common.dingding_markdown_msg_2(type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半",
                                        type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半")
@@ -46,7 +44,7 @@ def strategy(type):
         common.dingding_markdown_msg_2(type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半",
                                        type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半")
 
-    if (data1[0][3] >= 30 or data1[0][4] >= 30):
+    if (data1[0][3] >= 4 or data1[0][4] >= 4):
         # sendMail("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
         common.dingding_markdown_msg_2(type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半",
                                        type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半")
@@ -58,6 +56,33 @@ def strategy(type):
         common.dingding_markdown_msg_2(type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半",
                                        type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半")
 
-strategy("ZXG")
-strategy("TOP")
+
+common_mysqlUtil.deleteTopRecord("BTC")
+common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "BTC", "====", "========", "============", "======", "")
+common_mysqlUtil.insert_zhishu_record("BTC/USDT", "BTC/USDT", "BTC/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("ETH/USDT", "ETH/USDT", "ETH/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("XRP/USDT", "XRP/USDT", "XRP/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("BCH/USDT", "BCH/USDT", "BCH/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("LTC/USDT", "LTC/USDT", "LTC/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("EOS/USDT", "EOS/USDT", "EOS/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("XLM/USDT", "XLM/USDT", "XLM/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("ADA/USDT", "ADA/USDT", "ADA/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("TRX/USDT", "TRX/USDT", "TRX/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("XMR/USDT", "XMR/USDT", "XMR/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("NEO/USDT", "NEO/USDT", "NEO/USDT",  "", "", "BTC")
+time.sleep(10)
+common_mysqlUtil.insert_zhishu_record("ETC/USDT", "ETC/USDT", "ETC/USDT",  "", "", "BTC")
+time.sleep(10)
+strategy("BTC")
+
 
