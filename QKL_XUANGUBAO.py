@@ -31,7 +31,7 @@ def strategy(type):
     print("下降数：" + str(data1[0][6]))
     print("总数：" + str(data1[0][0]))
     print("总数618：" + str(int(data1[0][0] * 0.6)))
-    if (data1[0][5] == 4 or data1[0][6] == 4 or data1[0][5] == 3 or data1[0][6] == 3 or data1[0][5] == 5 or data1[0][6] == 5):
+    if (data1[0][5] == 12 or data1[0][6] == 12):
         # sendMail("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
         common.dingding_markdown_msg_2(type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "已开始趋势",
                                        type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "已开始趋势")
@@ -44,7 +44,7 @@ def strategy(type):
         common.dingding_markdown_msg_2(type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "已开始趋势",
                                        type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "已开始趋势")
 
-    if (data1[0][3] == 4 or data1[0][4] == 4 or data1[0][3] == 3 or data1[0][4] == 3 or data1[0][3] == 5 or data1[0][4] == 5):
+    if (data1[0][3] == 12 or data1[0][4] == 12):
         # sendMail("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
         common.dingding_markdown_msg_2(type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "已开始趋势",
                                        type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "已开始趋势")
