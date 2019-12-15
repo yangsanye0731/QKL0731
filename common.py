@@ -103,7 +103,7 @@ def daily_basic(code):
      timez = time.strftime('%Y%m%d', time.localtime(time.time()))
      df = pro.daily_basic(ts_code=code, trade_date="20191213",
                           fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
-     print(df)
+     #print(df)
      return df
 
 # 股票名称
