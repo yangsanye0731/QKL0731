@@ -34,6 +34,9 @@ def strategy():
             highArray = num.array(data_history['high'])
             doubleHighArray = num.asarray(highArray, dtype='double')
 
+            lowArray = num.array(data_history['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
@@ -50,9 +53,9 @@ def strategy():
                 strResult += common.codeName(codeItem) + "30周线向上，且在20日线以上" + "<br>"
 
             # 最高点大于5周线，开点小于5周线，前两周五周线处于下降阶段
-            # if (doubleHighArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0 and ma5[
+            # if (doubleHighArray[-1] > ma5[-1] and doubleLowArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0 and ma5[
             #     -2] < ma5[-3] and ma5[-3] < ma5[-4]):
-            if (doubleHighArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4]):
+            if (doubleHighArray[-1] > ma5[-1] and doubleLowArray[-1] < ma5[-1] and  epsup > 0 and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4]):
                 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
 
                 df = common.daily_basic(codeItem)
