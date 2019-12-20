@@ -53,11 +53,8 @@ def strategy():
                 strResult += common.codeName(codeItem) + "30周线向上，且在20日线以上" + "<br>"
 
             # 最高点大于5周线，开点小于5周线，前两周五周线处于下降阶段
-            # if (doubleHighArray[-1] > ma5[-1] and doubleLowArray[-1] < ma5[-1] and epsup > 0 and yingyeup > 0 and ma5[
-            #     -2] < ma5[-3] and ma5[-3] < ma5[-4]):
             if (doubleHighArray[-1] > ma5[-1] and doubleLowArray[-1] < ma5[-1] and  epsup > 0 and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4]):
                 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
-
                 df = common.daily_basic(codeItem)
                 # 判断DataFrame是否为空
                 turnover_rate = 0.0
