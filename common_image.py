@@ -55,7 +55,7 @@ def plt_image(code, codeName, type):
 
 
 # 跨越5周线图
-def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
+def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
@@ -81,7 +81,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy):
     #设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%",
+        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
                   fontproperties=myfont)
     plt.xlabel('日期，规则：跨越5周线，5周线前2期下降', fontproperties=myfont)
     plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)

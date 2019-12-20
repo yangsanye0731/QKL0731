@@ -109,7 +109,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         huanshoulv = ""
         print(data)
         if len(data) > 0:
-            huanshoulv = "@换手：" + data[0][4]
+            huanshoulv = "@换手：" + data[0][4] + "%"
         zhangdiefu = common.zhangdiefu(code) + huanshoulv
         print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
         title = fullName + zhangdiefu + " "
