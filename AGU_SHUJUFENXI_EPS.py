@@ -61,7 +61,6 @@ def strategy():
                 if df.empty:
                     print("empty")
                 else:
-                    # 换手率
                     turnover_rate = num.array(df['turnover_rate'])
 
                 common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
