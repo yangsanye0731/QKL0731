@@ -261,4 +261,3 @@ def zhibiao(code, type):
 # lowArray = num.array(data_history['low'])
 # openArray = num.array(data_history['open'])
 # doubleCloseArray = num.asarray(closeArray, dtype='double')
-# ENE_zhibiao(doubleCloseArray)
