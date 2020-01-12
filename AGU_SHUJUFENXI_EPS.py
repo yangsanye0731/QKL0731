@@ -49,11 +49,11 @@ def strategy():
             ene_qushi_D = common_zhibiao.ENE_zhibiao(doubleCloseArray_D)
             ene_qushi_W = common_zhibiao.ENE_zhibiao(doubleCloseArray)
 
-            # 30周线向上，且在20日线以上
-            if (ma30_D[-1] > ma30_D[-2] and epsup > 0 and yingyeup > 0 and ma30_D[-2] < ma30_D[-3] and ma30_D[-3] < ma30_D[-4]):
-                print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "======================================" + codeItem)
-                common_image.plt_image_30DayLineUp(codeItem, codeName, "D", "%.1f" % epsup, "%.1f" % yingyeup)
-                strResult += common.codeName(codeItem) + "30周线向上，且在20日线以上" + "<br>"
+            # # 30周线向上，且在20日线以上
+            # if (ma30_D[-1] > ma30_D[-2] and epsup > 0 and yingyeup > 0 and ma30_D[-2] < ma30_D[-3] and ma30_D[-3] < ma30_D[-4]):
+            #     print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "======================================" + codeItem)
+            #     common_image.plt_image_30DayLineUp(codeItem, codeName, "D", "%.1f" % epsup, "%.1f" % yingyeup)
+            #     strResult += common.codeName(codeItem) + "30周线向上，且在20日线以上" + "<br>"
 
             # 最高点大于5周线，开点小于5周线，前两周五周线处于下降阶段
             if (doubleHighArray[-1] > ma5[-1] and doubleOpenArray[-1] < ma5[-1] and  epsup > 0 and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4]):
@@ -84,11 +84,11 @@ def strategy():
                                                        "%.2f" % turnover_rate)
                 strResult += common.codeName(codeItem) + "ENE 周线趋势向上" + "<br>"
 
-            # 五周线连续下降
-            if (ma5[-1] < ma5[-2] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4] and ma5[-4] < ma5[-5] and epsup > 0 and yingyeup > 0 ):
-                print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
-                common_image.plt_image_lianXuXiaJiangWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
-                strResult_2 += common.codeName(codeItem) + "5周线连续下降" + "<br>"
+            # # 五周线连续下降
+            # if (ma5[-1] < ma5[-2] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4] and ma5[-4] < ma5[-5] and epsup > 0 and yingyeup > 0 ):
+            #     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
+            #     common_image.plt_image_lianXuXiaJiangWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
+            #     strResult_2 += common.codeName(codeItem) + "5周线连续下降" + "<br>"
             time.sleep(4)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
