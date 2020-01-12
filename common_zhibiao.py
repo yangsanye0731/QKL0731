@@ -7,9 +7,9 @@ from dingtalkchatbot.chatbot import DingtalkChatbot
 import matplotlib
 import matplotlib.pyplot as plt
 import os
-import tushare as ts
 import talib as ta
 import pandas as pd
+
 
 '''
 公共功能：ENE指标
@@ -25,7 +25,12 @@ def ENE_zhibiao(doubleCloseArray):
      upper = upper.round(2)
      ene = ene.round(2)
      lower = lower.round(2)
-
+     ene_qushi = ""
+     if (ene[-1] > ene[-2] and ene[-3] > ene[-2]):
+          ene_qushi = "ENE中线趋势上升"
+     else:
+         ene_qushi = "%.2f" % ene[-3] +  "_"  + "%.2f" % ene[-2] + "_" + "%.2f" % ene[-1]
+     return ene_qushi
 '''
 公共功能：KDJ指标
 '''
@@ -243,8 +248,11 @@ def zhibiao(code, type):
      # print("下沿：" + lowerband)
      ########################################################################################################## 均线指标
      MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30 = junxian_zhibiao(doubleCloseArray, doubleOpenArray)
+
+     ########################################################################################################## ENS指标
+     ene_qushi = ENE_zhibiao(doubleCloseArray)
      # 指标返回
-     return price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J, MACD_title, BULL_title, BULL_middleband
+     return price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J, MACD_title, BULL_title, BULL_middleband, ene_qushi
 
 # 返回20均线是否上传，30均线趋势
 # price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = zhibiao('399006','D')

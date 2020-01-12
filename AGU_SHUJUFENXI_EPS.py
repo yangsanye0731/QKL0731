@@ -6,6 +6,7 @@ import tushare as ts
 import talib as ta
 import common
 import common_image
+import common_zhibiao
 import datetime
 from email_util import *
 
@@ -45,6 +46,8 @@ def strategy():
             ma30_D = ta.SMA(doubleCloseArray_D, timeperiod=30)
             eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(codeItem)
             codeName = common.codeName(codeItem)
+            ene_qushi_D = common_zhibiao.ENE_zhibiao(doubleCloseArray_D)
+            ene_qushi_W = common_zhibiao.ENE_zhibiao(doubleCloseArray)
 
             # 30周线向上，且在20日线以上
             if (ma30_D[-1] > ma30_D[-2] and epsup > 0 and yingyeup > 0 and ma30_D[-2] < ma30_D[-3] and ma30_D[-3] < ma30_D[-4]):
@@ -65,6 +68,21 @@ def strategy():
 
                 common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
                 strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
+
+            # ene趋势向上
+            if ("ENE" in ene_qushi_W):
+                print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "======================================" + codeItem)
+                df = common.daily_basic(codeItem)
+                # 判断DataFrame是否为空
+                turnover_rate = 0.0
+                if df.empty:
+                    print("empty")
+                else:
+                    turnover_rate = num.array(df['turnover_rate'])
+
+                common_image.plt_image_ENEWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup,
+                                                       "%.2f" % turnover_rate)
+                strResult += common.codeName(codeItem) + "ENE 周线趋势向上" + "<br>"
 
             # 五周线连续下降
             if (ma5[-1] < ma5[-2] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4] and ma5[-4] < ma5[-5] and epsup > 0 and yingyeup > 0 ):
