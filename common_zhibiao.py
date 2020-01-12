@@ -67,7 +67,7 @@ def BULL_zhibiao(doubleCloseArray, closeArray, lowArray):
      if (closeArray[-1] > upperband[-1]):
           BULL_title = "上穿布林线上沿"
 
-     if (lowArray[-1] < lowerband[-1] * 1.005):
+     if (lowArray[-1] < lowerband[-1] * 1.008):
           BULL_title = "下穿布林线下沿"
 
      upperband = "%.2f" % upperband[-1]

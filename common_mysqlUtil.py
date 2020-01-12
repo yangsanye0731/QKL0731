@@ -178,7 +178,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         if ("上穿布林线上沿" in BULL_title):
             insert_ZhiShuLog_record(code, mingcheng, type, price,  plate, mark, zhangdiefu, "触发上穿日数据布林线上沿")
 
-    if (float(KDJ_J_title) < 0):
+    if (float(KDJ_J_title) < 2):
         insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发KDJ在0度以下" + KDJ_J_title)
         i = i + 1
 
@@ -188,10 +188,10 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
 
     if (i == 2):
         common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title, mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title)
-    print("======================================================================" + ene_qushi)
-    if ("ENE" in ene_qushi):
-        common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发ENE趋势向上",
-                                       mingcheng + zhangdiefu + "_触发ENE趋势向上")
+    # print("======================================================================" + ene_qushi)
+    # if ("ENE" in ene_qushi):
+    #     common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发ENE趋势向上",
+    #                                    mingcheng + zhangdiefu + "_触发ENE趋势向上")
     # if (j == 2):
         # common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60, mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60)
     return title, content

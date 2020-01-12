@@ -70,7 +70,7 @@ def strategy():
                 strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
 
             # ene趋势向上
-            if ("ENE" in ene_qushi_W):
+            if ("ENE" in ene_qushi_W and  epsup > 0):
                 print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "======================================" + codeItem)
                 df = common.daily_basic(codeItem)
                 # 判断DataFrame是否为空
