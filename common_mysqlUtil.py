@@ -120,7 +120,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
     #    common_image.plt_image_geGuZhiBiao(code, fullName)
     mingcheng = fullName
     sql = "INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `code`, `price`, `zhangdiefu`, `type`, `plate`, " \
-          "`ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_qushi_60junxian`, `ri_qushi_5_10_20_30`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, `ri_BULL_middle`, " \
+          "`ri_qushi_20junxian`, `ri_qushi_30junxian`, `ri_qushi_60junxian`, `ri_qushi_5_10_20_30`, `ri_MACD`, `ri_KDJ`, `ri_BULL`, `ri_BULL_middle`, `ri_ENE`," \
           "`60_qushi_20junxian`, `60_qushi_30junxian`, `60_qushi_5_10_20_30`, `60_MACD`, `60_KDJ`, `60_BULL`, " \
           "`30_qushi_20junxian`, `30_qushi_30junxian`, `30_qushi_60junxian`, `30_qushi_5_10_20_30`, `30_MACD`, `30_KDJ`, `30_BULL`, `30_BULL_middle`, `beizhu`, `insert_time`) VALUES (" \
           "'" + mingcheng + "', " \
@@ -137,6 +137,7 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
           "'" + KDJ_J_title + "', " \
           "'" + BULL_title + "', " \
           "'" + BULL_middleband + "', " \
+          "'" + ene_qushi + "', " \
           "'" + MA20_titile_60 + "', " \
           "'" + MA30_titile_60 + "', " \
           "'" + qushi_5_10_20_30_60 + "', " \
@@ -188,10 +189,10 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
 
     if (i == 2):
         common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title, mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title)
-    # print("======================================================================" + ene_qushi)
-    # if ("ENE" in ene_qushi):
-    #     common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发ENE趋势向上",
-    #                                    mingcheng + zhangdiefu + "_触发ENE趋势向上")
+
+    if ("ENE" in ene_qushi):
+        insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发ENE趋势向上")
+
     # if (j == 2):
         # common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60, mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60)
     return title, content
