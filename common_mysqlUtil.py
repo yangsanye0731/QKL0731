@@ -192,6 +192,8 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
 
     if ("ENE" in ene_qushi):
         insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发ENE趋势向上")
+        common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发ENE趋势向上",
+                                       mingcheng + zhangdiefu + "触发ENE趋势向上")
 
     # if (j == 2):
         # common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60, mingcheng + zhangdiefu + "_触发下穿60分钟布林线下沿&KDJ在0度以下" + KDJ_J_title_60)
