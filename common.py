@@ -143,4 +143,13 @@ def dingding_markdown_msg_2(title, text):
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
+def dingding_markdown_msg_ene(title, text):
+    # WebHook地址
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=7073587d80b34d698a2656dfa1d4aaffb18510c658b1ef12bf2b8cfebb3976cc'
+    # 初始化机器人小丁
+    xiaoding = DingtalkChatbot(webhook)
+    # Text消息@所有人
+    at_mobiles = ['17706417762']
+    xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
 # daily_basic("002655")
