@@ -51,4 +51,8 @@ def strategy(zhouqi, n):
 
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
 strMailResult_D = strategy('D', 0)
-print(strMailResult_D)
+common.dingding_markdown_msg_2("触发孕线策略完成", "触发孕线策略完成")
+time.sleep(0.5)
+common.dingding_markdown_msg_2("触发孕线策略完成", "触发孕线策略完成")
+time.sleep(0.5)
+common.dingding_markdown_msg_2("触发孕线策略完成", "触发孕线策略完成")
