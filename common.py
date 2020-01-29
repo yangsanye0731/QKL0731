@@ -101,7 +101,7 @@ def daily_basic(code):
      if code.startswith('3'):
           code = code + '.SZ'
      timez = time.strftime('%Y%m%d', time.localtime(time.time()))
-     df = pro.daily_basic(ts_code=code, trade_date="20200110",
+     df = pro.daily_basic(ts_code=code, trade_date="20200123",
                           fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
      #print(df)
      return df
