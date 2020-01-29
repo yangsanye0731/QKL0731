@@ -249,6 +249,22 @@ def select_xuangubao():
     db.close()
     return data
 
+def select_all_code():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "SELECT `code`, `name`, `plate`, `mark` FROM `superman`.`AGU_All_Code` order by insert_time ASC"
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
 def select_xuangubao_one(code):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
@@ -258,6 +274,22 @@ def select_xuangubao_one(code):
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
     sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv` FROM `superman`.`AGU_Code` WHERE `code` = " + code
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
+def select_all_code_one(code):
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv` FROM `superman`.`AGU_All_Code` WHERE `code` = " + code
     print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
@@ -277,6 +309,28 @@ def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code):
               "WHERE `code` = " + code
     else:
         sql = "UPDATE `superman`.`AGU_Code` SET " \
+              "`name` = '" + name + "', " \
+              "`shizhi` = '" + shizhi + "', " \
+              "`shiyinglv` = '" + shiyinglv + "', " \
+              "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "', " \
+              "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
+              "`huanshoulv` = '" + huanshoulv + "' " \
+              "WHERE `code` = " + code
+    print(sql)
+    insertRecord(sql)
+
+def update_all_code(name, shizhi, shiyinglv, huanshoulv, code):
+    sql = ""
+    if (len(name) == 0):
+        sql = "UPDATE `superman`.`AGU_ALL_Code` SET " \
+              "`shizhi` = '" + shizhi + "', " \
+              "`shiyinglv` = '" + shiyinglv + "', " \
+              "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
+              "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
+              "`huanshoulv` = '" + huanshoulv + "' " \
+              "WHERE `code` = " + code
+    else:
+        sql = "UPDATE `superman`.`AGU_ALL_Code` SET " \
               "`name` = '" + name + "', " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
