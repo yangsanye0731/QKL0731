@@ -107,10 +107,12 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
 
         data = select_xuangubao_one(code)
         huanshoulv = ""
+        epsup = ""
         print(data)
         if len(data) > 0:
             huanshoulv = "@换手：" + data[0][4] + "%"
-        zhangdiefu = common.zhangdiefu(code) + huanshoulv
+            epsup = "@EPS：" + data[0][5] + "%"
+        zhangdiefu = common.zhangdiefu(code) + huanshoulv + epsup
         print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
         title = fullName + zhangdiefu + " "
         content = fullName + zhangdiefu + qushi_5_10_20_30_30 + "<br>"
@@ -273,7 +275,7 @@ def select_xuangubao_one(code):
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv` FROM `superman`.`AGU_Code` WHERE `code` = " + code
+    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_Code` WHERE `code` = " + code
     print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
@@ -289,7 +291,7 @@ def select_all_code_one(code):
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv` FROM `superman`.`AGU_All_Code` WHERE `code` = " + code
+    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_All_Code` WHERE `code` = " + code
     print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()

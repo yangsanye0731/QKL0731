@@ -38,11 +38,13 @@ def strategy(zhouqi, n):
                         data = common_mysqlUtil.select_all_code_one(codeItem)
                         huanshoulv = ""
                         mingcheng = ""
+                        epsup = ""
                         print(data)
                         if len(data) > 0:
                             huanshoulv = "@换手：" + data[0][4] + "%"
+                            epsup = "@EPS：" + data[0][5] + "%"
                             mingcheng = data[0][1]
-                        zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv
+                        zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
                         common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
                                                 "触发孕线策略")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
