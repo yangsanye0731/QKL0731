@@ -326,7 +326,7 @@ def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup)
 def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     sql = ""
     if (len(name) == 0):
-        sql = "UPDATE `superman`.`AGU_ALL_Code` SET " \
+        sql = "UPDATE `superman`.`AGU_All_Code` SET " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
               "`epsup` = '" + epsup + "', " \
@@ -336,7 +336,7 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
               "`huanshoulv` = '" + huanshoulv + "' " \
               "WHERE `code` = " + code
     else:
-        sql = "UPDATE `superman`.`AGU_ALL_Code` SET " \
+        sql = "UPDATE `superman`.`AGU_All_Code` SET " \
               "`name` = '" + name + "', " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
