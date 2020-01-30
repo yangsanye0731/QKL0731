@@ -31,12 +31,12 @@ def strategy():
         # 换手率
         turnover_rate = num.array(df['turnover_rate'])
         # 名称
-        time.sleep(1)
+        time.sleep(10)
         name = common.codeName(code)
-        time.sleep(1)
+        time.sleep(10)
         eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
         common_mysqlUtil.update_xuangubao(name, "%.2f" % (total_mv / 10000), "%.2f" % pe, "%.2f" % turnover_rate, code, "%.2f" % epsup, "%.2f" % yingyeup)
-        time.sleep(1)
+        time.sleep(5)
 
 def strategy_all_code():
     # 获取实时数据
@@ -59,12 +59,12 @@ def strategy_all_code():
         # 换手率
         turnover_rate = num.array(df['turnover_rate'])
         # 名称
-        time.sleep(1)
+        time.sleep(10)
         name = common.codeName(code)
-        time.sleep(1)
+        time.sleep(10)
         eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
         common_mysqlUtil.update_all_code(name, "%.2f" % (total_mv / 10000), "%.2f" % pe, "%.2f" % turnover_rate, code, "%.2f" % epsup, "%.2f" % yingyeup)
-        time.sleep(1)
+        time.sleep(5)
 
-# strategy()
 strategy_all_code()
+strategy()
