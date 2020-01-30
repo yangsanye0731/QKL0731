@@ -297,12 +297,14 @@ def select_all_code_one(code):
     db.close()
     return data
 
-def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code):
+def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     sql = ""
     if (len(name) == 0):
         sql = "UPDATE `superman`.`AGU_Code` SET " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
+              "`epsup` = '" + epsup + "', " \
+              "`yingyeup` = '" + yingyeup + "', " \
               "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
               "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
               "`huanshoulv` = '" + huanshoulv + "' " \
@@ -312,6 +314,8 @@ def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code):
               "`name` = '" + name + "', " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
+              "`epsup` = '" + epsup + "', " \
+              "`yingyeup` = '" + yingyeup + "', " \
               "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "', " \
               "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
               "`huanshoulv` = '" + huanshoulv + "' " \
@@ -319,12 +323,14 @@ def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code):
     print(sql)
     insertRecord(sql)
 
-def update_all_code(name, shizhi, shiyinglv, huanshoulv, code):
+def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     sql = ""
     if (len(name) == 0):
         sql = "UPDATE `superman`.`AGU_ALL_Code` SET " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
+              "`epsup` = '" + epsup + "', " \
+              "`yingyeup` = '" + yingyeup + "', " \
               "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
               "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
               "`huanshoulv` = '" + huanshoulv + "' " \
@@ -334,6 +340,8 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code):
               "`name` = '" + name + "', " \
               "`shizhi` = '" + shizhi + "', " \
               "`shiyinglv` = '" + shiyinglv + "', " \
+              "`epsup` = '" + epsup + "', " \
+              "`yingyeup` = '" + yingyeup + "', " \
               "`insert_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()) + "', " \
               "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "', " \
               "`huanshoulv` = '" + huanshoulv + "' " \
