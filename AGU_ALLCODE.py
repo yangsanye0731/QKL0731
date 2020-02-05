@@ -1,9 +1,8 @@
 #encoding=utf-8
-import pandas as pd
+
 import time
 import numpy as num
 import tushare as ts
-import talib as ta
 import common
 import common_mysqlUtil
 
@@ -13,7 +12,7 @@ def strategy(zhouqi, n):
     count = 0
     all_code_index_x = num.array(all_code_index)
 
-    strResult = 0
+    str_result = 0
     for codeItem in all_code_index_x:
         count = count + 1
         # print(count)
@@ -47,15 +46,15 @@ def strategy(zhouqi, n):
                         zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
                         common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
                                                 "触发孕线策略")
-                        strResult = strResult + 1
+                        str_result = str_result + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
-    return strResult
+    return str_result
 
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
-strResult = strategy('D', 0)
-common.dingding_markdown_msg_2("触发孕线策略完成(" + strResult + ")", "触发孕线策略完成(" + strResult + ")")
+str_result = strategy('D', 0)
+common.dingding_markdown_msg_2("触发孕线策略完成(" + str_result + ")", "触发孕线策略完成(" + str_result + ")")
 time.sleep(0.5)
-common.dingding_markdown_msg_2("触发孕线策略完成(" + strResult + ")", "触发孕线策略完成(" + strResult + ")")
+common.dingding_markdown_msg_2("触发孕线策略完成(" + str_result + ")", "触发孕线策略完成(" + str_result + ")")
 time.sleep(0.5)
-common.dingding_markdown_msg_2("触发孕线策略完成(" + strResult + ")", "触发孕线策略完成(" + strResult + ")")
+common.dingding_markdown_msg_2("触发孕线策略完成(" + str_result + ")", "触发孕线策略完成(" + str_result + ")")
