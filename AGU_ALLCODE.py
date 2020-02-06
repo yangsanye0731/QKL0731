@@ -41,7 +41,7 @@ def strategy(zhouqi, n):
                         print(data)
                         if len(data) > 0:
                             huanshoulv = "@换手：" + data[0][4] + "%"
-                            epsup = "@EPS：" + data[0][5] + "%"
+                            # epsup = "@EPS：" + data[0][5] + "%"
                             mingcheng = data[0][1]
                         zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
                         common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
