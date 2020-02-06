@@ -15,7 +15,7 @@ def strategy(zhouqi, n):
     str_result = 0
     for codeItem in all_code_index_x:
         count = count + 1
-        # print(count)
+        print(count)
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
@@ -40,7 +40,7 @@ def strategy(zhouqi, n):
                         epsup = ""
                         print(data)
                         if len(data) > 0:
-                            huanshoulv = "@换手：" + data[0][4] + "%"
+                            # huanshoulv = "@换手：" + data[0][4] + "%"
                             # epsup = "@EPS：" + data[0][5] + "%"
                             mingcheng = data[0][1]
                         zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
@@ -49,7 +49,7 @@ def strategy(zhouqi, n):
                         str_result = str_result + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
-    return str_result
+    return str(str_result)
 
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
 str_result = strategy('D', 0)
