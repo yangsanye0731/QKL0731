@@ -15,7 +15,6 @@ def strategy(zhouqi, n):
     str_result = 0
     for codeItem in all_code_index_x:
         count = count + 1
-        print(count)
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
