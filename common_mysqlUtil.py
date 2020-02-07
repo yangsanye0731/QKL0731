@@ -16,8 +16,9 @@ cf.read(config_file)
 def insertRecord(sql):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -28,8 +29,9 @@ def insertRecord(sql):
 def deleteTopRecord(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -56,8 +58,9 @@ def insert_strategy_record(code, name, rongzibi, epsup, yingyeup, wuzhouxian, st
 def deleteRecord():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -69,8 +72,9 @@ def deleteRecord():
 def selectCountRecord(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -222,8 +226,9 @@ def insert_zhishu_count_record(type):
 def select_zhishu_count_record(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -238,8 +243,9 @@ def select_zhishu_count_record(type):
 def select_xuangubao():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -254,8 +260,9 @@ def select_xuangubao():
 def select_all_code():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -270,8 +277,9 @@ def select_all_code():
 def select_xuangubao_one(code):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -286,8 +294,9 @@ def select_xuangubao_one(code):
 def select_all_code_one(code):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -354,8 +363,9 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
 def deleteXiangSiDuRecord():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
+    url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(url, userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
