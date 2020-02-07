@@ -45,7 +45,7 @@ def strategy(zhouqi, n):
                             mingcheng = data[0][1]
                         zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
                         common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
-                                                "触发孕线策略")
+                                                "触发孕线" + zhouqi + "策略")
                         str_result = str_result + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -53,8 +53,15 @@ def strategy(zhouqi, n):
 
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
 str_result = strategy('D', 0)
-common.dingding_markdown_msg_2("触发孕线策略完成(" + str_result + ")", "触发孕线策略完成(" + str_result + ")")
+common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
 time.sleep(0.5)
-common.dingding_markdown_msg_2("触发孕线策略完成(" + str_result + ")", "触发孕线策略完成(" + str_result + ")")
+common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
 time.sleep(0.5)
-common.dingding_markdown_msg_2("触发孕线策略完成(" + str_result + ")", "触发孕线策略完成(" + str_result + ")")
+common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
+
+str_result = strategy('W', 0)
+common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
+time.sleep(0.5)
+common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
+time.sleep(0.5)
+common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
