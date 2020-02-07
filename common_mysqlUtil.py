@@ -6,6 +6,7 @@ import common_zhibiao
 import common_zhibiao_BTC
 import common
 import time
+from sshtunnel import SSHTunnelForwarder
 
 #读取配置配置文件
 config_file = path.join(path.dirname(__file__), 'config.conf')
@@ -14,17 +15,22 @@ cf.read(config_file)
 
 
 def insertRecord(sql):
-    userName = cf.get("MySql", "userName")
-    password = cf.get("MySql", "password")
-    url = cf.get("MySql", "url")
-    # 打开数据库连接
-    db = pymysql.connect(url, userName, password, "superman")
-    # 使用 cursor() 方法创建一个游标对象 cursor
-    cursor = db.cursor()
-    # 使用 execute()  方法执行 SQL 查询
-    cursor.execute(sql)
-    db.commit()
-    db.close()
+    with SSHTunnelForwarder(
+        ssh_address_or_host=('47.240.11.144', 22),  # 指定ssh登录的跳转机的address
+        ssh_username='root',  # 跳转机的用户
+        ssh_password='yang1qaz@WSX',  # 跳转机的密码
+        remote_bind_address=('localhost', 3306)) as server:
+        userName = cf.get("MySql", "userName")
+        password = cf.get("MySql", "password")
+        url = cf.get("MySql", "url")
+        # 打开数据库连接
+        db = pymysql.connect(url, userName, password, "superman")
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        cursor = db.cursor()
+        # 使用 execute()  方法执行 SQL 查询
+        cursor.execute(sql)
+        db.commit()
+        db.close()
 
 def deleteTopRecord(type):
     userName = cf.get("MySql", "userName")
