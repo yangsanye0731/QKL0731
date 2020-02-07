@@ -59,7 +59,7 @@ common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", 
 time.sleep(0.5)
 common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
 
-str_result = strategy('W', 0)
+str_result = strategy('W', -1)
 common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
 time.sleep(0.5)
 common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
