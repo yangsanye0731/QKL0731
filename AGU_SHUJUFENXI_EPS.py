@@ -81,12 +81,29 @@ def strategy():
                 common_image.plt_image_ENEWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
                 strResult += common.codeName(codeItem) + "ENE 周线趋势向上" + "<br>"
 
+            # 周孕线
+            n = 0
+            if (doubleCloseArray[n-3] > doubleCloseArray[n-2] and doubleCloseArray[n-1] >= doubleCloseArray[n-2]):
+                if (doubleHighArray[n-2] > doubleHighArray[n-1] and doubleLowArray[n-2] < doubleLowArray[n-1]):
+                    if(doubleOpenArray[n-2] > doubleCloseArray[n-1] and doubleCloseArray[n-2] < doubleOpenArray[n-1]):
+                        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
+                        df = common.daily_basic(codeItem)
+                        # 判断DataFrame是否为空
+                        turnover_rate = 0.0
+                        if df.empty:
+                            print("empty")
+                        else:
+                            turnover_rate = num.array(df['turnover_rate'])
+
+                        common_image.plt_image_YUNXIANWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
+                        strResult += common.codeName(codeItem) + "周孕线" + "<br>"
+
             # # 五周线连续下降
             # if (ma5[-1] < ma5[-2] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4] and ma5[-4] < ma5[-5] and epsup > 0 and yingyeup > 0 ):
             #     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
             #     common_image.plt_image_lianXuXiaJiangWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup)
             #     strResult_2 += common.codeName(codeItem) + "5周线连续下降" + "<br>"
-            time.sleep(4)
+            time.sleep(3)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return strResult, strResult_2
