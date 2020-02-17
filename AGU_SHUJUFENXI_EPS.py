@@ -33,11 +33,20 @@ def strategy():
             highArray = num.array(data_history['high'])
             doubleHighArray = num.asarray(highArray, dtype='double')
 
+            highArray_D = num.array(data_history_D['high'])
+            doubleHighArray_D = num.asarray(highArray_D, dtype='double')
+
             lowArray = num.array(data_history['low'])
             doubleLowArray = num.asarray(lowArray, dtype='double')
 
+            lowArray_D = num.array(data_history_D['low'])
+            doubleLowArray_D = num.asarray(lowArray_D, dtype='double')
+
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
+
+            openArray_D = num.array(data_history_D['open'])
+            doubleOpenArray_D = num.asarray(openArray_D, dtype='double')
 
             # 均线
             ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
@@ -97,6 +106,23 @@ def strategy():
 
                         common_image.plt_image_YUNXIANWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
                         strResult += common.codeName(codeItem) + "周孕线" + "<br>"
+
+            # 日孕线
+            n = 0
+            if (doubleCloseArray_D[n - 3] > doubleCloseArray_D[n - 2] and doubleCloseArray_D[n - 1] >= doubleCloseArray_D[n - 2]):
+                if (doubleHighArray_D[n - 2] > doubleHighArray_D[n - 1] and doubleLowArray_D[n - 2] < doubleLowArray_D[n - 1]):
+                    if (doubleOpenArray_D[n - 2] > doubleCloseArray_D[n - 1] and doubleCloseArray_D[n - 2] < doubleOpenArray_D[n - 1]):
+                        print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "======================================" + codeItem)
+                        df = common.daily_basic(codeItem)
+                        # 判断DataFrame是否为空
+                        turnover_rate = 0.0
+                        if df.empty:
+                            print("empty")
+                        else:
+                            turnover_rate = num.array(df['turnover_rate'])
+
+                        common_image.plt_image_YUNXIANDAY(codeItem, codeName, "D", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
+                        strResult += common.codeName(codeItem) + "日孕线" + "<br>"
 
             # # 五周线连续下降
             # if (ma5[-1] < ma5[-2] and ma5[-2] < ma5[-3] and ma5[-3] < ma5[-4] and ma5[-4] < ma5[-5] and epsup > 0 and yingyeup > 0 ):
