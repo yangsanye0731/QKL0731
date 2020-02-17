@@ -78,4 +78,4 @@ def strategy_all_code():
         common_mysqlUtil.update_all_code(name, "%.2f" % (total_mv / 10000), "%.2f" % pe, "%.2f" % turnover_rate, code, "%.2f" % epsup, "%.2f" % yingyeup)
 
 strategy_all_code()
-# strategy()
+strategy()
