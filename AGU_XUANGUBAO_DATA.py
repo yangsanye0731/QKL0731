@@ -48,7 +48,7 @@ def strategy_all_code():
         code = str(data[i][0])
         print(str(count) + "=============" + code)
         name = str(data[i][1])
-        time.sleep(5)
+        time.sleep(10)
         df = common.daily_basic(code)
         print(df)
         # 判断DataFrame是否为空
@@ -71,9 +71,10 @@ def strategy_all_code():
                 turnover_rate[0] = 0.0
 
         # 名称
+        time.sleep(10)
         name = common.codeName(code)
         print(name)
-        time.sleep(5)
+        time.sleep(10)
         eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
         common_mysqlUtil.update_all_code(name, "%.2f" % (total_mv / 10000), "%.2f" % pe, "%.2f" % turnover_rate, code, "%.2f" % epsup, "%.2f" % yingyeup)
 
