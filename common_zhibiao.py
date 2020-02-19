@@ -108,10 +108,16 @@ def MACD_zhibiao(doubleCloseArray):
 '''
 公共功能：均线指标
 '''
-def junxian_zhibiao(doubleCloseArray, doubleOpenArray):
+def junxian_zhibiao(doubleCloseArray, doubleOpenArray, doubleHighArray):
      MA_5 = ta.SMA(doubleCloseArray, timeperiod=5)
      MA_10 = ta.SMA(doubleCloseArray, timeperiod=10)
      MA_20 = ta.SMA(doubleCloseArray, timeperiod=20)
+
+     MA5_titile = ""
+     # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
+     if (doubleHighArray[-1] > MA_5[-1] and doubleOpenArray[-1] < MA_5[-1] and MA_5[-2] < MA_5[-3] and MA_5[-3] < MA_5[-4]):
+          MA5_titile = "5均线上穿"
+
      MA20_titile = ""
      if (doubleCloseArray[-1] > MA_20[-1] and doubleOpenArray[-1] < MA_20[-1]):
           MA20_titile = "20均线上穿"
@@ -213,7 +219,7 @@ def junxian_zhibiao(doubleCloseArray, doubleOpenArray):
                                                   -10] and MA_30[-9] < MA_30[-10]):
                                                   qushi_5_10_20_30 = "均线5、10、20、30齐降9"
 
-     return MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30
+     return MA5_titile, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30
 
 '''
 公共功能：指标
@@ -247,25 +253,18 @@ def zhibiao(code, type):
      # print("中线：" + middleband)
      # print("下沿：" + lowerband)
      ########################################################################################################## 均线指标
-     MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30 = junxian_zhibiao(doubleCloseArray, doubleOpenArray)
+     MA5_titile, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30 = junxian_zhibiao(doubleCloseArray, doubleOpenArray, doubleHighArray)
 
      ########################################################################################################## ENS指标
      ene_qushi = ENE_zhibiao(doubleCloseArray)
      # 指标返回
-     return price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J, MACD_title, BULL_title, BULL_middleband, ene_qushi
+     return price, MA5_titile, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J, MACD_title, BULL_title, BULL_middleband, ene_qushi
 
 # 返回20均线是否上传，30均线趋势
-# price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband = zhibiao('399006','D')
+# price, MA5_titile, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J, MACD_title, BULL_title, BULL_middleband, ene_qushi = zhibiao('002010','W')
 # print(price)
-# print(KDJ_J_title)
+# print(MA5_titile)
 # print(MACD_title)
 # print(BULL_title)
 # print(BULL_middleband)
 # print(MA20_titile)
-
-# data_history = ts.get_k_data("399006", ktype="W")
-# closeArray = num.array(data_history['close'])
-# highArray = num.array(data_history['high'])
-# lowArray = num.array(data_history['low'])
-# openArray = num.array(data_history['open'])
-# doubleCloseArray = num.asarray(closeArray, dtype='double')

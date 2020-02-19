@@ -103,9 +103,10 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
         KDJ_J_title_60 = "10000"
         KDJ_J_title_30 = "10000"
     else:
-        price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband, ene_qushi = common_zhibiao.zhibiao(code, 'D')
-        price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60, BULL_middleband_60, ene_qushi_60 = common_zhibiao.zhibiao(code, '60')
-        price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30, BULL_middleband_30, ene_qushi_30 = common_zhibiao.zhibiao(code, '30')
+        price_W, MA5_titile_W, MA20_titile_W, MA30_titile_W, MA60_titile_W, qushi_5_10_20_30_W, KDJ_J_title_W, MACD_title_W, BULL_title_W, BULL_middleband_W, ene_qushi_W = common_zhibiao.zhibiao(code, 'W')
+        price, MA5_titile, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband, ene_qushi = common_zhibiao.zhibiao(code, 'D')
+        price_60, MA5_titile_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, KDJ_J_title_60, MACD_title_60, BULL_title_60, BULL_middleband_60, ene_qushi_60 = common_zhibiao.zhibiao(code, '60')
+        price_30, MA5_titile_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, KDJ_J_title_30, MACD_title_30, BULL_title_30, BULL_middleband_30, ene_qushi_30 = common_zhibiao.zhibiao(code, '30')
 
         data = select_xuangubao_one(code)
         huanshoulv = ""
@@ -193,6 +194,9 @@ def insert_zhishu_record(code, name, fullName, plate, mark, type):
 
     # if (i == 2):
     #    common.dingding_markdown_msg_2(mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title, mingcheng + zhangdiefu + "_触发下穿日布林线下沿&KDJ在0度以下" + KDJ_J_title)
+
+    if ("5均线上穿" in MA5_titile_W):
+        insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发5周线上穿, 前两周五周线处于下降阶段")
 
     if ("ENE" in ene_qushi):
         insert_ZhiShuLog_record(code, mingcheng, type, price, plate, mark, zhangdiefu, "触发ENE趋势向上")
