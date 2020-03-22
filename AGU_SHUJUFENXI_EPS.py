@@ -11,7 +11,7 @@ from bypy import ByPy
 
 def strategy():
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[200:300].index
+    all_code_index = all_code[300:400].index
     all_code_index_x = num.array(all_code_index)
 
     count = 0
