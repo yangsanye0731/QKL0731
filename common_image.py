@@ -104,7 +104,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5K.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
 # 周ENE中线趋势
@@ -158,7 +158,7 @@ def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5K.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
 # 周孕线
@@ -212,7 +212,7 @@ def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5K.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
 # 日孕线
@@ -266,7 +266,7 @@ def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5K.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
 # 30日线上升
