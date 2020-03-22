@@ -7,10 +7,11 @@ import common
 import common_image
 import common_zhibiao
 from email_util import *
+from bypy import ByPy
 
 def strategy():
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:-1].index
+    all_code_index = all_code[200:300].index
     all_code_index_x = num.array(all_code_index)
 
     count = 0
@@ -135,6 +136,11 @@ def strategy():
     return strResult, strResult_2
 
 strMailResult_W, strResult_2 = strategy()
+
+bp = ByPy()
+timeStr1 = time.strftime("%Y%m%d", time.localtime())
+bp.mkdir(remotepath=timeStr1)
+bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
 sendMail(template1(strMailResult_W), "跨域5周线")
 time.sleep(10)
 sendMail(template1(strResult_2), "5周线连续下降")
