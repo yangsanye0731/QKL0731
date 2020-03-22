@@ -116,6 +116,16 @@ def codeName(code):
      nameArray = num.array(df2['name'])
      return nameArray[0]
 
+def codeName_and_industry(code):
+     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+     pro = ts.pro_api()
+     timez = time.strftime('%Y%m%d', time.localtime(time.time()))
+     df = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+     df2 = df.loc[df['symbol'] == code]
+     nameArray = num.array(df2['name'])
+     industryArray = num.array(df2['industry'])
+     return nameArray[0],industryArray[0]
+
 def dingding_msg(content):
      # WebHook地址
      webhook = 'https://oapi.dingtalk.com/robot/send?access_token=991bba5d439fb424f4ab1645a86aa353ac89e92352d11e1f44846a0bca812862'

@@ -54,7 +54,7 @@ def plt_image(code, codeName, type):
     plt.show()
 
 # 跨越5周线图
-def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate):
+def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
@@ -83,7 +83,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate):
         plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
                   fontproperties=myfont)
     plt.xlabel('日期，规则：跨越5周线，5周线前2期下降', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code)  + ", " + industry, fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)
@@ -108,7 +108,7 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate):
     plt.close()
 
 # 周ENE中线趋势
-def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate):
+def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
@@ -137,7 +137,7 @@ def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate):
         plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
                   fontproperties=myfont)
     plt.xlabel('日期，规则：ENE周线向上', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code)  + ", " + industry, fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)
@@ -162,7 +162,7 @@ def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate):
     plt.close()
 
 # 周孕线
-def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate):
+def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
@@ -191,7 +191,7 @@ def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate):
         plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
                   fontproperties=myfont)
     plt.xlabel('日期，规则：周孕线', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code)  + ", " + industry, fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)
@@ -216,7 +216,7 @@ def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate):
     plt.close()
 
 # 日孕线
-def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate):
+def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
@@ -245,7 +245,7 @@ def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate):
         plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
                   fontproperties=myfont)
     plt.xlabel('日期，规则：日孕线', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)

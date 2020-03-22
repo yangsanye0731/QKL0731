@@ -53,7 +53,7 @@ def strategy():
             ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
             ma30_D = ta.SMA(doubleCloseArray_D, timeperiod=30)
             eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(codeItem)
-            codeName = common.codeName(codeItem)
+            codeName, industry = common.codeName_and_industry(codeItem)
             ene_qushi_D = common_zhibiao.ENE_zhibiao(doubleCloseArray_D)
             ene_qushi_W = common_zhibiao.ENE_zhibiao(doubleCloseArray)
 
@@ -74,7 +74,7 @@ def strategy():
                 else:
                     turnover_rate = num.array(df['turnover_rate'])
 
-                common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
+                common_image.plt_image_kuaYueWeek5Line(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate, industry)
                 strResult += common.codeName(codeItem) + "跨越五周线" + "<br>"
 
             # 周ENE中线趋势向上
@@ -88,7 +88,7 @@ def strategy():
                 else:
                     turnover_rate = num.array(df['turnover_rate'])
 
-                common_image.plt_image_ENEWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
+                common_image.plt_image_ENEWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate, industry)
                 strResult += common.codeName(codeItem) + "ENE 周线趋势向上" + "<br>"
 
             # 周孕线
@@ -105,7 +105,7 @@ def strategy():
                         else:
                             turnover_rate = num.array(df['turnover_rate'])
 
-                        common_image.plt_image_YUNXIANWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
+                        common_image.plt_image_YUNXIANWEEK(codeItem, codeName, "W", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate, industry)
                         strResult += common.codeName(codeItem) + "周孕线" + "<br>"
 
             # 日孕线
@@ -122,7 +122,7 @@ def strategy():
                         else:
                             turnover_rate = num.array(df['turnover_rate'])
 
-                        common_image.plt_image_YUNXIANDAY(codeItem, codeName, "D", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate)
+                        common_image.plt_image_YUNXIANDAY(codeItem, codeName, "D", "%.1f" % epsup, "%.1f" % yingyeup, "%.2f" % turnover_rate, industry)
                         strResult += common.codeName(codeItem) + "日孕线" + "<br>"
 
             # # 五周线连续下降
