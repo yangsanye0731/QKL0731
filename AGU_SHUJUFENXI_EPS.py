@@ -13,7 +13,7 @@ import common_mysqlUtil
 
 def strategy():
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:20].index
+    all_code_index = all_code[1:-1].index
     all_code_index_x = num.array(all_code_index)
 
     count = 0
