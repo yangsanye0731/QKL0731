@@ -58,6 +58,6 @@ def strategy(type):
         # common.dingding_markdown_msg_2(type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半",
         #                                type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半")
 
-# strategy("ZXG")
+strategy("ZXG")
 strategy("TOP")
 
