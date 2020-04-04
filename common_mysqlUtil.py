@@ -296,7 +296,6 @@ def select_all_code_one(code):
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
     sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_All_Code` WHERE `code` = " + code
-    print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
