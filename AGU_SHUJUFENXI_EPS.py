@@ -253,7 +253,7 @@ def strategy2():
     return strResult, strResult_2
 
 strMailResult_W, strResult_2 = strategy()
-strMailResult, strResult = strategy2()
+#strMailResult, strResult = strategy2()
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
