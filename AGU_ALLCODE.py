@@ -63,7 +63,7 @@ def strategy(zhouqi, n):
     return str(str_result)
 
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
-m = -5
+m = 0
 str_result = strategy('D', m)
 str_result = strategy('D', m-1)
 str_result = strategy('D', m-2)
@@ -73,8 +73,8 @@ str_result = strategy('D', m-4)
 # time.sleep(0.5)
 # common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
 
+str_result = strategy('W', 0)
 str_result = strategy('W', -1)
-str_result = strategy('W', -2)
 print (dict)
 # common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
 # time.sleep(0.5)
