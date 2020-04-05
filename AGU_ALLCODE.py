@@ -64,7 +64,7 @@ def strategy(zhouqi, n):
     return str(str_result)
 
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
-m = -4
+m = -5
 str_result = strategy('D', m)
 str_result = strategy('D', m-1)
 str_result = strategy('D', m-2)
