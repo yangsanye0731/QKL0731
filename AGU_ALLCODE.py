@@ -58,7 +58,6 @@ def strategy(zhouqi, n):
                                                                      "触发孕线日线周线双策略")
                             common.dingding_markdown_msg_2("触发孕线日线周线双策略(" + codeItem + ")",
                                                            "触发孕线日线周线双策略(" + codeItem + ")")
-                        print(dict)
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return str(str_result)
