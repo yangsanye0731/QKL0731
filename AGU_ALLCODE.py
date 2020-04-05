@@ -35,20 +35,20 @@ def strategy(zhouqi, n):
                 if (doubleHighArray[n-2] > doubleHighArray[n-1] and doubleLowArray[n-2] < doubleLowArray[n-1]):
                     if(doubleOpenArray[n-2] > doubleCloseArray[n-1] and doubleCloseArray[n-2] < doubleOpenArray[n-1]):
 
-                        data = common_mysqlUtil.select_all_code_one(codeItem)
-                        huanshoulv = ""
-                        mingcheng = ""
-                        epsup = ""
-                        print(data)
-                        if len(data) > 0:
-                            # huanshoulv = "@换手：" + data[0][4] + "%"
-                            # epsup = "@EPS：" + data[0][5] + "%"
-                            mingcheng = data[0][1]
-                        zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
-                        if n == 0 :
-                            common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
-                                                "触发孕线" + zhouqi + "策略")
-                        str_result = str_result + 1
+                        # data = common_mysqlUtil.select_all_code_one(codeItem)
+                        # huanshoulv = ""
+                        # mingcheng = ""
+                        # epsup = ""
+                        # print(data)
+                        # if len(data) > 0:
+                        #     # huanshoulv = "@换手：" + data[0][4] + "%"
+                        #     # epsup = "@EPS：" + data[0][5] + "%"
+                        #     mingcheng = data[0][1]
+                        # zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
+                        # if n == 0 :
+                        #     common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
+                        #                         "触发孕线" + zhouqi + "策略")
+                        # str_result = str_result + 1
                         global dict
                         if codeItem not in dict:
                             dict[codeItem] = 1
