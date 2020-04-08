@@ -45,9 +45,8 @@ def strategy(zhouqi, n):
                         #     # epsup = "@EPS：" + data[0][5] + "%"
                         #     mingcheng = data[0][1]
                         # zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
-                        # if n == 0 :
-                        #     common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
-                        #                         "触发孕线" + zhouqi + "策略")
+                        if n == 0 :
+                            common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu, "触发孕线" + zhouqi + "策略")
                         # str_result = str_result + 1
                         global dict
                         if codeItem not in dict:
