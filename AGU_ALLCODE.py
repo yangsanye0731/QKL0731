@@ -5,18 +5,19 @@ import numpy as num
 import tushare as ts
 import common
 import common_mysqlUtil
+import common_image
+from bypy import ByPy
 
 dict = {}
-
 def strategy(zhouqi, n):
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:-1].index
+    all_code_index = all_code[1:5].index
     count = 0
     all_code_index_x = num.array(all_code_index)
-
     str_result = 0
     for codeItem in all_code_index_x:
         count = count + 1
+        codeItem = "002058"
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
@@ -35,19 +36,9 @@ def strategy(zhouqi, n):
                 if (doubleHighArray[n-2] > doubleHighArray[n-1] and doubleLowArray[n-2] < doubleLowArray[n-1]):
                     if(doubleOpenArray[n-2] > doubleCloseArray[n-1] and doubleCloseArray[n-2] < doubleOpenArray[n-1]):
 
-                        # data = common_mysqlUtil.select_all_code_one(codeItem)
-                        # huanshoulv = ""
-                        # mingcheng = ""
-                        # epsup = ""
-                        # print(data)
-                        # if len(data) > 0:
-                        #     # huanshoulv = "@换手：" + data[0][4] + "%"
-                        #     # epsup = "@EPS：" + data[0][5] + "%"
-                        #     mingcheng = data[0][1]
-                        # zhangdiefu = common.zhangdiefu(codeItem) + huanshoulv + epsup
-                        # if n == 0 :
-                        #     common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu, "触发孕线" + zhouqi + "策略")
-                        # str_result = str_result + 1
+                        data = common_mysqlUtil.select_all_code_one(codeItem)
+                        if len(data) > 0:
+                            mingcheng = data[0][1]
                         global dict
                         if codeItem not in dict:
                             dict[codeItem] = 1
@@ -55,8 +46,9 @@ def strategy(zhouqi, n):
                             dict[codeItem] = dict[codeItem] + 1
                             # common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
                             #                                          "触发孕线日线周线双策略")
-                            common.dingding_markdown_msg_2("触发孕线日线周线双策略(" + codeItem + ")",
-                                                           "触发孕线日线周线双策略(" + codeItem + ")")
+                            common.dingding_markdown_msg_2("触发孕线日线周线双策略(" + mingcheng + codeItem + ")",
+                                                           "触发孕线日线周线双策略(" + mingcheng + codeItem + ")")
+                            common_image.plt_image_tongyichutu(codeItem, "W", "XUANGYUNXIAN", "双孕线")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return str(str_result)
@@ -68,18 +60,11 @@ str_result = strategy('D', m-1)
 str_result = strategy('D', m-2)
 str_result = strategy('D', m-3)
 str_result = strategy('D', m-4)
-# common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
-# time.sleep(0.5)
-# common.dingding_markdown_msg_2("触发孕线D策略完成(" + str_result + ")", "触发孕线D策略完成(" + str_result + ")")
 
 str_result = strategy('W', 0)
 str_result = strategy('W', -1)
-print (dict)
-# common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
-# time.sleep(0.5)
-# common.dingding_markdown_msg_2("触发孕线W策略完成(" + str_result + ")", "触发孕线W策略完成(" + str_result + ")")
 
-# str_result = strategy('M', -1)
-# common.dingding_markdown_msg_2("触发孕线M策略完成(" + str_result + ")", "触发孕线M策略完成(" + str_result + ")")
-# time.sleep(0.5)
-# common.dingding_markdown_msg_2("触发孕线M策略完成(" + str_result + ")", "触发孕线M策略完成(" + str_result + ")")
+bp = ByPy()
+timeStr1 = time.strftime("%Y%m%d", time.localtime())
+bp.mkdir(remotepath=timeStr1)
+bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
