@@ -11,13 +11,12 @@ from bypy import ByPy
 dict = {}
 def strategy(zhouqi, n):
     all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:5].index
+    all_code_index = all_code[1:-1].index
     count = 0
     all_code_index_x = num.array(all_code_index)
     str_result = 0
     for codeItem in all_code_index_x:
         count = count + 1
-        codeItem = "002058"
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
