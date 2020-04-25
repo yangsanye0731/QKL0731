@@ -7,6 +7,7 @@ import talib as ta
 from email_util import *
 import common
 import common_image
+from bypy import ByPy
 
 def strategy(zhouqi):
     all_code = ts.get_stock_basics()
