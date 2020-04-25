@@ -326,7 +326,6 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
 
     #设置坐标轴范围
     changdu = len(ts)
-    print(changdu)
     if (changdu > 200):
         plt.xlim(changdu-100, changdu)
 
