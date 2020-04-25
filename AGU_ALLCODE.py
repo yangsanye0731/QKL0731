@@ -43,8 +43,8 @@ def strategy(zhouqi, n):
                             dict[codeItem] = 1
                         else:
                             dict[codeItem] = dict[codeItem] + 1
-                            zhangdiefu = common.zhangdiefu(codeItem)
-                            common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
+                            # zhangdiefu = common.zhangdiefu(codeItem)
+                            common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", "",
                                                                      "触发孕线日线周线双策略")
                             common.dingding_markdown_msg_2("触发孕线日线周线双策略(" + mingcheng + codeItem + ")",
                                                            "触发孕线日线周线双策略(" + mingcheng + codeItem + ")")
