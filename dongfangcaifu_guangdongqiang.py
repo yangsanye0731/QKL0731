@@ -18,7 +18,7 @@ async def main():
            )
        }'''
 
-    browser = await launch(headless=False)
+    browser = await launch(headless=True, args=['--no-sandbox'])
     # browser = await launch()
 
     page = await browser.newPage()
