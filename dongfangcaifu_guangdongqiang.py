@@ -1,6 +1,7 @@
 import asyncio
 from pyppeteer import launch
 import datetime
+import common
 
 async def main():
 
@@ -49,8 +50,7 @@ async def main():
         if dateTime_p > datetime.datetime.now() + datetime.timedelta(days=-2):
             print(item)
             print("======================================================================")
-
+            common.dingding_markdown_msg_2("东方财富网广州强有更新", "东方财富网广州强有更新")
 
     await browser.close()
-
 asyncio.get_event_loop().run_until_complete(main())
