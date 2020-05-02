@@ -4,28 +4,27 @@ import datetime
 
 async def main():
 
-    # js1 = '''() =>{
-    #
-    #        Object.defineProperties(navigator,{
-    #        webdriver:{
-    #            get: () => false
-    #            }
-    #        })
-    #    }'''
-    #
-    # js2 = '''() => {
-    #        alert (
-    #            window.navigator.webdriver
-    #        )
-    #    }'''
+    js1 = '''() =>{
+           Object.defineProperties(navigator,{
+           webdriver:{
+               get: () => false
+               }
+           })
+       }'''
 
-    # browser = await launch(headless=False)
-    browser = await launch()
+    js2 = '''() => {
+           alert (
+               window.navigator.webdriver
+           )
+       }'''
+
+    browser = await launch(headless=False)
+    # browser = await launch()
 
     page = await browser.newPage()
     await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
     await page.goto('https://i.eastmoney.com/7289074629097176')
-    # await page.evaluate(js1)
+    await page.evaluate(js1)
     # await page.evaluate(js2)
 
     elements_level1 = await page.xpath('//div[@class="detailright"]')
