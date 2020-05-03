@@ -337,6 +337,50 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
+def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng):
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
+
+    # 画5日均线图
+    avg_1 = talib.MA(ts["close"], timeperiod=1)
+    avg_5 = talib.MA(ts["close"], timeperiod=5)
+    avg_10 = talib.MA(ts["close"], timeperiod=10)
+    avg_20 = talib.MA(ts["close"], timeperiod=20)
+    avg_30 = talib.MA(ts["close"], timeperiod=30)
+    # print(avg_5)
+    # print(avg_10)
+    # print(avg_20)
+    # print(avg_30)
+
+    fig = plt.subplots(figsize=(15, 12))
+    plt.plot(avg_1, "b.-")
+    plt.plot(avg_5, "k.-")
+    plt.plot(avg_10, color="y")
+    # plt.plot(avg_20,color="g")
+    # plt.plot(avg_30,color="b")
+    plt.xticks(rotation=75)
+    # 设置坐标轴名称
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    plt.title(
+        timeStr1 + "_" + codeName + '(' + code + ')EPS:' + "" + "%,营业额：" + "" + "%,换手率：" + "" + "%",
+        fontproperties=myfont)
+    plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + "", fontproperties=myfont)
+
+    # 设置坐标轴范围
+    changdu = len(ts)
+    if (changdu > 200):
+        plt.xlim(changdu - 100, changdu)
+
+    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
+    path = "./images/" + timeStr1 + "/" + pathType
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
+    plt.close()
+
 
 
 
