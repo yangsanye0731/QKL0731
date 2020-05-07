@@ -5,6 +5,9 @@ import common
 import time
 from asyncio import sleep
 import json
+import pandas as pd
+import random
+import common
 
 async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
@@ -18,21 +21,22 @@ async def load_cookie():
 
 # 加载首页
 async def index(page, cookie1,url):
-    for cookie in cookie1:
-        await page.setCookie(cookie)
-    await page.goto(url)
-    print("==============================成功")
-    data_content = await page.xpath('//pre')
-    # print(await (await data_content[0].getProperty("textContent")).jsonValue())
-    json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
-    print(json_list.get('data').get('item'))
-
-    for item in json_list.get('data').get('item'):
-        print(item)
+    try:
+        for cookie in cookie1:
+            await page.setCookie(cookie)
+        await page.goto(url)
+        print("==============================成功")
+        data_content = await page.xpath('//pre')
+        # print(await (await data_content[0].getProperty("textContent")).jsonValue())
+        json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
+        res = pd.DataFrame(json_list.get('data').get('item'), columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent', 'turnoverrate', 'amount', 'volume_post', 'amount_post'])
+        print(res)
+    except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
+        print(e)
 
 async def main(url):
     print(datetime.datetime.now())
-    await asyncio.sleep(10)
+    await asyncio.sleep(60 + random.randint(1, 120))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
@@ -65,6 +69,21 @@ async def main(url):
     await browser.close()
 
 
-asyncio.get_event_loop().run_until_complete(main('https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=BK0669&begin=1588755908183&period=week&type=before&count=-142'))
-asyncio.get_event_loop().run_until_complete(main('https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=BK0602&begin=1588755908183&period=week&type=before&count=-142'))
-asyncio.get_event_loop().run_until_complete(main('https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=BK0539&begin=1588755908183&period=week&type=before&count=-142'))
+count = 0
+jsonDicCode = {}
+jsonDicCode1 = [('BK0688', '光刻胶'), ('BK0539', '集成电路'), ('BK0636', '大豆'), ('BK0629', '高送转预期'),
+                ('BK0647', '网络切片'), ('BK0606', '啤酒'), ('BK0669', '华为海思'), ('BK0602', '语音技术'),
+                ('BK0638', '农业种植'), ('BK0656', '透明工厂'), ('BK0637', '玉米'), ('BK0699', 'MINILED'),
+                ('BK0586', '芯片概念'), ('BK0686', '氢氟酸'), ('BK0709', '氮化镓'), ('BK0701', '转基因'),
+                ('BK0554', '农机'), ('BK0655', '丙烯酸'), ('BK0410', '稀土永磁'), ('BK0417', '苹果概念'),
+                ('BK0568', 'OLED'), ('BK0631', '芬太尼'), ('BK0626', '消费电子'), ('BK0692', '无线耳机')
+              ]
+
+for key, value in jsonDicCode1:
+    codeItem = key
+    count = count + 1
+    print(count)
+    asyncio.get_event_loop().run_until_complete(main(
+        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=1588755908183&period=week&type=before&count=-142'))
+
+common.dingding_markdown_msg_2('触发执行完成', '触发执行完成')
