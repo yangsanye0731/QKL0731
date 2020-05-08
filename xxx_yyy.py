@@ -23,7 +23,7 @@ async def load_cookie():
     return cookie
 
 # 加载首页
-async def index(page, cookie1,url):
+async def index(page, cookie1, url, codeName):
     try:
         for cookie in cookie1:
             await page.setCookie(cookie)
@@ -33,7 +33,7 @@ async def index(page, cookie1,url):
         # print(await (await data_content[0].getProperty("textContent")).jsonValue())
         json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
         data_history = pd.DataFrame(json_list.get('data').get('item'), columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent', 'turnoverrate', 'amount', 'volume_post', 'amount_post'])
-
+        print(data_history)
 
         closeArray = num.array(data_history['close'])
         doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -46,17 +46,18 @@ async def index(page, cookie1,url):
 
         # 均线
         ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+        print(ma5)
 
         n = 0
         # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
         if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n-2] < ma5[n-3] and \
                 ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
-            print(value)
-            common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "雪球指数跨越5周线", "雪球指数跨越5周线")
+            common.dingding_markdown_msg_2('触发跨越5周线' + codeName, '触发跨越5周线' + codeName)
+            common_image.plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, codeItem, codeName, "W", "雪球指数跨越5周线", "雪球指数跨越5周线")
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         print(e)
 
-async def main(url):
+async def main(url, codeName):
     print(datetime.datetime.now())
     await asyncio.sleep(60 + random.randint(1, 120))
     print(datetime.datetime.now())
@@ -87,7 +88,7 @@ async def main(url):
     await save_cookie(cookies2)
     cookie = await load_cookie()
     # 华为海思概念股
-    await index(page, cookie, url)
+    await index(page, cookie, url, codeName)
     await browser.close()
 
 
@@ -149,7 +150,7 @@ for key, value in jsonDicCode1:
     print(codeItem)
     print(value)
     asyncio.get_event_loop().run_until_complete(main(
-        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=1588755908183&period=week&type=before&count=-142'))
+        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=1588755908183&period=week&type=before&count=-142', value))
 
 common.dingding_markdown_msg_2('触发执行完成', '触发执行完成')
 bp = ByPy()
