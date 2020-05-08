@@ -407,10 +407,10 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
         timeStr1 + "_" + codeName + '(' + code + ')EPS:' + "" + "%,营业额：" + "" + "%,换手率：" + "" + "%",
         fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + "", fontproperties=myfont)
+    plt.ylabel('价格 ' + ", " + "", fontproperties=myfont)
 
     # 设置坐标轴范围
-    changdu = len(ts)
+    changdu = len(doubleCloseArray)
     if (changdu > 200):
         plt.xlim(changdu - 100, changdu)
 
