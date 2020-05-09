@@ -52,7 +52,7 @@ async def index(page, cookie1, url, codeName):
         # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
         if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n-2] < ma5[n-3] and \
                 ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
-            common.dingding_markdown_msg_2('触发跨越5周线' + codeName, '触发跨越5周线' + codeName)
+            common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')' , '触发跨越5周线' + codeName + '(' + codeItem + ')')
             common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "雪球指数跨越5周线", "雪球指数跨越5周线")
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         print(e)
@@ -363,8 +363,10 @@ for key, value in jsonDicCode1:
     count = count + 1
     print(codeItem)
     print(value)
+    curtime = str(int(time.time()*1000))
+    print(curtime)
     asyncio.get_event_loop().run_until_complete(main(
-        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=1588755908183&period=week&type=before&count=-142', value))
+        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=week&type=before&count=-142', value))
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
