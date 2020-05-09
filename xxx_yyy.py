@@ -366,8 +366,8 @@ for key, value in jsonDicCode1:
     asyncio.get_event_loop().run_until_complete(main(
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=1588755908183&period=week&type=before&count=-142', value))
 
-common.dingding_markdown_msg_2('触发执行完成', '触发执行完成')
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
+common.dingding_markdown_msg_2('触发执行完成', '触发执行完成')
