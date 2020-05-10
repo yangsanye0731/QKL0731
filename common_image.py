@@ -404,10 +404,12 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
     # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     plt.title(
-        timeStr1 + "_" + codeName + '(' + code + ')EPS:' + "" + "%,营业额：" + "" + "%,换手率：" + "" + "%",
+        timeStr1 + "_" + codeName + '(' + code + ')',
         fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-    plt.ylabel('价格 ' + ", " + "", fontproperties=myfont)
+
+    zhangdiefu = "%.2f" % (((doubleCloseArray[-1] - doubleCloseArray[-2]) / doubleCloseArray[-2]) * 100) + '%'
+    plt.ylabel('价格: ' + zhangdiefu, fontproperties=myfont)
 
     # 设置坐标轴范围
     changdu = len(doubleCloseArray)
