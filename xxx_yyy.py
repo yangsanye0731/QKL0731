@@ -28,12 +28,10 @@ async def index(page, cookie1, url, codeName):
         for cookie in cookie1:
             await page.setCookie(cookie)
         await page.goto(url)
-        print("==============================成功")
         data_content = await page.xpath('//pre')
         # print(await (await data_content[0].getProperty("textContent")).jsonValue())
         json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
         data_history = pd.DataFrame(json_list.get('data').get('item'), columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent', 'turnoverrate', 'amount', 'volume_post', 'amount_post'])
-        print(data_history)
 
         closeArray = num.array(data_history['close'])
         doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -46,7 +44,6 @@ async def index(page, cookie1, url, codeName):
 
         # 均线
         ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
-        print(ma5)
 
         n = 0
         # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
@@ -364,7 +361,6 @@ for key, value in jsonDicCode1:
     print(codeItem)
     print(value)
     curtime = str(int(time.time()*1000))
-    print(curtime)
     asyncio.get_event_loop().run_until_complete(main(
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=week&type=before&count=-142', value))
 
