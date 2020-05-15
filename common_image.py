@@ -408,8 +408,8 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
         fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
 
-    zhangdiefu = "%.2f" % (((doubleCloseArray[-1] - doubleCloseArray[-2]) / doubleCloseArray[-2]) * 100) + '%'
-    plt.ylabel('价格: ' + zhangdiefu, fontproperties=myfont)
+    # zhangdiefu = "%.2f" % (((doubleCloseArray[-1] - doubleCloseArray[-2]) / doubleCloseArray[-2]) * 100) + '%'
+    plt.ylabel('价格:', fontproperties=myfont)
 
     # 设置坐标轴范围
     changdu = len(doubleCloseArray)
