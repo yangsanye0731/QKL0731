@@ -52,11 +52,13 @@ async def index(page, cookie1, url, codeName):
             common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')' , '触发跨越5周线' + codeName + '(' + codeItem + ')')
             common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "雪球指数跨越5周线", "雪球指数跨越5周线")
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
+        common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '触发跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
 async def main(url, codeName):
     print(datetime.datetime.now())
-    await asyncio.sleep(20 + random.randint(1, 85))
+    await asyncio.sleep(60 + random.randint(1, 85))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
