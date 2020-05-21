@@ -9,7 +9,7 @@ import common
 import common_image
 from bypy import ByPy
 
-def strategy(zhouqi):
+def strategy(zhouqi, n):
     count = 0
     jsonDicCode = {}
     jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'),
@@ -25,7 +25,8 @@ def strategy(zhouqi):
                     ('399976', '中证新能源汽车'),
                     ('399989', '中证医疗'), ('399993', '中证生物科技'), ('399996', '中证智能家居'),
                     ('399997', '中证白酒'), ('600519', '白酒_茅台'),
-                    ('399998', '中证煤炭'), ('601088', '煤炭_神华')]
+                    ('399998', '中证煤炭'), ('601088', '煤炭_神华'),
+                    ('512480', '半导体ETF'), ('512760', '半导体50ETF'), ('512930', 'AIETF'),  ('515050', '5GETF'), ('512690', '酒ETF')]
 
     for key, value in jsonDicCode1:
         codeItem = key
@@ -47,15 +48,15 @@ def strategy(zhouqi):
             ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
 
             # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
-            if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] and \
-                    ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1]:
+            if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n-2] < ma5[n-3] and \
+                    ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
                 print(value)
-                common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "指数跨越5周线", "指数跨越5周线")
+                common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "02指数跨越5周线", "02指数跨越5周线")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
 
-strategy('W')
+strategy('W', 0)
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
