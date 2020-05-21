@@ -48,7 +48,7 @@ def strategy(zhouqi, n):
                                                                      "触发孕线日线周线双策略")
                             common.dingding_markdown_msg_2("触发孕线日线周线双策略(" + mingcheng + codeItem + ")",
                                                            "触发孕线日线周线双策略(" + mingcheng + codeItem + ")")
-                            common_image.plt_image_tongyichutu(codeItem, "W", "日周双孕线", "双孕线")
+                            common_image.plt_image_tongyichutu(codeItem, "W", "03日周双孕线", "03日周双孕线")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return str(str_result)
