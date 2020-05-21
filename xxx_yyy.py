@@ -44,6 +44,7 @@ async def index(page, cookie1, url, codeName):
 
         # 均线
         ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+        print(ma5)
 
         n = 0
         # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
@@ -58,7 +59,7 @@ async def index(page, cookie1, url, codeName):
 
 async def main(url, codeName):
     print(datetime.datetime.now())
-    await asyncio.sleep(10 + random.randint(1, 60))
+    await asyncio.sleep(10 + random.randint(1, 50))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
