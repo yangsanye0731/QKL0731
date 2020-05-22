@@ -7,6 +7,7 @@ import common
 import common_mysqlUtil
 import talib as ta
 import common_image
+from bypy import ByPy
 
 def strategy(zhouqi, zhouqi2):
     all_code = ts.get_stock_basics()
@@ -61,10 +62,14 @@ def strategy(zhouqi, zhouqi2):
 
             if (ene[-1] > ene[-2]):
                 if (lowArray[-1] < lowerband[-1] * 1.008):
-                    common_image.plt_image_tongyichutu(codeItem, "W", "04月线ENE上升，日线触布林下轨", "04月线ENE上升，日线触布林下轨")
+                    common_image.plt_image_tongyichutu_wueps(codeItem, "W", "04月线ENE上升，日线触布林下轨", "04月线ENE上升，日线触布林下轨")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return str(str_result)
 
 str_result = strategy('M', 'D')
 print(str_result)
+bp = ByPy()
+timeStr1 = time.strftime("%Y%m%d", time.localtime())
+bp.mkdir(remotepath=timeStr1)
+bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
