@@ -6,6 +6,7 @@ import tushare as ts
 import common
 import common_mysqlUtil
 import talib as ta
+import common_image
 
 def strategy(zhouqi, zhouqi2):
     all_code = ts.get_stock_basics()
@@ -57,10 +58,10 @@ def strategy(zhouqi, zhouqi2):
             mingcheng = ""
             if len(data) > 0:
                 mingcheng = data[0][1]
+
             if (ene[-1] > ene[-2]):
                 if (lowArray[-1] < lowerband[-1] * 1.008):
-                    common.dingding_markdown_msg_2("触发月线ENE上升，日线触布林下轨策略(" + mingcheng + codeItem + ")",
-                                                   "触发月线ENE上升，日线触布林下轨策略(" + mingcheng + codeItem + ")")
+                    common_image.plt_image_tongyichutu(codeItem, "W", "04月线ENE上升，日线触布林下轨", "04月线ENE上升，日线触布林下轨")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return str(str_result)
