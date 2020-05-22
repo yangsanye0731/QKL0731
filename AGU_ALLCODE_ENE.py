@@ -65,6 +65,8 @@ def strategy(zhouqi, zhouqi2):
                     common_image.plt_image_tongyichutu_wueps(codeItem, "W", "04月线ENE上升，日线触布林下轨", "04月线ENE上升，日线触布林下轨")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
+            common.dingding_markdown_msg_2('触发04月线ENE上升，日线触布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                           '触发04月线ENE上升，日线触布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
     return str(str_result)
 
 str_result = strategy('M', 'D')
@@ -73,3 +75,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
+common.dingding_markdown_msg_2('触发04月线ENE上升，日线触布林下轨', '触发04月线ENE上升，日线触布林下轨')
