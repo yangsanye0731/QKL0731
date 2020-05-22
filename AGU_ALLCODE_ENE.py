@@ -61,7 +61,7 @@ def strategy(zhouqi, zhouqi2):
                 mingcheng = data[0][1]
 
             if (ene[-1] > ene[-2]):
-                if (lowArray[-1] < lowerband[-1] * 1.008):
+                if (lowArray_2[-1] < lowerband[-1]):
                     common_image.plt_image_tongyichutu_wueps(codeItem, "W", "04月线ENE上升，日线触布林下轨", "04月线ENE上升，日线触布林下轨")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
