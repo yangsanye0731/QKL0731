@@ -344,18 +344,11 @@ def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0,0,0,0,0,0
 
 
-    codeName, industry = common.codeName_and_industry(code)
+    codeName, industry = "", ""
     eps = "%.1f" % epsup
     yoy = "%.1f" % yingyeup
 
-    df = common.daily_basic(code)
-    # 判断DataFrame是否为空
-    turnover_rate = 0.0
-    if df.empty:
-        print("empty")
-    else:
-        turnover_rate = num.array(df['turnover_rate'])
-    turnover_rate = "%.2f" % turnover_rate
+    turnover_rate = ""
 
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
