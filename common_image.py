@@ -341,9 +341,8 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
 
 # 统一出图
 def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
-    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
-    if epsup < 0 or yingyeup < 0:
-        return
+    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0,0,0,0,0,0
+
 
     codeName, industry = common.codeName_and_industry(code)
     eps = "%.1f" % epsup
