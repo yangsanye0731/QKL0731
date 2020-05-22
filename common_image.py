@@ -389,7 +389,7 @@ def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
+    plt.savefig(path + "/" + timeStr1 + "_" + code + ".png")
     plt.close()
 
 
