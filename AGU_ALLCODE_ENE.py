@@ -40,7 +40,6 @@ async def index(page, cookie1, url, codeName):
         lowArray = num.array(data_history['low'])
         doubleLowArray = num.asarray(lowArray, dtype='double')
 
-        print(doubleCloseArray)
         param_m1 = 11
         param_m2 = 9
         param_n = 10
@@ -54,16 +53,9 @@ async def index(page, cookie1, url, codeName):
 
         if (ene[-1] > ene[-2] and doubleLowArray[-1] < ene[-1]):
             result = 1
-        # n = 0
-        # # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
-        # if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n-2] < ma5[n-3] and \
-        #         ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
-        #     common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')' , '触发跨越5周线' + codeName + '(' + codeItem + ')')
-        #     common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "01雪球指数跨越5周线", "01雪球指数跨越5周线")
-        #     result = 1
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
-                                       '触发跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+        common.dingding_markdown_msg_2('触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
     return result
@@ -89,25 +81,55 @@ async def index2(page, cookie1, url, codeName):
         zhangdiefu = num.array(data_history['percent'])
         huanshoulv = num.array(data_history['turnoverrate'])
 
-        print(doubleCloseArray)
         upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                      matype=0)
 
         if lowArray[-1] < lowerband[-1] :
-            common.dingding_markdown_msg_2('触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')',
-                                           '触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')')
-            common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W",
-                                                             "11雪球指数ENE月线向上，日线下穿布林下轨", "11雪球指数ENE月线向上，日线下穿布林下轨", str(zhangdiefu[-1]),
-                                                             str(huanshoulv[-1]))
+            result = 1
+    except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
+        common.dingding_markdown_msg_2('触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+        print(e)
+
+    return result
+
+# 加载首页
+async def index3(page, cookie1, url, codeName):
+    result = 0
+    try:
+        for cookie in cookie1:
+            await page.setCookie(cookie)
+        await page.goto(url)
+        data_content = await page.xpath('//pre')
+        # print(await (await data_content[0].getProperty("textContent")).jsonValue())
+        json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
+        data_history = pd.DataFrame(json_list.get('data').get('item'), columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent', 'turnoverrate', 'amount', 'volume_post', 'amount_post'])
+
+        closeArray = num.array(data_history['close'])
+        doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+        lowArray = num.array(data_history['low'])
+        doubleLowArray = num.asarray(lowArray, dtype='double')
+
+        zhangdiefu = num.array(data_history['percent'])
+        huanshoulv = num.array(data_history['turnoverrate'])
+
+        print(data_history)
+        common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W",
+                                                         "11雪球指数ENE月线向上，日线下穿布林下轨", "11雪球指数ENE月线向上，日线下穿布林下轨",
+                                                         str(zhangdiefu[-1]),
+                                                         str(huanshoulv[-1]))
+
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_2('触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
                                        '触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
 
-async def main(url1, url2, codeName):
+
+async def main(url1, url2, url3, codeName):
     print(datetime.datetime.now())
-    await asyncio.sleep(10 + random.randint(1, 10))
+    # await asyncio.sleep(10 + random.randint(1, 10))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
@@ -139,11 +161,12 @@ async def main(url1, url2, codeName):
     result = await index(page, cookie, url1, codeName)
 
     if result == 1:
-        await index2(page, cookie, url2, codeName)
-        print("===========================================================================================")
+        result2 = await index2(page, cookie, url2, codeName)
+        print(result2)
+        if result2 == 1:
+            await index3(page, cookie, url3, codeName)
+            print("===========================================================================================")
     await browser.close()
-    print(result)
-
     return result
 
 count = 0
@@ -421,6 +444,7 @@ for key, value in jsonDicCode1:
     asyncio.get_event_loop().run_until_complete(main(
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=month&type=before&count=-142',
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=day&type=before&count=-142',
+        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=week&type=before&count=-142',
         value))
 
 bp = ByPy()
