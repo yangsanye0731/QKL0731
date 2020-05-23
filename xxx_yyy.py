@@ -42,6 +42,11 @@ async def index(page, cookie1, url, codeName):
         openArray = num.array(data_history['open'])
         doubleOpenArray = num.asarray(openArray, dtype='double')
 
+        zhangdiefu = num.array(data_history['percent'])
+        huanshoulv  = num.array(data_history['turnoverrate'])
+        print("==============================================================")
+        print(zhangdiefu[-1])
+        print(huanshoulv[-1])
         # 均线
         ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
         print(ma5)
@@ -51,10 +56,10 @@ async def index(page, cookie1, url, codeName):
         if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n-2] < ma5[n-3] and \
                 ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
             common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')' , '触发跨越5周线' + codeName + '(' + codeItem + ')')
-            common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "01雪球指数跨越5周线", "01雪球指数跨越5周线")
+            common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "01雪球指数跨越5周线", "01雪球指数跨越5周线", str(zhangdiefu[-1]), str(huanshoulv[-1]))
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
-                                       '触发跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+        common.dingding_markdown_msg_2('01雪球指数跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '01雪球指数跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
 async def main(url, codeName):
