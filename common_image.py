@@ -437,7 +437,7 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
-def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType, guizeMingcheng):
+def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType, guizeMingcheng, zhangdiefu, huanshoulv):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     # 画5日均线图
     avg_1 = talib.MA(doubleCloseArray, timeperiod=1)
@@ -460,12 +460,12 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
     # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     plt.title(
-        timeStr1 + "_" + codeName + '(' + code + ')',
+        timeStr1 + "_" + codeName + '(' + code + ')' + ",换手率：" + huanshoulv + "%",
         fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
 
     # zhangdiefu = "%.2f" % (((doubleCloseArray[-1] - doubleCloseArray[-2]) / doubleCloseArray[-2]) * 100) + '%'
-    plt.ylabel('价格:', fontproperties=myfont)
+    plt.ylabel('价格:' + zhangdiefu, fontproperties=myfont)
 
     # 设置坐标轴范围
     changdu = len(doubleCloseArray)
