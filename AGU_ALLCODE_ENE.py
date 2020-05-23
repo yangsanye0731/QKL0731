@@ -93,7 +93,7 @@ async def index2(page, cookie1, url, codeName):
         upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                      matype=0)
 
-        if True or lowArray[-1] < lowerband[-1] :
+        if lowArray[-1] < lowerband[-1] :
             common.dingding_markdown_msg_2('触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')',
                                            '触发11雪球指数ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')')
             common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W",
