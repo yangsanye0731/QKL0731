@@ -42,9 +42,9 @@ def strategy(zhouqi):
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] and \
                     ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1] and ma30[-1] > ma30[-2] and ma60[-1] > ma60[-2]:
                 print(codeItem + "=======================================================================================")
-                common.dingding_markdown_msg_2("触发20跨越5周线策略(" + codeItem + ")",
-                                               "触发20跨越5周线策略(" + codeItem + ")")
-                common_image.plt_image_tongyichutu_2(codeItem, "W", "20跨越5周线容大感光", "20跨越5周线容大感光")
+                common.dingding_markdown_msg_2("触发20跨越5周线容大感光,主力持仓突增(" + codeItem + ")",
+                                               "触发20跨越5周线容大感光,主力持仓突增(" + codeItem + ")")
+                common_image.plt_image_tongyichutu_2(codeItem, "W", "20跨越5周线容大感光,主力持仓突增", "20跨越5周线容大感光,主力持仓突增")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -57,4 +57,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发20跨越5周线执行完成', '触发20跨越5周线执行完成')
+common.dingding_markdown_msg_2('触发20跨越5周线容大感光,主力持仓突增执行完成', '触发20跨越5周线容大感光,主力持仓突增执行完成')
