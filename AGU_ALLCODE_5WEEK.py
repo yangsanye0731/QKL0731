@@ -41,10 +41,21 @@ def strategy(zhouqi):
             # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] and \
                     ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1] and ma30[-1] > ma30[-2] and ma60[-1] > ma60[-2]:
-                print(codeItem + "=======================================================================================")
-                common.dingding_markdown_msg_2("触发20跨越5周线容大感光,主力持仓突增(" + codeItem + ")",
-                                               "触发20跨越5周线容大感光,主力持仓突增(" + codeItem + ")")
+                data = common_mysqlUtil.select_all_code_one(codeItem)
+                if len(data) > 0:
+                    mingcheng = data[0][1]
+
                 common_image.plt_image_tongyichutu_2(codeItem, "W", "20跨越5周线容大感光,主力持仓突增", "20跨越5周线容大感光,主力持仓突增")
+
+                # if codeItem.startswith('6'):
+                #     codeItem = 'SH' + codeItem
+                # if codeItem.startswith('0'):
+                #     codeItem = 'SZ' + codeItem
+                # if codeItem.startswith('3'):
+                #     codeItem = 'SZ' + codeItem
+                common.dingding_markdown_msg_link("触发20跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
+                                               "触发20跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
+                                                   "http://stockpage.10jqka.com.cn/" + codeItem)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
