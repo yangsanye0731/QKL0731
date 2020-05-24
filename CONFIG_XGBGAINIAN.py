@@ -84,6 +84,12 @@ for codeItem in all_code_index_x:
         print(count)
         print(codeItem)
         code = codeItem
+        data = common_mysqlUtil.select_all_code_one(code)
+        if len(data) > 0:
+            plate = data[0][2]
+            if(len(plate)>10):
+                continue
+
         if codeItem.startswith('6'):
             codeItem = codeItem + '.SS'
         if codeItem.startswith('0'):
