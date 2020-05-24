@@ -35,7 +35,7 @@ async def index(page, cookie1, url, codeName):
         # print(await (await data_content[0].getProperty("textContent")).jsonValue())
         json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
         print("==================================================================================")
-        common_mysqlUtil.update_all_code_plate(codeName, str(json_list.get('data')))
+        common_mysqlUtil.update_all_code_plate(codeName, str(json.dumps(json_list.get('data'), ensure_ascii=False)))
         # items = json_list.get('data').items()
         # for key, value in items:
         #     print(str(key) + '=' + str(value.get('plate_name')))
