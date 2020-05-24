@@ -62,7 +62,7 @@ def strategy(zhouqi):
     return strResult
 
 strMailResult_W = strategy('W')
-sendMail(template1(strMailResult_W), "跨域5周线")
+sendMail(template1(strMailResult_W), "20跨越5周线容大感光,主力持仓突增执行完成")
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
