@@ -357,7 +357,7 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
 def update_all_code_plate(code, plate):
     sql = ""
     sql = "UPDATE `superman`.`AGU_All_Code` SET " \
-          "`plate` = \"" + plate + "\", " \
+          "`plate` = '" + plate + "', " \
           "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "'" \
           "WHERE `code` = " + code
     print(sql)
