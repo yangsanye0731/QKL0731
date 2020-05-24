@@ -34,13 +34,11 @@ def strategy(zhouqi):
 
             # 均线
             ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
-            # ma20 = ta.SMA(doubleCloseArray, timeperiod=20)
-            ma30 = ta.SMA(doubleCloseArray, timeperiod=30)
             ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
 
             # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] and \
-                    ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1] and ma30[-1] > ma30[-2] and ma60[-1] > ma60[-2]:
+                    ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 data = common_mysqlUtil.select_all_code_one(codeItem)
                 if len(data) > 0:
                     mingcheng = data[0][1]
