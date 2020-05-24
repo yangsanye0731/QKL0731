@@ -44,7 +44,7 @@ def strategy(zhouqi):
                 print(codeItem + "=======================================================================================")
                 common.dingding_markdown_msg_2("触发20跨越5周线策略(" + codeItem + ")",
                                                "触发20跨越5周线策略(" + codeItem + ")")
-                common_image.plt_image_tongyichutu(codeItem, "W", "20跨越5周线容大感光", "20跨越5周线容大感光")
+                common_image.plt_image_tongyichutu_2(codeItem, "W", "20跨越5周线容大感光", "20跨越5周线容大感光")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
