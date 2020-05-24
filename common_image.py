@@ -13,7 +13,7 @@ import os
 import common
 import numpy as num
 import common_mysqlUtil
-
+import json
 
 def plt_image(code, codeName, type):
     matplotlib.rcParams['font.family'] = 'SimHei'
@@ -340,6 +340,21 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
 # 统一出图
 def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
+    re = ""
+    data = common_mysqlUtil.select_all_code_one(code)
+    if len(data) > 0:
+        plate = data[0][2]
+        if (len(plate) > 0):
+            json_list = json.loads(plate)
+            items = json_list.items()
+            count = 1
+            re = "\n"
+            for key, value in items:
+                if count % 5 == 0:
+                    re = re + "   " + str(value.get('plate_name')) + "\n"
+                else:
+                    re = re + "   " + str(value.get('plate_name'))
+                count = count + 1
 
     codeName, industry = common.codeName_and_industry(code)
     eps = "%.1f" % epsup
@@ -369,7 +384,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig=plt.subplots(figsize=(15,13))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
     plt.plot(avg_10,color="y")
@@ -378,7 +393,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     plt.xticks(rotation=75)
     #设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
-    plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
+    plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%" + re,
                   fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
     plt.ylabel('价格 '+ common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
