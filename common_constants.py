@@ -282,4 +282,5 @@ xqgn = [('BK0688', '光刻胶'), ('BK0539', '集成电路'), ('BK0636', '大豆'
               ]
 
 const = Const()
+# 雪球概念常量
 const.XUEQIUGAINIAN = xqgn

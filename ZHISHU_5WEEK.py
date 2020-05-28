@@ -51,7 +51,7 @@ def strategy(zhouqi, n):
             if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n-2] < ma5[n-3] and \
                     ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
                 print(value)
-                common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "02指数跨越5周线", "02指数跨越5周线")
+                common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "【02国内指数】跨越5周线", "【02国内指数】跨越5周线")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -62,3 +62,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
+common.dingding_markdown_msg_2('触发【02国内指数】跨越5周线执行完成', '触发【02国内指数】跨越5周线执行完成')

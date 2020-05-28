@@ -43,7 +43,7 @@ def strategy(zhouqi):
                 if len(data) > 0:
                     mingcheng = data[0][1]
 
-                common_image.plt_image_tongyichutu_2(codeItem, "W", "20跨越5周线容大感光,主力持仓突增", "20跨越5周线容大感光,主力持仓突增")
+                common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
 
                 # if codeItem.startswith('6'):
                 #     codeItem = 'SH' + codeItem
@@ -51,8 +51,8 @@ def strategy(zhouqi):
                 #     codeItem = 'SZ' + codeItem
                 # if codeItem.startswith('3'):
                 #     codeItem = 'SZ' + codeItem
-                common.dingding_markdown_msg_link("触发20跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
-                                               "触发20跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
+                common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
+                                               "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
                                                    "http://stockpage.10jqka.com.cn/" + codeItem)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
@@ -60,10 +60,10 @@ def strategy(zhouqi):
     return strResult
 
 strMailResult_W = strategy('W')
-sendMail(template1(strMailResult_W), "20跨越5周线容大感光,主力持仓突增执行完成")
+sendMail(template1(strMailResult_W), "【03全部代码】跨越5周线容大感光,主力持仓突增执行完成")
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发20跨越5周线容大感光,主力持仓突增执行完成', '触发20跨越5周线容大感光,主力持仓突增执行完成')
+common.dingding_markdown_msg_2('触发【03全部代码】跨越5周线容大感光,主力持仓突增', '触发【03全部代码】跨越5周线容大感光,主力持仓突增')
