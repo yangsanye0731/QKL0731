@@ -46,9 +46,9 @@ def strategy(zhouqi, n):
                             zhangdiefu = common.zhangdiefu(codeItem)
                             common_mysqlUtil.insert_ZhiShuLog_record(codeItem, mingcheng, "ACD", "", "", "", zhangdiefu,
                                                                      "触发孕线日线周线双策略")
-                            common.dingding_markdown_msg_2("触发孕线日线周线双策略(" + mingcheng + codeItem + ")",
-                                                           "触发孕线日线周线双策略(" + mingcheng + codeItem + ")")
-                            common_image.plt_image_tongyichutu(codeItem, "W", "03日周双孕线", "03日周双孕线")
+                            common.dingding_markdown_msg_2("触发【03全部代码】日周双孕线(" + mingcheng + codeItem + ")",
+                                                           "触发【03全部代码】日周双孕线(" + mingcheng + codeItem + ")")
+                            common_image.plt_image_tongyichutu(codeItem, "W", "【03全部代码】日周双孕线", "【03全部代码】日周双孕线")
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return str(str_result)
