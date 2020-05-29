@@ -26,7 +26,9 @@ def strategy(zhouqi, n):
                     ('399989', '中证医疗'), ('399993', '中证生物科技'), ('399996', '中证智能家居'),
                     ('399997', '中证白酒'), ('600519', '白酒_茅台'),
                     ('399998', '中证煤炭'), ('601088', '煤炭_神华'),
-                    ('512480', '半导体ETF'), ('512760', '半导体50ETF'), ('512930', 'AIETF'),  ('515050', '5GETF'), ('512690', '酒ETF')]
+                    ('512480', '半导体ETF'), ('512760', '半导体50ETF'), ('512930', 'AIETF'),  ('515050', '5GETF'), ('512690', '酒ETF'),
+                    ('518880', '黄金ETF'), ('515110', '一带一路国企ETF'), ('159995', '芯片ETF'), ('515000', '科技ETF'), ('515030', '新能源车ETF'),
+                    ('512170', '医疗ETF'), ('512660', '军工ETF'), ('515880', '通信ETF'), ('515980', '人工智能ETF')]
 
     for key, value in jsonDicCode1:
         codeItem = key
@@ -74,7 +76,7 @@ def strategy(zhouqi, n):
             ene = ene.round(2)
             lower = lower.round(2)
 
-            if (ene[-1] > ene[-2] and doubleLowArray_M[-1] < ene[-1]):
+            if (ene[-1] > ene[-2]):
                 upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                              matype=0)
                 if doubleLowArray_D[-1] < lowerband[-1]:
