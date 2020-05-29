@@ -42,7 +42,7 @@ def strategy(zhouqi):
                 if len(data) > 0:
                     mingcheng = data[0][1]
                 print("====================================================" + codeItem)
-                common_image.plt_image_tongyichutu_2(codeItem, "W", "跨越5周线容大感光,主力持仓突增", "跨越5周线容大感光,主力持仓突增")
+                common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
 
                 # common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
                 #                                "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
