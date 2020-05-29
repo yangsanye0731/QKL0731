@@ -42,17 +42,11 @@ def strategy(zhouqi):
                 if len(data) > 0:
                     mingcheng = data[0][1]
                 print("====================================================" + codeItem)
-                common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
+                common_image.plt_image_tongyichutu_2(codeItem, "W", "跨越5周线容大感光,主力持仓突增", "跨越5周线容大感光,主力持仓突增")
 
-                # if codeItem.startswith('6'):
-                #     codeItem = 'SH' + codeItem
-                # if codeItem.startswith('0'):
-                #     codeItem = 'SZ' + codeItem
-                # if codeItem.startswith('3'):
-                #     codeItem = 'SZ' + codeItem
-                common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
-                                               "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
-                                                   "http://stockpage.10jqka.com.cn/" + codeItem)
+                # common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
+                #                                "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
+                #                                    "http://stockpage.10jqka.com.cn/" + codeItem)
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
