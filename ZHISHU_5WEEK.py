@@ -53,7 +53,7 @@ def strategy(zhouqi, n):
             if doubleHighArray_W[n-1] > ma5[n-1] > doubleOpenArray_W[n-1] and ma5[n-2] < ma5[n-3] and \
                     ma5[n-3] < ma5[n-4] and doubleCloseArray_W[n-1] > doubleOpenArray_W[n-1]:
                 print(value)
-                common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "【02国内指数】5周线上穿", "【02国内指数】5周线上穿")
+                common_image.plt_image_tongyichutu_zhishu(codeItem, value, "W", "【02国内指数】跨越5周线", "【02国内指数】跨越5周线")
 
             closeArray_M = num.array(data_history_M['close'])
             doubleCloseArray_M = num.asarray(closeArray_M, dtype='double')

@@ -56,8 +56,8 @@ async def index(page, cookie1, url, codeName):
         if (ene[-1] > ene[-2] and doubleLowArray[-1] < ene[-1]):
             result = 1
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
-                                       '触发【01雪球指数】ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
     return result
@@ -89,8 +89,8 @@ async def index2(page, cookie1, url, codeName):
         if lowArray[-1] < lowerband[-1] :
             result = 1
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
-                                       '触发【01雪球指数】ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
     return result
@@ -118,13 +118,13 @@ async def index3(page, cookie1, url, codeName):
 
         print(data_history)
         common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W",
-                                                         "【01雪球指数】ENE月线向上，日线下穿布林下轨", "【01雪球指数】ENE月线向上，日线下穿布林下轨",
+                                                         "【01雪球指数】ENE月线升势，布林日线下穿", "【01雪球指数】ENE月线升势，布林日线下穿",
                                                          str(zhangdiefu[-1]),
                                                          "%.2f" % huanshoulv[-1])
 
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
-                                       '触发【01雪球指数】ENE月线向上，日线下穿布林下轨' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
+                                       '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
 
 
@@ -188,4 +188,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线向上，日线下穿布林下轨执行完成', '触发【01雪球指数】ENE月线向上，日线下穿布林下轨执行完成')
+common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿执行完成', '触发【01雪球指数】ENE月线升势，布林日线下穿执行完成')
