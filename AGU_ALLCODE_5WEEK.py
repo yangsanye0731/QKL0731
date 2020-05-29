@@ -19,7 +19,6 @@ def strategy(zhouqi):
     strResult = ""
     for codeItem in all_code_index_x:
         count = count + 1
-        print(count)
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
@@ -42,7 +41,7 @@ def strategy(zhouqi):
                 data = common_mysqlUtil.select_all_code_one(codeItem)
                 if len(data) > 0:
                     mingcheng = data[0][1]
-
+                print("====================================================" + codeItem)
                 common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
 
                 # if codeItem.startswith('6'):
