@@ -19,7 +19,11 @@ def strategy(zhouqi):
     strResult = ""
     for codeItem in all_code_index_x:
         count = count + 1
+        print(count)
         data_history = ts.get_k_data(codeItem, ktype=zhouqi)
+
+        data_history_M = ts.get_k_data(codeItem, ktype='M')
+        data_history_D = ts.get_k_data(codeItem, ktype='D')
 
         try:
             closeArray = num.array(data_history['close'])
@@ -41,12 +45,37 @@ def strategy(zhouqi):
                 data = common_mysqlUtil.select_all_code_one(codeItem)
                 if len(data) > 0:
                     mingcheng = data[0][1]
-                print("====================================================" + codeItem)
                 common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
 
                 # common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
                 #                                "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
                 #                                    "http://stockpage.10jqka.com.cn/" + codeItem)
+
+            closeArray_M = num.array(data_history_M['close'])
+            doubleCloseArray_M = num.asarray(closeArray_M, dtype='double')
+            lowArray_M = num.array(data_history_M['low'])
+            doubleLowArray_M = num.asarray(lowArray_M, dtype='double')
+            closeArray_D = num.array(data_history_D['close'])
+            doubleCloseArray_D = num.asarray(closeArray_D, dtype='double')
+            lowArray_D = num.array(data_history_D['low'])
+            doubleLowArray_D = num.asarray(lowArray_D, dtype='double')
+
+            param_m1 = 11
+            param_m2 = 9
+            param_n = 10
+            sma_n = ta.SMA(closeArray_M, param_n)
+            upper = (1 + param_m1 / 100) * sma_n
+            lower = (1 - param_m2 / 100) * sma_n
+            ene = (upper + lower) / 2
+            upper = upper.round(2)
+            ene = ene.round(2)
+            lower = lower.round(2)
+
+            if (ene[-1] > ene[-2]):
+                upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2,
+                                                             matype=0)
+                if doubleLowArray_D[-1] < lowerband[-1]:
+                    common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
