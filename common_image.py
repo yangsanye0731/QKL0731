@@ -344,6 +344,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     data = common_mysqlUtil.select_all_code_one(code)
     if len(data) > 0:
         plate = data[0][2]
+        print(plate)
         if (len(plate) > 0):
             json_list = json.loads(plate)
             items = json_list.items()
