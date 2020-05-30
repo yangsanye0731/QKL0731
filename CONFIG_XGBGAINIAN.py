@@ -87,7 +87,7 @@ for codeItem in all_code_index_x:
         data = common_mysqlUtil.select_all_code_one(code)
         if len(data) > 0:
             plate = data[0][2]
-            if(len(plate)>0):
+            if(plate is not None and len(plate)>0):
                 continue
 
             if codeItem.startswith('6'):
