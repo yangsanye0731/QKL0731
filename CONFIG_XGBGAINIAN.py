@@ -102,5 +102,14 @@ for codeItem in all_code_index_x:
             code_name = common.codeName(code)
             common_mysqlUtil.insert_all_code(code, code_name)
 
+            if codeItem.startswith('6'):
+                codeItem = codeItem + '.SS'
+            if codeItem.startswith('0'):
+                codeItem = codeItem + '.SZ'
+            if codeItem.startswith('3'):
+                codeItem = codeItem + '.SZ'
+            asyncio.get_event_loop().run_until_complete(main('https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
+                code))
+
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         print(e)
