@@ -311,7 +311,7 @@ def select_all_code_one(code):
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`agu_all_code_copy1` WHERE `code` = " + code
+    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_All_Code` WHERE `code` = " + code
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
@@ -371,13 +371,13 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     insertRecord(sql)
 
 def insert_all_code(code, name):
-    sql = "INSERT INTO `superman`.`agu_all_code_copy1`(`code`, `name`) VALUES ('" + code + "','" + name + "\')"
+    sql = "INSERT INTO `superman`.`AGU_All_Code`(`code`, `name`) VALUES ('" + code + "','" + name + "\')"
     print(sql)
     insertRecord(sql)
 
 def update_all_code_plate(code, plate):
     sql = ""
-    sql = "UPDATE `superman`.`agu_all_code_copy1` SET " \
+    sql = "UPDATE `superman`.`AGU_All_Code` SET " \
           "`plate` = '" + plate + "', " \
           "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "'" \
           "WHERE `code` = " + code
