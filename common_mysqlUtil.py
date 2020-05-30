@@ -354,6 +354,11 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     print(sql)
     insertRecord(sql)
 
+def insert_all_code(code, name):
+    sql = "INSERT INTO `superman`.`AGU_All_Code`(`code`, `name`) VALUES ('" + code + "','" + name + "\')"
+    print(sql)
+    insertRecord(sql)
+
 def update_all_code_plate(code, plate):
     sql = ""
     sql = "UPDATE `superman`.`AGU_All_Code` SET " \
