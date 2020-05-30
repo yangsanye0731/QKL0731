@@ -271,6 +271,22 @@ def select_all_code():
     db.close()
     return data
 
+def select_report_news():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "SELECT `id`, `title`, `type`, `mark` FROM `superman`.`Report_News` where status = '20' order by insert_time ASC"
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
 def select_xuangubao_one(code):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
@@ -295,7 +311,7 @@ def select_all_code_one(code):
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_All_Code` WHERE `code` = " + code
+    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`agu_all_code_copy1` WHERE `code` = " + code
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
@@ -355,13 +371,13 @@ def update_all_code(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     insertRecord(sql)
 
 def insert_all_code(code, name):
-    sql = "INSERT INTO `superman`.`AGU_All_Code`(`code`, `name`) VALUES ('" + code + "','" + name + "\')"
+    sql = "INSERT INTO `superman`.`agu_all_code_copy1`(`code`, `name`) VALUES ('" + code + "','" + name + "\')"
     print(sql)
     insertRecord(sql)
 
 def update_all_code_plate(code, plate):
     sql = ""
-    sql = "UPDATE `superman`.`AGU_All_Code` SET " \
+    sql = "UPDATE `superman`.`agu_all_code_copy1` SET " \
           "`plate` = '" + plate + "', " \
           "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "'" \
           "WHERE `code` = " + code
