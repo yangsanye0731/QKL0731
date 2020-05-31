@@ -25,7 +25,7 @@ async def load_cookie():
     return cookie
 
 # 加载页面
-async def index(page, cookie1, url, codeName):
+async def index(page, cookie1, url, codeName, codeItem):
     result = 0
     try:
         for cookie in cookie1:
@@ -63,7 +63,7 @@ async def index(page, cookie1, url, codeName):
     return result
 
 # 加载页面
-async def index2(page, cookie1, url, codeName):
+async def index2(page, cookie1, url, codeName, codeItem):
     result = 0
     try:
         for cookie in cookie1:
@@ -88,6 +88,7 @@ async def index2(page, cookie1, url, codeName):
 
         if lowArray[-1] < lowerband[-1] * 1.006:
             result = 1
+            common.dingding_markdown_msg_link('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')','触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')', "https://xueqiu.com/S/" + codeItem)
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
                                        '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
@@ -96,7 +97,7 @@ async def index2(page, cookie1, url, codeName):
     return result
 
 # 加载页面
-async def index3(page, cookie1, url, codeName):
+async def index3(page, cookie1, url, codeName, codeItem):
     result = 0
     try:
         for cookie in cookie1:
@@ -129,7 +130,7 @@ async def index3(page, cookie1, url, codeName):
 
 
 
-async def main(url1, url2, url3, codeName):
+async def main(url1, url2, url3, codeName, codeItem):
     print(datetime.datetime.now())
     # await asyncio.sleep(10 + random.randint(1, 10))
     print(datetime.datetime.now())
@@ -160,13 +161,13 @@ async def main(url1, url2, url3, codeName):
     await save_cookie(cookies2)
     cookie = await load_cookie()
     # 华为海思概念股
-    result = await index(page, cookie, url1, codeName)
+    result = await index(page, cookie, url1, codeName, codeItem)
 
     if result == 1:
-        result2 = await index2(page, cookie, url2, codeName)
+        result2 = await index2(page, cookie, url2, codeName, codeItem)
         print(result2)
         if result2 == 1:
-            await index3(page, cookie, url3, codeName)
+            await index3(page, cookie, url3, codeName, codeItem)
             print("===========================================================================================")
     await browser.close()
     return result
@@ -182,7 +183,7 @@ for key, value in const.XUEQIUGAINIAN:
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=month&type=before&count=-142',
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=day&type=before&count=-142',
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=week&type=before&count=-142',
-        value))
+        value, codeItem))
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
