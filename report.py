@@ -4,6 +4,8 @@ from docxtpl import InlineImage
 from docxtpl import RichText
 import time
 import common_mysqlUtil
+import common
+from bypy import ByPy
 
 asset_url = 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
@@ -96,3 +98,9 @@ context['jiaoxun_list'] = jiaoxun_list
 tpl.render(context)
 timeTitle = time.strftime("%Y%m%d", time.localtime())
 tpl.save('./report/每日报告_' + timeTitle + '.docx')
+
+bp = ByPy()
+timeStr1 = time.strftime("%Y%m%d", time.localtime())
+bp.mkdir(remotepath='0000_Report')
+bp.upload(localpath="./report", remotepath='0000_Report')
+common.dingding_markdown_msg_2('触发【Report】每日投资报告执行完成', '触发【Report】每日投资报告执行完成')
