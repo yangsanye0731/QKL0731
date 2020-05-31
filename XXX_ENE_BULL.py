@@ -86,7 +86,7 @@ async def index2(page, cookie1, url, codeName):
         upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                      matype=0)
 
-        if lowArray[-1] < lowerband[-1] :
+        if lowArray[-1] < lowerband[-1] * 1.006:
             result = 1
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
