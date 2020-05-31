@@ -53,7 +53,7 @@ async def index(page, cookie1, url, codeName):
         ene = ene.round(2)
         lower = lower.round(2)
 
-        if (ene[-1] > ene[-2] and doubleLowArray[-1] < ene[-1]):
+        if (ene[-1] > ene[-2]):
             result = 1
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
