@@ -384,6 +384,15 @@ def update_all_code_plate(code, plate):
     print(sql)
     insertRecord(sql)
 
+def update_all_code_huanshoulv(code, huanshoulv):
+    sql = ""
+    sql = "UPDATE `superman`.`AGU_All_Code` SET " \
+          "`huanshoulv` = '" + huanshoulv + "', " \
+          "`update_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "'" \
+          "WHERE `code` = " + code
+    print(sql)
+    insertRecord(sql)
+
 def deleteXiangSiDuRecord():
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
