@@ -75,7 +75,7 @@ def strategy(zhouqi):
             if (ene[-1] > ene[-2]):
                 upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                              matype=0)
-                if doubleLowArray_D[-1] < lowerband[-1]:
+                if doubleLowArray_D[-1] < lowerband[-1] * 1.008:
                     common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
