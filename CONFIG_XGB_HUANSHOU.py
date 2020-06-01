@@ -47,6 +47,7 @@ async def index(page, cookie1, url, codeName):
 
 async def main(url1, codeName):
     print(datetime.datetime.now())
+    await asyncio.sleep(random.randint(7, 27))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
