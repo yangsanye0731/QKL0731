@@ -1,3 +1,4 @@
+# encoding=utf-8
 import asyncio
 from pyppeteer import launch
 import datetime
