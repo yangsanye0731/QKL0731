@@ -65,7 +65,7 @@ context['shuju_list'] = shuju_list
 # 策略概览
 celve_labels = ['策略所属', '策略名称', '注意事项', '其他']
 context['celve_labels'] = celve_labels
-celve_dict1 = {'suoshu': '【01雪球概念】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天17:00-18:00', 'qita':'已核对'}
+celve_dict1 = {'suoshu': '【01雪球概念】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天10:30, 13:30', 'qita':'已核对'}
 celve_dict2 = {'suoshu': '【01雪球概念】', 'mingcheng':'跨越5周线', 'zhuyi':'每天15:10-16:00', 'qita':'已核对'}
 celve_dict3 = {'suoshu': '【02指数ETF】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天16:00-17:00', 'qita':'已核对'}
 celve_dict4 = {'suoshu': '【02国内ETF】', 'mingcheng':'跨越5周线', 'zhuyi':'每天16:00-17:00', 'qita':'已核对'}
