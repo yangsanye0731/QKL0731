@@ -341,21 +341,21 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
 def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
     re = ""
-    data = common_mysqlUtil.select_all_code_one(code)
-    if len(data) > 0:
-        plate = data[0][2]
-        print(plate)
-        if (len(plate) > 0):
-            json_list = json.loads(plate)
-            items = json_list.items()
-            count = 1
-            re = "\n"
-            for key, value in items:
-                if count % 5 == 0:
-                    re = re + "   " + str(value.get('plate_name')) + "\n"
-                else:
-                    re = re + "   " + str(value.get('plate_name'))
-                count = count + 1
+    # data = common_mysqlUtil.select_all_code_one(code)
+    # if len(data) > 0:
+    #     plate = data[0][2]
+    #     print(plate)
+    #     if (len(plate) > 0):
+    #         json_list = json.loads(plate)
+    #         items = json_list.items()
+    #         count = 1
+    #         re = "\n"
+    #         for key, value in items:
+    #             if count % 5 == 0:
+    #                 re = re + "   " + str(value.get('plate_name')) + "\n"
+    #             else:
+    #                 re = re + "   " + str(value.get('plate_name'))
+    #             count = count + 1
 
     codeName, industry = common.codeName_and_industry(code)
     eps = "%.1f" % epsup
