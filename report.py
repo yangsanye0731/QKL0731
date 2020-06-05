@@ -21,6 +21,21 @@ context['text'] = timeStr
 # myimage=InlineImage(tpl, './images/111222333.png')
 # context['myimage'] = myimage
 
+# 未来趋势
+qushi_labels = ['资讯来源', '数据内容']
+context['qushi_labels'] = qushi_labels
+
+# 数据遍历
+qushi_dict1 = {'type': '国内趋势（30分钟）', 'title':'上升数、下降数进入30以上', 'mark':'主力趋势指标', 'qita':''}
+qushi_dict2 = {'type': '国内趋势（60分钟）', 'title':'上升数、下降数进入30以上', 'mark':'主力趋势指标', 'qita':''}
+qushi_dict3 = {'type': '国内趋势（日线）', 'title':'上升数、下降数进入30以上，大趋势', 'mark':'主力趋势指标', 'qita':''}
+qushi_list = []
+qushi_list.append(qushi_dict1)
+qushi_list.append(qushi_dict2)
+qushi_list.append(qushi_dict3)
+context['qushi_list'] = qushi_list
+
+
 # 数据资源
 zixun_labels = ['资讯来源', '数据内容']
 context['zixun_labels'] = zixun_labels
@@ -89,7 +104,7 @@ context['jiaoxun_labels'] = jiaoxun_labels
 jiaoxun_dict1 = {'mingcheng': '聚光科技', 'yuanyin':'及时止损，持仓时间过长，均线、上轨及时撤出，不预测', 'zhuyi':'时间：2019-10-15', 'qita':'-'}
 jiaoxun_dict2 = {'mingcheng': '传化智联', 'yuanyin':'横久必跌；进入时机不对；有多次机会出手；持仓时间过长', 'zhuyi':'时间：2020-05-22', 'qita':'-'}
 jiaoxun_dict3 = {'mingcheng': '容大感光', 'yuanyin':'大盘趋势错失，光刻胶概念趋势错失，ENE月线、日线布林下穿，跨越5周线；模糊的确定性明显', 'zhuyi':'-', 'qita':'-'}
-jiaoxun_dict4 = {'mingcheng': '游族网络', 'yuanyin':'在30、60分钟线都符合条件情况下，没有介入', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
+jiaoxun_dict4 = {'mingcheng': '游族网络', 'yuanyin':'在30、60分钟线都符合条件情况下，没有介入，错失良机', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
