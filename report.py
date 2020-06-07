@@ -22,6 +22,16 @@ context['text'] = timeStr
 # context['myimage'] = myimage
 
 # 未来趋势
+jiaoyi_labels = ['资讯来源', '数据内容']
+context['jiaoyi_labels'] = jiaoyi_labels
+
+# 数据遍历
+jiaoyi_dict1 = {'date': '2020-05-27', 'title':'游族网络：20.50卖出', 'mark':'交易原因：涨幅超过7%', 'qita':''}
+jiaoyi_list = []
+jiaoyi_list.append(jiaoyi_dict1)
+context['jiaoyi_list'] = jiaoyi_list
+
+# 未来趋势
 qushi_labels = ['资讯来源', '数据内容']
 context['qushi_labels'] = qushi_labels
 
