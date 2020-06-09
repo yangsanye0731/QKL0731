@@ -372,7 +372,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     #     turnover_rate = num.array(df['turnover_rate'])
     # turnover_rate = "%.2f" % turnover_rate
 
-    turnover_rate = 0
+    turnover_rate = "0"
 
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
