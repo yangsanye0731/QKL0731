@@ -339,11 +339,14 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
 
 # 统一出图
 def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
-    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
+    # eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
+    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0,0,0,0,0,0
     re = ""
+    codeName = ''
     data = common_mysqlUtil.select_all_code_one(code)
     if len(data) > 0:
         plate = data[0][2]
+        codeName = data[0][1]
         print(plate)
         if (len(plate) > 0):
             json_list = json.loads(plate)
@@ -357,18 +360,19 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
                     re = re + "   " + str(value.get('plate_name'))
                 count = count + 1
 
-    codeName, industry = common.codeName_and_industry(code)
     eps = "%.1f" % epsup
     yoy = "%.1f" % yingyeup
 
-    df = common.daily_basic(code)
-    # 判断DataFrame是否为空
-    turnover_rate = 0.0
-    if df.empty:
-        print("empty")
-    else:
-        turnover_rate = num.array(df['turnover_rate'])
-    turnover_rate = "%.2f" % turnover_rate
+    # df = common.daily_basic(code)
+    # # 判断DataFrame是否为空
+    # turnover_rate = 0.0
+    # if df.empty:
+    #     print("empty")
+    # else:
+    #     turnover_rate = num.array(df['turnover_rate'])
+    # turnover_rate = "%.2f" % turnover_rate
+
+    turnover_rate = 0
 
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
@@ -397,7 +401,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%" + re,
                   fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
 
     #设置坐标轴范围
     changdu = len(ts)
