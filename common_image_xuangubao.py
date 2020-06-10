@@ -3,7 +3,6 @@
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import mpl_finance as mpf
 from matplotlib.pylab import date2num
 import datetime
 import talib
