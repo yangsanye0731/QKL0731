@@ -58,6 +58,10 @@ gegu3 = cf.get("script", "gegu3")
 context['gegu3'] = gegu3
 gegu4 = cf.get("script", "gegu4")
 context['gegu4'] = gegu4
+gegu5 = cf.get("script", "gegu5")
+context['gegu5'] = gegu5
+gegu6 = cf.get("script", "gegu6")
+context['gegu6'] = gegu6
 
 
 
