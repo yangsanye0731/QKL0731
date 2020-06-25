@@ -162,7 +162,7 @@ context['jiaoxun_labels'] = jiaoxun_labels
 jiaoxun_dict1 = {'mingcheng': '聚光科技', 'yuanyin':'没有及时止损，持仓时间过长，均线、上轨及时撤出，不预测', 'zhuyi':'时间：2019-10-15', 'qita':'-'}
 jiaoxun_dict2 = {'mingcheng': '传化智联', 'yuanyin':'横久必跌；进入时机不对；有多次机会出手；持仓时间过长，将已有利润全部回吐', 'zhuyi':'时间：2020-05-22', 'qita':'-'}
 jiaoxun_dict3 = {'mingcheng': '容大感光（光刻胶行业、换手）', 'yuanyin':'1、大盘趋势错失，光刻胶概念趋势错失，ENE月线、日线布林下穿，跨越5周线；    2、模糊的确定性明显；    3、买入策略没有规划，分批买入', 'zhuyi':'-', 'qita':'-'}
-jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin':'1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
+jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin':'1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出；   3、当多数概念出现跨越5周线时，预示着一波行情的出现', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
