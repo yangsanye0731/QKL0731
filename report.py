@@ -17,7 +17,7 @@ asset_url = 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
 # 图片
-def code_strategy(codeItem, field_name):
+def code_strategy(codeItem, field_name, width):
     count = 0
     all_code_index_x = [codeItem]
 
@@ -50,7 +50,7 @@ def code_strategy(codeItem, field_name):
                 mingcheng = data[0][1]
             image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增",
                                                               "【03全部代码】跨越5周线容大感光,主力持仓突增")
-            myimage = InlineImage(tpl, image_path, width=Mm(135))
+            myimage = InlineImage(tpl, image_path, width=Mm(width))
             context[field_name] = myimage
 
 
@@ -61,7 +61,7 @@ def code_strategy(codeItem, field_name):
                 if len(data) > 0:
                     mingcheng = data[0][1]
                 image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
-                myimage=InlineImage(tpl, image_path, width=Mm(135))
+                myimage=InlineImage(tpl, image_path, width=Mm(width))
                 context[field_name] = myimage
 
             closeArray_M = num.array(data_history_M['close'])
@@ -89,7 +89,7 @@ def code_strategy(codeItem, field_name):
                                                              matype=0)
                 if doubleLowArray_D[-1] < lowerband[-1] * 1.008:
                     image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
-                    myimage = InlineImage(tpl, image_path, width=Mm(135))
+                    myimage = InlineImage(tpl, image_path, width=Mm(width))
                     context[field_name] = myimage
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -122,6 +122,7 @@ context['text'] = timeStr
 
 filepath = "./report_list/"
 time_path = time.strftime("%Y%m%d", time.localtime())
+time_path = '20200705'
 script_file_path = filepath + time_path + ".conf"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
@@ -137,7 +138,7 @@ context['gainian4'] = gainian4
 gegu_list = []
 for i in range(6):
     gegu = cf.get("script", "gegu" + str(i))
-    image_path = code_strategy(gegu.split('|')[1], "codeItemXXX")
+    image_path = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
     gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': '', 'image_path':image_path}
     gegu_list.append(gegu_dict)
 context['gegu_list'] = gegu_list
@@ -252,15 +253,13 @@ jiaoxun_list.append(jiaoxun_dict5)
 context['jiaoxun_list'] = jiaoxun_list
 
 
-
-codeItem1 = cf.get("script", "codeItem1")
-codeItem1 = codeItem1.split(",")[0]
-code_strategy(codeItem1, "codeItem1")
-
-codeItem2 = cf.get("script", "codeItem2")
-codeItem2 = codeItem2.split(",")[0]
-code_strategy(codeItem2, "codeItem2")
-
+genzong_list = []
+for i in range(5):
+    genzong = cf.get("script", "genzong" + str(i))
+    image_path = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
+    gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
+    genzong_list.append(gezong_dict)
+context['genzong_list'] = genzong_list
 
 
 tpl.render(context)
