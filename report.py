@@ -254,7 +254,7 @@ context['jiaoxun_list'] = jiaoxun_list
 
 
 genzong_list = []
-for i in range(5):
+for i in range(7):
     genzong = cf.get("script", "genzong" + str(i))
     image_path = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
