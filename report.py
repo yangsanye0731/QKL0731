@@ -16,6 +16,85 @@ from docx.shared import Mm
 asset_url = 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
+# 图片
+def code_strategy(codeItem, field_name):
+    count = 0
+    all_code_index_x = [codeItem]
+
+    strResult = ""
+    for codeItem in all_code_index_x:
+        time.sleep(1)
+        count = count + 1
+        data_history = ts.get_k_data(codeItem, ktype='W')
+
+        data_history_M = ts.get_k_data(codeItem, ktype='M')
+        data_history_D = ts.get_k_data(codeItem, ktype='D')
+
+        try:
+            closeArray = num.array(data_history['close'])
+            doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+            highArray = num.array(data_history['high'])
+            doubleHighArray = num.asarray(highArray, dtype='double')
+
+            openArray = num.array(data_history['open'])
+            doubleOpenArray = num.asarray(openArray, dtype='double')
+
+            # 均线
+            ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+            ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
+
+
+            data = common_mysqlUtil.select_all_code_one(codeItem)
+            if len(data) > 0:
+                mingcheng = data[0][1]
+            image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增",
+                                                              "【03全部代码】跨越5周线容大感光,主力持仓突增")
+            myimage = InlineImage(tpl, image_path, width=Mm(135))
+            context[field_name] = myimage
+
+
+            # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
+            if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] and \
+                    ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
+                data = common_mysqlUtil.select_all_code_one(codeItem)
+                if len(data) > 0:
+                    mingcheng = data[0][1]
+                image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
+                myimage=InlineImage(tpl, image_path, width=Mm(135))
+                context[field_name] = myimage
+
+            closeArray_M = num.array(data_history_M['close'])
+            doubleCloseArray_M = num.asarray(closeArray_M, dtype='double')
+            lowArray_M = num.array(data_history_M['low'])
+            doubleLowArray_M = num.asarray(lowArray_M, dtype='double')
+            closeArray_D = num.array(data_history_D['close'])
+            doubleCloseArray_D = num.asarray(closeArray_D, dtype='double')
+            lowArray_D = num.array(data_history_D['low'])
+            doubleLowArray_D = num.asarray(lowArray_D, dtype='double')
+
+            param_m1 = 11
+            param_m2 = 9
+            param_n = 10
+            sma_n = ta.SMA(closeArray_M, param_n)
+            upper = (1 + param_m1 / 100) * sma_n
+            lower = (1 - param_m2 / 100) * sma_n
+            ene = (upper + lower) / 2
+            upper = upper.round(2)
+            ene = ene.round(2)
+            lower = lower.round(2)
+
+            if (ene[-1] > ene[-2]):
+                upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2,
+                                                             matype=0)
+                if doubleLowArray_D[-1] < lowerband[-1] * 1.008:
+                    image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
+                    myimage = InlineImage(tpl, image_path, width=Mm(135))
+                    context[field_name] = myimage
+        except (IOError, TypeError, NameError, IndexError, Exception) as e:
+            print(e)
+    return myimage
+
 def get_week_day(date):
   week_day_dict = {
     0 : '星期一',
@@ -55,18 +134,13 @@ context['gainian3'] = gainian3
 gainian4 = cf.get("script", "gainian4")
 context['gainian4'] = gainian4
 
-gegu1 = cf.get("script", "gegu1")
-context['gegu1'] = gegu1
-gegu2 = cf.get("script", "gegu2")
-context['gegu2'] = gegu2
-gegu3 = cf.get("script", "gegu3")
-context['gegu3'] = gegu3
-gegu4 = cf.get("script", "gegu4")
-context['gegu4'] = gegu4
-gegu5 = cf.get("script", "gegu5")
-context['gegu5'] = gegu5
-gegu6 = cf.get("script", "gegu6")
-context['gegu6'] = gegu6
+gegu_list = []
+for i in range(6):
+    gegu = cf.get("script", "gegu" + str(i))
+    image_path = code_strategy(gegu.split('|')[1], "codeItemXXX")
+    gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': '', 'image_path':image_path}
+    gegu_list.append(gegu_dict)
+context['gegu_list'] = gegu_list
 
 
 
@@ -76,8 +150,8 @@ context['jiaoyi_labels'] = jiaoyi_labels
 
 # 数据遍历
 jiaoyi_dict1 = {'date': '2020-05-27', 'title':'游族网络：20.50卖出', 'mark':'交易原因：涨幅超过7%', 'qita':''}
-jiaoyi_dict2 = {'date': '2020-06-18', 'title':'科林电器：11.50买入', 'mark':'价格在大单介入附近，且30,60下降个数较大', 'qita':''}
-jiaoyi_dict3 = {'date': '2020-06-19', 'title':'科林电器：11.58卖出', 'mark':'30,60上升个数均超过30，有一定风险，抛出', 'qita':''}
+jiaoyi_dict2 = {'date': '2020-06-18', 'title':'科林电气：11.50买入', 'mark':'价格在大单介入附近，且30,60下降个数较大', 'qita':''}
+jiaoyi_dict3 = {'date': '2020-06-19', 'title':'科林电气：11.58卖出', 'mark':'30,60上升个数均超过30，有一定风险，抛出', 'qita':''}
 jiaoyi_list = []
 jiaoyi_list.append(jiaoyi_dict1)
 jiaoyi_list.append(jiaoyi_dict2)
@@ -167,92 +241,25 @@ context['jiaoxun_labels'] = jiaoxun_labels
 jiaoxun_dict1 = {'mingcheng': '聚光科技', 'yuanyin':'没有及时止损，持仓时间过长，均线、上轨及时撤出，不预测', 'zhuyi':'时间：2019-10-15', 'qita':'-'}
 jiaoxun_dict2 = {'mingcheng': '传化智联', 'yuanyin':'横久必跌；进入时机不对；有多次机会出手；持仓时间过长，将已有利润全部回吐', 'zhuyi':'时间：2020-05-22', 'qita':'-'}
 jiaoxun_dict3 = {'mingcheng': '容大感光（光刻胶行业、换手）', 'yuanyin':'1、大盘趋势错失，光刻胶概念趋势错失，ENE月线、日线布林下穿，跨越5周线；    2、模糊的确定性明显；    3、买入策略没有规划，分批买入', 'zhuyi':'-', 'qita':'-'}
-jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin':'1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出；   3、当多数概念出现跨越5周线时，预示着一波行情的出现', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
+jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin':'1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出；   3、当多数概念出现跨越5周线时，预示着一波行情的出现，错过一次20%左右的较大行情', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
+jiaoxun_dict5 = {'mingcheng': '科林电气', 'yuanyin':'2020年度6月份交易次数为1，且很快进出，技术是要持续磨练出来的，交易次数少，对成长不利', 'zhuyi':'时间：2019-06-18', 'qita':'-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
 jiaoxun_list.append(jiaoxun_dict3)
 jiaoxun_list.append(jiaoxun_dict4)
+jiaoxun_list.append(jiaoxun_dict5)
 context['jiaoxun_list'] = jiaoxun_list
 
 
 
-# 图片
-def code_strategy(codeItem, field_name):
-    count = 0
-    all_code_index_x = [codeItem]
-
-    strResult = ""
-    for codeItem in all_code_index_x:
-        time.sleep(1)
-        count = count + 1
-        print(count)
-        data_history = ts.get_k_data(codeItem, ktype='W')
-
-        data_history_M = ts.get_k_data(codeItem, ktype='M')
-        data_history_D = ts.get_k_data(codeItem, ktype='D')
-
-        try:
-            closeArray = num.array(data_history['close'])
-            doubleCloseArray = num.asarray(closeArray, dtype='double')
-
-            highArray = num.array(data_history['high'])
-            doubleHighArray = num.asarray(highArray, dtype='double')
-
-            openArray = num.array(data_history['open'])
-            doubleOpenArray = num.asarray(openArray, dtype='double')
-
-            # 均线
-            ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
-            ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
-
-            # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
-            if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] and \
-                    ma5[-3] < ma5[-4] and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
-                data = common_mysqlUtil.select_all_code_one(codeItem)
-                if len(data) > 0:
-                    mingcheng = data[0][1]
-                image_path = common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
-                print(image_path)
-                myimage=InlineImage(tpl, image_path, width=Mm(150))
-                context[field_name] = myimage
-                # common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
-                #                                "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
-                #                                    "http://stockpage.10jqka.com.cn/" + codeItem)
-
-            closeArray_M = num.array(data_history_M['close'])
-            doubleCloseArray_M = num.asarray(closeArray_M, dtype='double')
-            lowArray_M = num.array(data_history_M['low'])
-            doubleLowArray_M = num.asarray(lowArray_M, dtype='double')
-            closeArray_D = num.array(data_history_D['close'])
-            doubleCloseArray_D = num.asarray(closeArray_D, dtype='double')
-            lowArray_D = num.array(data_history_D['low'])
-            doubleLowArray_D = num.asarray(lowArray_D, dtype='double')
-
-            param_m1 = 11
-            param_m2 = 9
-            param_n = 10
-            sma_n = ta.SMA(closeArray_M, param_n)
-            upper = (1 + param_m1 / 100) * sma_n
-            lower = (1 - param_m2 / 100) * sma_n
-            ene = (upper + lower) / 2
-            upper = upper.round(2)
-            ene = ene.round(2)
-            lower = lower.round(2)
-
-            if (ene[-1] > ene[-2]):
-                upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2,
-                                                             matype=0)
-                if doubleLowArray_D[-1] < lowerband[-1] * 1.008:
-                    image_path = common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
-                    print(image_path)
-        except (IOError, TypeError, NameError, IndexError, Exception) as e:
-            print(e)
-    return strResult
-
 codeItem1 = cf.get("script", "codeItem1")
 codeItem1 = codeItem1.split(",")[0]
 code_strategy(codeItem1, "codeItem1")
+
+codeItem2 = cf.get("script", "codeItem2")
+codeItem2 = codeItem2.split(",")[0]
+code_strategy(codeItem2, "codeItem2")
 
 
 
