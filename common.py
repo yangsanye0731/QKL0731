@@ -7,6 +7,7 @@ from dingtalkchatbot.chatbot import DingtalkChatbot
 import matplotlib
 import matplotlib.pyplot as plt
 import os
+import datetime
 
 # 涨跌幅
 def zhangdiefu(code):
@@ -101,9 +102,62 @@ def daily_basic(code):
      if code.startswith('3'):
           code = code + '.SZ'
      timez = time.strftime('%Y%m%d', time.localtime(time.time()))
-     df = pro.daily_basic(ts_code=code, trade_date="20200217",
+     df = pro.daily_basic(ts_code=code, trade_date=timez,
                           fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
-     #print(df)
+
+     if len(df) == 0:
+         timez = time.strftime('%Y%m%d', time.localtime(time.time()-86400))
+         print(timez)
+         df = pro.daily_basic(ts_code=code, trade_date=timez,
+                              fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+         if len(df) == 0:
+             timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400*2))
+             print(timez)
+             df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                  fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+             if len(df) == 0:
+                 timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 3))
+                 print(timez)
+                 df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                      fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+                 if len(df) == 0:
+                     timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 4))
+                     print(timez)
+                     df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                          fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+                     if len(df) == 0:
+                         timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 5))
+                         print(timez)
+                         df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                              fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+                         if len(df) == 0:
+                             timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 6))
+                             print(timez)
+                             df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                                  fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+                             if len(df) == 0:
+                                 timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 7))
+                                 print(timez)
+                                 df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                                      fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+                                 if len(df) == 0:
+                                     timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 8))
+                                     print(timez)
+                                     df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                                          fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
+
+                                     if len(df) == 0:
+                                         timez = time.strftime('%Y%m%d', time.localtime(time.time() - 86400 * 9))
+                                         print(timez)
+                                         df = pro.daily_basic(ts_code=code, trade_date=timez,
+                                                              fields='ts_code,trade_date,turnover_rate,turnover_rate_f,volume_ratio,pe,pb,total_mv')
      return df
 
 # 股票名称
