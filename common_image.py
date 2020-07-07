@@ -644,6 +644,8 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
 
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
+    image_path = path + "/" + timeStr1 + "_" + codeName + ".png"
+    return image_path
 
 
 
