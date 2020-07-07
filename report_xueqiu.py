@@ -29,6 +29,7 @@ async def load_cookie():
 
 # 加载首页
 async def index(page, cookie1, url, codeName):
+    myimage = None
     try:
         for cookie in cookie1:
             await page.setCookie(cookie)
