@@ -47,7 +47,7 @@ def strategy(zhouqi):
                 if len(data) > 0:
                     mingcheng = data[0][1]
                 common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
-
+                count_result_b = count_result_b + 1
                 # common.dingding_markdown_msg_link("触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
                 #                                "触发【03全部代码】跨越5周线容大感光,主力持仓突增(" + mingcheng + codeItem + ")",
                 #                                    "http://stockpage.10jqka.com.cn/" + codeItem)
@@ -77,11 +77,14 @@ def strategy(zhouqi):
                                                              matype=0)
                 if doubleLowArray_D[-1] < lowerband[-1] * 1.008:
                     common_image.plt_image_tongyichutu_2(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
+                    count_result_c = count_result_c + 1
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return strResult
 
+count_result_b = 0
+count_result_e = 0
 strMailResult_W = strategy('W')
 sendMail(template1(strMailResult_W), "【03全部代码】跨越5周线容大感光,主力持仓突增执行完成")
 
@@ -89,4 +92,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【03全部代码】跨越5周线容大感光,主力持仓突增', '触发【03全部代码】跨越5周线容大感光,主力持仓突增')
+common.dingding_markdown_msg_2('触发【03全部代码】跨越5周线容大感光,主力持仓突增，B：' + count_result_b + ", E:" + count_result_e, '触发【03全部代码】跨越5周线容大感光,主力持仓突增，B：' + count_result_b + ", E:" + count_result_e)
