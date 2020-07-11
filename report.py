@@ -15,7 +15,7 @@ from docx.shared import Mm
 
 # 个股数
 gegu_count = 7
-gengong_count = 10
+gengong_count = 11
 
 
 asset_url = 'reportTemplate.docx'
@@ -148,7 +148,8 @@ for i in range(gegu_count):
     gegu = cf.get("script", "gegu" + str(i))
     image_path, sign_result = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
     if "触发" in sign_result:
-        common.dingding_markdown_msg_2('触发【Report】每日投资报告有鱼，有鱼，有鱼！', '触发【Report】每日投资报告有鱼，有鱼，有鱼！')
+        common.dingding_markdown_msg_2('触发每日投资报告有鱼，有鱼！' + gegu.split('|')[2] + sign_result,
+                                       '触发【Report】每日投资报告有鱼，有鱼！' + gegu.split('|')[2] + sign_result)
     rt1 = RichText('')
     rt1.add(sign_result, color='#ff0000', bold=True)
     gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': rt1, 'image_path':image_path}
@@ -273,7 +274,8 @@ for i in range(gengong_count):
     genzong = cf.get("script", "genzong" + str(i))
     image_path, sign_result = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
     if "触发" in sign_result:
-        common.dingding_markdown_msg_2('触发【Report】每日投资报告有鱼，有鱼，有鱼！', '触发【Report】每日投资报告有鱼，有鱼，有鱼！')
+        common.dingding_markdown_msg_2('触发每日投资报告有鱼，有鱼！' + genzong.split('|')[2] + sign_result,
+                                       '触发【Report】每日投资报告有鱼，有鱼！' + genzong.split('|')[2] + sign_result)
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
     genzong_list.append(gezong_dict)
 context['genzong_list'] = genzong_list
