@@ -13,6 +13,11 @@ import talib as ta
 import common_image
 from docx.shared import Mm
 
+# 个股数
+gegu_count = 7
+gengong_count = 9
+
+
 asset_url = 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
@@ -20,7 +25,8 @@ tpl = DocxTemplate(asset_url)
 def code_strategy(codeItem, field_name, width):
     count = 0
     all_code_index_x = [codeItem]
-
+    myimage = None
+    sign_result = "信号："
     strResult = ""
     for codeItem in all_code_index_x:
         time.sleep(1)
@@ -62,6 +68,7 @@ def code_strategy(codeItem, field_name, width):
                     mingcheng = data[0][1]
                 image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
                 myimage=InlineImage(tpl, image_path, width=Mm(width))
+                sign_result = sign_result + "触发跨越5周线容大感光,主力持仓突增;  "
                 context[field_name] = myimage
 
             closeArray_M = num.array(data_history_M['close'])
@@ -91,9 +98,13 @@ def code_strategy(codeItem, field_name, width):
                     image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
                     myimage = InlineImage(tpl, image_path, width=Mm(width))
                     context[field_name] = myimage
+
+            if lowArray_D[-1] < ene[-1] :
+                sign_result = sign_result + "触发价格在ENE周线中线下方；"
+
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
-    return myimage
+    return myimage, sign_result
 
 def get_week_day(date):
   week_day_dict = {
@@ -117,9 +128,6 @@ context['week'] = get_week_day(datetime.datetime.now())
 # 资产概述
 context['text'] = timeStr
 
-# myimage=InlineImage(tpl, './images/111222333.png')
-# context['myimage'] = myimage
-
 filepath = "./report_list/"
 time_path = time.strftime("%Y%m%d", time.localtime())
 time_path = '20200705'
@@ -136,10 +144,14 @@ gainian4 = cf.get("script", "gainian4")
 context['gainian4'] = gainian4
 
 gegu_list = []
-for i in range(6):
+for i in range(gegu_count):
     gegu = cf.get("script", "gegu" + str(i))
-    image_path = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
-    gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': '', 'image_path':image_path}
+    image_path, sign_result = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
+    if "触发" in sign_result:
+        common.dingding_markdown_msg_2('触发【Report】每日投资报告有鱼，有鱼，有鱼！', '触发【Report】每日投资报告有鱼，有鱼，有鱼！')
+    rt1 = RichText('')
+    rt1.add(sign_result, color='#ff0000', bold=True)
+    gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': rt1, 'image_path':image_path}
     gegu_list.append(gegu_dict)
 context['gegu_list'] = gegu_list
 
@@ -244,19 +256,22 @@ jiaoxun_dict2 = {'mingcheng': '传化智联', 'yuanyin':'横久必跌；进入�
 jiaoxun_dict3 = {'mingcheng': '容大感光（光刻胶行业、换手）', 'yuanyin':'1、大盘趋势错失，光刻胶概念趋势错失，ENE月线、日线布林下穿，跨越5周线；    2、模糊的确定性明显；    3、买入策略没有规划，分批买入', 'zhuyi':'-', 'qita':'-'}
 jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin':'1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出；   3、当多数概念出现跨越5周线时，预示着一波行情的出现，错过一次20%左右的较大行情', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
 jiaoxun_dict5 = {'mingcheng': '科林电气', 'yuanyin':'2020年度6月份交易次数为1，且很快进出，技术是要持续磨练出来的，交易次数少，对成长不利', 'zhuyi':'时间：2019-06-18', 'qita':'-'}
+jiaoxun_dict6 = {'mingcheng': '华脉科技', 'yuanyin':'在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi':'时间：2019-07-01', 'qita':'-'}
+jiaoxun_dict7 = {'mingcheng': '万通智控', 'yuanyin':'在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi':'时间：2019-07-01', 'qita':'-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
 jiaoxun_list.append(jiaoxun_dict3)
 jiaoxun_list.append(jiaoxun_dict4)
-jiaoxun_list.append(jiaoxun_dict5)
+jiaoxun_list.append(jiaoxun_dict6)
+jiaoxun_list.append(jiaoxun_dict7)
 context['jiaoxun_list'] = jiaoxun_list
 
 
 genzong_list = []
-for i in range(9):
+for i in range(gengong_count):
     genzong = cf.get("script", "genzong" + str(i))
-    image_path = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
+    image_path, sign_result = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
     genzong_list.append(gezong_dict)
 context['genzong_list'] = genzong_list
