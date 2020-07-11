@@ -833,30 +833,111 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     plt.savefig(path + "/" +  timeStr1 + "_" + codeName + "5D.png")
     plt.close()
 
+import pandas as pd
+def KDJ_zhibiao(data_history, doubleCloseArray):
+    stock_data = {}
+    low_list = data_history.low.rolling(9).min()
+    low_list.fillna(value=data_history.low.expanding().min(), inplace=True)
+    high_list = data_history.high.rolling(9).max()
+    high_list.fillna(value=data_history.high.expanding().max(), inplace=True)
+    rsv = (doubleCloseArray - low_list) / (high_list - low_list) * 100
+    stock_data['KDJ_K'] = pd.DataFrame.ewm(rsv, com=2).mean()
+    stock_data['KDJ_D'] = pd.DataFrame.ewm(stock_data['KDJ_K'], com=2).mean()
+    stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']
+    dddd = pd.DataFrame(stock_data)
+    return dddd
+
 
 # 个股指标
 def plt_image_geGuZhiBiao(code, fullName):
     codeName = fullName + "(" + code + ")"
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
 
-    fig = plt.figure(figsize=(15,12))
+    fig = plt.figure(figsize=(15,10))
+    # fig.suptitle(codeName, fontproperties=myfont_title)
     # 1*1 的第一个图表
-    ax_macd = fig.add_subplot(121)
-    ax_bull = fig.add_subplot(122)
+    ax_macd_60 = fig.add_subplot(331)
+    ax_macd_d = fig.add_subplot(332)
+    ax_macd = fig.add_subplot(333)
+    ax_bull_60 = fig.add_subplot(334)
+    ax_bull_d = fig.add_subplot(335)
+    ax_bull = fig.add_subplot(336)
+    ax_kdj_60 = fig.add_subplot(337)
+    ax_kdj_d = fig.add_subplot(338)
+    ax_kdj = fig.add_subplot(339)
+
+    data_60 = tushare.get_k_data(code, ktype="60")
+    ts_60 = data_60[["open", "close", "high", "low", "volume"]]
+    closeArray_60 = num.array(data_60['close'])
+    doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+
+    data_d = tushare.get_k_data(code, ktype="D")
+    ts_d = data_d[["open", "close", "high", "low", "volume"]]
+    closeArray_d = num.array(data_d['close'])
+    doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
 
     data = tushare.get_k_data(code, ktype="W")
     ts = data[["open", "close", "high", "low", "volume"]]
-
-    # 计算MACD指标数据
     closeArray = num.array(data['close'])
     doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    kdj_60 = KDJ_zhibiao(data_60, closeArray_60)
+    kdj_d = KDJ_zhibiao(data_d, closeArray_d)
+    kdj = KDJ_zhibiao(data, closeArray)
+
+    # 计算MACD指标数据
+    data_60["macd"], data_60["sigal"], data_60["hist"] = talib.MACD(ts_60['close'], fastperiod=12, slowperiod=26, signalperiod=9)
+
+    ax_macd_60.plot(data_60.index, data_60["macd"], label="macd")
+    ax_macd_60.plot(data_60.index, data_60["sigal"], label="sigal")
+    ax_macd_60.bar(data_60.index, data_60["hist"] * 2, label="hist")
+    ax_macd_60.set_xlabel( "60MACD买入卖出量与力道", fontproperties=myfont)
+    ax_macd_60.set_ylabel(codeName + "涨跌幅：" + common.zhangdiefu(code), fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if (changdu > 200):
+        ax_macd_60.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_macd_60.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_macd_60.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_macd_60.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_macd_60.set_xlim(500, changdu)
+
+
+
+    # 计算MACD指标数据
+    data_d["macd"], data_d["sigal"], data_d["hist"] = talib.MACD(ts_d['close'], fastperiod=12, slowperiod=26, signalperiod=9)
+
+    ax_macd_d.plot(data_d.index, data_d["macd"], label="macd")
+    ax_macd_d.plot(data_d.index, data_d["sigal"], label="sigal")
+    ax_macd_d.bar(data_d.index, data_d["hist"] * 2, label="hist")
+    ax_macd_d.set_xlabel("MACD（日线）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if (changdu > 200):
+        ax_macd_d.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_macd_d.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_macd_d.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_macd_d.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_macd_d.set_xlim(500, changdu)
+
+
+
+
+    # 计算MACD指标数据
     data["macd"], data["sigal"], data["hist"] = talib.MACD(ts['close'], fastperiod=12, slowperiod=26, signalperiod=9)
 
     ax_macd.plot(data.index, data["macd"], label="macd")
     ax_macd.plot(data.index, data["sigal"], label="sigal")
     ax_macd.bar(data.index, data["hist"] * 2, label="hist")
-    ax_macd.set_xlabel(codeName + "日期（周）", fontproperties=myfont)
-    ax_macd.set_ylabel("涨跌幅：" + common.zhangdiefu(code), fontproperties=myfont)
+    ax_macd.set_xlabel("MACD（周线）", fontproperties=myfont)
 
     changdu = len(ts)
     if (changdu > 200):
@@ -871,16 +952,66 @@ def plt_image_geGuZhiBiao(code, fullName):
         ax_macd.set_xlim(500, changdu)
 
 
+
+
+
+
+    data_60['upperband'], data_60['middleband'], data_60['lowerband'] = talib.BBANDS(ts_60['close'], timeperiod=20, nbdevup=2,
+                                                                            nbdevdn=2,
+                                                                            matype=0)
+    ax_bull_60.plot(data_60.index, data_60["upperband"], label="UP")
+    ax_bull_60.plot(data_60.index, data_60["middleband"], label="MID")
+    ax_bull_60.plot(data_60.index, data_60["lowerband"], label="LOW")
+    ax_bull_60.plot(data_60.index, data_60["low"], "b.-", label="Line")
+
+    ax_bull_60.set_xlabel("布林（60）", fontproperties=myfont)
+    ax_bull_60.set_ylabel("BULL", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if (changdu > 200):
+        ax_bull_60.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_bull_60.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_bull_60.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_bull_60.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_bull_60.set_xlim(500, changdu)
+
+
+    data_d['upperband'], data_d['middleband'], data_d['lowerband'] = talib.BBANDS(ts_d['close'], timeperiod=20, nbdevup=2,
+                                                                            nbdevdn=2,
+                                                                            matype=0)
+    ax_bull_d.plot(data_d.index, data_d["upperband"], label="UP")
+    ax_bull_d.plot(data_d.index, data_d["middleband"], label="MID")
+    ax_bull_d.plot(data_d.index, data_d["lowerband"], label="LOW")
+    ax_bull_d.plot(data_d.index, data_d["low"], "b.-", label="Line")
+    ax_bull_d.set_xlabel("布林（日）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if (changdu > 200):
+        ax_bull_d.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_bull_d.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_bull_d.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_bull_d.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_bull_d.set_xlim(500, changdu)
+
+
+
     data['upperband'], data['middleband'],data['lowerband']  = talib.BBANDS(ts['close'], timeperiod=20, nbdevup=2, nbdevdn=2,
                                                           matype=0)
     ax_bull.plot(data.index, data["upperband"], label="UP")
     ax_bull.plot(data.index, data["middleband"], label="MID")
     ax_bull.plot(data.index, data["lowerband"], label="LOW")
     ax_bull.plot(data.index, data["low"], "b.-" , label="Line")
+    ax_bull.set_xlabel("布林（周）", fontproperties=myfont)
 
-    ax_bull.set_xlabel(codeName + "日期（周）", fontproperties=myfont)
-    ax_bull.set_ylabel("BULL", fontproperties=myfont)
-
+    changdu = len(ts)
     if (changdu > 200):
         ax_bull.set_xlim(100, changdu)
     if (changdu > 300):
@@ -892,12 +1023,70 @@ def plt_image_geGuZhiBiao(code, fullName):
     if (changdu > 600):
         ax_bull.set_xlim(500, changdu)
 
+
+
+    # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
+    ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
+
+    ax_kdj_60.set_xlabel("KDJ（60）", fontproperties=myfont)
+    ax_kdj_60.set_ylabel("KDJ", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if (changdu > 200):
+        ax_kdj_60.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_kdj_60.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_kdj_60.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_kdj_60.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_kdj_60.set_xlim(500, changdu)
+
+    ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
+    ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
+
+    ax_kdj_d.set_xlabel("KDJ（日）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if (changdu > 200):
+        ax_kdj_d.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_kdj_d.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_kdj_d.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_kdj_d.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_kdj_d.set_xlim(500, changdu)
+
+    ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
+    ax_kdj.plot(kdj.index, kdj["KDJ_J"], label="J")
+
+    ax_kdj.set_xlabel("KDJ（周）", fontproperties=myfont)
+
+    changdu = len(ts)
+    if (changdu > 200):
+        ax_kdj.set_xlim(100, changdu)
+    if (changdu > 300):
+        ax_kdj.set_xlim(200, changdu)
+    if (changdu > 400):
+        ax_kdj.set_xlim(300, changdu)
+    if (changdu > 500):
+        ax_kdj.set_xlim(400, changdu)
+    if (changdu > 600):
+        ax_kdj.set_xlim(500, changdu)
+
+
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1 + "/geGuZhiBiao"
     if not os.path.exists(path):
         os.makedirs(path)
-    plt.savefig(path + "/" + timeStr1 + "_" + code + "GeGu.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + code + ".png")
     plt.close()
+    image_path = path + "/" + timeStr1 + "_" + code + ".png"
+    return image_path
 
-# plt_image_geGuZhiBiao("002008","dazujiguang")
+# plt_image_geGuZhiBiao("399006","创业板指")

@@ -276,9 +276,18 @@ for i in range(gengong_count):
     genzong_list.append(gezong_dict)
 context['genzong_list'] = genzong_list
 
+image_path = common_image.plt_image_geGuZhiBiao("399006","创业板指")
+myimage = InlineImage(tpl, image_path, width=Mm(182))
+context['image1'] = myimage
+
+image_path = common_image.plt_image_geGuZhiBiao("399300","沪深300")
+myimage = InlineImage(tpl, image_path, width=Mm(182))
+context['image2'] = myimage
+
 
 tpl.render(context)
 timeTitle = time.strftime("%Y%m%d", time.localtime())
+tpl.save('./report/每日报告_2020.docx')
 tpl.save('./report/每日报告_' + timeTitle + '.docx')
 
 bp = ByPy()
