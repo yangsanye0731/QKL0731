@@ -851,7 +851,7 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
 # 个股指标
 def plt_image_geGuZhiBiao(code, fullName):
     codeName = fullName + "(" + code + ")"
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="15")
+    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="10")
 
     fig = plt.figure(figsize=(15,10))
     # fig.suptitle(codeName, fontproperties=myfont_title)
