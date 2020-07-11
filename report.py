@@ -277,10 +277,12 @@ for i in range(gengong_count):
 context['genzong_list'] = genzong_list
 
 image_path = common_image.plt_image_geGuZhiBiao("399006","创业板指")
+time.sleep(10)
 myimage = InlineImage(tpl, image_path, width=Mm(182))
 context['image1'] = myimage
 
 image_path = common_image.plt_image_geGuZhiBiao("399300","沪深300")
+time.sleep(10)
 myimage = InlineImage(tpl, image_path, width=Mm(182))
 context['image2'] = myimage
 
