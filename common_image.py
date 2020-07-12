@@ -442,7 +442,6 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
     if len(data) > 0:
         plate = data[0][2]
         codeName = data[0][1]
-        print(plate)
         if (len(plate) > 0):
             json_list = json.loads(plate)
             items = json_list.items()

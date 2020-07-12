@@ -15,7 +15,7 @@ from docx.shared import Mm
 
 # 个股数
 gegu_count = 7
-gengong_count = 13
+gengong_count = 14
 
 
 asset_url = 'reportTemplate.docx'
@@ -45,6 +45,9 @@ def code_strategy(codeItem, field_name, width):
 
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
+
+            lowArray = num.array(data_history['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
 
             # 均线
             ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
@@ -99,7 +102,15 @@ def code_strategy(codeItem, field_name, width):
                     myimage = InlineImage(tpl, image_path, width=Mm(width))
                     context[field_name] = myimage
 
-            if lowArray_D[-1] < ene[-1] :
+            sma_n_w = ta.SMA(doubleCloseArray, param_n)
+            upper_w = (1 + param_m1 / 100) * sma_n_w
+            lower_w = (1 - param_m2 / 100) * sma_n_w
+            ene_w = (upper_w + lower_w) / 2
+            upper_w = upper_w.round(2)
+            ene_w = ene_w.round(2)
+            lower_w = lower_w.round(2)
+
+            if lowArray[-1] < ene_w[-1] :
                 sign_result = sign_result + "触发价格在ENE周线中线下方；"
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
@@ -149,7 +160,7 @@ for i in range(gegu_count):
     image_path, sign_result = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
     if "触发" in sign_result:
         common.dingding_markdown_msg_2('触发每日投资报告有鱼，有鱼！' + gegu.split('|')[2] + sign_result,
-                                       '触发【Report】每日投资报告有鱼，有鱼！' + gegu.split('|')[2] + sign_result)
+                                       '触发每日投资报告有鱼，有鱼！' + gegu.split('|')[2] + sign_result)
     rt1 = RichText('')
     rt1.add(sign_result, color='#ff0000', bold=True)
     gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': rt1, 'image_path':image_path}
@@ -275,7 +286,7 @@ for i in range(gengong_count):
     image_path, sign_result = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
     if "触发" in sign_result:
         common.dingding_markdown_msg_2('触发每日投资报告有鱼，有鱼！' + genzong.split('|')[2] + sign_result,
-                                       '触发【Report】每日投资报告有鱼，有鱼！' + genzong.split('|')[2] + sign_result)
+                                       '触发每日投资报告有鱼，有鱼！' + genzong.split('|')[2] + sign_result)
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
     genzong_list.append(gezong_dict)
 context['genzong_list'] = genzong_list

@@ -280,7 +280,6 @@ def select_report_news():
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
     sql = "SELECT `id`, `title`, `type`, `mark` FROM `superman`.`Report_News` where status = '20' order by insert_time ASC"
-    print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
