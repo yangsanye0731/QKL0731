@@ -69,7 +69,7 @@ def code_strategy(codeItem, field_name, width):
                 data = common_mysqlUtil.select_all_code_one(codeItem)
                 if len(data) > 0:
                     mingcheng = data[0][1]
-                image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增", "【03全部代码】跨越5周线容大感光,主力持仓突增")
+                image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【04每日报告】跨越5周线容大感光,主力持仓突增", "【04每日报告】跨越5周线容大感光,主力持仓突增")
                 myimage=InlineImage(tpl, image_path, width=Mm(width))
                 sign_result = sign_result + "触发跨越5周线容大感光,主力持仓突增;  "
                 context[field_name] = myimage
@@ -98,7 +98,7 @@ def code_strategy(codeItem, field_name, width):
                 upperband, middleband, lowerband = ta.BBANDS(doubleCloseArray_D, timeperiod=20, nbdevup=2, nbdevdn=2,
                                                              matype=0)
                 if doubleLowArray_D[-1] < lowerband[-1] * 1.008:
-                    image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】ENE月线升势，布林日线下穿", "【03全部代码】ENE月线升势，布林日线下穿")
+                    image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【04每日报告】ENE月线升势，布林日线下穿", "【04每日报告】ENE月线升势，布林日线下穿")
                     myimage = InlineImage(tpl, image_path, width=Mm(width))
                     context[field_name] = myimage
 
