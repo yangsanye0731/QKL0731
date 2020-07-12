@@ -109,10 +109,10 @@ def code_strategy(codeItem, field_name, width):
             upper_w = upper_w.round(2)
             ene_w = ene_w.round(2)
             lower_w = lower_w.round(2)
-            # if (codeItem == '002368'):
-            #     print("=====================================================" + codeItem)
-            #     print(closeArray)
-            #     print(ene_w)
+
+            print("=====================================================" + codeItem)
+            print(closeArray[-1])
+            print(ene_w[-1])
             if closeArray[-1] < ene_w[-1] :
                 sign_result = sign_result + "触发当前价格在ENE周线中线下方；"
 
