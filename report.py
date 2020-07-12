@@ -15,7 +15,7 @@ from docx.shared import Mm
 
 # 个股数
 gegu_count = 7
-gengong_count = 16
+gengong_count = 17
 
 
 asset_url = 'reportTemplate.docx'
@@ -57,8 +57,8 @@ def code_strategy(codeItem, field_name, width):
             data = common_mysqlUtil.select_all_code_one(codeItem)
             if len(data) > 0:
                 mingcheng = data[0][1]
-            image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【03全部代码】跨越5周线容大感光,主力持仓突增",
-                                                              "【03全部代码】跨越5周线容大感光,主力持仓突增")
+            image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【04每日报告】跨越5周线容大感光,主力持仓突增",
+                                                              "【04每日报告】跨越5周线容大感光,主力持仓突增")
             myimage = InlineImage(tpl, image_path, width=Mm(width))
             context[field_name] = myimage
 
