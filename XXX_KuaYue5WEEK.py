@@ -58,6 +58,24 @@ async def index(page, cookie1, url, codeName):
                 ma5[n-3] < ma5[n-4] and doubleCloseArray[n-1] > doubleOpenArray[n-1]:
             common.dingding_markdown_msg_2('触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')', '触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')')
             common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "【01雪球指数】跨越5周线", "【01雪球指数】跨越5周线", str(zhangdiefu[-1]), "%.2f" % huanshoulv[-1])
+
+        param_m1 = 11
+        param_m2 = 9
+        param_n = 10
+        sma_n = ta.SMA(doubleCloseArray, param_n)
+        upper = (1 + param_m1 / 100) * sma_n
+        lower = (1 - param_m2 / 100) * sma_n
+        ene = (upper + lower) / 2
+        upper = upper.round(2)
+        ene = ene.round(2)
+        lower = lower.round(2)
+
+        if doubleCloseArray[-1] < ene[-1]:
+            common.dingding_markdown_msg_2('触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')',
+                                           '触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')')
+            common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W",
+                                                             "【01雪球指数】当前价格在ENE周线中线下方", "【01雪球指数】当前价格在ENE周线中线下方", str(zhangdiefu[-1]),
+                                                             "%.2f" % huanshoulv[-1])
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_2('触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
                                        '触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')

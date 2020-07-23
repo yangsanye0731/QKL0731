@@ -15,7 +15,7 @@ from docx.shared import Mm
 
 # 个股数
 gegu_count = 8
-gengong_count = 29
+gengong_count = 28
 
 
 asset_url = 'reportTemplate.docx'
@@ -179,7 +179,7 @@ context['jiaoyi_labels'] = jiaoyi_labels
 # 数据遍历
 jiaoyi_dict1 = {'date': '2020-05-27', 'title':'游族网络：20.50卖出', 'mark':'交易原因：涨幅超过7%', 'qita':''}
 jiaoyi_dict2 = {'date': '2020-06-18', 'title':'科林电气：11.50买入', 'mark':'价格在大单介入附近，且30,60下降个数较大', 'qita':''}
-jiaoyi_dict3 = {'date': '2020-06-19', 'title':'科林电气：11.58卖出', 'mark':'30,60上升个数均超过30，有一定风险，抛出', 'qita':''}
+jiaoyi_dict3 = {'date': '2020-06-19', 'title':'科林电气：11.58卖出', 'mark':'30,60上升个数均超过30，有一定风险，抛出，收益100+', 'qita':''}
 jiaoyi_dict4 = {'date': '2020-07-16', 'title':'恒为科技：22.80买入5500股', 'mark':'30,60下降个数均超过30，ENE下方，大资金接入', 'qita':''}
 jiaoyi_dict5 = {'date': '2020-07-17', 'title':'万通智控：14.30买入11700股', 'mark':'30,60下降个数均超过30，ENE下方，大资金接入', 'qita':''}
 jiaoyi_dict6 = {'date': '2020-07-21', 'title':'金太阳：21.95买入1600股', 'mark':'30,60下降个数均超过30，ENE下方，大资金接入', 'qita':''}
