@@ -300,8 +300,8 @@ for i in range(gengong_count):
     genzong = cf.get("script", "genzong" + str(i))
     image_path, sign_result = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
     if "触发" in sign_result:
-        common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + genzong.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
-                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + genzong.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result)
+        common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + genzong.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + sign_result,
+                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + genzong.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + sign_result)
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
     genzong_list.append(gezong_dict)
 context['genzong_list'] = genzong_list
