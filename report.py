@@ -14,7 +14,7 @@ import common_image
 from docx.shared import Mm
 
 # 个股数
-gegu_count = 9
+gegu_count = 10
 gengong_count = 40
 
 
