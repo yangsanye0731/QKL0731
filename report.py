@@ -118,7 +118,7 @@ def code_strategy(codeItem, field_name, width):
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
-    return myimage, sign_result
+    return myimage, sign_result, image_path
 
 def get_week_day(date):
   week_day_dict = {
@@ -160,8 +160,8 @@ context['gainian4'] = gainian4
 gegu_list = []
 for i in range(gegu_count):
     gegu = cf.get("script", "gegu" + str(i))
-    image_path, sign_result = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
-    image_url = "http://47.240.11.144/" + image_path
+    image_path, sign_result, image_lujing = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
+    image_url = "http://47.240.11.144/" + image_lujing
     if "触发" in sign_result:
         common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
                                        '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result + "\n\n> ![screenshot](" + image_url + ")")
@@ -321,10 +321,11 @@ context['jiaoxun_list'] = jiaoxun_list
 genzong_list = []
 for i in range(gengong_count):
     genzong = cf.get("script", "genzong" + str(i))
-    image_path, sign_result = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
+    image_path, sign_result, image_lujing = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
+    image_url = "http://47.240.11.144/" + image_lujing
     if "触发" in sign_result:
         common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result,
-                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result)
+                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
     genzong_list.append(gezong_dict)
 context['genzong_list'] = genzong_list
