@@ -323,6 +323,7 @@ for i in range(gengong_count):
     genzong = cf.get("script", "genzong" + str(i))
     image_path, sign_result, image_lujing = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
     image_url = "http://47.240.11.144/" + image_lujing
+    print(image_url)
     if "触发" in sign_result:
         common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result,
                                        '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
