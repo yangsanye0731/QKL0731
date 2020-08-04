@@ -15,7 +15,7 @@ from docx.shared import Mm
 
 # 个股数
 gegu_count = 12
-gengong_count = 44
+gengong_count = 46
 
 
 asset_url = 'reportTemplate.docx'
