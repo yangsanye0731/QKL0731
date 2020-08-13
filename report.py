@@ -26,6 +26,7 @@ def code_strategy(codeItem, field_name, width):
     count = 0
     all_code_index_x = [codeItem]
     myimage = None
+    image_path = None
     sign_result = "信号："
     strResult = ""
     for codeItem in all_code_index_x:
