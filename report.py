@@ -330,6 +330,7 @@ for i in range(gengong_count):
                                        '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
     gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
     genzong_list.append(gezong_dict)
+    time.sleep(5)
 context['genzong_list'] = genzong_list
 
 image_path = common_image.plt_image_geGuZhiBiao("399006","创业板指")
