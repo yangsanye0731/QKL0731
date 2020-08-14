@@ -329,7 +329,9 @@ for i in range(gengong_count):
         if "触发" in sign_result:
             common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result,
                                            '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
-        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': '', 'image_path':image_path}
+        rt1 = RichText('')
+        rt1.add(sign_result, color='#ff0000', bold=True)
+        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': sign_result, 'image_path':image_path}
         genzong_list.append(gezong_dict)
         time.sleep(10)
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
