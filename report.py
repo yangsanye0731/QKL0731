@@ -331,7 +331,7 @@ for i in range(gengong_count):
                                            '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
         rt1 = RichText('')
         rt1.add(sign_result, color='#ff0000', bold=True)
-        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': sign_result, 'image_path':image_path}
+        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': rt1, 'image_path':image_path}
         genzong_list.append(gezong_dict)
         time.sleep(10)
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
