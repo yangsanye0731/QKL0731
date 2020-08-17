@@ -1,4 +1,3 @@
-
 from docxtpl import DocxTemplate
 from docxtpl import InlineImage
 from docxtpl import RichText
@@ -121,6 +120,7 @@ def code_strategy(codeItem, field_name, width):
             print(e)
     return myimage, sign_result, image_path
 
+# 返回时间所对应的星期值
 def get_week_day(date):
   week_day_dict = {
     0 : '星期一',
