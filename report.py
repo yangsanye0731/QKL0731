@@ -337,6 +337,7 @@ jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyi
 jiaoxun_dict5 = {'mingcheng': '科林电气', 'yuanyin':'2020年度6月份交易次数为1，且很快进出，技术是要持续磨练出来的，交易次数少，对成长不利', 'zhuyi':'时间：2019-06-18', 'qita':'-'}
 jiaoxun_dict6 = {'mingcheng': '华脉科技', 'yuanyin':'在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi':'时间：2019-07-01', 'qita':'-'}
 jiaoxun_dict7 = {'mingcheng': '万通智控', 'yuanyin':'在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi':'时间：2019-07-01', 'qita':'-'}
+jiaoxun_dict8 = {'mingcheng': '电连技术', 'yuanyin':'大盘股在拉升，但是30、60数量已经达到了卖出的标准，执行卖出动作，这个时候最好能够看下主力资金的接入情况，如果大资金在卖出，坚决卖出，如果大资金还在持续买入，可以进行观察', 'zhuyi':'时间：2019-08-17', 'qita':'-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
@@ -344,6 +345,7 @@ jiaoxun_list.append(jiaoxun_dict3)
 jiaoxun_list.append(jiaoxun_dict4)
 jiaoxun_list.append(jiaoxun_dict6)
 jiaoxun_list.append(jiaoxun_dict7)
+jiaoxun_list.append(jiaoxun_dict8)
 context['jiaoxun_list'] = jiaoxun_list
 
 
