@@ -143,7 +143,7 @@ context['week'] = get_week_day(datetime.datetime.now())
 # 资产概述
 context['text'] = timeStr
 
-filepath = "./report_list/"
+filepath = "./config/"
 time_path = time.strftime("%Y%m%d", time.localtime())
 time_path = '20200705'
 script_file_path = filepath + time_path + ".conf"
@@ -340,6 +340,8 @@ jiaoxun_dict7 = {'mingcheng': '万通智控', 'yuanyin':'在大盘行情较好�
 jiaoxun_dict8 = {'mingcheng': '电连技术', 'yuanyin':'大盘股在拉升，但是30、60数量已经达到了卖出的标准，执行卖出动作，这个时候最好能够看下主力资金的接入情况，如果大资金在卖出，坚决卖出，如果大资金还在持续买入，可以进行观察', 'zhuyi':'时间：2019-08-17', 'qita':'-'}
 jiaoxun_dict9 = {'mingcheng': '游族网络', 'yuanyin':'在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；买入25%仓位也是可以的，不然又要等比较长的时间，才能出现机会', 'zhuyi':'时间：2019-08-20', 'qita':'-'}
 jiaoxun_dict10 = {'mingcheng': '电连技术', 'yuanyin':'在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；买入25%仓位也是可以的，不然又要等比较长的时间，才能出现机会', 'zhuyi':'时间：2019-08-20', 'qita':'-'}
+jiaoxun_dict11 = {'mingcheng': '游族网络', 'yuanyin':'在30、60分钟线都符合条件情况下，选择对了介入时机，但是选择了换手率比较低的，涨幅较小', 'zhuyi':'时间：2019-08-26', 'qita':'-'}
+jiaoxun_dict12 = {'mingcheng': '恒为科技', 'yuanyin':'在30、60分钟线都符合条件情况下，选择对了介入时机，但是选择了换手率比较低的，涨幅较小', 'zhuyi':'时间：2019-08-26', 'qita':'-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
@@ -350,6 +352,8 @@ jiaoxun_list.append(jiaoxun_dict7)
 jiaoxun_list.append(jiaoxun_dict8)
 jiaoxun_list.append(jiaoxun_dict9)
 jiaoxun_list.append(jiaoxun_dict10)
+jiaoxun_list.append(jiaoxun_dict11)
+jiaoxun_list.append(jiaoxun_dict12)
 context['jiaoxun_list'] = jiaoxun_list
 
 
