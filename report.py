@@ -57,8 +57,8 @@ def code_strategy(codeItem, field_name, width):
             data = common_mysqlUtil.select_all_code_one(codeItem)
             if len(data) > 0:
                 mingcheng = data[0][1]
-            image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【04每日报告】跨越5周线容大感光,主力持仓突增",
-                                                              "【04每日报告】跨越5周线容大感光,主力持仓突增")
+            image_path = common_image.plt_image_tongyichutu_3(codeItem, "W", "【04每日报告】全部",
+                                                              "【04每日报告】全部")
             myimage = InlineImage(tpl, image_path, width=Mm(width))
             context[field_name] = myimage
 
