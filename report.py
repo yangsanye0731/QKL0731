@@ -113,8 +113,8 @@ def code_strategy(codeItem, field_name, width):
             print("=====================================================" + codeItem)
             print(closeArray[-1])
             print(ene_w[-1])
-            if closeArray[-1] < ene_w[-1] :
-                sign_result = sign_result + "触发当前价格在ENE周线中线下方；"
+            # if closeArray[-1] < ene_w[-1] :
+                # sign_result = sign_result + "触发当前价格在ENE周线中线下方；"
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
