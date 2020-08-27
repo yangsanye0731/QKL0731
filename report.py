@@ -163,6 +163,7 @@ for i in range(gegu_count):
     gegu = cf.get("script", "gegu" + str(i))
     image_path, sign_result, image_lujing = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
     image_url = "http://47.240.11.144/" + image_lujing[9:]
+    print(image_url)
     if "触发" in sign_result:
         common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
                                        '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result + "\n\n> ![screenshot](" + image_url + ")")
