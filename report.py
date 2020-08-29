@@ -316,7 +316,8 @@ celve_dict3 = {'suoshu': '【02指数ETF】', 'mingcheng':'ENE月线升势，布
 celve_dict4 = {'suoshu': '【02指数ETF】', 'mingcheng':'跨越5周线', 'zhuyi':'每天16:00-17:00', 'qita':'已核对'}
 celve_dict5 = {'suoshu': '【03全部代码】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天15:10-16:00', 'qita':'已核对'}
 celve_dict6 = {'suoshu': '【03全部代码】', 'mingcheng':'跨越5周线', 'zhuyi':'每天15:10-16:00', 'qita':'已核对'}
-celve_dict7 = {'suoshu': '【03全部代码】', 'mingcheng':'日周双孕线', 'zhuyi':'-', 'qita':'暂不启用'}
+celve_dict7 = {'suoshu': '【03全部代码】', 'mingcheng':'跨越5月线', 'zhuyi':'每天18:10-19:00', 'qita':'已核对'}
+celve_dict8 = {'suoshu': '【03全部代码】', 'mingcheng':'日周双孕线', 'zhuyi':'-', 'qita':'暂不启用'}
 celve_list = []
 celve_list.append(celve_dict1)
 celve_list.append(celve_dict2)
@@ -325,10 +326,12 @@ celve_list.append(celve_dict4)
 celve_list.append(celve_dict5)
 celve_list.append(celve_dict6)
 celve_list.append(celve_dict7)
+celve_list.append(celve_dict8)
 context['celve_list'] = celve_list
 
 
-# 血的教训
+#######################################################################################################################
+################################################################################################################血的教训
 jiaoxun_labels = ['名称', '原因']
 context['jiaoxun_labels'] = jiaoxun_labels
 jiaoxun_dict1 = {'mingcheng': '聚光科技', 'yuanyin':'没有及时止损，持仓时间过长，均线、上轨及时撤出，不预测', 'zhuyi':'时间：2019-10-15', 'qita':'-'}
@@ -370,7 +373,7 @@ for i in range(gengong_count):
                                            '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
         rt1 = RichText('')
         rt1.add(sign_result, color='#ff0000', bold=True)
-        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2], 'mark': '', 'qita': rt1, 'image_path':image_path}
+        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2] + '【' + sign_result + '】', 'mark': '', 'qita': rt1, 'image_path':image_path}
         genzong_list.append(gezong_dict)
         time.sleep(10)
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
@@ -379,20 +382,23 @@ context['genzong_list'] = genzong_list
 
 image_path = common_image.plt_image_geGuZhiBiao("399006","创业板指")
 time.sleep(10)
-myimage = InlineImage(tpl, image_path, width=Mm(182))
+myimage = InlineImage(tpl, image_path, width=Mm(245))
 context['image1'] = myimage
 
 image_path = common_image.plt_image_geGuZhiBiao("399300","沪深300")
 time.sleep(10)
-myimage = InlineImage(tpl, image_path, width=Mm(182))
+myimage = InlineImage(tpl, image_path, width=Mm(245))
 context['image2'] = myimage
 
 
+#######################################################################################################################
+################################################################################################################生成文件
 tpl.render(context)
 timeTitle = time.strftime("%Y%m%d", time.localtime())
 tpl.save('./report/每日报告_2020.docx')
 tpl.save('./report/每日报告_' + timeTitle + '.docx')
-
+#######################################################################################################################
+################################################################################################################同步数据
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath='0000_Report')
