@@ -16,7 +16,6 @@ from docx.shared import Mm
 gegu_count = 13
 gengong_count = 57
 
-
 asset_url = 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
@@ -250,18 +249,12 @@ jiaoyi_list.append(jiaoyi_dict28)
 jiaoyi_list.append(jiaoyi_dict29)
 context['jiaoyi_list'] = jiaoyi_list
 
-# 未来趋势
-qushi_labels = ['资讯来源', '数据内容']
-context['qushi_labels'] = qushi_labels
-
-# 数据遍历
-qushi_dict1 = {'type': '国内趋势（30分钟）', 'title':'上升数、下降数进入30以上', 'mark':'主力趋势指标', 'qita':''}
-qushi_dict2 = {'type': '国内趋势（60分钟）', 'title':'上升数、下降数进入30以上', 'mark':'主力趋势指标', 'qita':''}
-qushi_dict3 = {'type': '国内趋势（日线）', 'title':'上升数、下降数进入30以上，大趋势', 'mark':'主力趋势指标', 'qita':''}
-qushi_list = []
-qushi_list.append(qushi_dict1)
-qushi_list.append(qushi_dict2)
-qushi_list.append(qushi_dict3)
+#######################################################################################################################
+########################################################################################################未来趋势&介入时机
+qushi_dict1 = {'type': '国内趋势（30分钟）', 'title': '上升数、下降数进入30以上', 'mark': '主力趋势指标', 'qita': ''}
+qushi_dict2 = {'type': '国内趋势（60分钟）', 'title': '上升数、下降数进入30以上', 'mark': '主力趋势指标', 'qita': ''}
+qushi_dict3 = {'type': '国内趋势（日线）', 'title': '上升数、下降数进入30以上，大趋势', 'mark': '主力趋势指标', 'qita': ''}
+qushi_list = [qushi_dict1, qushi_dict2, qushi_dict3]
 context['qushi_list'] = qushi_list
 
 
@@ -277,56 +270,51 @@ for i in range(len(data)):
     title = data[i][1]
     type = data[i][2]
     mark = data[i][3]
-    zixun_dict1 = {'type': type, 'title':title, 'mark':mark, 'qita':'需优化'}
+    zixun_dict1 = {'type': type, 'title': title, 'mark': mark, 'qita': '需优化'}
     zixun_list.append(zixun_dict1)
 context['zixun_list'] = zixun_list
 
-# 数据资源
+#######################################################################################################################
+################################################################################################################数据资源
 shuju_labels = ['数据来源', '数据内容']
 context['shuju_labels'] = shuju_labels
-shuju_dict1 = {'shujulaiyuan': '选股宝', 'shujuneirong':'股票所属概念、概念简述', 'zhuyi':'每周六手动执行', 'qita':'已核对'}
+shuju_dict1 = {'shujulaiyuan': '选股宝', 'shujuneirong': '股票所属概念、概念简述',
+               'zhuyi': '每周六手动执行', 'qita': '已核对'}
 
 rt1 = RichText('持续盈利:')
 rt1.add('临渊履薄', url_id=tpl.build_url_id('https://xueqiu.com/u/5377325546'))
-
 rt2 = RichText('价值择时:')
 rt2.add('亚克斯', url_id=tpl.build_url_id('https://xueqiu.com/u/4469239431'))
-
 rt3 = RichText('价值择股:')
 rt3.add('广州强', url_id=tpl.build_url_id('https://i.eastmoney.com/7289074629097176'))
 
-
-shuju_dict2 = {'shujulaiyuan': '东方财富网', 'shujuneirong':rt3, 'zhuyi':'有应用监控提醒', 'qita':'已核对'}
-shuju_dict3 = {'shujulaiyuan': '雪球财经', 'shujuneirong': rt1, 'zhuyi':'每交易日更新', 'qita':'已核对'}
-shuju_dict4 = {'shujulaiyuan': '雪球财经', 'shujuneirong': rt2, 'zhuyi':'更新频繁', 'qita':'已核对'}
-shuju_list = []
-shuju_list.append(shuju_dict1)
-shuju_list.append(shuju_dict2)
-shuju_list.append(shuju_dict3)
-shuju_list.append(shuju_dict4)
+shuju_dict2 = {'shujulaiyuan': '东方财富网', 'shujuneirong': rt3, 'zhuyi': '有应用监控提醒', 'qita': '已核对'}
+shuju_dict3 = {'shujulaiyuan': '雪球财经', 'shujuneirong': rt1, 'zhuyi': '每交易日更新', 'qita': '已核对'}
+shuju_dict4 = {'shujulaiyuan': '雪球财经', 'shujuneirong': rt2, 'zhuyi': '更新频繁', 'qita': '已核对'}
+shuju_list = [shuju_dict1, shuju_dict2, shuju_dict3, shuju_dict4]
 context['shuju_list'] = shuju_list
 
 #######################################################################################################################
 ################################################################################################################策略概览
 celve_labels = ['策略所属', '策略名称', '注意事项', '其他']
 context['celve_labels'] = celve_labels
-celve_dict1 = {'suoshu': '【01雪球概念】', 'mingcheng': 'ENE月线升势，布林日线下穿', 'zhuyi': '每天10:30, 13:30', 'qita': '已核对'}
-celve_dict2 = {'suoshu': '【01雪球概念】', 'mingcheng': '跨越5周线', 'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
-celve_dict3 = {'suoshu': '【02指数ETF】', 'mingcheng': 'ENE月线升势，布林日线下穿', 'zhuyi': '每天16:00-17:00', 'qita': '已核对'}
-celve_dict4 = {'suoshu': '【02指数ETF】', 'mingcheng': '跨越5周线', 'zhuyi': '每天16:00-17:00', 'qita': '已核对'}
-celve_dict5 = {'suoshu': '【03全部代码】', 'mingcheng': 'ENE月线升势，布林日线下穿', 'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
-celve_dict6 = {'suoshu': '【03全部代码】', 'mingcheng': '跨越5周线', 'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
-celve_dict7 = {'suoshu': '【03全部代码】', 'mingcheng': '跨越5月线', 'zhuyi': '每天18:10-19:00', 'qita': '已核对'}
-celve_dict8 = {'suoshu': '【03全部代码】', 'mingcheng': '日周双孕线', 'zhuyi': '-', 'qita': '暂不启用'}
-celve_list = []
-celve_list.append(celve_dict1)
-celve_list.append(celve_dict2)
-celve_list.append(celve_dict3)
-celve_list.append(celve_dict4)
-celve_list.append(celve_dict5)
-celve_list.append(celve_dict6)
-celve_list.append(celve_dict7)
-celve_list.append(celve_dict8)
+celve_dict1 = {'suoshu': '【01雪球概念】', 'mingcheng': 'ENE月线升势，布林日线下穿',
+               'zhuyi': '每天10:30, 13:30', 'qita': '已核对'}
+celve_dict2 = {'suoshu': '【01雪球概念】', 'mingcheng': '跨越5周线',
+               'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
+celve_dict3 = {'suoshu': '【02指数ETF】', 'mingcheng': 'ENE月线升势，布林日线下穿',
+               'zhuyi': '每天16:00-17:00', 'qita': '已核对'}
+celve_dict4 = {'suoshu': '【02指数ETF】', 'mingcheng': '跨越5周线',
+               'zhuyi': '每天16:00-17:00', 'qita': '已核对'}
+celve_dict5 = {'suoshu': '【03全部代码】', 'mingcheng': 'ENE月线升势，布林日线下穿',
+               'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
+celve_dict6 = {'suoshu': '【03全部代码】', 'mingcheng': '跨越5周线',
+               'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
+celve_dict7 = {'suoshu': '【03全部代码】', 'mingcheng': '跨越5月线',
+               'zhuyi': '每天18:10-19:00', 'qita': '已核对'}
+celve_dict8 = {'suoshu': '【03全部代码】', 'mingcheng': '日周双孕线',
+               'zhuyi': '-', 'qita': '暂不启用'}
+celve_list = [celve_dict1, celve_dict2, celve_dict3, celve_dict4, celve_dict5, celve_dict6, celve_dict7, celve_dict8]
 context['celve_list'] = celve_list
 
 #######################################################################################################################
@@ -386,15 +374,17 @@ for i in range(gengong_count):
         print(e)
 context['genzong_list'] = genzong_list
 
-image_path = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
+#######################################################################################################################
+############################################################################################################指数指标图片
+image_path_399006 = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
 time.sleep(10)
-myimage = InlineImage(tpl, image_path, width=Mm(245))
-context['image1'] = myimage
+myimage_399006 = InlineImage(tpl, image_path_399006, width=Mm(245))
+context['image1'] = myimage_399006
 
-image_path = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
+image_path_399300 = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
 time.sleep(10)
-myimage = InlineImage(tpl, image_path, width=Mm(245))
-context['image2'] = myimage
+myimage_399300 = InlineImage(tpl, image_path_399300, width=Mm(245))
+context['image2'] = myimage_399300
 
 #######################################################################################################################
 ################################################################################################################生成文件
