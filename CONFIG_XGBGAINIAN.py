@@ -1,18 +1,13 @@
 # encoding=utf-8
 import asyncio
-from pyppeteer import launch
 import datetime
-import time
-from asyncio import sleep
 import json
-import pandas as pd
-import random
-import common
-import common_image
-from bypy import ByPy
-import talib as ta
+
 import numpy as num
 import tushare as ts
+from pyppeteer import launch
+
+import common
 import common_mysqlUtil
 
 async def save_cookie(cookie):
@@ -88,7 +83,7 @@ for codeItem in all_code_index_x:
         data = common_mysqlUtil.select_all_code_one(code)
         if len(data) > 0:
             plate = data[0][2]
-            if(plate is not None and len(plate)>0):
+            if plate is not None and len(plate)>0:
                 continue
 
             if codeItem.startswith('6'):
