@@ -13,10 +13,6 @@ import talib as ta
 import common_image
 from docx.shared import Mm
 
-# 个股数
-gegu_count = 13
-gengong_count = 57
-
 asset_url = 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
@@ -141,7 +137,7 @@ context['week'] = get_week_day(datetime.datetime.now())
 context['text'] = timeStr
 
 filepath = "./config/"
-time_path = 'conf_gegu_genzong'
+time_path = 'config'
 script_file_path = filepath + time_path + ".conf"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
@@ -157,7 +153,8 @@ context['gainian4'] = gainian4
 #######################################################################################################################
 ########################################################################################################跨越5周线个股筛选
 gegu_list = []
-for i in range(gegu_count):
+gegu_count = cf.get("script", "gegu_count")
+for i in range(int(gegu_count) + 1):
     gegu = cf.get("script", "gegu" + str(i))
     image_path_result, sign_result, image_lujing = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
     image_url = "http://47.240.11.144/" + image_lujing[9:]
@@ -268,7 +265,8 @@ context['jiaoxun_list'] = jiaoxun_list
 #######################################################################################################################
 ################################################################################################################股票跟踪
 genzong_list = []
-for i in range(gengong_count):
+gengong_count = cf.get("script", "genzong_count")
+for i in range(int(gengong_count) + 1):
     try:
         genzong = cf.get("script", "genzong" + str(i))
         image_path_result, sign_result, image_lujing = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
