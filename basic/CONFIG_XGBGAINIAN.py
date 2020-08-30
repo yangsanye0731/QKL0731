@@ -6,6 +6,8 @@ import numpy as num
 import tushare as ts
 from pyppeteer import launch
 
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
 curPath = os.path.abspath(os.path.dirname(__file__))
@@ -14,18 +16,18 @@ sys.path.append(rootPath)
 import common
 import common_mysqlUtil
 
-
+#######################################################################################################################
+##########################################################################################################保存COOKIE信息
 async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
 
-
-# 读取cookie
+#######################################################################################################################
+##########################################################################################################读取COOKIE信息
 async def load_cookie():
     with open("cookie.json", 'r', encoding="utf-8") as file:
         cookie = json.load(file)
     return cookie
-
 
 # 加载首页
 async def index(page, cookie1, url, codeName):
@@ -46,7 +48,8 @@ async def index(page, cookie1, url, codeName):
         print(e)
     return result
 
-
+#######################################################################################################################
+#############################################################################请求选股宝股票页面，获取其对应的概念并更新数据库
 async def main(url1, codeName):
     print(datetime.datetime.now())
     print(datetime.datetime.now())
@@ -67,7 +70,8 @@ async def main(url1, codeName):
     browser = await launch(headless=True, args=['--no-sandbox'])
     page = await browser.newPage()
     await page.setUserAgent(
-        'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
+        'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+        'Chrome/70.0.3538.67 Safari/537.36')
     await page.goto("https://www.xuangubao.cn/")
     await page.evaluate(js1)
     # await page.evaluate(js2)
@@ -80,6 +84,8 @@ async def main(url1, codeName):
     return result
 
 
+#######################################################################################################################
+##########################################################################################################遍历A股所有股票
 all_code = ts.get_stock_basics()
 all_code_index = all_code[1:-1].index
 count = 0
@@ -103,7 +109,8 @@ for codeItem in all_code_index_x:
             if codeItem.startswith('3'):
                 codeItem = codeItem + '.SZ'
             asyncio.get_event_loop().run_until_complete(main(
-                'https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
+                'https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol='
+                + codeItem + '&fields=core_avg_pcp,plate_name',
                 code))
         else:
             code_name = common.codeName(code)
@@ -116,8 +123,8 @@ for codeItem in all_code_index_x:
             if codeItem.startswith('3'):
                 codeItem = codeItem + '.SZ'
             asyncio.get_event_loop().run_until_complete(main(
-                'https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
+                'https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol='
+                + codeItem + '&fields=core_avg_pcp,plate_name',
                 code))
-
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         print(e)
