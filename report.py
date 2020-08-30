@@ -13,10 +13,11 @@ import talib as ta
 import common_image
 from docx.shared import Mm
 
-asset_url = 'reportTemplate.docx'
+asset_url = './resource/template/reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
-# 图片
+#######################################################################################################################
+###########################################################################################################工具方法：策略
 def code_strategy(codeItem, field_name, width):
     count = 0
     all_code_index_x = [codeItem]
@@ -27,7 +28,6 @@ def code_strategy(codeItem, field_name, width):
         time.sleep(1)
         count = count + 1
         data_history = ts.get_k_data(codeItem, ktype='W')
-
         data_history_M = ts.get_k_data(codeItem, ktype='M')
         data_history_D = ts.get_k_data(codeItem, ktype='D')
 
@@ -113,7 +113,8 @@ def code_strategy(codeItem, field_name, width):
             print(e)
     return myimage, sign, image_path
 
-# 返回时间所对应的星期值
+#######################################################################################################################
+###########################################################################################工具方法：返回时间所对应的星期值
 def get_week_day(date):
   week_day_dict = {
     0: '星期一',
@@ -127,18 +128,16 @@ def get_week_day(date):
   day = date.weekday()
   return week_day_dict[day]
 
+#######################################################################################################################
+#########################################################################################################投资报告首页信息
 context = {'title': '我的每日报告'}
 # 当天日期
 timeStr = time.strftime("%Y/%m/%d", time.localtime())
 context['time'] = timeStr
 context['week'] = get_week_day(datetime.datetime.now())
 
-# 资产概述
-context['text'] = timeStr
-
-filepath = "./config/"
-time_path = 'config'
-script_file_path = filepath + time_path + ".conf"
+filepath = "resource/config/"
+script_file_path = filepath + "config.conf"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
 gainian1 = cf.get("script", "gainian1")
