@@ -305,17 +305,18 @@ shuju_list.append(shuju_dict3)
 shuju_list.append(shuju_dict4)
 context['shuju_list'] = shuju_list
 
-# 策略概览
+#######################################################################################################################
+################################################################################################################策略概览
 celve_labels = ['策略所属', '策略名称', '注意事项', '其他']
 context['celve_labels'] = celve_labels
-celve_dict1 = {'suoshu': '【01雪球概念】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天10:30, 13:30', 'qita':'已核对'}
-celve_dict2 = {'suoshu': '【01雪球概念】', 'mingcheng':'跨越5周线', 'zhuyi':'每天15:10-16:00', 'qita':'已核对'}
-celve_dict3 = {'suoshu': '【02指数ETF】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天16:00-17:00', 'qita':'已核对'}
-celve_dict4 = {'suoshu': '【02指数ETF】', 'mingcheng':'跨越5周线', 'zhuyi':'每天16:00-17:00', 'qita':'已核对'}
-celve_dict5 = {'suoshu': '【03全部代码】', 'mingcheng':'ENE月线升势，布林日线下穿', 'zhuyi':'每天15:10-16:00', 'qita':'已核对'}
-celve_dict6 = {'suoshu': '【03全部代码】', 'mingcheng':'跨越5周线', 'zhuyi':'每天15:10-16:00', 'qita':'已核对'}
-celve_dict7 = {'suoshu': '【03全部代码】', 'mingcheng':'跨越5月线', 'zhuyi':'每天18:10-19:00', 'qita':'已核对'}
-celve_dict8 = {'suoshu': '【03全部代码】', 'mingcheng':'日周双孕线', 'zhuyi':'-', 'qita':'暂不启用'}
+celve_dict1 = {'suoshu': '【01雪球概念】', 'mingcheng': 'ENE月线升势，布林日线下穿', 'zhuyi': '每天10:30, 13:30', 'qita': '已核对'}
+celve_dict2 = {'suoshu': '【01雪球概念】', 'mingcheng': '跨越5周线', 'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
+celve_dict3 = {'suoshu': '【02指数ETF】', 'mingcheng': 'ENE月线升势，布林日线下穿', 'zhuyi': '每天16:00-17:00', 'qita': '已核对'}
+celve_dict4 = {'suoshu': '【02指数ETF】', 'mingcheng': '跨越5周线', 'zhuyi': '每天16:00-17:00', 'qita': '已核对'}
+celve_dict5 = {'suoshu': '【03全部代码】', 'mingcheng': 'ENE月线升势，布林日线下穿', 'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
+celve_dict6 = {'suoshu': '【03全部代码】', 'mingcheng': '跨越5周线', 'zhuyi': '每天15:10-16:00', 'qita': '已核对'}
+celve_dict7 = {'suoshu': '【03全部代码】', 'mingcheng': '跨越5月线', 'zhuyi': '每天18:10-19:00', 'qita': '已核对'}
+celve_dict8 = {'suoshu': '【03全部代码】', 'mingcheng': '日周双孕线', 'zhuyi': '-', 'qita': '暂不启用'}
 celve_list = []
 celve_list.append(celve_dict1)
 celve_list.append(celve_dict2)
@@ -327,23 +328,22 @@ celve_list.append(celve_dict7)
 celve_list.append(celve_dict8)
 context['celve_list'] = celve_list
 
-
 #######################################################################################################################
 ################################################################################################################血的教训
 jiaoxun_labels = ['名称', '原因']
 context['jiaoxun_labels'] = jiaoxun_labels
-jiaoxun_dict1 = {'mingcheng': '聚光科技', 'yuanyin':'没有及时止损，持仓时间过长，均线、上轨及时撤出，不预测', 'zhuyi':'时间：2019-10-15', 'qita':'-'}
-jiaoxun_dict2 = {'mingcheng': '传化智联', 'yuanyin':'横久必跌；进入时机不对；有多次机会出手；持仓时间过长，将已有利润全部回吐', 'zhuyi':'时间：2020-05-22', 'qita':'-'}
-jiaoxun_dict3 = {'mingcheng': '容大感光（光刻胶行业、换手）', 'yuanyin':'1、大盘趋势错失，光刻胶概念趋势错失，ENE月线、日线布林下穿，跨越5周线；    2、模糊的确定性明显；    3、买入策略没有规划，分批买入', 'zhuyi':'-', 'qita':'-'}
-jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin':'1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出；   3、当多数概念出现跨越5周线时，预示着一波行情的出现，错过一次20%左右的较大行情', 'zhuyi':'时间：2020-05-28', 'qita':'-'}
-jiaoxun_dict5 = {'mingcheng': '科林电气', 'yuanyin':'2020年度6月份交易次数为1，且很快进出，技术是要持续磨练出来的，交易次数少，对成长不利', 'zhuyi':'时间：2019-06-18', 'qita':'-'}
-jiaoxun_dict6 = {'mingcheng': '华脉科技', 'yuanyin':'在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi':'时间：2019-07-01', 'qita':'-'}
-jiaoxun_dict7 = {'mingcheng': '万通智控', 'yuanyin':'在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi':'时间：2019-07-01', 'qita':'-'}
-jiaoxun_dict8 = {'mingcheng': '电连技术', 'yuanyin':'大盘股在拉升，但是30、60数量已经达到了卖出的标准，执行卖出动作，这个时候最好能够看下主力资金的介入    情况，如果大资金在卖出，坚决卖出，如果大资金还在持续买入，可以进行观察', 'zhuyi':'时间：2019-08-17', 'qita':'-'}
-jiaoxun_dict9 = {'mingcheng': '游族网络', 'yuanyin':'在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；买入25%仓位也是可以的，不然又要等比较长的时间，才能出现机会', 'zhuyi':'时间：2019-08-20', 'qita':'-'}
-jiaoxun_dict10 = {'mingcheng': '电连技术', 'yuanyin':'在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；买入25%仓位也是可以的，不然又要等比较长的时间，才能出现机会', 'zhuyi':'时间：2019-08-20', 'qita':'-'}
-jiaoxun_dict11 = {'mingcheng': '游族网络', 'yuanyin':'在30、60分钟线都符合条件情况下，选择对了介入时机，但是选择了换手率比较低的，涨幅较小', 'zhuyi':'时间：2019-08-26', 'qita':'-'}
-jiaoxun_dict12 = {'mingcheng': '恒为科技', 'yuanyin':'在30、60分钟线都符合条件情况下，选择对了介入时机，但是选择了换手率比较低的，涨幅较小', 'zhuyi':'时间：2019-08-26', 'qita':'-'}
+jiaoxun_dict1 = {'mingcheng': '聚光科技', 'yuanyin': '没有及时止损，持仓时间过长，均线、上轨及时撤出，不预测', 'zhuyi': '时间：2019-10-15', 'qita': '-'}
+jiaoxun_dict2 = {'mingcheng': '传化智联', 'yuanyin': '横久必跌；进入时机不对；有多次机会出手；持仓时间过长，将已有利润全部回吐', 'zhuyi': '时间：2020-05-22', 'qita': '-'}
+jiaoxun_dict3 = {'mingcheng': '容大感光（光刻胶行业、换手）', 'yuanyin': '1、大盘趋势错失，光刻胶概念趋势错失，ENE月线、日线布林下穿，跨越5周线；    2、模糊的确定性明显；    3、买入策略没有规划，分批买入', 'zhuyi': '-', 'qita': '-'}
+jiaoxun_dict4 = {'mingcheng': '游族网络（游戏行业、换手）', 'yuanyin': '1、在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；    2、卖出策略没有规划，分批卖出；   3、当多数概念出现跨越5周线时，预示着一波行情的出现，错过一次20%左右的较大行情', 'zhuyi': '时间：2020-05-28', 'qita': '-'}
+jiaoxun_dict5 = {'mingcheng': '科林电气', 'yuanyin':'2020年度6月份交易次数为1，且很快进出，技术是要持续磨练出来的，交易次数少，对成长不利', 'zhuyi': '时间：2019-06-18', 'qita': '-'}
+jiaoxun_dict6 = {'mingcheng': '华脉科技', 'yuanyin': '在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi': '时间：2019-07-01', 'qita': '-'}
+jiaoxun_dict7 = {'mingcheng': '万通智控', 'yuanyin': '在大盘行情较好，价格在ENE中线下方时，没有及时入手；对盘面没有深入的分析，太懒惰，对自己的技术不自信', 'zhuyi': '时间：2019-07-01', 'qita': '-'}
+jiaoxun_dict8 = {'mingcheng': '电连技术', 'yuanyin': '大盘股在拉升，但是30、60数量已经达到了卖出的标准，执行卖出动作，这个时候最好能够看下主力资金的介入    情况，如果大资金在卖出，坚决卖出，如果大资金还在持续买入，可以进行观察', 'zhuyi': '时间：2019-08-17', 'qita': '-'}
+jiaoxun_dict9 = {'mingcheng': '游族网络', 'yuanyin': '在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；买入25%仓位也是可以的，不然又要等比较长的时间，才能出现机会', 'zhuyi': '时间：2019-08-20', 'qita': '-'}
+jiaoxun_dict10 = {'mingcheng': '电连技术', 'yuanyin': '在30、60分钟线都符合条件情况下，没有介入，错失良机，个人主观性的预测未来；买入25%仓位也是可以的，不然又要等比较长的时间，才能出现机会', 'zhuyi': '时间：2019-08-20', 'qita': '-'}
+jiaoxun_dict11 = {'mingcheng': '游族网络', 'yuanyin': '在30、60分钟线都符合条件情况下，选择对了介入时机，但是选择了换手率比较低的，涨幅较小', 'zhuyi': '时间：2019-08-26', 'qita': '-'}
+jiaoxun_dict12 = {'mingcheng': '恒为科技', 'yuanyin': '在30、60分钟线都符合条件情况下，选择对了介入时机，但是选择了换手率比较低的，涨幅较小', 'zhuyi': '时间：2019-08-26', 'qita': '-'}
 jiaoxun_list = []
 jiaoxun_list.append(jiaoxun_dict1)
 jiaoxun_list.append(jiaoxun_dict2)
@@ -358,7 +358,8 @@ jiaoxun_list.append(jiaoxun_dict11)
 jiaoxun_list.append(jiaoxun_dict12)
 context['jiaoxun_list'] = jiaoxun_list
 
-
+#######################################################################################################################
+################################################################################################################股票跟踪
 genzong_list = []
 for i in range(gengong_count):
     try:
@@ -367,23 +368,29 @@ for i in range(gengong_count):
         image_url = "http://47.240.11.144/" + image_lujing[9:]
         print(image_url)
         if "触发" in sign_result:
-            common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result,
-                                           '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]：" + common.zhangdiefu(genzong.split('|')[1]) + "】" + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot](" + image_url + ")")
+            common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
+                                           + common.zhangdiefu(genzong.split('|')[1]) + "】"
+                                           + genzong.split('|')[2] + sign_result,
+                                           '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
+                                           + common.zhangdiefu(genzong.split('|')[1]) + "】"
+                                           + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot]("
+                                           + image_url + ")")
         rt1 = RichText('')
         rt1.add(sign_result, color='#ff0000', bold=True)
-        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2] + '【' + sign_result + '】', 'mark': '', 'qita': rt1, 'image_path':image_path}
+        gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2] + '【' + sign_result + '】',
+                       'mark': '', 'qita': rt1, 'image_path': image_path}
         genzong_list.append(gezong_dict)
         time.sleep(10)
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
         print(e)
 context['genzong_list'] = genzong_list
 
-image_path = common_image.plt_image_geGuZhiBiao("399006","创业板指")
+image_path = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
 time.sleep(10)
 myimage = InlineImage(tpl, image_path, width=Mm(245))
 context['image1'] = myimage
 
-image_path = common_image.plt_image_geGuZhiBiao("399300","沪深300")
+image_path = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
 time.sleep(10)
 myimage = InlineImage(tpl, image_path, width=Mm(245))
 context['image2'] = myimage
