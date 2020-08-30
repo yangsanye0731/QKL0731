@@ -121,13 +121,13 @@ def code_strategy(codeItem, field_name, width):
 # 返回时间所对应的星期值
 def get_week_day(date):
   week_day_dict = {
-    0 : '星期一',
-    1 : '星期二',
-    2 : '星期三',
-    3 : '星期四',
-    4 : '星期五',
-    5 : '星期六',
-    6 : '星期天',
+    0: '星期一',
+    1: '星期二',
+    2: '星期三',
+    3: '星期四',
+    4: '星期五',
+    5: '星期六',
+    6: '星期天',
   }
   day = date.weekday()
   return week_day_dict[day]
@@ -142,8 +142,7 @@ context['week'] = get_week_day(datetime.datetime.now())
 context['text'] = timeStr
 
 filepath = "./config/"
-time_path = time.strftime("%Y%m%d", time.localtime())
-time_path = '20200705'
+time_path = 'conf_gegu_genzong'
 script_file_path = filepath + time_path + ".conf"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
@@ -163,15 +162,17 @@ for i in range(gegu_count):
     image_url = "http://47.240.11.144/" + image_lujing[9:]
     print(image_url)
     if "触发" in sign_result:
-        common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
-                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2] + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result + "\n\n> ![screenshot](" + image_url + ")")
+        common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
+                                       + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
+                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
+                                       + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】"
+                                       + sign_result + "\n\n> ![screenshot](" + image_url + ")")
     rt1 = RichText('')
     rt1.add(sign_result, color='#ff0000', bold=True)
-    gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3], 'qita': rt1, 'image_path':image_path}
+    gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3],
+                 'qita': rt1, 'image_path': image_path}
     gegu_list.append(gegu_dict)
 context['gegu_list'] = gegu_list
-
-
 
 # 未来趋势
 jiaoyi_labels = ['资讯来源', '数据内容']
@@ -394,7 +395,6 @@ image_path = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
 time.sleep(10)
 myimage = InlineImage(tpl, image_path, width=Mm(245))
 context['image2'] = myimage
-
 
 #######################################################################################################################
 ################################################################################################################生成文件
