@@ -182,7 +182,7 @@ jiaoyi_count = cf.get("script", "jiaoyi_count")
 for i in range(1, int(jiaoyi_count) + 1):
     jiaoyi = cf.get("script", "jiaoyi" + str(i))
     jiaoyi_dict = {'date': jiaoyi.split('|')[0], 'title': jiaoyi.split('|')[1] + '【' + jiaoyi.split('|')[2] + '】',
-                   'mark': jiaoyi.split('|')[3] + '， ' + jiaoyi.split('|')[4], 'qita': ''}
+                   'mark': jiaoyi.split('|')[3] + '， ' + jiaoyi.split('|')[4], 'huoli': jiaoyi.split('|')[5]}
     jiaoyi_list.append(jiaoyi_dict)
 context['jiaoyi_list'] = jiaoyi_list
 
@@ -205,9 +205,9 @@ data = common_mysqlUtil.select_report_news()
 zixun_list = []
 for i in range(len(data)):
     title = data[i][1]
-    type = data[i][2]
+    zixun_type = data[i][2]
     mark = data[i][3]
-    zixun_dict1 = {'type': type, 'title': title, 'mark': mark, 'qita': '需优化'}
+    zixun_dict1 = {'type': zixun_type, 'title': title, 'mark': mark, 'qita': '需优化'}
     zixun_list.append(zixun_dict1)
 context['zixun_list'] = zixun_list
 
