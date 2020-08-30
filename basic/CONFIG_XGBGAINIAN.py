@@ -1,4 +1,3 @@
-# encoding=utf-8
 import asyncio
 import datetime
 import json
@@ -7,18 +6,19 @@ import numpy as num
 import tushare as ts
 from pyppeteer import launch
 
-import common
-import common_mysqlUtil
-
 import sys
 import os
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
+import common
+import common_mysqlUtil
+
 
 async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
+
 
 # 读取cookie
 async def load_cookie():
@@ -26,13 +26,14 @@ async def load_cookie():
         cookie = json.load(file)
     return cookie
 
+
 # 加载首页
 async def index(page, cookie1, url, codeName):
     result = 0
     try:
         for cookie in cookie1:
             await page.setCookie(cookie)
-        await page.goto(url, options={"timeout":10000})
+        await page.goto(url, options={"timeout": 10000})
         data_content = await page.xpath('//pre')
         # print(await (await data_content[0].getProperty("textContent")).jsonValue())
         json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
@@ -44,6 +45,7 @@ async def index(page, cookie1, url, codeName):
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         print(e)
     return result
+
 
 async def main(url1, codeName):
     print(datetime.datetime.now())
@@ -64,7 +66,8 @@ async def main(url1, codeName):
 
     browser = await launch(headless=True, args=['--no-sandbox'])
     page = await browser.newPage()
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
+    await page.setUserAgent(
+        'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
     await page.goto("https://www.xuangubao.cn/")
     await page.evaluate(js1)
     # await page.evaluate(js2)
@@ -75,6 +78,7 @@ async def main(url1, codeName):
     result = await index(page, cookie, url1, codeName)
     await browser.close()
     return result
+
 
 all_code = ts.get_stock_basics()
 all_code_index = all_code[1:-1].index
@@ -89,7 +93,7 @@ for codeItem in all_code_index_x:
         data = common_mysqlUtil.select_all_code_one(code)
         if len(data) > 0:
             plate = data[0][2]
-            if plate is not None and len(plate)>0:
+            if plate is not None and len(plate) > 0:
                 continue
 
             if codeItem.startswith('6'):
@@ -98,7 +102,8 @@ for codeItem in all_code_index_x:
                 codeItem = codeItem + '.SZ'
             if codeItem.startswith('3'):
                 codeItem = codeItem + '.SZ'
-            asyncio.get_event_loop().run_until_complete(main('https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
+            asyncio.get_event_loop().run_until_complete(main(
+                'https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
                 code))
         else:
             code_name = common.codeName(code)
@@ -110,7 +115,8 @@ for codeItem in all_code_index_x:
                 codeItem = codeItem + '.SZ'
             if codeItem.startswith('3'):
                 codeItem = codeItem + '.SZ'
-            asyncio.get_event_loop().run_until_complete(main('https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
+            asyncio.get_event_loop().run_until_complete(main(
+                'https://flash-api.xuangubao.cn/api/stage2/plates_by_any_stock?symbol=' + codeItem + '&fields=core_avg_pcp,plate_name',
                 code))
 
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
