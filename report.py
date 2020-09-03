@@ -137,7 +137,7 @@ context['time'] = timeStr
 context['week'] = get_week_day(datetime.datetime.now())
 
 filepath = "resource/config/"
-script_file_path = filepath + "config.ini"
+script_file_path = filepath + "datasource.ini"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
 gainian1 = cf.get("script", "gainian1")
