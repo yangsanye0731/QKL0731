@@ -448,7 +448,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     yoy = "%.1f" % yingyeup
     turnover_rate = "0"
 
-    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + "\\simsun.ttc", size="25")
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts = ts[["open","close","high","low","volume"]]
 
