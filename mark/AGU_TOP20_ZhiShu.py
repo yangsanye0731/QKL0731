@@ -1,13 +1,6 @@
 #encoding=utf-8
 
-import sys
-import tushare as ts
-import time
-import numpy as num
-from datetime import datetime, date
-from datetime import timedelta
-from email_util import *
-import common
+from mark.email_util import *
 import common_mysqlUtil
 
 '''
