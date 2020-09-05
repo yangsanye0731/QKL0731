@@ -11,7 +11,8 @@ import common_zhibiao_BTC
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
-rootPath = str(os.path.abspath(os.path.dirname(__file__)).split('QKL0731')[0]) + 'QKL0731'
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 print(rootPath)
 sys.path.append(rootPath)
 
