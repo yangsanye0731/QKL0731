@@ -639,8 +639,8 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
     avg_1 = talib.MA(ts["close"], timeperiod=1)
     avg_5 = talib.MA(ts["close"], timeperiod=5)
     avg_10 = talib.MA(ts["close"], timeperiod=10)
-    avg_20 = talib.MA(ts["close"], timeperiod=20)
-    avg_30 = talib.MA(ts["close"], timeperiod=30)
+    # avg_20 = talib.MA(ts["close"], timeperiod=20)
+    # avg_30 = talib.MA(ts["close"], timeperiod=30)
     # print(avg_5)
     # print(avg_10)
     # print(avg_20)
@@ -666,7 +666,6 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
     if changdu > 200:
         plt.xlim(changdu - 100, changdu)
 
-    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
         os.makedirs(path)
@@ -674,14 +673,17 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
     plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
-def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType, guizeMingcheng, zhangdiefu, huanshoulv):
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+#######################################################################################################################
+##################################################################################################统一出图（雪球概念数据图）
+def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType,
+                                        guizeMingcheng, zhangdiefu, huanshoulv):
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
     # 画5日均线图
     avg_1 = talib.MA(doubleCloseArray, timeperiod=1)
     avg_5 = talib.MA(doubleCloseArray, timeperiod=5)
     avg_10 = talib.MA(doubleCloseArray, timeperiod=10)
-    avg_20 = talib.MA(doubleCloseArray, timeperiod=20)
-    avg_30 = talib.MA(doubleCloseArray, timeperiod=30)
+    # avg_20 = talib.MA(doubleCloseArray, timeperiod=20)
+    # avg_30 = talib.MA(doubleCloseArray, timeperiod=30)
     # print(avg_5)
     # print(avg_10)
     # print(avg_20)
@@ -700,23 +702,20 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
         timeStr1 + "_" + codeName + '(' + code + ')' + ",换手率：" + huanshoulv + "%",
         fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-
-    # zhangdiefu = "%.2f" % (((doubleCloseArray[-1] - doubleCloseArray[-2]) / doubleCloseArray[-2]) * 100) + '%'
     plt.ylabel('价格:' + zhangdiefu, fontproperties=myfont)
 
     # 设置坐标轴范围
     changdu = len(doubleCloseArray)
-    if (changdu > 200):
+    if changdu > 200:
         plt.xlim(changdu - 100, changdu)
 
-    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = "./images/" + timeStr1 + "/" + pathType
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
+    plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
     plt.close()
-    image_path = path + "/" + timeStr1 + "_" + codeName + ".png"
+    image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
     return image_path
 
 
