@@ -1,10 +1,8 @@
 #encoding=utf-8
-import pandas as pd
-import time
 import numpy as num
 import tushare as ts
 import talib as ta
-from email_util import *
+from mark.email_util import *
 
 a = 0
 

@@ -1,13 +1,21 @@
-#encoding=utf-8
-
 import time
 import numpy as num
 import tushare as ts
-import common
 import common_mysqlUtil
-import common_image
 from bypy import ByPy
 
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
+import common
+import common_image
+
+#######################################################################################################################
+###########################################################################################################跨域5周线策略
 dict = {}
 def strategy(zhouqi, n):
     all_code = ts.get_stock_basics()
@@ -31,10 +39,9 @@ def strategy(zhouqi, n):
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
             # 倒数第二天是下降，倒数第一天是上升
-            if (doubleCloseArray[n-3] > doubleCloseArray[n-2]  and doubleCloseArray[n-1] >= doubleCloseArray[n-2]):
-                if (doubleHighArray[n-2] > doubleHighArray[n-1] and doubleLowArray[n-2] < doubleLowArray[n-1]):
-                    if(doubleOpenArray[n-2] > doubleCloseArray[n-1] and doubleCloseArray[n-2] < doubleOpenArray[n-1]):
-
+            if doubleCloseArray[n-3] > doubleCloseArray[n-2]  and doubleCloseArray[n-1] >= doubleCloseArray[n-2]:
+                if doubleHighArray[n-2] > doubleHighArray[n-1] and doubleLowArray[n-2] < doubleLowArray[n-1]:
+                    if doubleOpenArray[n-2] > doubleCloseArray[n-1] and doubleCloseArray[n-2] < doubleOpenArray[n-1]:
                         data = common_mysqlUtil.select_all_code_one(codeItem)
                         if len(data) > 0:
                             mingcheng = data[0][1]
@@ -53,18 +60,21 @@ def strategy(zhouqi, n):
             print(e)
     return str(str_result)
 
+#######################################################################################################################
+##############################################################################################################主程序执行
 common_mysqlUtil.insert_ZhiShuLog_record("======", "======", "ACD", "====", "========", "============", "======", "")
 m = 0
-str_result = strategy('D', m)
-str_result = strategy('D', m-1)
-str_result = strategy('D', m-2)
-str_result = strategy('D', m-3)
-str_result = strategy('D', m-4)
+strategy('D', m)
+strategy('D', m-1)
+strategy('D', m-2)
+strategy('D', m-3)
+strategy('D', m-4)
 
-str_result = strategy('W', 0)
-str_result = strategy('W', -1)
+strategy('W', 0)
+strategy('W', -1)
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
-bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
+bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep
+                    + '【03全部代码】日周双孕线', remotepath=timeStr1)

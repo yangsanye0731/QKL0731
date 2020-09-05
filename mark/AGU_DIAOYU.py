@@ -1,12 +1,6 @@
 #encoding=utf-8
-import pandas as pd
-import time
-import numpy as num
 import tushare as ts
-import talib as ta
-from email_util import *
 import common
-import common_image
 import datetime
 
 def diaoyu(code, startTime):
