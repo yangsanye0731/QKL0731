@@ -64,6 +64,6 @@ count_result_b = strategy('M')
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
-bp.upload(localpath=rootPath + "\\images\\" + timeStr1, remotepath=timeStr1)
+bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
 common.dingding_markdown_msg_2('触发【03全部代码】跨越5月线,主力持仓、换手率突增执行完成',
                                '触发【03全部代码】跨越5月线,主力持仓、换手率突增执行完成')

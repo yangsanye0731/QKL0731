@@ -98,7 +98,7 @@ count_result_b, count_result_e = strategy('W')
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
-bp.upload(localpath=rootPath + "\\images\\" + timeStr1, remotepath=timeStr1)
+bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
 common.dingding_markdown_msg_2('触发【03全部代码】跨越5周线容大感光,主力持仓突增，'
                                'B：' + count_result_b + ", E:" + count_result_e,
                                '触发【03全部代码】跨越5周线容大感光,主力持仓突增，'
