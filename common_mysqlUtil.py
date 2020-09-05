@@ -13,13 +13,11 @@ import sys
 import os
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
-print(rootPath)
 sys.path.append(rootPath)
 
 #######################################################################################################################
 ############################################################################################################读取配置文件
 systemconfig_file_path = rootPath + '//resource//config//systemconfig.ini'
-print(systemconfig_file_path)
 cf = configparser.ConfigParser()
 cf.read(systemconfig_file_path)
 
