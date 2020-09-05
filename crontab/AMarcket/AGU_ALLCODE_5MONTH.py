@@ -1,4 +1,3 @@
-# encoding=utf-8
 import numpy as num
 import talib as ta
 import tushare as ts
@@ -9,14 +8,11 @@ from bypy import ByPy
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
-
-rootPath = str(os.path.abspath(os.path.dirname(__file__)).split('QKL0731')[0]) + 'QKL0731'
-print(rootPath)
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
 import common
 import common_image
-import common_mysqlUtil
-
 
 #######################################################################################################################
 ###########################################################################################################跨域5月线策略
