@@ -4,16 +4,25 @@ from docxtpl import RichText
 import time
 import datetime
 import common_mysqlUtil
-import common
 from bypy import ByPy
 import configparser
 import tushare as ts
 import numpy as num
 import talib as ta
-import common_image
 from docx.shared import Mm
 
-asset_url = './resource/template/reportTemplate.docx'
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
+import common
+import common_image
+
+
+asset_url = rootPath + os.sep + 'resource' + os.sep + 'template' + os.sep + 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
 
 #######################################################################################################################
@@ -136,8 +145,8 @@ timeStr = time.strftime("%Y/%m/%d", time.localtime())
 context['time'] = timeStr
 context['week'] = get_week_day(datetime.datetime.now())
 
-filepath = "resource/config/"
-script_file_path = filepath + "datasource.ini"
+filepath = rootPath + + os.sep + 'resource' + os.sep + 'config'
+script_file_path = filepath + + os.sep + "datasource.ini"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
 gainian1 = cf.get("script", "gainian1")
@@ -305,13 +314,13 @@ context['image2'] = myimage_399300
 ################################################################################################################生成文件
 tpl.render(context)
 timeTitle = time.strftime("%Y%m%d", time.localtime())
-tpl.save('./report/每日报告_2020.docx')
-tpl.save('./report/每日报告_' + timeTitle + '.docx')
+tpl.save(rootPath + os.sep + 'report' + os.sep + '每日报告_2020.docx')
+tpl.save(rootPath + os.sep + 'report' + os.sep + '每日报告_' + timeTitle + '.docx')
 
 #######################################################################################################################
 ################################################################################################################同步数据
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath='0000_Report')
-bp.upload(localpath="./report", remotepath='0000_Report')
+bp.upload(localpath=rootPath + os.sep + "report", remotepath='0000_Report')
 common.dingding_markdown_msg_2('触发【Report】每日投资报告执行完成', '触发【Report】每日投资报告执行完成')

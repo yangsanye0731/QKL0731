@@ -479,7 +479,6 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     if changdu > 200:
         plt.xlim(changdu-100, changdu)
 
-    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
         os.makedirs(path)
@@ -492,7 +491,8 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
 
 
 
-# 统一出图
+#######################################################################################################################
+#################################################################################统一出图（图片顶部包含营业额、换手率等数据）
 def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = common.codeEPS(code)
 
@@ -526,8 +526,7 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
                     re = re + "   " + str(value.get('plate_name'))
                 count = count + 1
 
-
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts=ts[["open","close","high","low","volume"]]
 
@@ -558,22 +557,18 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
 
     #设置坐标轴范围
     changdu = len(ts)
-    if (changdu > 200):
+    if changdu > 200:
         plt.xlim(changdu-100, changdu)
 
-    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = "./images/" + timeStr1 + "/" + pathType
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
+    plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
-    image_path = path + "/" + timeStr1 + "_" + codeName + ".png"
+    image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
     return image_path
-
-
-
 
 # 统一出图
 def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
@@ -919,10 +914,11 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
     return dddd
 
 
-# 个股指标
+#######################################################################################################################
+#######################################################################################个股60、日、周线KDE、MACD、BULL指标
 def plt_image_geGuZhiBiao(code, fullName):
     codeName = fullName + "(" + code + ")"
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="14")
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
 
     fig = plt.figure(figsize=(15,10))
     # fig.suptitle(codeName, fontproperties=myfont_title)
@@ -957,7 +953,8 @@ def plt_image_geGuZhiBiao(code, fullName):
     kdj = KDJ_zhibiao(data, closeArray)
 
     # 计算MACD指标数据
-    data_60["macd"], data_60["sigal"], data_60["hist"] = talib.MACD(ts_60['close'], fastperiod=12, slowperiod=26, signalperiod=9)
+    data_60["macd"], data_60["sigal"], data_60["hist"] = talib.MACD(ts_60['close'], fastperiod=12,
+                                                                    slowperiod=26, signalperiod=9)
 
     ax_macd_60.plot(data_60.index, data_60["macd"], label="macd")
     ax_macd_60.plot(data_60.index, data_60["sigal"], label="sigal")
@@ -966,21 +963,20 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_macd_60.set_ylabel(codeName + "涨跌幅：" + common.zhangdiefu(code), fontproperties=myfont)
 
     changdu = len(ts_60)
-    if (changdu > 200):
+    if changdu > 200:
         ax_macd_60.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_macd_60.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_macd_60.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_macd_60.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_macd_60.set_xlim(500, changdu)
 
-
-
     # 计算MACD指标数据
-    data_d["macd"], data_d["sigal"], data_d["hist"] = talib.MACD(ts_d['close'], fastperiod=12, slowperiod=26, signalperiod=9)
+    data_d["macd"], data_d["sigal"], data_d["hist"] = talib.MACD(ts_d['close'], fastperiod=12,
+                                                                 slowperiod=26, signalperiod=9)
 
     ax_macd_d.plot(data_d.index, data_d["macd"], label="macd")
     ax_macd_d.plot(data_d.index, data_d["sigal"], label="sigal")
@@ -988,19 +984,16 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_macd_d.set_xlabel("MACD（日线）", fontproperties=myfont)
 
     changdu = len(ts_d)
-    if (changdu > 200):
+    if changdu > 200:
         ax_macd_d.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_macd_d.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_macd_d.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_macd_d.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_macd_d.set_xlim(500, changdu)
-
-
-
 
     # 计算MACD指标数据
     data["macd"], data["sigal"], data["hist"] = talib.MACD(ts['close'], fastperiod=12, slowperiod=26, signalperiod=9)
@@ -1011,25 +1004,19 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_macd.set_xlabel("MACD（周线）", fontproperties=myfont)
 
     changdu = len(ts)
-    if (changdu > 200):
+    if changdu > 200:
         ax_macd.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_macd.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_macd.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_macd.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_macd.set_xlim(500, changdu)
 
-
-
-
-
-
-    data_60['upperband'], data_60['middleband'], data_60['lowerband'] = talib.BBANDS(ts_60['close'], timeperiod=20, nbdevup=2,
-                                                                            nbdevdn=2,
-                                                                            matype=0)
+    data_60['upperband'], data_60['middleband'], data_60['lowerband'] = talib.BBANDS(ts_60['close'], timeperiod=20,
+                                                                                     nbdevup=2, nbdevdn=2, matype=0)
     ax_bull_60.plot(data_60.index, data_60["upperband"], label="UP")
     ax_bull_60.plot(data_60.index, data_60["middleband"], label="MID")
     ax_bull_60.plot(data_60.index, data_60["lowerband"], label="LOW")
@@ -1039,21 +1026,19 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_bull_60.set_ylabel("BULL", fontproperties=myfont)
 
     changdu = len(ts_60)
-    if (changdu > 200):
+    if changdu > 200:
         ax_bull_60.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_bull_60.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_bull_60.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_bull_60.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_bull_60.set_xlim(500, changdu)
 
-
-    data_d['upperband'], data_d['middleband'], data_d['lowerband'] = talib.BBANDS(ts_d['close'], timeperiod=20, nbdevup=2,
-                                                                            nbdevdn=2,
-                                                                            matype=0)
+    data_d['upperband'], data_d['middleband'], data_d['lowerband'] = talib.BBANDS(ts_d['close'], timeperiod=20,
+                                                                                  nbdevup=2, nbdevdn=2, matype=0)
     ax_bull_d.plot(data_d.index, data_d["upperband"], label="UP")
     ax_bull_d.plot(data_d.index, data_d["middleband"], label="MID")
     ax_bull_d.plot(data_d.index, data_d["lowerband"], label="LOW")
@@ -1061,21 +1046,19 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_bull_d.set_xlabel("布林（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
-    if (changdu > 200):
+    if changdu > 200:
         ax_bull_d.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_bull_d.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_bull_d.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_bull_d.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_bull_d.set_xlim(500, changdu)
 
-
-
-    data['upperband'], data['middleband'],data['lowerband']  = talib.BBANDS(ts['close'], timeperiod=20, nbdevup=2, nbdevdn=2,
-                                                          matype=0)
+    data['upperband'], data['middleband'], data['lowerband'] = talib.BBANDS(ts['close'], timeperiod=20, nbdevup=2,
+                                                                            nbdevdn=2, matype=0)
     ax_bull.plot(data.index, data["upperband"], label="UP")
     ax_bull.plot(data.index, data["middleband"], label="MID")
     ax_bull.plot(data.index, data["lowerband"], label="LOW")
@@ -1083,18 +1066,16 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_bull.set_xlabel("布林（周）", fontproperties=myfont)
 
     changdu = len(ts)
-    if (changdu > 200):
+    if changdu > 200:
         ax_bull.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_bull.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_bull.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_bull.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_bull.set_xlim(500, changdu)
-
-
 
     # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
@@ -1104,15 +1085,15 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_kdj_60.set_ylabel("KDJ", fontproperties=myfont)
 
     changdu = len(ts_60)
-    if (changdu > 200):
+    if changdu > 200:
         ax_kdj_60.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_kdj_60.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_kdj_60.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_kdj_60.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_kdj_60.set_xlim(500, changdu)
 
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
@@ -1121,15 +1102,15 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_kdj_d.set_xlabel("KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
-    if (changdu > 200):
+    if changdu > 200:
         ax_kdj_d.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_kdj_d.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_kdj_d.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_kdj_d.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_kdj_d.set_xlim(500, changdu)
 
     ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
@@ -1138,26 +1119,24 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_kdj.set_xlabel("KDJ（周）", fontproperties=myfont)
 
     changdu = len(ts)
-    if (changdu > 200):
+    if changdu > 200:
         ax_kdj.set_xlim(100, changdu)
-    if (changdu > 300):
+    if changdu > 300:
         ax_kdj.set_xlim(200, changdu)
-    if (changdu > 400):
+    if changdu > 400:
         ax_kdj.set_xlim(300, changdu)
-    if (changdu > 500):
+    if changdu > 500:
         ax_kdj.set_xlim(400, changdu)
-    if (changdu > 600):
+    if changdu > 600:
         ax_kdj.set_xlim(500, changdu)
 
-
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
-    timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = "./images/" + timeStr1 + "/geGuZhiBiao"
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + 'geGuZhiBiao'
     if not os.path.exists(path):
         os.makedirs(path)
-    plt.savefig(path + "/" + timeStr1 + "_" + code + ".png")
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + ".png")
     plt.close()
-    image_path = path + "/" + timeStr1 + "_" + code + ".png"
+    image_path = path + os.sep + timeStr1 + "_" + code + ".png"
     return image_path
 
 # plt_image_geGuZhiBiao("399006","创业板指")
