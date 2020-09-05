@@ -1,14 +1,7 @@
-#encoding=utf-8
+# encoding=utf-8
 
-import sys
-import tushare as ts
-import time
-import numpy as num
-from datetime import datetime, date
-from datetime import timedelta
-from email_util import *
-import common
 import common_mysqlUtil
+import time
 
 '''
 #################################
@@ -16,6 +9,7 @@ import common_mysqlUtil
 说明：
 #################################
 '''
+
 
 def execute_shenzhen_1():
     jsonDicCode = {}
@@ -29,10 +23,11 @@ def execute_shenzhen_1():
                     ('000089.SZ', '深圳机场'), ('300498.SZ', '温氏股份'), ('002714.SZ', '牧原股份'), ('002422.SZ', '科伦药业'),
                     ('002475.SZ', '立讯精密'), ('000333.SZ', '美的集团')]
 
-    for key,value in jsonDicCode1:
+    for key, value in jsonDicCode1:
         codeStr = key[0:6]
         codeName = value
         common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", " ", "TOP")
+
 
 def execute_shanghai_1():
     jsonDicCode = {}
@@ -47,15 +42,15 @@ def execute_shanghai_1():
                     ('603259.SH', '药明康德'), ('600519.SH', '贵州茅台'), ('600900.SH', '长江电力'), ('601012.SH', '隆基股份'),
                     ('600600.SH', '青岛啤酒')]
 
-
     for key, value in jsonDicCode1:
         codeStr = key[0:6]
         codeName = value
         common_mysqlUtil.insert_zhishu_record(codeStr, codeName, codeName, " ", " ", "TOP")
 
+
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 common_mysqlUtil.deleteTopRecord("TOP")
-content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1())+ "<br></br>"
-content2 = "===========================上海60天：<br></br>" + str(execute_shanghai_1())+ "<br></br>"
+content1 = "===========================深圳60天：<br></br>" + str(execute_shenzhen_1()) + "<br></br>"
+content2 = "===========================上海60天：<br></br>" + str(execute_shanghai_1()) + "<br></br>"
 # sendMail(content1, "TOP执行完成")
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))

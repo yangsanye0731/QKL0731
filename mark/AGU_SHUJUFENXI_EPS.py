@@ -7,7 +7,7 @@ import common
 import common_image
 import common_image_xuangubao
 import common_zhibiao
-from email_util import *
+from mark.email_util import *
 from bypy import ByPy
 import common_mysqlUtil
 
@@ -258,6 +258,3 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath="./images/" + timeStr1, remotepath=timeStr1)
-sendMail(template1(strMailResult), "跨域5周线")
-time.sleep(10)
-sendMail(template1(strResult), "5周线连续下降")

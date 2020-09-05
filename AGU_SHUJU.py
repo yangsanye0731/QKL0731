@@ -1,14 +1,6 @@
-#encoding=utf-8
-import pandas as pd
-import time
-import numpy as num
-import tushare as ts
-import talib as ta
-from email_util import *
 import common
-import common_image
-import common_zhibiao
 import common_mysqlUtil
+import time
 
 def strategy(type):
     # 获取实时数据
