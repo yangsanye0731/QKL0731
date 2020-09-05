@@ -422,7 +422,7 @@ def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, 
     return image_path
 
 #######################################################################################################################
-#################################################################################################统一出图（无营业额等数据）
+##########################################################################################统一出图（图片顶部无营业额等数据）
 def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0,0,0,0,0,0
     re = ""
@@ -480,14 +480,14 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
         plt.xlim(changdu-100, changdu)
 
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = rootPath + "//images//" + timeStr1 + "//" + pathType
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "//" + timeStr1 + "_" + codeName + ".png")
+    plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
-    image_path = path + "//" + timeStr1 + "_" + codeName + ".png"
+    image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
     return image_path
 
 
