@@ -9,11 +9,15 @@ import common_zhibiao
 import common_zhibiao_BTC
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
-import pathutil
+import sys
+import os
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = os.path.split(curPath)[0]
+sys.path.append(rootPath)
 
 #######################################################################################################################
 ############################################################################################################读取配置文件
-systemconfig_file_path = pathutil.PathUtil.rootPath + '//resource//config//systemconfig.ini'
+systemconfig_file_path = rootPath + '//resource//config//systemconfig.ini'
 print(systemconfig_file_path)
 cf = configparser.ConfigParser()
 cf.read(systemconfig_file_path)
