@@ -628,9 +628,10 @@ def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
     plt.savefig(path + "/" + timeStr1 + "_" + code + ".png")
     plt.close()
 
-
+#######################################################################################################################
+####################################################################################################统一出图（指数数据图）
 def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng):
-    myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype=type)
     ts = ts[["open", "close", "high", "low", "volume"]]
 
@@ -662,15 +663,15 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
 
     # 设置坐标轴范围
     changdu = len(ts)
-    if (changdu > 200):
+    if changdu > 200:
         plt.xlim(changdu - 100, changdu)
 
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = "./images/" + timeStr1 + "/" + pathType
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
+    plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
 def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType, guizeMingcheng, zhangdiefu, huanshoulv):
