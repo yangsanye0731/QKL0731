@@ -1,8 +1,18 @@
 import asyncio
 from pyppeteer import launch
 import datetime
+
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
 import common
 
+#######################################################################################################################
+##############################################################################################################主执行程序
 async def main():
 
     js1 = '''() =>{
@@ -13,24 +23,24 @@ async def main():
            })
        }'''
 
-    js2 = '''() => {
-           alert (
-               window.navigator.webdriver
-           )
-       }'''
+    # js2 = '''() => {
+    #        alert (
+    #            window.navigator.webdriver
+    #        )
+    #    }'''
 
     browser = await launch(headless=True, args=['--no-sandbox'])
     # browser = await launch()
 
     page = await browser.newPage()
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) '
+                            'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
     await page.goto('https://i.eastmoney.com/7289074629097176')
     await page.evaluate(js1)
     # await page.evaluate(js2)
 
     elements_level1 = await page.xpath('//div[@class="detailright"]')
 
-    itemArray = {}
     for item_level1 in elements_level1:
         item = dict()
         elements_level2_title = await item_level1.xpath('./a[@class="detailtitle"]')
@@ -50,7 +60,9 @@ async def main():
         if dateTime_p > datetime.datetime.now() + datetime.timedelta(days=-2):
             print(item)
             print("======================================================================")
-            common.dingding_markdown_msg_2("触发东方财富网广州强有更新：" + item['title'], "触发东方财富网广州强有更新：" + item['title'])
+            common.dingding_markdown_msg_2("触发东方财富网广州强有更新："
+                                           + str(item['title']), "触发东方财富网广州强有更新："
+                                           + str(item['title']))
 
     await browser.close()
 asyncio.get_event_loop().run_until_complete(main())
