@@ -1,16 +1,22 @@
 #encoding=utf-8
-import pymysql
 import configparser
-from os import path
-import common_zhibiao
-import common_zhibiao_BTC
-import common
 import time
 
-#读取配置配置文件
-config_file = path.join(path.dirname(__file__), 'config.conf')
+import pymysql
+
+import common
+import common_zhibiao
+import common_zhibiao_BTC
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import pathutil
+
+#######################################################################################################################
+############################################################################################################读取配置文件
+systemconfig_file_path = pathutil.PathUtil.rootPath + '//resource//config//systemconfig.ini'
+print(systemconfig_file_path)
 cf = configparser.ConfigParser()
-cf.read(config_file)
+cf.read(systemconfig_file_path)
 
 
 def insertRecord(sql):
