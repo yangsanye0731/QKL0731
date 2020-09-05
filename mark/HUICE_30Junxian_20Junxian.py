@@ -5,7 +5,7 @@ import backtrader as bt
 import tushare as ts
 import datetime
 import numpy as num
-from email_util import *
+from mark.email_util import *
 import common_mysqlUtil
 import common
 

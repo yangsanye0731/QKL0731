@@ -19,7 +19,7 @@ from email import encoders
 from os import path
 
 #读取配置配置文件
-config_file = path.join(path.dirname(__file__), 'config.conf')
+config_file = path.join(path.dirname(__file__), 'systemconfig.ini')
 cf = configparser.ConfigParser()
 cf.read(config_file)
 
