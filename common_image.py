@@ -12,6 +12,9 @@ import numpy as num
 import common_mysqlUtil
 import json
 
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+
 def plt_image(code, codeName, type):
     matplotlib.rcParams['font.family'] = 'SimHei'
     ts = tushare.get_k_data(code, ktype = type)
@@ -445,8 +448,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     yoy = "%.1f" % yingyeup
     turnover_rate = "0"
 
-    path = str(os.path.abspath(os.path.dirname(__file__)).split('QKL')[0]) + 'QKL'
-    myfont = matplotlib.font_manager.FontProperties(fname=path + "/simsun.ttc", size="25")
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + "\\simsun.ttc", size="25")
     ts = tushare.get_k_data(code, ktype = type)
     ts = ts[["open","close","high","low","volume"]]
 
@@ -478,7 +480,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
         plt.xlim(changdu-100, changdu)
 
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
-    path = path + "//images//" + timeStr1 + "//" + pathType
+    path = rootPath + "//images//" + timeStr1 + "//" + pathType
     if not os.path.exists(path):
         os.makedirs(path)
 
