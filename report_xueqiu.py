@@ -1,21 +1,28 @@
 import asyncio
-from pyppeteer import launch
 import datetime
-import time
-from asyncio import sleep
 import json
-import pandas as pd
-import random
-import common
-import common_image
-from bypy import ByPy
-import talib as ta
+import time
+
 import numpy as num
-from common_constants import const
+import pandas as pd
+import talib as ta
+from bypy import ByPy
+from docx.shared import Mm
 from docxtpl import DocxTemplate
 from docxtpl import InlineImage
-from docxtpl import RichText
-from docx.shared import Mm
+from pyppeteer import launch
+
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
+import common
+import common_image
+from common_constants import const
+
 
 async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
@@ -37,7 +44,9 @@ async def index(page, cookie1, url, codeName):
         data_content = await page.xpath('//pre')
         # print(await (await data_content[0].getProperty("textContent")).jsonValue())
         json_list = json.loads(await (await data_content[0].getProperty("textContent")).jsonValue())
-        data_history = pd.DataFrame(json_list.get('data').get('item'), columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent', 'turnoverrate', 'amount', 'volume_post', 'amount_post'])
+        data_history = pd.DataFrame(json_list.get('data').get('item'),
+                                    columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent',
+                                             'turnoverrate', 'amount', 'volume_post', 'amount_post'])
 
         closeArray = num.array(data_history['close'])
         doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -58,7 +67,10 @@ async def index(page, cookie1, url, codeName):
         print(ma5)
 
         n = 0
-        image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName, "W", "【01雪球指数】雪球报告", "【01雪球指数】跨越5周线", str(zhangdiefu[-1]), "%.2f" % huanshoulv[-1])
+        image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
+                                                                      "W", "【01雪球指数】雪球报告",
+                                                                      "【01雪球指数】跨越5周线",
+                                                                      str(zhangdiefu[-1]), "%.2f" % huanshoulv[-1])
         myimage = InlineImage(tpl, image_path, width=Mm(135))
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_2('触发【01雪球指数】雪球报告' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
@@ -87,7 +99,8 @@ async def main(url, codeName):
     browser = await launch(headless=True, args=['--no-sandbox'])
 
     page = await browser.newPage()
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) '
+                            'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
     await page.goto("https://www.xueqiu.com/")
     await page.evaluate(js1)
     # await page.evaluate(js2)
@@ -116,7 +129,7 @@ def get_week_day(date):
   day = date.weekday()
   return week_day_dict[day]
 
-asset_url = 'reportXueqiuTemplate.docx'
+asset_url = rootPath + os.sep + 'resource' + os.sep + 'template' + os.sep + 'reportXueqiuTemplate.docx'
 tpl = DocxTemplate(asset_url)
 context = {'title': '雪球报告'}
 # 当天日期
@@ -133,14 +146,20 @@ for key, value in const.XUEQIUGAINIAN:
     print(value)
     curtime = str(int(time.time()*1000))
     asyncio.get_event_loop().run_until_complete(main(
-        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key + '&begin=' + curtime + '&period=week&type=before&count=-142', value))
+        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol='
+        + key + '&begin=' + curtime + '&period=week&type=before&count=-142', value))
 
+#######################################################################################################################
+################################################################################################################生成文件
 tpl.render(context)
 timeTitle = time.strftime("%Y%m%d", time.localtime())
-tpl.save('./report/雪球报告_' + timeTitle + '.docx')
+tpl.save(rootPath + os.sep + 'report' + os.sep + '雪球报告_' + timeTitle + '.docx')
 
+
+#######################################################################################################################
+################################################################################################################同步数据
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath='0000_Report')
-bp.upload(localpath="./report", remotepath='0000_Report')
+bp.upload(localpath=rootPath + os.sep + "report", remotepath='0000_Report')
 common.dingding_markdown_msg_2('触发【01雪球指数】雪球报告', '触发【01雪球指数】雪球报告')
