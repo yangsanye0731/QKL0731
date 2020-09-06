@@ -145,8 +145,8 @@ timeStr = time.strftime("%Y/%m/%d", time.localtime())
 context['time'] = timeStr
 context['week'] = get_week_day(datetime.datetime.now())
 
-filepath = rootPath + + os.sep + 'resource' + os.sep + 'config'
-script_file_path = filepath + + os.sep + "datasource.ini"
+filepath = rootPath + os.sep + 'resource' + os.sep + 'config'
+script_file_path = filepath + os.sep + "datasource.ini"
 cf = configparser.RawConfigParser()
 cf.read(script_file_path, encoding="utf-8-sig")
 gainian1 = cf.get("script", "gainian1")
