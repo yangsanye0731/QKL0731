@@ -165,6 +165,7 @@ gegu_count = cf.get("script", "gegu_count")
 for i in range(int(gegu_count) + 1):
     gegu = cf.get("script", "gegu" + str(i))
     image_path_result, sign_result, image_lujing = code_strategy(gegu.split('|')[1], "codeItemXXX", 135)
+    print(image_lujing)
     image_url = "http://47.240.11.144/" + image_lujing[9:]
     print(image_url)
     if "触发" in sign_result:
@@ -278,6 +279,7 @@ for i in range(int(gengong_count) + 1):
     try:
         genzong = cf.get("script", "genzong" + str(i))
         image_path_result, sign_result, image_lujing = code_strategy(genzong.split('|')[1], "codeItemXXX", 120)
+        print(image_lujing)
         image_url = "http://47.240.11.144/" + image_lujing[9:]
         print(image_url)
         if "触发" in sign_result:
