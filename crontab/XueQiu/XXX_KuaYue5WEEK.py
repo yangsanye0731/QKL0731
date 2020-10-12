@@ -90,8 +90,8 @@ async def index(page, cookie1, url, codeName):
         # lower = lower.round(2)
 
         if doubleCloseArray[-1] < ene[-1]:
-            common.dingding_markdown_msg_2('触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')',
-                                           '触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')')
+            # common.dingding_markdown_msg_2('触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')',
+            #                                '触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')')
             common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
                                                              "W",
                                                              "【01雪球指数】当前价格在ENE周线中线下方",
