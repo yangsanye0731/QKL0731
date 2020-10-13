@@ -50,12 +50,12 @@ def strategy(type):
     if flag:
         image_path_399006 = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
         image_url_399006 = "http://47.240.11.144/" + image_path_399006[6:]
-        common.dingding_markdown_msg_2("创业板指数", "创业板指数\n\n> ![screenshot]("
+        common.dingding_markdown_msg_2("触发创业板指数", "触发创业板指数\n\n> ![screenshot]("
                                        + image_url_399006 + ")")
 
         image_path_399300 = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
         image_url_399300 = "http://47.240.11.144/" + image_path_399300[6:]
-        common.dingding_markdown_msg_2("深证指数", "深证指数\n\n> ![screenshot]("
+        common.dingding_markdown_msg_2("触发深证指数", "触发深证指数\n\n> ![screenshot]("
                                        + image_url_399300 + ")")
 
 
