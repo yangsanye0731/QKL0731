@@ -202,10 +202,48 @@ def dingding_markdown_msg(title, text):
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
+########################################################################################################################
+######################################################################################################【01】每日趋势钉钉群
 def dingding_markdown_msg_2(title, text):
     # WebHook地址
     webhook = 'https://oapi.dingtalk.com/robot/' \
               'send?access_token=d62051ad4dd53ae281ef9cb2e7258041a9a0d086bc5bb14612b508930ebd1666'
+    # 初始化机器人小丁
+    xiaoding = DingtalkChatbot(webhook)
+    # Text消息@所有人
+    at_mobiles = ['17706417762']
+    xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
+########################################################################################################################
+######################################################################################################【02】雪球指数钉钉群
+def dingding_markdown_msg_02(title, text):
+    # WebHook地址
+    webhook = 'https://oapi.dingtalk.com/robot/' \
+              'send?access_token=44aed8fcbb24037e166ac9848c55bbe5a955ceea2a62efc5eb743040f70c07c1'
+    # 初始化机器人小丁
+    xiaoding = DingtalkChatbot(webhook)
+    # Text消息@所有人
+    at_mobiles = ['17706417762']
+    xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
+########################################################################################################################
+##################################################################################################### 【03】指数ETF钉钉群
+def dingding_markdown_msg_03(title, text):
+    # WebHook地址
+    webhook = 'https://oapi.dingtalk.com/robot/' \
+              'send?access_token=e6e0ace0004798b428470dda7a0d5760e0043f1bd087eec9d74848378bec043e'
+    # 初始化机器人小丁
+    xiaoding = DingtalkChatbot(webhook)
+    # Text消息@所有人
+    at_mobiles = ['17706417762']
+    xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
+########################################################################################################################
+################################################################################################## 【04】Report报告钉钉群
+def dingding_markdown_msg_04(title, text):
+    # WebHook地址
+    webhook = 'https://oapi.dingtalk.com/robot/' \
+              'send?access_token=fe46cb39d4ce1046cede9896390938f3b33744806feccb249230251f6ba3f49a'
     # 初始化机器人小丁
     xiaoding = DingtalkChatbot(webhook)
     # Text消息@所有人
