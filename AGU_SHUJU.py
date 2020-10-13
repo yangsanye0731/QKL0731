@@ -27,12 +27,10 @@ def strategy(type):
     print("总数618：" + str(int(data1[0][0] * 0.6)))
     if (data1[0][5] >= 30 or data1[0][6] >= 30):
         # sendMail("30MIN上升数，下降数达到一半", "30MIN上升数，下降数达到一半")
-        common.dingding_markdown_msg_2("【重要通知，规范流程】" + type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半",
-                                       "【重要通知，规范流程】" + type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半")
-
-        time.sleep(0.5)
-        common.dingding_markdown_msg_2("【重要通知，规范流程】" + type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半",
-                                       "【重要通知，规范流程】" + type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半")
+        common.dingding_markdown_msg_2("【重要通知，规范流程】" + type + "30MIN上升数:" + str(data1[0][5])
+                                       + "，下降数:" + str(data1[0][6]) + "达到一半",
+                                       "【重要通知，规范流程】" + type + "30MIN上升数:" + str(data1[0][5])
+                                       + "，下降数:" + str(data1[0][6]) + "达到一半")
 
         # time.sleep(0.5)
         # common.dingding_markdown_msg_2(type + "30MIN上升数:" + str(data1[0][5]) + "，下降数:" + str(data1[0][6]) + "达到一半",
@@ -40,12 +38,11 @@ def strategy(type):
 
     if (data1[0][3] >= 30 or data1[0][4] >= 30):
         # sendMail("60MIN上升数，下降数达到一半", "60MIN上升数，下降数达到一半")
-        common.dingding_markdown_msg_2("【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半",
-                                       "【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半")
+        common.dingding_markdown_msg_2("【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3])
+                                       + "，下降数:" + str(data1[0][4]) + "达到一半",
+                                       "【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3])
+                                       + "，下降数:" + str(data1[0][4]) + "达到一半")
 
-        time.sleep(0.5)
-        common.dingding_markdown_msg_2("【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半",
-                                       "【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半")
         # time.sleep(0.5)
         # common.dingding_markdown_msg_2(type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半",
         #                                type + "60MIN上升数:" + str(data1[0][3]) + "，下降数:" + str(data1[0][4]) + "达到一半")
