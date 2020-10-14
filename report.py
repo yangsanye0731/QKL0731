@@ -169,7 +169,7 @@ for i in range(int(gegu_count) + 1):
     image_url = "http://47.240.11.144/" + image_lujing[6:]
     print(image_url)
     if "触发" in sign_result:
-        common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
+        common.dingding_markdown_msg_04('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
                                        + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
                                        '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
                                        + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】"
@@ -283,7 +283,7 @@ for i in range(int(gengong_count) + 1):
         image_url = "http://47.240.11.144/" + image_lujing[6:]
         print(image_url)
         if "触发" in sign_result:
-            common.dingding_markdown_msg_2('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
+            common.dingding_markdown_msg_04('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
                                            + common.zhangdiefu(genzong.split('|')[1]) + "】"
                                            + genzong.split('|')[2] + sign_result,
                                            '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
@@ -325,4 +325,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath='0000_Report')
 bp.upload(localpath=rootPath + os.sep + "report", remotepath='0000_Report')
-common.dingding_markdown_msg_2('触发【Report】每日投资报告执行完成', '触发【Report】每日投资报告执行完成')
+common.dingding_markdown_msg_04('触发【Report】每日投资报告执行完成', '触发【Report】每日投资报告执行完成')
