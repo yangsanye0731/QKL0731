@@ -63,6 +63,7 @@ def strategy(zhouqi, n):
 
                 image_url = "http://47.240.11.144/" + image_path[6:]
                 print(image_url)
+                time.sleep(10)
                 common.dingding_markdown_msg_03('触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')',
                                                 '触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')'
                                                 + "\n\n> ![screenshot](" + image_url + ")")
