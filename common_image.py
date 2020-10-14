@@ -668,6 +668,9 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
     plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
+    image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
+    return image_path
+
 #######################################################################################################################
 ##################################################################################################统一出图（雪球概念数据图）
 def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType,

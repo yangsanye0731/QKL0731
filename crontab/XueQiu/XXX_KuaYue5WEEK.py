@@ -13,6 +13,7 @@ from pyppeteer import launch
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
@@ -20,11 +21,13 @@ import common
 import common_image
 from common_constants import const
 
+
 #######################################################################################################################
 ##############################################################################################################保存COOKIE
 async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
+
 
 #######################################################################################################################
 ##############################################################################################################读取COOKIE
@@ -32,6 +35,7 @@ async def load_cookie():
     with open("cookie.json", 'r', encoding="utf-8") as file:
         cookie = json.load(file)
     return cookie
+
 
 #######################################################################################################################
 ################################################################################################################数据解析
@@ -67,16 +71,18 @@ async def index(page, cookie1, url, codeName):
 
         n = 0
         # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
-        if doubleHighArray[n-1] > ma5[n-1] > doubleOpenArray[n-1] and ma5[n - 2] < ma5[n - 3] < ma5[n - 4] \
+        if doubleHighArray[n - 1] > ma5[n - 1] > doubleOpenArray[n - 1] and ma5[n - 2] < ma5[n - 3] < ma5[n - 4] \
                 and doubleCloseArray[n - 1] > doubleOpenArray[n - 1]:
+            image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
+                                                                          "W",
+                                                                          "【01雪球指数】跨越5周线",
+                                                                          "【01雪球指数】跨越5周线",
+                                                                          str(zhangdiefu[-1]),
+                                                                          "%.2f" % huanshoulv[-1])
+            image_url = "http://47.240.11.144/" + image_path[6:]
             common.dingding_markdown_msg_02('触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')',
-                                           '触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')')
-            common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
-                                                             "W",
-                                                             "【01雪球指数】跨越5周线",
-                                                             "【01雪球指数】跨越5周线",
-                                                             str(zhangdiefu[-1]),
-                                                             "%.2f" % huanshoulv[-1])
+                                            '触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')'
+                                            + "\n\n> ![screenshot](" + image_url + ")")
 
         param_m1 = 11
         param_m2 = 9
@@ -99,8 +105,9 @@ async def index(page, cookie1, url, codeName):
                                                              "%.2f" % huanshoulv[-1])
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_02('触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
-                                       '触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
+                                        '触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
+
 
 #######################################################################################################################
 #############################################################################################################数据爬虫入口
@@ -137,6 +144,7 @@ async def main(url, codeName):
     await index(page, cookie, url, codeName)
     await browser.close()
 
+
 #######################################################################################################################
 #############################################################################################################遍历雪球概念
 count = 0
@@ -145,7 +153,7 @@ for key, value in const.XUEQIUGAINIAN:
     count = count + 1
     print(codeItem)
     print(value)
-    curtime = str(int(time.time()*1000))
+    curtime = str(int(time.time() * 1000))
     asyncio.get_event_loop().run_until_complete(main(
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key +
         '&begin=' + curtime + '&period=week&type=before&count=-142', value))

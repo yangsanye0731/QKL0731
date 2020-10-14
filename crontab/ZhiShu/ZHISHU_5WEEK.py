@@ -56,12 +56,15 @@ def strategy(zhouqi, n):
             if doubleHighArray_W[n-1] > ma5[n-1] > doubleOpenArray_W[n-1] and ma5[n - 2] < ma5[n - 3] < ma5[n - 4] \
                     and doubleCloseArray_W[n - 1] > doubleOpenArray_W[n - 1]:
                 print(value)
-                common.dingding_markdown_msg_02('触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')',
-                                                '触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')')
-                common_image.plt_image_tongyichutu_zhishu(codeItem, value,
+                image_path = common_image.plt_image_tongyichutu_zhishu(codeItem, value,
                                                           "W",
                                                           "【02国内指数】跨越5周线",
                                                           "【02国内指数】跨越5周线")
+
+                image_url = "http://47.240.11.144/" + image_path[6:]
+                common.dingding_markdown_msg_03('触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')',
+                                                '触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')'
+                                                + "\n\n> ![screenshot](" + image_url + ")")
 
             closeArray_M = num.array(data_history_M['close'])
             doubleCloseArray_M = num.asarray(closeArray_M, dtype='double')
@@ -101,4 +104,4 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【02国内指数】执行完成', '触发【02国内指数】执行完成')
+common.dingding_markdown_msg_03('触发【02国内指数】执行完成', '触发【02国内指数】执行完成')
