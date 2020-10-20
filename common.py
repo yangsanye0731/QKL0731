@@ -288,4 +288,4 @@ def dingding_markdown_msg_ene(title, text):
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
 
-print(zhangdiefu('399006'))
+# print(zhangdiefu('399006'))

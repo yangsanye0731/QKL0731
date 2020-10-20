@@ -1,6 +1,7 @@
-#encoding=utf-8
+# encoding=utf-8
 
 import matplotlib
+
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import talib
@@ -15,12 +16,13 @@ import json
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 
+
 def plt_image(code, codeName, type):
     matplotlib.rcParams['font.family'] = 'SimHei'
-    ts = tushare.get_k_data(code, ktype = type)
+    ts = tushare.get_k_data(code, ktype=type)
     # ts=ts.get_hist_data("002941",start="2018-08-27",end="2019-08-17")
-    ts=ts[["open","close","high","low","volume"]]
-    #print(ts)
+    ts = ts[["open", "close", "high", "low", "volume"]]
+    # print(ts)
 
     # 画5日均线图
     avg_5 = talib.MA(ts["close"], timeperiod=5)
@@ -32,18 +34,18 @@ def plt_image(code, codeName, type):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(8,4))
-    plt.plot(avg_5,color="r")
-    plt.plot(avg_10,color="y")
-    plt.plot(avg_20,color="g")
-    plt.plot(avg_30,color="b")
+    fig = plt.subplots(figsize=(8, 4))
+    plt.plot(avg_5, color="r")
+    plt.plot(avg_10, color="y")
+    plt.plot(avg_20, color="g")
+    plt.plot(avg_30, color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     if (type == "W"):
         plt.title(codeName + '周线均线')
     plt.xlabel('Date')
     plt.ylabel('Price')
-    #设置坐标轴范围
+    # 设置坐标轴范围
 
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
@@ -51,14 +53,15 @@ def plt_image(code, codeName, type):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" +  code + "_" + codeName + "_" + timeStr2 + "qushi.png")
+    plt.savefig(path + "/" + code + "_" + codeName + "_" + timeStr2 + "qushi.png")
     plt.show()
+
 
 # 跨越5周线图
 def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -71,22 +74,23 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate, ind
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
-                  fontproperties=myfont)
+        plt.title(
+            timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
+            fontproperties=myfont)
     plt.xlabel('日期，规则：跨越5周线，5周线前2期下降', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code)  + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     print(changdu)
     if (changdu > 200):
@@ -108,11 +112,12 @@ def plt_image_kuaYueWeek5Line(code, codeName, type, eps, yoy, turnover_rate, ind
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
+
 # 周ENE中线趋势
 def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -125,22 +130,23 @@ def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate, industry):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
-                  fontproperties=myfont)
+        plt.title(
+            timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
+            fontproperties=myfont)
     plt.xlabel('日期，规则：ENE周线向上', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code)  + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     print(changdu)
     if (changdu > 200):
@@ -162,11 +168,12 @@ def plt_image_ENEWEEK(code, codeName, type, eps, yoy, turnover_rate, industry):
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
+
 # 周孕线
 def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -179,22 +186,23 @@ def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate, industr
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
-                  fontproperties=myfont)
+        plt.title(
+            timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
+            fontproperties=myfont)
     plt.xlabel('日期，规则：周孕线', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code)  + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     print(changdu)
     if (changdu > 200):
@@ -216,11 +224,12 @@ def plt_image_YUNXIANWEEK(code, codeName, type, eps, yoy, turnover_rate, industr
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
 
+
 # 日孕线
 def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate, industry):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -233,26 +242,27 @@ def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate, industry
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "D"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
-                  fontproperties=myfont)
+        plt.title(
+            timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
+            fontproperties=myfont)
     plt.xlabel('日期，规则：日孕线', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     print(changdu)
     if (changdu > 200):
-        plt.xlim(changdu-100, changdu)
+        plt.xlim(changdu - 100, changdu)
     # if (changdu > 300):
     #     plt.xlim(200, changdu)
     # if (changdu > 400):
@@ -269,11 +279,6 @@ def plt_image_YUNXIANDAY(code, codeName, type, eps, yoy, turnover_rate, industry
 
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
-
-
-
-
-
 
 
 # 统一出图
@@ -296,8 +301,8 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
     turnover_rate = "%.2f" % turnover_rate
 
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -310,24 +315,24 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
-                  fontproperties=myfont)
+              fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     if (changdu > 200):
-        plt.xlim(changdu-100, changdu)
+        plt.xlim(changdu - 100, changdu)
 
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1 + "/" + pathType
@@ -336,6 +341,7 @@ def plt_image_tongyichutu(code, type, pathType, guizeMingcheng):
 
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + ".png")
     plt.close()
+
 
 # 统一出图
 def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, pbx9, pbx13, pbx18, pbx24):
@@ -421,10 +427,11 @@ def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, 
     image_path = path + "/" + timeStr1 + "_" + codeName + ".png"
     return image_path
 
+
 #######################################################################################################################
 ##########################################################################################统一出图（图片顶部无营业额等数据）
 def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
-    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0,0,0,0,0,0
+    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0, 0, 0, 0, 0, 0
     re = ""
     codeName = ''
     data = common_mysqlUtil.select_all_code_one(code)
@@ -449,8 +456,8 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     turnover_rate = "0"
 
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts = ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -462,22 +469,22 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     fig = plt.subplots(figsize=(15, 13))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
 
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额："
               + yoy + "%,换手率：" + turnover_rate + "%" + re, fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
     plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     if changdu > 200:
-        plt.xlim(changdu-100, changdu)
+        plt.xlim(changdu - 100, changdu)
 
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
@@ -488,7 +495,6 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
 
     image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
     return image_path
-
 
 
 #######################################################################################################################
@@ -527,8 +533,8 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
                 count = count + 1
 
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -541,24 +547,25 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,13))
+    fig = plt.subplots(figsize=(15, 13))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
-    plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%" + re,
-                  fontproperties=myfont)
+    plt.title(
+        timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%" + re,
+        fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     if changdu > 200:
-        plt.xlim(changdu-100, changdu)
+        plt.xlim(changdu - 100, changdu)
 
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
@@ -570,10 +577,10 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
     image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
     return image_path
 
+
 # 统一出图
 def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
-    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0,0,0,0,0,0
-
+    eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0, 0, 0, 0, 0, 0
 
     codeName, industry = "", ""
     eps = "%.1f" % epsup
@@ -582,8 +589,8 @@ def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
     turnover_rate = ""
 
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -596,24 +603,24 @@ def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%,换手率：" + turnover_rate + "%",
-                  fontproperties=myfont)
+              fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code) + ", " + industry, fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     if (changdu > 200):
-        plt.xlim(changdu-100, changdu)
+        plt.xlim(changdu - 100, changdu)
 
     timeStr2 = time.strftime("%m%d%H%M", time.localtime())
     path = "./images/" + timeStr1 + "/" + pathType
@@ -622,6 +629,7 @@ def plt_image_tongyichutu_wueps(code, type, pathType, guizeMingcheng):
 
     plt.savefig(path + "/" + timeStr1 + "_" + code + ".png")
     plt.close()
+
 
 #######################################################################################################################
 ####################################################################################################统一出图（指数数据图）
@@ -671,6 +679,7 @@ def plt_image_tongyichutu_zhishu(code, codeName, type, pathType, guizeMingcheng)
     image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
     return image_path
 
+
 #######################################################################################################################
 ##################################################################################################统一出图（雪球概念数据图）
 def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, pathType,
@@ -717,18 +726,11 @@ def plt_image_tongyichutu_zhishu_xueqiu(doubleCloseArray, code, codeName, type, 
     return image_path
 
 
-
-
-
-
-
-
-
 # 30日线上升
 def plt_image_30DayLineUp(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -741,26 +743,26 @@ def plt_image_30DayLineUp(code, codeName, type, eps, yoy):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_20, "k.-")
-    plt.plot(avg_30,color="y")
+    plt.plot(avg_30, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "D"):
         plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%",
                   fontproperties=myfont)
     plt.xlabel('日期，规则：30日线上升，30日线线前2期下降', fontproperties=myfont)
-    plt.ylabel('价格 '+ common.zhangdiefu(code), fontproperties=myfont)
+    plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     print(changdu)
     if (changdu > 200):
-        plt.xlim(changdu-100, changdu)
+        plt.xlim(changdu - 100, changdu)
 
     path = "./images/" + timeStr1 + "/30DayLineUp"
     if not os.path.exists(path):
@@ -769,12 +771,13 @@ def plt_image_30DayLineUp(code, codeName, type, eps, yoy):
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + "30D.png")
     plt.close()
 
+
 # 5周线图
 def plt_image_week5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
-    #print(ts)
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
+    # print(ts)
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -787,20 +790,20 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
         plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%", fontproperties=myfont)
     plt.xlabel('日期，规则：EPS大于20，价格在5周线以下', fontproperties=myfont)
     plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     if (changdu > 200):
         plt.xlim(100, changdu)
@@ -820,11 +823,12 @@ def plt_image_week5Line(code, codeName, type, eps, yoy):
     plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5W.png")
     plt.close()
 
+
 # 百日新高绘图
 def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc")
 
-    fig = plt.figure(figsize=(15,12))
+    fig = plt.figure(figsize=(15, 12))
     ax = fig.add_subplot(111)
     ax.plot(riQi, zhiShuShuJu, 'rs-', )
     ax2 = ax.twinx()
@@ -849,11 +853,12 @@ def plt_image_baiRiXinGao(xinGaoGeShu, zhiShuShuJu, riQi):
         os.makedirs(path)
     plt.savefig(path + "/" + timeStr2 + "qushi.png")
 
+
 # 5周线连续下降
 def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     myfont = matplotlib.font_manager.FontProperties(fname="/root/software/QKL/simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype = type)
-    ts=ts[["open","close","high","low","volume"]]
+    ts = tushare.get_k_data(code, ktype=type)
+    ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画5日均线图
     avg_1 = talib.MA(ts["close"], timeperiod=1)
@@ -866,21 +871,21 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     # print(avg_20)
     # print(avg_30)
 
-    fig=plt.subplots(figsize=(15,12))
+    fig = plt.subplots(figsize=(15, 12))
     plt.plot(avg_1, "b.-")
     plt.plot(avg_5, "k.-")
-    plt.plot(avg_10,color="y")
+    plt.plot(avg_10, color="y")
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
-    #设置坐标轴名称
+    # 设置坐标轴名称
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     if (type == "W"):
-        plt.title(timeStr1 + "_" + codeName + '(' + code  + ')EPS:' + eps + "%,营业额：" + yoy + "%", fontproperties=myfont)
+        plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额：" + yoy + "%", fontproperties=myfont)
     plt.xlabel('日期，规则：5周线连续下降', fontproperties=myfont)
     plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
 
-    #设置坐标轴范围
+    # 设置坐标轴范围
     changdu = len(ts)
     print(changdu)
 
@@ -899,10 +904,13 @@ def plt_image_lianXuXiaJiangWeek5Line(code, codeName, type, eps, yoy):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + "/" +  timeStr1 + "_" + codeName + "5D.png")
+    plt.savefig(path + "/" + timeStr1 + "_" + codeName + "5D.png")
     plt.close()
 
+
 import pandas as pd
+
+
 def KDJ_zhibiao(data_history, doubleCloseArray):
     stock_data = {}
     low_list = data_history.low.rolling(9).min()
@@ -923,7 +931,7 @@ def plt_image_geGuZhiBiao(code, fullName):
     codeName = fullName + "(" + code + ")"
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
 
-    fig = plt.figure(figsize=(15,10))
+    fig = plt.figure(figsize=(15, 10))
     # fig.suptitle(codeName, fontproperties=myfont_title)
     # 1*1 的第一个图表
     ax_macd_60 = fig.add_subplot(331)
@@ -962,7 +970,7 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_macd_60.plot(data_60.index, data_60["macd"], label="macd")
     ax_macd_60.plot(data_60.index, data_60["sigal"], label="sigal")
     ax_macd_60.bar(data_60.index, data_60["hist"] * 2, label="hist")
-    ax_macd_60.set_xlabel( "60MACD买入卖出量与力道", fontproperties=myfont)
+    ax_macd_60.set_xlabel("60MACD买入卖出量与力道", fontproperties=myfont)
     ax_macd_60.set_ylabel(codeName + "涨跌幅：" + common.zhangdiefu(code), fontproperties=myfont)
 
     changdu = len(ts_60)
@@ -1065,7 +1073,7 @@ def plt_image_geGuZhiBiao(code, fullName):
     ax_bull.plot(data.index, data["upperband"], label="UP")
     ax_bull.plot(data.index, data["middleband"], label="MID")
     ax_bull.plot(data.index, data["lowerband"], label="LOW")
-    ax_bull.plot(data.index, data["low"], "b.-" , label="Line")
+    ax_bull.plot(data.index, data["low"], "b.-", label="Line")
     ax_bull.set_xlabel("布林（周）", fontproperties=myfont)
 
     changdu = len(ts)
@@ -1142,4 +1150,5 @@ def plt_image_geGuZhiBiao(code, fullName):
     image_path = path + os.sep + timeStr1 + "_" + code + ".png"
     return image_path
 
-# plt_image_geGuZhiBiao("399006","创业板指")
+
+# plt_image_geGuZhiBiao("399006", "创业板指")
