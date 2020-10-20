@@ -4,11 +4,13 @@ import numpy as num
 import tushare as ts
 from dingtalkchatbot.chatbot import DingtalkChatbot
 
+
 # 涨跌幅
 def zhangdiefu(code):
     data_history_D = ts.get_k_data(code, ktype="D")
     closeArray_D = num.array(data_history_D['close'])
     return "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100) + '%'
+
 
 # 股票名称（可能为空，不推荐使用）
 def gupiaomingcheng(code):
@@ -17,6 +19,7 @@ def gupiaomingcheng(code):
     data_realTime = ts.get_realtime_quotes(code)
     nameArray = data_realTime['name']
     return nameArray[0]
+
 
 # 市净率
 def shijinglv(code):
@@ -34,6 +37,7 @@ def shijinglv(code):
     nameArray = num.array(df['pb'])
     return nameArray[0]
 
+
 # EPS
 def codeEPS(code):
     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
@@ -47,6 +51,7 @@ def codeEPS(code):
     timez = time.strftime('%Y%m%d', time.localtime(time.time()))
     df = pro.fina_indicator(ts_code=code)
     return df['eps'][0], df['basic_eps_yoy'][0], df['or_yoy'][0], df['eps'][1], df['basic_eps_yoy'][1], df['or_yoy'][1]
+
 
 # 融资比
 def codeRongZiBi(code):
@@ -70,6 +75,7 @@ def codeRongZiBi(code):
     rongZiBi = rzye[0] / (nameArray[0] * 10000)
     return "%.4f" % rongZiBi
 
+
 # 总市值
 def zongshizhi(code):
     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
@@ -85,6 +91,7 @@ def zongshizhi(code):
                          fields='ts_code,trade_date,turnover_rate,volume_ratio,pe,pb,total_mv')
     nameArray = num.array(df['total_mv'])
     return nameArray[0]
+
 
 # 基本数据
 def daily_basic(code):
@@ -162,6 +169,7 @@ def daily_basic(code):
                                                                     'volume_ratio,pe,pb,total_mv')
     return df
 
+
 # 股票名称
 def codeName(code):
     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
@@ -171,6 +179,7 @@ def codeName(code):
     df2 = df.loc[df['symbol'] == code]
     nameArray = num.array(df2['name'])
     return nameArray[0]
+
 
 def codeName_and_industry(code):
     ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
@@ -182,6 +191,7 @@ def codeName_and_industry(code):
     industryArray = num.array(df2['industry'])
     return nameArray[0], industryArray[0]
 
+
 def dingding_msg(content):
     # WebHook地址
     webhook = 'https://oapi.dingtalk.com/robot/' \
@@ -192,6 +202,7 @@ def dingding_msg(content):
     at_mobiles = ['17706417762']
     xiaoding.send_text(msg=content, is_at_all=False, at_mobiles=at_mobiles)
 
+
 def dingding_markdown_msg(title, text):
     # WebHook地址
     webhook = 'https://oapi.dingtalk.com/robot/' \
@@ -201,6 +212,7 @@ def dingding_markdown_msg(title, text):
     # Text消息@所有人
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
 
 ########################################################################################################################
 ######################################################################################################【01】每日趋势钉钉群
@@ -214,6 +226,7 @@ def dingding_markdown_msg_2(title, text):
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
+
 ########################################################################################################################
 ######################################################################################################【02】雪球指数钉钉群
 def dingding_markdown_msg_02(title, text):
@@ -225,6 +238,7 @@ def dingding_markdown_msg_02(title, text):
     # Text消息@所有人
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
 
 ########################################################################################################################
 ##################################################################################################### 【03】指数ETF钉钉群
@@ -238,6 +252,7 @@ def dingding_markdown_msg_03(title, text):
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
+
 ########################################################################################################################
 ################################################################################################## 【04】Report报告钉钉群
 def dingding_markdown_msg_04(title, text):
@@ -250,6 +265,7 @@ def dingding_markdown_msg_04(title, text):
     at_mobiles = ['17706417762']
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
+
 def dingding_markdown_msg_link(title, text, url):
     # WebHook地址
     webhook = 'https://oapi.dingtalk.com/robot/' \
@@ -259,6 +275,7 @@ def dingding_markdown_msg_link(title, text, url):
     # Text消息@所有人
     at_mobiles = ['17706417762']
     xiaoding.send_link(title=title, text=text, message_url=url)
+
 
 def dingding_markdown_msg_ene(title, text):
     # WebHook地址
