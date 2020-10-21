@@ -12,6 +12,7 @@ import common
 import numpy as num
 import common_mysqlUtil
 import json
+import random
 
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
@@ -1145,9 +1146,12 @@ def plt_image_geGuZhiBiao(code, fullName):
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + 'geGuZhiBiao'
     if not os.path.exists(path):
         os.makedirs(path)
-    plt.savefig(path + os.sep + timeStr1 + "_" + code + ".png")
+
+    suiji = random.randint(100,200)
+    suiji_str = str(suiji)
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
     plt.close()
-    image_path = path + os.sep + timeStr1 + "_" + code + ".png"
+    image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
 
