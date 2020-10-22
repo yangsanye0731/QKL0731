@@ -1155,4 +1155,4 @@ def plt_image_geGuZhiBiao(code, fullName):
     return image_path
 
 
-# plt_image_geGuZhiBiao("399006", "创业板指")
+#plt_image_geGuZhiBiao("300322", "硕贝德")

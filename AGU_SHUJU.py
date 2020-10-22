@@ -47,7 +47,7 @@ def strategy(type):
 
     ####################################################################################################################
     ##########################################################################################################指数指标图片
-    # flag = True
+    flag = True
     if flag:
         image_path_399006 = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
         image_url_399006 = "http://47.240.11.144/" + image_path_399006[6:]
@@ -60,6 +60,12 @@ def strategy(type):
         print(image_url_399300)
         common.dingding_markdown_msg_2("触发深证指数", "触发深证指数\n\n> ![screenshot]("
                                        + image_url_399300 + ")")
+
+        image_path_300322 = common_image.plt_image_geGuZhiBiao("300322", "硕贝德")
+        image_url_300322 = "http://47.240.11.144/" + image_path_300322[6:]
+        print(image_url_300322)
+        common.dingding_markdown_msg_2("触发硕贝德", "触发硕贝德\n\n> ![screenshot]("
+                                       + image_url_300322 + ")")
 
 
 # strategy("ZXG")
