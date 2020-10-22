@@ -51,7 +51,7 @@ def strategy(type):
     if flag:
         image_path_399006 = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
         image_url_399006 = "http://47.240.11.144/" + image_path_399006[6:]
-        print(image_path_399006)
+        print(image_url_399006)
         common.dingding_markdown_msg_2("触发创业板指数", "触发创业板指数\n\n> ![screenshot]("
                                        + image_url_399006 + ")")
 
