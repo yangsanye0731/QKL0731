@@ -69,7 +69,7 @@ async def index(page, cookie1, url, codeName, codeItem):
         if ene[-1] > ene[-2]:
             result = 1
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
+        common.dingding_markdown_msg_02('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
                                        + '(' + codeItem + ')报错了 ！！！！！！',
                                        '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
                                        + '(' + codeItem + ')报错了 ！！！！！！')
@@ -112,7 +112,7 @@ async def index2(page, cookie1, url, codeName, codeItem):
                                               + codeName + '(' + codeItem + ')',
                                               "https://xueqiu.com/S/" + codeItem)
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
+        common.dingding_markdown_msg_02('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
                                        + '(' + codeItem + ')报错了 ！！！！！！',
                                        '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
                                        + '(' + codeItem + ')报错了 ！！！！！！')
@@ -153,7 +153,7 @@ async def index3(page, cookie1, url, codeName, codeItem):
                                                          "%.2f" % huanshoulv[-1])
 
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
-        common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
+        common.dingding_markdown_msg_02('触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
                                        + '(' + codeItem + ')报错了 ！！！！！！',
                                        '触发【01雪球指数】ENE月线升势，布林日线下穿' + codeName
                                        + '(' + codeItem + ')报错了 ！！！！！！')
@@ -228,5 +228,5 @@ bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【01雪球指数】ENE月线升势，布林日线下穿执行完成',
+common.dingding_markdown_msg_02('触发【01雪球指数】ENE月线升势，布林日线下穿执行完成',
                                '触发【01雪球指数】ENE月线升势，布林日线下穿执行完成')
