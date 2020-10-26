@@ -84,3 +84,4 @@ def plot_mean_ret(code, title):
 # plot_mean_ret('sh', '上证综指')
 # plot_mean_ret('cyb', '创业板指')
 # plot_mean_ret('300322', '硕贝德')
+plot_mean_ret('603363', '傲农生物')
