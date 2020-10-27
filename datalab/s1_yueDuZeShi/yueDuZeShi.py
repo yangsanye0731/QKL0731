@@ -1,19 +1,30 @@
 import matplotlib.patches as mpatches
+import random
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import tushare as ts
 # 正常显示画图时出现的中文和负号
 from pylab import mpl
+import time
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 mpl.rcParams['axes.unicode_minus'] = False
 
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
+
 
 ########################################################################################################################
 ############################################################################################################ 计算日收益率
-def get_daily_ret(code='sh', start='2000-01-01', end='2020-10-26'):
-    df = ts.get_k_data(code, start=start, end=end)
+def get_daily_ret(code='sh', start='2000-01-01'):
+    df = ts.get_k_data(code, start=start)
     df.index = pd.to_datetime(df.date)
     # 计算日收益率
     daily_ret = df['close'].pct_change()
@@ -69,7 +80,7 @@ def plot_votil(code, title):
 ########################################################################################################################
 ##################################################################################################### 计算月度收益率平均值
 # pyecharts是0.5.11版本
-def plot_mean_ret(code, title):
+def plot_mean_ret(code):
     daily_ret = get_daily_ret(code)
     # 月度收益率
     mnthly_ret = daily_ret.resample('M').apply(lambda x: ((1 + x).prod() - 1))
@@ -78,10 +89,19 @@ def plot_mean_ret(code, title):
     v = list(mrets)
 
     plt.bar(attr, v, fc='r')
-    plt.show()
 
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + '月度择时策略'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
+    plt.close()
+    image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
+    return image_path
 
 # plot_mean_ret('sh', '上证综指')
 # plot_mean_ret('cyb', '创业板指')
 # plot_mean_ret('300322', '硕贝德')
-plot_mean_ret('603363', '傲农生物')
+plot_mean_ret('603363')

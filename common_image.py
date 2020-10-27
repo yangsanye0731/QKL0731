@@ -1147,12 +1147,11 @@ def plt_image_geGuZhiBiao(code, fullName):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    suiji = random.randint(100,200)
-    suiji_str = str(suiji)
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
     plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
     plt.close()
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
 
-#plt_image_geGuZhiBiao("300322", "硕贝德")
+# plt_image_geGuZhiBiao("300322", "硕贝德")

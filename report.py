@@ -10,6 +10,7 @@ import tushare as ts
 import numpy as num
 import talib as ta
 from docx.shared import Mm
+import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -311,6 +312,14 @@ image_path_399300 = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
 time.sleep(10)
 myimage_399300 = InlineImage(tpl, image_path_399300, width=Mm(245))
 context['image2'] = myimage_399300
+
+image_path_ydzs_cyb = ydzs.plot_mean_ret('cyb')
+myimage_ydzs_cyb = InlineImage(tpl, image_path_ydzs_cyb, width=Mm(245))
+context['image_ydzs_cyb'] = myimage_ydzs_cyb
+
+image_path_ydzs_sh = ydzs.plot_mean_ret('sh')
+myimage_ydzs_sh = InlineImage(tpl, image_path_ydzs_cyb, width=Mm(245))
+context['image_ydzs_sh'] = myimage_ydzs_sh
 
 #######################################################################################################################
 ################################################################################################################生成文件
