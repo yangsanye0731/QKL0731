@@ -16,15 +16,16 @@ import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
 import common
 import common_image
 
-
 asset_url = rootPath + os.sep + 'resource' + os.sep + 'template' + os.sep + 'reportTemplate.docx'
 tpl = DocxTemplate(asset_url)
+
 
 #######################################################################################################################
 ###########################################################################################################工具方法：策略
@@ -118,25 +119,27 @@ def code_strategy(codeItem, field_name, width):
             print(closeArray[-1])
             print(ene_w[-1])
             # if closeArray[-1] < ene_w[-1] :
-                # sign = sign + "触发当前价格在ENE周线中线下方；"
+            # sign = sign + "触发当前价格在ENE周线中线下方；"
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return myimage, sign, image_path
 
+
 #######################################################################################################################
 ###########################################################################################工具方法：返回时间所对应的星期值
 def get_week_day(date):
-  week_day_dict = {
-    0: '星期一',
-    1: '星期二',
-    2: '星期三',
-    3: '星期四',
-    4: '星期五',
-    5: '星期六',
-    6: '星期天',
-  }
-  day = date.weekday()
-  return week_day_dict[day]
+    week_day_dict = {
+        0: '星期一',
+        1: '星期二',
+        2: '星期三',
+        3: '星期四',
+        4: '星期五',
+        5: '星期六',
+        6: '星期天',
+    }
+    day = date.weekday()
+    return week_day_dict[day]
+
 
 #######################################################################################################################
 #########################################################################################################投资报告首页信息
@@ -170,11 +173,19 @@ for i in range(int(gegu_count) + 1):
     image_url = "http://47.240.11.144/" + image_lujing[6:]
     print(image_url)
     if "触发" in sign_result:
+        image_path_ydzs = ydzs.plot_mean_ret(gegu.split('|')[1])
+        image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
+
+        image_path = common_image.plt_image_geGuZhiBiao(gegu.split('|')[1], gegu.split('|')[1])
+        image_url = "http://47.240.11.144/" + image_path[6:]
+
         common.dingding_markdown_msg_04('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
-                                       + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
-                                       '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
-                                       + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】"
-                                       + sign_result + "\n\n> ![screenshot](" + image_url + ")")
+                                        + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
+                                        '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
+                                        + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】"
+                                        + sign_result + "\n\n> ![screenshot](" + image_url + ")"
+                                        + "![screenshot](" + image_url + ")"
+                                        + "![screenshot](" + image_url_ydzs + ")")
     rt1 = RichText('')
     rt1.add(sign_result, color='#ff0000', bold=True)
     gegu_dict = {'date': gegu.split('|')[0], 'title': gegu.split('|')[2], 'mark': gegu.split('|')[3],
@@ -200,7 +211,6 @@ qushi_dict2 = {'type': '国内趋势（60分钟）', 'title': '上升数、下�
 qushi_dict3 = {'type': '国内趋势（日线）', 'title': '上升数、下降数进入30以上，大趋势', 'mark': '主力趋势指标', 'qita': ''}
 qushi_list = [qushi_dict1, qushi_dict2, qushi_dict3]
 context['qushi_list'] = qushi_list
-
 
 # 数据资源
 zixun_labels = ['资讯来源', '数据内容']
@@ -284,13 +294,21 @@ for i in range(int(gengong_count) + 1):
         image_url = "http://47.240.11.144/" + image_lujing[6:]
         print(image_url)
         if "触发" in sign_result:
+            image_path_ydzs = ydzs.plot_mean_ret(genzong.split('|')[1])
+            image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
+
+            image_path = common_image.plt_image_geGuZhiBiao(genzong.split('|')[1], genzong.split('|')[1])
+            image_url = "http://47.240.11.144/" + image_path[6:]
+
             common.dingding_markdown_msg_04('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
-                                           + common.zhangdiefu(genzong.split('|')[1]) + "】"
-                                           + genzong.split('|')[2] + sign_result,
-                                           '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
-                                           + common.zhangdiefu(genzong.split('|')[1]) + "】"
-                                           + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot]("
-                                           + image_url + ")")
+                                            + common.zhangdiefu(genzong.split('|')[1]) + "】"
+                                            + genzong.split('|')[2] + sign_result,
+                                            '触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
+                                            + common.zhangdiefu(genzong.split('|')[1]) + "】"
+                                            + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot]("
+                                            + image_url + ")"
+                                            + "![screenshot](" + image_url + ")"
+                                            + "![screenshot](" + image_url_ydzs + ")")
         rt1 = RichText('')
         rt1.add(sign_result, color='#ff0000', bold=True)
         gezong_dict = {'date': genzong.split('|')[0], 'title': genzong.split('|')[2] + '【' + sign_result + '】',
