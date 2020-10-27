@@ -85,7 +85,7 @@ def plot_mean_ret(code):
     # 月度收益率
     mnthly_ret = daily_ret.resample('M').apply(lambda x: ((1 + x).prod() - 1))
     mrets = (mnthly_ret.groupby(mnthly_ret.index.month).mean() * 100).round(2)
-    attr = [str(i) + '月' for i in range(1, 13)]
+    attr = [str(i) + 'M' for i in range(1, 13)]
     v = list(mrets)
 
     plt.bar(attr, v, fc='r')
