@@ -69,11 +69,11 @@ def strategy(type):
     ##########################################################################################################指数指标图片
     flag = True
     if flag:
-        send_image('sh', '上证指数')
-        send_image('cyb', '创业板指数')
-        send_image('399300', '深证指数')
-        send_image('300322', '硕贝德', True)
-        send_image('603363', '傲农生物', True)
+        send_image(code='sh', name='上证指数')
+        send_image(code='cyb', name='创业板指数')
+        send_image(code='399300', name='深证指数')
+        send_image(code='300322', name='硕贝德', only_qushi_image=True)
+        send_image(code='603363', name='傲农生物', only_qushi_image=True)
 
         # image_path_ydzs_sh = ydzs.plot_mean_ret('sh')
         # image_url_ydzs_sh = "http://47.240.11.144/" + image_path_ydzs_sh[6:]
