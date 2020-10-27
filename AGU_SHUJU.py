@@ -4,7 +4,7 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
-def send_image(code, name, only_quShi_image):
+def send_image(code, name, only_qushi_image=False):
 
     if only_quShi_image:
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
