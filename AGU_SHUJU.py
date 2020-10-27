@@ -4,6 +4,17 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
+def send_image(code, name):
+    image_path_ydzs = ydzs.plot_mean_ret(code)
+    image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs_sh[6:]
+
+    image_path = common_image.plt_image_geGuZhiBiao(code, name)
+    image_url = "http://47.240.11.144/" + image_path[6:]
+    print(image_url)
+    common.dingding_markdown_msg_2("触发" + name, "触发" + name + " > ![screenshot]("
+                                   + image_url + ")" + "![screenshot](" + image_url_ydzs + ")")
+
+
 def strategy(type):
     # 获取实时数据
     data1 = common_mysqlUtil.selectCountRecord(type)
@@ -46,23 +57,11 @@ def strategy(type):
                                        "【重要通知，规范流程】" + type + "60MIN上升数:" + str(data1[0][3])
                                        + "，下降数:" + str(data1[0][4]) + "达到一半")
 
-
-def send_image(code, name):
-    image_path_ydzs = ydzs.plot_mean_ret(code)
-    image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs_sh[6:]
-
-    image_path = common_image.plt_image_geGuZhiBiao(code, name)
-    image_url = "http://47.240.11.144/" + image_path[6:]
-    print(image_url)
-    common.dingding_markdown_msg_2("触发" + name, "触发" + name + " > ![screenshot]("
-                                   + image_url + ")" + "![screenshot](" + image_url_ydzs + ")")
-    
-
     ####################################################################################################################
     ##########################################################################################################指数指标图片
     flag = True
     if flag:
-        send_image('sh','上证指数')
+        send_image('sh', '上证指数')
         send_image('cyb', '创业板指数')
         send_image('399300', '深证指数')
         send_image('300322', '硕贝德')
