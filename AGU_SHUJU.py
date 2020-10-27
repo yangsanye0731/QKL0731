@@ -74,7 +74,7 @@ def strategy(type):
         send_image(code='399300', name='深证指数')
         send_image(code='300322', name='【铁三角】硕贝德', only_qushi_image=True)
         send_image(code='603363', name='【铁三角】傲农生物', only_qushi_image=True)
-        send_image(code='002425', name='【铁三角】凯撒文化', only_qushi_image=True)
+        send_image(code='002655', name='【铁三角】共达电声', only_qushi_image=True)
 
 
 # strategy("ZXG")
