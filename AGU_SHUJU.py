@@ -4,15 +4,23 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
-def send_image(code, name):
-    image_path_ydzs = ydzs.plot_mean_ret(code)
-    image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
+def send_image(code, name, only_quShi_image):
 
-    image_path = common_image.plt_image_geGuZhiBiao(code, name)
-    image_url = "http://47.240.11.144/" + image_path[6:]
-    print(image_url)
-    common.dingding_markdown_msg_2("触发" + name, "触发" + name + " > ![screenshot]("
-                                   + image_url + ")" + "![screenshot](" + image_url_ydzs + ")")
+    if only_quShi_image:
+        image_path = common_image.plt_image_geGuZhiBiao(code, name)
+        image_url = "http://47.240.11.144/" + image_path[6:]
+        print(image_url)
+        common.dingding_markdown_msg_2("触发" + name, "触发" + name + " ![screenshot]("
+                                       + image_url + ")")
+    else:
+        image_path_ydzs = ydzs.plot_mean_ret(code)
+        image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
+
+        image_path = common_image.plt_image_geGuZhiBiao(code, name)
+        image_url = "http://47.240.11.144/" + image_path[6:]
+        print(image_url)
+        common.dingding_markdown_msg_2("触发" + name, "触发" + name + " ![screenshot]("
+                                       + image_url + ")" + "![screenshot](" + image_url_ydzs + ")")
 
 
 def strategy(type):
@@ -64,8 +72,8 @@ def strategy(type):
         send_image('sh', '上证指数')
         send_image('cyb', '创业板指数')
         send_image('399300', '深证指数')
-        send_image('300322', '硕贝德')
-        send_image('603363', '傲农生物')
+        send_image('300322', '硕贝德', True)
+        send_image('603363', '傲农生物', True)
 
         # image_path_ydzs_sh = ydzs.plot_mean_ret('sh')
         # image_url_ydzs_sh = "http://47.240.11.144/" + image_path_ydzs_sh[6:]
