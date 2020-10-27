@@ -6,7 +6,7 @@ import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 def send_image(code, name):
     image_path_ydzs = ydzs.plot_mean_ret(code)
-    image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs_sh[6:]
+    image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
 
     image_path = common_image.plt_image_geGuZhiBiao(code, name)
     image_url = "http://47.240.11.144/" + image_path[6:]
