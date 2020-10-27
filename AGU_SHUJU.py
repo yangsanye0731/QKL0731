@@ -5,7 +5,6 @@ import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
 def send_image(code, name, only_qushi_image=False):
-
     zhangdiefu = common.zhangdiefu(code)
     if only_qushi_image:
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
@@ -76,6 +75,7 @@ def strategy(type):
         send_image(code='300322', name='【铁三角】硕贝德', only_qushi_image=True)
         send_image(code='603363', name='【铁三角】傲农生物', only_qushi_image=True)
         send_image(code='002425', name='【铁三角】凯撒文化', only_qushi_image=True)
+
 
 # strategy("ZXG")
 strategy("TOP")
