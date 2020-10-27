@@ -75,40 +75,5 @@ def strategy(type):
         send_image(code='300322', name='硕贝德', only_qushi_image=True)
         send_image(code='603363', name='傲农生物', only_qushi_image=True)
 
-        # image_path_ydzs_sh = ydzs.plot_mean_ret('sh')
-        # image_url_ydzs_sh = "http://47.240.11.144/" + image_path_ydzs_sh[6:]
-        # 
-        # image_path_sh = common_image.plt_image_geGuZhiBiao("sh", "上证指数")
-        # image_url_sh = "http://47.240.11.144/" + image_path_sh[6:]
-        # print(image_url_sh)
-        # common.dingding_markdown_msg_2("触发上证指数", "触发上证指数 > ![screenshot]("
-        #                                + image_url_sh + ")" + "![screenshot](" + image_url_ydzs_sh + ")")
-        # 
-        # 
-        # image_path_ydzs_cyb = ydzs.plot_mean_ret('cyb')
-        # image_url_ydzs_cyb = "http://47.240.11.144/" + image_path_ydzs_cyb[6:]
-        # 
-        # image_path_399006 = common_image.plt_image_geGuZhiBiao("399006", "创业板指")
-        # image_url_399006 = "http://47.240.11.144/" + image_path_399006[6:]
-        # print(image_url_399006)
-        # common.dingding_markdown_msg_2("触发创业板指数", "触发创业板指数 > ![screenshot]("
-        #                                + image_url_399006 + ")" + "![screenshot](" + image_url_ydzs_cyb + ")")
-        # 
-        # image_path_ydzs_399300 = ydzs.plot_mean_ret('399300')
-        # image_url_ydzs_399300 = "http://47.240.11.144/" + image_path_ydzs_399300[6:]
-        # image_path_399300 = common_image.plt_image_geGuZhiBiao("399300", "沪深300")
-        # image_url_399300 = "http://47.240.11.144/" + image_path_399300[6:]
-        # print(image_url_399300)
-        # common.dingding_markdown_msg_2("触发深证指数", "触发深证指数\n\n> ![screenshot]("
-        #                                + image_url_399300 + ")" + "![screenshot](" + image_url_ydzs_399300 + ")")
-        # 
-        # 
-        # image_path_300322 = common_image.plt_image_geGuZhiBiao("300322", "硕贝德")
-        # image_url_300322 = "http://47.240.11.144/" + image_path_300322[6:]
-        # print(image_url_300322)
-        # common.dingding_markdown_msg_2("触发硕贝德", "触发硕贝德\n\n> ![screenshot]("
-        #                                + image_url_300322 + ")")
-
-
 # strategy("ZXG")
 strategy("TOP")
