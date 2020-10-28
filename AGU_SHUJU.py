@@ -10,7 +10,7 @@ def send_image(code, name, only_qushi_image=False):
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
         image_url = "http://47.240.11.144/" + image_path[6:]
         print(image_url)
-        common.dingding_markdown_msg_2("触发" + name, "触发" + name + zhangdiefu + " ![screenshot]("
+        common.dingding_markdown_msg_2("触发" + name + zhangdiefu, "触发" + name + zhangdiefu + " ![screenshot]("
                                        + image_url + ")")
     else:
         image_path_ydzs = ydzs.plot_mean_ret(code)
@@ -19,7 +19,7 @@ def send_image(code, name, only_qushi_image=False):
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
         image_url = "http://47.240.11.144/" + image_path[6:]
         print(image_url)
-        common.dingding_markdown_msg_2("触发" + name, "触发" + name + zhangdiefu + " ![screenshot]("
+        common.dingding_markdown_msg_2("触发" + name + zhangdiefu, "触发" + name + zhangdiefu + " ![screenshot]("
                                        + image_url + ")" + "![screenshot](" + image_url_ydzs + ")")
 
 
