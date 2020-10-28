@@ -176,15 +176,15 @@ for i in range(int(gegu_count) + 1):
         image_path_ydzs = ydzs.plot_mean_ret(gegu.split('|')[1])
         image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
 
-        image_path = common_image.plt_image_geGuZhiBiao(gegu.split('|')[1], gegu.split('|')[1])
-        image_url = "http://47.240.11.144/" + image_path[6:]
+        image_path_quanjing = common_image.plt_image_geGuZhiBiao(gegu.split('|')[1], gegu.split('|')[1])
+        image_url_quanjing = "http://47.240.11.144/" + image_path_quanjing[6:]
 
         common.dingding_markdown_msg_04('触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
                                         + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】" + sign_result,
                                         '触发每日投资报告有鱼[火]，有鱼[火]！' + gegu.split('|')[2]
                                         + "【涨跌幅[钉子]：" + common.zhangdiefu(gegu.split('|')[1]) + "】"
                                         + sign_result + "\n\n> ![screenshot](" + image_url + ")"
-                                        + "![screenshot](" + image_url + ")"
+                                        + "![screenshot](" + image_url_quanjing + ")"
                                         + "![screenshot](" + image_url_ydzs + ")")
     rt1 = RichText('')
     rt1.add(sign_result, color='#ff0000', bold=True)
@@ -297,8 +297,8 @@ for i in range(int(gengong_count) + 1):
             image_path_ydzs = ydzs.plot_mean_ret(genzong.split('|')[1])
             image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
 
-            image_path = common_image.plt_image_geGuZhiBiao(genzong.split('|')[1], genzong.split('|')[1])
-            image_url = "http://47.240.11.144/" + image_path[6:]
+            image_path_quanjing = common_image.plt_image_geGuZhiBiao(genzong.split('|')[1], genzong.split('|')[1])
+            image_url_quanjing = "http://47.240.11.144/" + image_path_quanjing[6:]
 
             common.dingding_markdown_msg_04('触发每日投资报告有鱼[火]，有鱼[火]！' + "【涨跌幅[钉子]："
                                             + common.zhangdiefu(genzong.split('|')[1]) + "】"
@@ -307,7 +307,7 @@ for i in range(int(gengong_count) + 1):
                                             + common.zhangdiefu(genzong.split('|')[1]) + "】"
                                             + genzong.split('|')[2] + sign_result + "\n\n> ![screenshot]("
                                             + image_url + ")"
-                                            + "![screenshot](" + image_url + ")"
+                                            + "![screenshot](" + image_url_quanjing + ")"
                                             + "![screenshot](" + image_url_ydzs + ")")
         rt1 = RichText('')
         rt1.add(sign_result, color='#ff0000', bold=True)
