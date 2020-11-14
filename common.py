@@ -14,7 +14,7 @@ def zhangdiefu(code):
 def zhangdiefu_and_price(code):
     data_history_D = ts.get_k_data(code, ktype="D")
     closeArray_D = num.array(data_history_D['close'])
-    return "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100) + '%', closeArray_D[-1]
+    return "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100) + '%', "%.2f" % closeArray_D[-1]
 
 
 # 股票名称（可能为空，不推荐使用）
