@@ -74,9 +74,10 @@ def strategy(type):
         send_image(code='sh', name='上证指数')
         send_image(code='cyb', name='创业板指数')
         send_image(code='399300', name='深证指数')
-        send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
-        send_image(code='603363', name='【跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False)
-        send_image(code='002768', name='【低市盈率，广州强】国恩股份', only_qushi_image=False)
+        # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
+        send_image(code='603363', name='【猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False)
+        send_image(code='002548', name='【猪周期，跨越5周线】金新农', only_qushi_image=False)
+        # send_image(code='002768', name='【低市盈率，广州强】国恩股份', only_qushi_image=False)
 
 
 # strategy("ZXG")
