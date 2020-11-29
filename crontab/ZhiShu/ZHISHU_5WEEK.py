@@ -14,7 +14,14 @@ rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]
 sys.path.append(rootPath)
 import common
 import common_image
+import configparser
 
+#######################################################################################################################
+############################################################################################################读取配置文件
+systemconfig_file_path = rootPath + '//resource//config//systemconfig.ini'
+cf = configparser.ConfigParser()
+cf.read(systemconfig_file_path)
+ip2 = cf.get("URL", "ip2")
 
 #######################################################################################################################
 ################################################################################################################指数策略
@@ -63,7 +70,7 @@ def strategy(zhouqi, n):
                                                                        "【02国内指数】跨越5周线",
                                                                        "【02国内指数】跨越5周线")
 
-                image_url = "http://47.240.11.144/" + image_path[6:]
+                image_url = "http://" + ip2 + "/" + image_path[6:]
                 print(image_url)
                 time.sleep(10)
                 common.dingding_markdown_msg_03('触发【02国内指数】跨越5周线' + value + '(' + codeItem + ')',
