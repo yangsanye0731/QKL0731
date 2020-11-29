@@ -101,8 +101,8 @@ async def index(page, cookie1, url, codeName):
             #                                '触发【01雪球指数】当前价格在ENE周线中线下方' + codeName + '(' + codeItem + ')')
             common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
                                                              "W",
-                                                             "【01雪球指数】当前价格在ENE周线中线下方",
-                                                             "【01雪球指数】当前价格在ENE周线中线下方", str(zhangdiefu[-1]),
+                                                             "【01雪球指数】ENE周中线下方",
+                                                             "【01雪球指数】ENE周中线下方", str(zhangdiefu[-1]),
                                                              "%.2f" % huanshoulv[-1])
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_02('触发【01雪球指数】跨越5周线' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
