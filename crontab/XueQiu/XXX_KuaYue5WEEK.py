@@ -164,7 +164,7 @@ for key, value in const.XUEQIUGAINIAN:
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
-bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + "【01雪球指数】跨越5周线", remotepath=timeStr1)
-bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + "【01雪球指数】ENE周中线下方", remotepath=timeStr1)
+bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
+bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
 common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '跨越5周线执行完成',
                                 '触发【01雪球指数】' + timeStr1 + '跨越5周线执行完成')
