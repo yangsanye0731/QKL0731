@@ -54,8 +54,8 @@ def strategy(zhouqi):
                     and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 common_image.plt_image_tongyichutu_2(codeItem,
                                                      "M",
-                                                     "【03全部代码】跨越5月线,主力持仓,换手率突增",
-                                                     "【03全部代码】跨越5月线,主力持仓,换手率突增")
+                                                     "【03全部代码】跨越5月线",
+                                                     "【03全部代码】跨越5月线")
                 count_b = count_b + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
