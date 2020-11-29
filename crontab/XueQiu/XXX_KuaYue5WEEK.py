@@ -76,7 +76,7 @@ async def index(page, cookie1, url, codeName):
                 and doubleCloseArray[n - 1] > doubleOpenArray[n - 1]:
             image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
                                                                           "W",
-                                                                          "【01雪球指数】跨越5周线" + time_str,
+                                                                          "【01雪球指数】跨越5周线",
                                                                           "【01雪球指数】跨越5周线" + time_str,
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
