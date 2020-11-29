@@ -60,7 +60,7 @@ def strategy(zhouqi):
                     and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 common_image.plt_image_tongyichutu_2(codeItem,
                                                      "W",
-                                                     "【03全部代码】跨越5周线容大感光,主力持仓突增",
+                                                     "【03全部代码】跨越5周线",
                                                      "【03全部代码】跨越5周线容大感光,主力持仓突增")
                 count_b = count_b + 1
 
