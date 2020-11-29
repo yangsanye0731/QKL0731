@@ -21,12 +21,15 @@ def strategy(zhouqi):
     count = 0
     count_b = 0
 
-    all_code = ts.get_stock_basics()
-    all_code_index = all_code[1:-1].index
-    all_code_index_x = num.array(all_code_index)
+    ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+    pro = ts.pro_api()
+    all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    all_code = all_code[1:-1].ts_code
+    all_code_index_x = num.array(all_code)
 
     # 遍历
     for codeItem in all_code_index_x:
+        codeItem = codeItem[0:6]
         time.sleep(0.1)
         count = count + 1
         print(count)
