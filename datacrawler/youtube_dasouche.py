@@ -68,7 +68,7 @@ async def main():
     cookie = await load_cookie()
 
     elements_level1 = await page.xpath('//div[@class="text-wrapper style-scope ytd-video-renderer"]')
-    # print(elements_level1.__len__())
+    print(elements_level1.__len__())
 
     for item_level1 in elements_level1:
         elements_level2 = await item_level1.xpath\
@@ -77,7 +77,7 @@ async def main():
             elements_time = await item_level2.xpath \
                 ('./ytd-video-meta-block[@class="style-scope ytd-video-renderer"]/div[@id="metadata"]'
                  '/div[@id="metadata-line"]/span[@class="style-scope ytd-video-meta-block"]')
-            # print(await (await elements_time[1].getProperty("textContent")).jsonValue())
+            print(await (await elements_time[1].getProperty("textContent")).jsonValue())
             time_str = await (await elements_time[1].getProperty("textContent")).jsonValue()
             if(time_str == "1 day ago" or time_str == "2 days ago" or time_str == "3 days ago"
                     or time_str == "4 days ago" or time_str == "5 days ago"):
