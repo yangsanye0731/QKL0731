@@ -75,8 +75,8 @@ async def main():
     # print(elements_level1.__len__())
 
     print("============================================================================")
-    print("=                              大特搜                                       =")
-    print("=                              大特搜                                       =")
+    print("=                              大特搜                                      =")
+    print("=                              大特搜                                      =")
     print("============================================================================")
     for item_level1 in elements_level1:
         elements_level2 = await item_level1.xpath('./div[@id="meta"]')
@@ -86,7 +86,7 @@ async def main():
                                                     '/span[@class="style-scope ytd-video-meta-block"]')
 
             time_str = await (await elements_time[1].getProperty("textContent")).jsonValue()
-            print(time_str, end='')
+            print(time_str)
             if (time_str == "1 day ago" or time_str == "2 days ago" or time_str == "3 days ago"
                     or time_str == "4 days ago" or time_str == "5 days ago"
                     or time_str == "1 日前" or time_str == "2 日前" or time_str == "3 日前"
