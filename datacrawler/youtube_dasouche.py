@@ -94,15 +94,10 @@ async def main():
 
                 # 打印新闻标题
                 elements_level3 = await item_level2 \
-                    .xpath('./div[@id="title-wrapper"]')
-
-                for item_level3 in elements_level3:
-                    elements_level4 = await item_level3 \
-                        .xpath('./h3[@class="title-and-badge style-scope ytd-video-renderer"]')
-                    for item_level4 in elements_level4:
-                        elements_level5 = await item_level4 \
-                            .xpath('./a[@class="yt-simple-endpoint style-scope ytd-video-renderer"]')
-                        print(await (await elements_level5[0].getProperty("title")).jsonValue())
+                    .xpath('./div[@id="title-wrapper"]'
+                           '/h3[@class="title-and-badge style-scope ytd-video-renderer"]'
+                           '/a[@class="yt-simple-endpoint style-scope ytd-video-renderer"]')
+                print(await (await elements_level3[0].getProperty("title")).jsonValue())
 
     # for item_level1 in elements_level1:
     #     elements_level2 = await item_level1.xpath \
