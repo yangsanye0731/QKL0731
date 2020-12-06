@@ -103,17 +103,6 @@ async def main():
                 elements_xiangqing = await item_level1 \
                     .xpath('./yt-formatted-string[@id="description-text"]')
                 print(await (await elements_xiangqing[0].getProperty("textContent")).jsonValue())
-
-    # for item_level1 in elements_level1:
-    #     elements_level2 = await item_level1.xpath \
-    #         ('./div[@id="meta"]/div[@id="title-wrapper"]/h3[@class="title-and-badge style-scope '
-    #          'ytd-video-renderer"]/a[@class="yt-simple-endpoint style-scope ytd-video-renderer"]')
-    #     print(await (await elements_level2[0].getProperty("title")).jsonValue())
-    #     print(await (await elements_level2[0].getProperty("href")).jsonValue())
-    #     href = await (await elements_level2[0].getProperty("href")).jsonValue()
-    #     # await goto_page(page, href)
-
     await browser.close()
-
 
 asyncio.get_event_loop().run_until_complete(main())
