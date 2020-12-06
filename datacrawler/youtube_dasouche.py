@@ -99,6 +99,11 @@ async def main():
                            '/a[@class="yt-simple-endpoint style-scope ytd-video-renderer"]')
                 print(await (await elements_level3[0].getProperty("title")).jsonValue())
 
+                # 打印新闻标题
+                elements_xiangqing = await item_level1 \
+                    .xpath('./yt-formatted-string[@id="description-text"]')
+                print(await (await elements_xiangqing[0].getProperty("textContent")).jsonValue())
+
     # for item_level1 in elements_level1:
     #     elements_level2 = await item_level1.xpath \
     #         ('./div[@id="meta"]/div[@id="title-wrapper"]/h3[@class="title-and-badge style-scope '
