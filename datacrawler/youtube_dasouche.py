@@ -8,11 +8,13 @@ import json
 import sys
 import os
 
+
 #######################################################################################################################
 ##############################################################################################################保存COOKIE
 async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
+
 
 #######################################################################################################################
 ##############################################################################################################读取COOKIE
@@ -20,6 +22,7 @@ async def load_cookie():
     with open("cookie.json", 'r', encoding="utf-8") as file:
         cookie = json.load(file)
     return cookie
+
 
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
@@ -57,7 +60,7 @@ async def main():
     page = await browser.newPage()
     await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) '
                             'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
-    # 大搜车+非凡电视
+    # 大搜车 非凡电视
     await page.goto(
         'https://www.youtube.com/results?search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D')
     await page.evaluate(js1)
@@ -68,31 +71,37 @@ async def main():
     cookie = await load_cookie()
 
     elements_level1 = await page.xpath('//div[@class="text-wrapper style-scope ytd-video-renderer"]')
-    print(elements_level1.__len__())
+    # 新闻总数
+    # print(elements_level1.__len__())
 
+    print("============================================================================")
+    print("=                              大特搜                                       =")
+    print("=                              大特搜                                       =")
+    print("============================================================================")
     for item_level1 in elements_level1:
-        elements_level2 = await item_level1.xpath\
-            ('./div[@id="meta"]')
+        elements_level2 = await item_level1.xpath('./div[@id="meta"]')
         for item_level2 in elements_level2:
-            elements_time = await item_level2.xpath \
-                ('./ytd-video-meta-block[@class="style-scope ytd-video-renderer"]/div[@id="metadata"]'
-                 '/div[@id="metadata-line"]/span[@class="style-scope ytd-video-meta-block"]')
-            print(await (await elements_time[1].getProperty("textContent")).jsonValue())
+            elements_time = await item_level2.xpath('./ytd-video-meta-block[@class="style-scope ytd-video-renderer"]'
+                                                    '/div[@id="metadata"]/div[@id="metadata-line"]'
+                                                    '/span[@class="style-scope ytd-video-meta-block"]')
+
             time_str = await (await elements_time[1].getProperty("textContent")).jsonValue()
-            if(time_str == "1 day ago" or time_str == "2 days ago" or time_str == "3 days ago"
+            print(time_str, end='')
+            if (time_str == "1 day ago" or time_str == "2 days ago" or time_str == "3 days ago"
                     or time_str == "4 days ago" or time_str == "5 days ago"
                     or time_str == "1 日前" or time_str == "2 日前" or time_str == "3 日前"
                     or time_str == "4 日前" or time_str == "5 日前"):
-                elements_level3 = await item_level2.xpath \
-                    ('./div[@id="title-wrapper"]')
+
+                # 打印新闻标题
+                elements_level3 = await item_level2 \
+                    .xpath('./div[@id="title-wrapper"]')
 
                 for item_level3 in elements_level3:
-                    elements_level4 = await item_level3.xpath \
-                        ('./h3[@class="title-and-badge style-scope ytd-video-renderer"]')
-
+                    elements_level4 = await item_level3 \
+                        .xpath('./h3[@class="title-and-badge style-scope ytd-video-renderer"]')
                     for item_level4 in elements_level4:
-                        elements_level5 = await item_level4.xpath \
-                            ('./a[@class="yt-simple-endpoint style-scope ytd-video-renderer"]')
+                        elements_level5 = await item_level4 \
+                            .xpath('./a[@class="yt-simple-endpoint style-scope ytd-video-renderer"]')
                         print(await (await elements_level5[0].getProperty("title")).jsonValue())
 
     # for item_level1 in elements_level1:
