@@ -47,7 +47,7 @@ async def goto_page(page, href):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
-async def main():
+async def main(url, title):
     # js2 = '''() => {
     #        alert (
     #            window.navigator.webdriver
@@ -61,8 +61,7 @@ async def main():
     await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; Win64; x64) '
                             'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36')
     # 大搜车 非凡电视
-    await page.goto(
-        'https://www.youtube.com/results?search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D')
+    await page.goto(url)
     await page.evaluate(js1)
     # await page.evaluate(js2)
 
@@ -75,8 +74,8 @@ async def main():
     # print(elements_level1.__len__())
 
     print("============================================================================")
-    print("=                              大特搜                                      =")
-    print("=                              大特搜                                      =")
+    print("=                              " + title + "                                      =")
+    print("=                              " + title + "                                      =")
     print("============================================================================")
     for item_level1 in elements_level1:
         elements_level2 = await item_level1.xpath('./div[@id="meta"]')
@@ -105,4 +104,12 @@ async def main():
                 print(await (await elements_xiangqing[0].getProperty("textContent")).jsonValue())
     await browser.close()
 
-asyncio.get_event_loop().run_until_complete(main())
+url = "https://www.youtube.com/results?" \
+      "search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D"
+title = "大特搜"
+asyncio.get_event_loop().run_until_complete(main(url, title))
+
+url = "https://www.youtube.com/results?" \
+      "search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D"
+title = "杨世光"
+asyncio.get_event_loop().run_until_complete(main(url, title))
