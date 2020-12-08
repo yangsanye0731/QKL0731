@@ -87,11 +87,7 @@ async def main(url, title):
 
             time_str = await (await elements_time[1].getProperty("textContent")).jsonValue()
             print(time_str)
-            if (time_str == "1 day ago" or time_str == "2 days ago" or time_str == "3 days ago"
-                    or time_str == "4 days ago" or time_str == "5 days ago"
-                    or time_str == "1 日前" or time_str == "2 日前" or time_str == "3 日前"
-                    or time_str == "4 日前" or time_str == "5 日前"):
-
+            if "1 day ago" in time_str or "days ago" in time_str or "日前" in time_str:
                 # 打印新闻标题
                 elements_level3 = await item_level2 \
                     .xpath('./div[@id="title-wrapper"]'
