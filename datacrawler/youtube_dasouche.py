@@ -85,7 +85,6 @@ async def main(url, title):
                                                     '[@class="style-scope ytd-video-renderer byline-separated"]'
                                                     '/div[@id="metadata"]/div[@id="metadata-line"]'
                                                     '/span[@class="style-scope ytd-video-meta-block"]')
-            print(elements_time.__len__())
             if elements_time.__len__() == 0:
                 elements_time = await item_level2.xpath(
                     './ytd-video-meta-block[@class="style-scope ytd-video-renderer"]'
