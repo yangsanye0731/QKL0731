@@ -113,8 +113,8 @@ url = "https://www.youtube.com/results?" \
       "search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D"
 title = "大特搜"
 asyncio.get_event_loop().run_until_complete(main(url, title))
-#
-# time.sleep(10)
+
+time.sleep(10)
 
 url = "https://www.youtube.com/results?" \
       "search_query=%E6%9D%A8%E4%B8%96%E5%85%89%E5%9C%A8%E9%87%91%E9%92%B1%E7%88%86&sp=CAI%253D"
