@@ -81,13 +81,20 @@ async def main(url, title):
     for item_level1 in elements_level1:
         elements_level2 = await item_level1.xpath('./div[@id="meta"]')
         for item_level2 in elements_level2:
-            elements_time = await item_level2.xpath('./ytd-video-meta-block[@class="style-scope ytd-video-renderer"]'
+            elements_time = await item_level2.xpath('./ytd-video-meta-block'
+                                                    '[@class="style-scope ytd-video-renderer byline-separated"]'
                                                     '/div[@id="metadata"]/div[@id="metadata-line"]'
                                                     '/span[@class="style-scope ytd-video-meta-block"]')
-
+            print(elements_time.__len__())
+            if elements_time.__len__() == 0:
+                elements_time = await item_level2.xpath(
+                    './ytd-video-meta-block[@class="style-scope ytd-video-renderer"]'
+                    '/div[@id="metadata"]/div[@id="metadata-line"]'
+                    '/span[@class="style-scope ytd-video-meta-block"]')
             time_str = await (await elements_time[1].getProperty("textContent")).jsonValue()
             print(time_str)
-            if "1 day ago" in time_str or "days ago" in time_str or "日前" in time_str:
+            if "1 day ago" in time_str or "days ago" in time_str or "日前" in time_str \
+                    or 'hours' in time_str or '小时' in time_str:
                 # 打印新闻标题
                 elements_level3 = await item_level2 \
                     .xpath('./div[@id="title-wrapper"]'
@@ -101,12 +108,13 @@ async def main(url, title):
                 print(await (await elements_xiangqing[0].getProperty("textContent")).jsonValue())
     await browser.close()
 
+
 url = "https://www.youtube.com/results?" \
       "search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D"
 title = "大特搜"
 asyncio.get_event_loop().run_until_complete(main(url, title))
-
-time.sleep(10)
+#
+# time.sleep(10)
 
 url = "https://www.youtube.com/results?" \
       "search_query=%E6%9D%A8%E4%B8%96%E5%85%89%E5%9C%A8%E9%87%91%E9%92%B1%E7%88%86&sp=CAI%253D"
