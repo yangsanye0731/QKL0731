@@ -75,8 +75,8 @@ async def main(url, title):
     # print(elements_level1.__len__())
 
     print("============================================================================")
-    print("=                              " + title + "                                      =")
-    print("=                              " + title + "                                      =")
+    print("                              " + title + "                                      ")
+    print("                              " + title + "                                      ")
     print("============================================================================")
     for item_level1 in elements_level1:
         elements_level2 = await item_level1.xpath('./div[@id="meta"]')
@@ -113,6 +113,6 @@ asyncio.get_event_loop().run_until_complete(main(url, title))
 time.sleep(60)
 
 url = "https://www.youtube.com/results?" \
-      "search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D"
-title = "杨世光"
+      "search_query=%E6%9D%A8%E4%B8%96%E5%85%89%E5%9C%A8%E9%87%91%E9%92%B1%E7%88%86&sp=CAI%253D"
+title = "杨世光在金钱爆"
 asyncio.get_event_loop().run_until_complete(main(url, title))
