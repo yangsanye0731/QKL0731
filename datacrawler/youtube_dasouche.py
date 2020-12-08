@@ -91,6 +91,8 @@ async def main(url, title):
                     './ytd-video-meta-block[@class="style-scope ytd-video-renderer"]'
                     '/div[@id="metadata"]/div[@id="metadata-line"]'
                     '/span[@class="style-scope ytd-video-meta-block"]')
+            time_str_0 = await (await elements_time[0].getProperty("textContent")).jsonValue()
+            print(time_str_0)
             time_str = await (await elements_time[1].getProperty("textContent")).jsonValue()
             print(time_str)
             if "1 day ago" in time_str or "days ago" in time_str or "日前" in time_str \
