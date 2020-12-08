@@ -109,6 +109,8 @@ url = "https://www.youtube.com/results?" \
 title = "大特搜"
 asyncio.get_event_loop().run_until_complete(main(url, title))
 
+asyncio.sleep(60)
+
 url = "https://www.youtube.com/results?" \
       "search_query=%E9%9D%9E%E5%87%A1%E7%94%B5%E8%A7%86+%E5%A4%A7%E7%89%B9%E6%90%9C&sp=CAI%253D"
 title = "杨世光"
