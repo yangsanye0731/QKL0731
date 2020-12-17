@@ -177,8 +177,10 @@ print(jsonDic1)
 
 #######################################################################################################################
 ################################################################################################################数据同步
-bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
+common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
+                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
+bp = ByPy()
 bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
 bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
