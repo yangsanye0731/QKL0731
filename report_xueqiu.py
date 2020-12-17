@@ -16,6 +16,7 @@ from pyppeteer import launch
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
@@ -28,11 +29,13 @@ async def save_cookie(cookie):
     with open("cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
 
+
 # 读取cookie
 async def load_cookie():
     with open("cookie.json", 'r', encoding="utf-8") as file:
         cookie = json.load(file)
     return cookie
+
 
 # 加载首页
 async def index(page, cookie1, url, codeName):
@@ -58,7 +61,7 @@ async def index(page, cookie1, url, codeName):
         doubleOpenArray = num.asarray(openArray, dtype='double')
 
         zhangdiefu = num.array(data_history['percent'])
-        huanshoulv  = num.array(data_history['turnoverrate'])
+        huanshoulv = num.array(data_history['turnoverrate'])
         print("==============================================================")
         print(zhangdiefu[-1])
         print(huanshoulv[-1])
@@ -77,6 +80,7 @@ async def index(page, cookie1, url, codeName):
                                        '触发【01雪球指数】雪球报告' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
         print(e)
     return myimage
+
 
 async def main(url, codeName):
     print(datetime.datetime.now())
@@ -116,18 +120,20 @@ async def main(url, codeName):
     context['genzong_list'] = genzong_list
     await browser.close()
 
+
 def get_week_day(date):
-  week_day_dict = {
-    0 : '星期一',
-    1 : '星期二',
-    2 : '星期三',
-    3 : '星期四',
-    4 : '星期五',
-    5 : '星期六',
-    6 : '星期天',
-  }
-  day = date.weekday()
-  return week_day_dict[day]
+    week_day_dict = {
+        0: '星期一',
+        1: '星期二',
+        2: '星期三',
+        3: '星期四',
+        4: '星期五',
+        5: '星期六',
+        6: '星期天',
+    }
+    day = date.weekday()
+    return week_day_dict[day]
+
 
 asset_url = rootPath + os.sep + 'resource' + os.sep + 'template' + os.sep + 'reportXueqiuTemplate.docx'
 tpl = DocxTemplate(asset_url)
@@ -144,7 +150,7 @@ for key, value in const.XUEQIUGAINIAN:
     count = count + 1
     print(codeItem)
     print(value)
-    curtime = str(int(time.time()*1000))
+    curtime = str(int(time.time() * 1000))
     asyncio.get_event_loop().run_until_complete(main(
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol='
         + key + '&begin=' + curtime + '&period=week&type=before&count=-142', value))
@@ -154,7 +160,6 @@ for key, value in const.XUEQIUGAINIAN:
 tpl.render(context)
 timeTitle = time.strftime("%Y%m%d", time.localtime())
 tpl.save(rootPath + os.sep + 'report' + os.sep + '雪球报告_' + timeTitle + '.docx')
-
 
 #######################################################################################################################
 ################################################################################################################同步数据
