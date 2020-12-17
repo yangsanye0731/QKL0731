@@ -160,7 +160,7 @@ async def main(url, codename):
 #######################################################################################################################
 #############################################################################################################遍历雪球概念
 count = 0
-for key, value in const.XUEQIUGAINIAN_YUEDUZESHI:
+for key, value in const.XUEQIUGAINIAN:
     codeItem = key
     count = count + 1
     print(codeItem)
