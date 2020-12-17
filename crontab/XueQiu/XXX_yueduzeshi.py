@@ -4,13 +4,14 @@ import json
 import time
 import matplotlib
 
-
 import numpy as num
 import pandas as pd
 from bypy import ByPy
 from pyppeteer import launch
 import random
 import matplotlib.pyplot as plt
+
+jsonDic = {}
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -23,6 +24,7 @@ sys.path.append(rootPath)
 import common
 import common_image
 from common_constants import const
+
 matplotlib.use('Agg')
 
 
@@ -49,6 +51,14 @@ def plot_mean_ret(codeName, daily_ret):
     mrets = (mnthly_ret.groupby(mnthly_ret.index.month).mean() * 100).round(2)
     attr = [str(i) + 'M' for i in range(1, 13)]
     v = list(mrets)
+    print(v)
+
+    for i in range(v.__len__()):
+        if v[i] > 5 and daily_ret.size > 500:
+            if jsonDic.get("M" + str(i + 1)) is None:
+                jsonDic["M" + str(i + 1)] = codeName
+            else:
+                jsonDic["M" + str(i + 1)] = jsonDic.get("M" + str(i + 1)) + "," + codeName
 
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
     plt.bar(attr, v, fc='r')
@@ -94,7 +104,7 @@ async def index(page, cookie1, url, codename):
         print("==============================================================")
         print(zhangdiefu[-1])
         print(huanshoulv[-1])
-        print(data_history)
+        # print(data_history)
         # data_history['timestamp'] = data_history['timestamp'].apply(pd.to_datetime)
         # print(data_history['timestamp'])
         data_history.index = pd.to_datetime(data_history['timestamp'], unit='ms')
@@ -102,7 +112,7 @@ async def index(page, cookie1, url, codename):
 
         # 删除缺失值
         daily_ret.dropna(inplace=True)
-        print(daily_ret)
+        # print(daily_ret)
         plot_mean_ret(codename, daily_ret)
 
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
@@ -159,6 +169,11 @@ for key, value in const.XUEQIUGAINIAN_YUEDUZESHI:
     asyncio.get_event_loop().run_until_complete(main(
         'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key +
         '&begin=' + curtime + '&period=day&type=before&count=-10000', value))
+    time.sleep(5)
+
+jsonDic1 = sorted(jsonDic.items(), key=lambda kv: (kv[1], kv[0]))
+print(jsonDic)
+print(jsonDic1)
 
 #######################################################################################################################
 ################################################################################################################数据同步
@@ -168,4 +183,4 @@ bp.mkdir(remotepath=timeStr1)
 bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
 bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
 common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
-                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成')
+                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
