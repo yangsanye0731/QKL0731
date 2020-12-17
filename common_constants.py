@@ -284,6 +284,9 @@ xqgn = [('BK0688', '光刻胶'), ('BK0539', '集成电路'), ('BK0636', '大豆'
         ('BK0522', '西安自贸区')
         ]
 
+
+xqgn2 = [('BK0447', '手机游戏'), ('BK0513', '网络游戏'), ('BK0696', '云游戏'), ('BK0503', '猪肉')]
 const = Const()
 # 雪球概念常量
 const.XUEQIUGAINIAN = xqgn
+const.XUEQIUGAINIAN_YUEDUZESHI = xqgn2

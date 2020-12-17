@@ -4,17 +4,13 @@ import json
 import time
 import matplotlib
 
-matplotlib.use('Agg')
+
 import numpy as num
 import pandas as pd
-import talib as ta
 from bypy import ByPy
 from pyppeteer import launch
-import matplotlib.patches as mpatches
 import random
 import matplotlib.pyplot as plt
-# 正常显示画图时出现的中文和负号
-from pylab import mpl
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -27,6 +23,7 @@ sys.path.append(rootPath)
 import common
 import common_image
 from common_constants import const
+matplotlib.use('Agg')
 
 
 #######################################################################################################################
@@ -153,7 +150,7 @@ async def main(url, codename):
 #######################################################################################################################
 #############################################################################################################遍历雪球概念
 count = 0
-for key, value in const.XUEQIUGAINIAN:
+for key, value in const.XUEQIUGAINIAN_YUEDUZESHI:
     codeItem = key
     count = count + 1
     print(codeItem)
