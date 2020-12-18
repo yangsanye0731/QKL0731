@@ -54,7 +54,7 @@ def plot_mean_ret(codeName, daily_ret):
     print(v)
 
     for i in range(v.__len__()):
-        if v[i] > 5 and daily_ret.size > 500:
+        if v[i] > 5 and daily_ret.size > 1000:
             if jsonDic.get("M" + str(i + 1)) is None:
                 jsonDic["M" + str(i + 1)] = codeName
             else:
