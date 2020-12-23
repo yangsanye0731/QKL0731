@@ -77,7 +77,7 @@ def strategy(type):
         # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
         send_image(code='603363', name='【猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False)
         send_image(code='002548', name='【猪周期，跨越5周线】金新农', only_qushi_image=False)
-        send_image(code='002010', name='【巨头产能退出】传化智联', only_qushi_image=False)
+        send_image(code='300498', name='【大市值猪肉股】温氏股份', only_qushi_image=False)
 
 
 # strategy("ZXG")
