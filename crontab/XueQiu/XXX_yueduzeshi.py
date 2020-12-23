@@ -54,7 +54,7 @@ def plot_mean_ret(codeName, daily_ret):
     print(v)
 
     for i in range(v.__len__()):
-        if v[i] > 3 and daily_ret.size > 1000:
+        if v[i] > 2 and daily_ret.size > 1000:
             if jsonDic.get("M" + str(i + 1)) is None:
                 jsonDic["M" + str(i + 1)] = codeName
             else:
@@ -180,9 +180,9 @@ print(jsonDic1)
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
                                 '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
-bp = ByPy()
-bp.mkdir(remotepath=timeStr1)
-bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
-                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
+# bp = ByPy()
+# bp.mkdir(remotepath=timeStr1)
+# bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
+# bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
+# common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
+#                                 '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
