@@ -4,7 +4,7 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
-def send_image(code, name, only_qushi_image=False):
+def send_image(code, name, only_qushi_image=False, item_image_url=''):
     zhangdiefu, price = common.zhangdiefu_and_price(code)
     if only_qushi_image:
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
@@ -21,8 +21,9 @@ def send_image(code, name, only_qushi_image=False):
         image_url = "http://47.240.11.144/" + image_path[6:]
         print(image_url)
         common.dingding_markdown_msg_2("触发" + name + zhangdiefu, "触发" + name + zhangdiefu + " 价格：" + price
-                                       + " ![screenshot]("
-                                       + image_url + ")" + "![screenshot](" + image_url_ydzs + ")")
+                                       + " ![screenshot](" + image_url + ")"
+                                       + " ![screenshot](" + image_url_ydzs + ")"
+                                       + " ![screenshot](" + item_image_url + ")")
 
 
 def strategy(type):
@@ -75,7 +76,8 @@ def strategy(type):
         send_image(code='cyb', name='创业板指数')
         send_image(code='399300', name='深证指数')
         # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
-        send_image(code='603363', name='【猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False)
+        send_image(code='603363', name='【猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
+                   item_image_url='http://47.240.11.144/software/QKL0713/resource/iamges/傲农生物.png')
         send_image(code='002548', name='【猪周期，跨越5周线】金新农', only_qushi_image=False)
         send_image(code='300498', name='【大市值猪肉股】温氏股份', only_qushi_image=False)
 
