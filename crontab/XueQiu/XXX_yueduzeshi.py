@@ -124,6 +124,7 @@ async def index(page, cookie1, url, codename):
 #######################################################################################################################
 #############################################################################################################数据爬虫入口
 async def main(url, codename):
+    print(url)
     print(datetime.datetime.now())
     # await asyncio.sleep(10 + random.randint(1, 10))
     print(datetime.datetime.now())
