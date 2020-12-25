@@ -12,6 +12,7 @@ import random
 import matplotlib.pyplot as plt
 
 jsonDic = {}
+jsonDic_huanshoulv = {}
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -104,6 +105,7 @@ async def index(page, cookie1, url, codename):
         print("==============================================================")
         print(zhangdiefu[-1])
         print(huanshoulv[-1])
+        jsonDic_huanshoulv[codename] = huanshoulv[-1]
         # print(data_history)
         # data_history['timestamp'] = data_history['timestamp'].apply(pd.to_datetime)
         # print(data_history['timestamp'])
@@ -173,14 +175,20 @@ for key, value in const.XUEQIUGAINIAN:
     time.sleep(5)
 
 jsonDic1 = sorted(jsonDic.items(), key=lambda item: item[0])
+jsonDic_huanshoulv1 = sorted(jsonDic_huanshoulv.items(), key=lambda item: item[1])
 print(jsonDic)
 print(jsonDic1)
+print(jsonDic_huanshoulv)
+print(jsonDic_huanshoulv1)
 
 #######################################################################################################################
 ################################################################################################################数据同步
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
                                 '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
+
+common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
+                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic_huanshoulv1))
 # bp = ByPy()
 # bp.mkdir(remotepath=timeStr1)
 # bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
