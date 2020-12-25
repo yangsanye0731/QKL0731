@@ -171,7 +171,7 @@ for key, value in const.XUEQIUGAINIAN:
         '&begin=' + curtime + '&period=day&type=before&count=-10000', value))
     time.sleep(5)
 
-jsonDic1 = sorted(jsonDic.items(), key=lambda kv: (kv[1], kv[0]))
+jsonDic1 = sorted(jsonDic.items(), key=lambda item: item[0])
 print(jsonDic)
 print(jsonDic1)
 
