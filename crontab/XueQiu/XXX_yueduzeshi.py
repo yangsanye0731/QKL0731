@@ -56,10 +56,10 @@ def plot_mean_ret(codeName, daily_ret):
 
     for i in range(v.__len__()):
         if v[i] > 2 and daily_ret.size > 1000:
-            if jsonDic.get("M" + str(i + 1)) is None:
-                jsonDic["M" + str(i + 1)] = codeName
+            if jsonDic.get(i + 1) is None:
+                jsonDic[i + 1] = codeName
             else:
-                jsonDic["M" + str(i + 1)] = jsonDic.get("M" + str(i + 1)) + "," + codeName
+                jsonDic[i + 1] = jsonDic.get(i + 1) + "," + codeName
 
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
     plt.bar(attr, v, fc='r')
