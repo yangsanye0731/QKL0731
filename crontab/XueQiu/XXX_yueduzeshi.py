@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 
 jsonDic = {}
 jsonDic_huanshoulv = {}
+jsonDic_huanshoulv_result = {}
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -175,11 +176,11 @@ for key, value in const.XUEQIUGAINIAN:
     time.sleep(5)
 
 jsonDic1 = sorted(jsonDic.items(), key=lambda item: item[0])
-jsonDic_huanshoulv1 = sorted(jsonDic_huanshoulv.items(), key=lambda item: item[1])
-print(jsonDic)
-print(jsonDic1)
-print(jsonDic_huanshoulv)
-print(jsonDic_huanshoulv1)
+jsonDic_huanshoulv1 = sorted(jsonDic_huanshoulv.items(), key=lambda item: item[1], reverse=True)
+# print(jsonDic)
+# print(jsonDic1)
+# print(jsonDic_huanshoulv)
+# print(jsonDic_huanshoulv1)
 
 #######################################################################################################################
 ################################################################################################################数据同步
@@ -187,8 +188,21 @@ timeStr1 = time.strftime("%Y%m%d", time.localtime())
 common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
                                 '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic1))
 
+# for key, value in jsonDic1:
+#     print(key)
+#     print(value)
+
+count = 0
+for key, value in jsonDic_huanshoulv1:
+    if count <= 10:
+        print(key)
+        print(value)
+        jsonDic_huanshoulv_result[key] = value
+
+    count = count + 1
+
 common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月度择时执行完成',
-                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic_huanshoulv1))
+                                '触发【01雪球指数】' + timeStr1 + '月度择时执行完成' + str(jsonDic_huanshoulv_result))
 # bp = ByPy()
 # bp.mkdir(remotepath=timeStr1)
 # bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
