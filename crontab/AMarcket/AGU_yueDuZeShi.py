@@ -137,7 +137,7 @@ print(jsonDic1)
 
 count = 1
 for key, value in jsonDic1:
-    if count <= 20:
+    if count <= 100:
         print(key)
         print(value)
         common_image.plt_image_tongyichutu_2(key,
