@@ -143,7 +143,7 @@ for key, value in jsonDic1:
         common_image.plt_image_tongyichutu_2(key,
                                              "W",
                                              "【03全部代码】1月前20增长",
-                                             "【03全部代码】1月前20增长，排名为：第" + str(count) + "位")
+                                             "【03全部代码】1月前20增长，排名为：第" + str(count) + "位，平均涨幅" + str(value))
 
     count = count + 1
 
