@@ -56,7 +56,7 @@ def plot_mean_ret(codeName, daily_ret):
     print(v)
 
     for i in range(v.__len__()):
-        if v[i] > 2 and daily_ret.size > 1000:
+        if v[i] > 2 and daily_ret.size > 800:
             if jsonDic.get(i + 1) is None:
                 jsonDic[i + 1] = codeName
             else:
@@ -194,7 +194,7 @@ common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '月�
 
 count = 0
 for key, value in jsonDic_huanshoulv1:
-    if count <= 10:
+    if count <= 20:
         print(key)
         print(value)
         jsonDic_huanshoulv_result[key] = value
