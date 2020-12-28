@@ -89,7 +89,7 @@ def plot_votil(code, title):
 # pyecharts是0.5.11版本
 def plot_mean_ret(code):
     daily_ret = get_daily_ret(code)
-    if daily_ret.size > 1000:
+    if daily_ret is not None and daily_ret.size > 1000:
         # 月度收益率
         mnthly_ret = daily_ret.resample('M').apply(lambda x: ((1 + x).prod() - 1))
         mrets = (mnthly_ret.groupby(mnthly_ret.index.month).mean() * 100).round(2)
