@@ -86,16 +86,16 @@ def plot_votil(code, title):
 # pyecharts是0.5.11版本
 def plot_mean_ret(code):
     daily_ret = get_daily_ret(code)
-    # 月度收益率
-    mnthly_ret = daily_ret.resample('M').apply(lambda x: ((1 + x).prod() - 1))
-    mrets = (mnthly_ret.groupby(mnthly_ret.index.month).mean() * 100).round(2)
-    attr = [str(i) + 'M' for i in range(1, 13)]
-    v = list(mrets)
-
-    jsonDic[code] = v[0]
-    print(code)
-    print(v)
-    print(v[0])
+    if daily_ret.size > 1000:
+        # 月度收益率
+        mnthly_ret = daily_ret.resample('M').apply(lambda x: ((1 + x).prod() - 1))
+        mrets = (mnthly_ret.groupby(mnthly_ret.index.month).mean() * 100).round(2)
+        attr = [str(i) + 'M' for i in range(1, 13)]
+        v = list(mrets)
+        jsonDic[code] = v[0]
+        print(code)
+        print(v)
+        print(v[0])
 
     # plt.bar(attr, v, fc='r')
 
@@ -124,7 +124,7 @@ def strategy():
     pro = ts.pro_api()
     all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     # all_code = ts.get_stock_basics()
-    all_code = all_code[1:-1].ts_code
+    all_code = all_code[1:5].ts_code
     all_code_index_x = num.array(all_code)
 
     try:
