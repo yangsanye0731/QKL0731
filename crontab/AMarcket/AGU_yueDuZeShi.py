@@ -8,8 +8,6 @@ import tushare as ts
 from pylab import mpl
 import time
 import numpy as num
-import common_image
-import common
 from bypy import ByPy
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
@@ -23,6 +21,8 @@ import os
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
+import common_image
+import common
 
 
 ########################################################################################################################
