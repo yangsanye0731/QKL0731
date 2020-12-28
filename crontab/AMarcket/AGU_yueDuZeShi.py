@@ -124,7 +124,7 @@ def strategy():
     pro = ts.pro_api()
     all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     # all_code = ts.get_stock_basics()
-    all_code = all_code[1:5].ts_code
+    all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
 
     try:
