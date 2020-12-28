@@ -491,10 +491,11 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     if not os.path.exists(path):
         os.makedirs(path)
 
-    plt.savefig(path + os.sep + timeStr1 + "_" + codeName + ".png")
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
+    plt.savefig(path + os.sep + timeStr1 + "_" + codeName + suiji_str + ".png")
     plt.close()
 
-    image_path = path + os.sep + timeStr1 + "_" + codeName + ".png"
+    image_path = path + os.sep + timeStr1 + "_" + codeName + suiji_str + ".png"
     return image_path
 
 
