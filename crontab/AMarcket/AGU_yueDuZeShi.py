@@ -125,11 +125,14 @@ def strategy():
     all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
 
-    # 遍历
-    for codeItem in all_code_index_x:
-        codeItem = codeItem[0:6]
-        print(codeItem)
-        plot_mean_ret(codeItem)
+    try:
+        # 遍历
+        for codeItem in all_code_index_x:
+            codeItem = codeItem[0:6]
+            print(codeItem)
+            plot_mean_ret(codeItem)
+    except (AttributeError, IOError, TypeError, NameError, IndexError, Exception) as e:
+        print(e)
 
 strategy()
 jsonDic1 = sorted(jsonDic.items(), key=lambda item: item[1], reverse=True)
