@@ -97,7 +97,6 @@ def plot_mean_ret(code):
     print(v)
     print(v[0])
 
-
     # plt.bar(attr, v, fc='r')
 
     # timeStr1 = time.strftime("%Y%m%d", time.localtime())
@@ -111,7 +110,10 @@ def plot_mean_ret(code):
     # image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     # return image_path
 
+
 jsonDic = {}
+
+
 def strategy():
     # 局部变量初始化
     count = 0
@@ -131,24 +133,26 @@ def strategy():
             codeItem = codeItem[0:6]
             print(codeItem)
             plot_mean_ret(codeItem)
+
+        jsonDic1 = sorted(jsonDic.items(), key=lambda item: item[1], reverse=True)
+        print(jsonDic1)
+
+        count = 1
+        for key, value in jsonDic1:
+            if count <= 100:
+                print(key)
+                print(value)
+                common_image.plt_image_tongyichutu_2(key,
+                                                     "W",
+                                                     "【03全部代码】1月前20增长",
+                                                     "【03全部代码】1月前20增长，排名为：第" + str(count) + "位，平均涨幅" + str(value))
+
+            count = count + 1
     except (AttributeError, IOError, TypeError, NameError, IndexError, Exception) as e:
         print(e)
 
+
 strategy()
-jsonDic1 = sorted(jsonDic.items(), key=lambda item: item[1], reverse=True)
-print(jsonDic1)
-
-count = 1
-for key, value in jsonDic1:
-    if count <= 100:
-        print(key)
-        print(value)
-        common_image.plt_image_tongyichutu_2(key,
-                                             "W",
-                                             "【03全部代码】1月前20增长",
-                                             "【03全部代码】1月前20增长，排名为：第" + str(count) + "位，平均涨幅" + str(value))
-
-    count = count + 1
 
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
