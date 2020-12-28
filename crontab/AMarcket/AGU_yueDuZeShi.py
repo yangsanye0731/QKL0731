@@ -28,14 +28,17 @@ import common
 ########################################################################################################################
 ############################################################################################################ 计算日收益率
 def get_daily_ret(code='sh', start='2000-01-01'):
-    df = ts.get_k_data(code, start=start)
-    df.index = pd.to_datetime(df.date)
-    # 计算日收益率
-    daily_ret = df['close'].pct_change()
-    # 删除缺失值
-    daily_ret.dropna(inplace=True)
+    try:
+        df = ts.get_k_data(code, start=start)
+        df.index = pd.to_datetime(df.date)
+        # 计算日收益率
+        daily_ret = df['close'].pct_change()
+        # 删除缺失值
+        daily_ret.dropna(inplace=True)
+        return daily_ret
+    except (AttributeError, IOError, TypeError, NameError, IndexError, Exception) as e:
+        print(e)
     # print(daily_ret)
-    return daily_ret
 
 
 ########################################################################################################################
