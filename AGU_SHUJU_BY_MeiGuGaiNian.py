@@ -50,15 +50,15 @@ strategy("眼科医疗")
 strategy("生物疫苗")
 strategy("动物疫苗")
 
-# strategy("小米概念")
-# strategy("消费电子")
-# strategy("无线耳机")
-# strategy("华为概念")
-#
-# strategy("超清视频")
-# strategy("超级真菌")
-# strategy("超级品牌")
-#
-# strategy("横琴新区")
-# strategy("国产航母")
-# strategy("边缘计算")
+strategy("小米概念")
+strategy("消费电子")
+strategy("无线耳机")
+strategy("华为概念")
+
+strategy("超清视频")
+strategy("超级真菌")
+strategy("超级品牌")
+
+strategy("横琴新区")
+strategy("国产航母")
+strategy("边缘计算")
