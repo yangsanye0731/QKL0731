@@ -78,8 +78,8 @@ def strategy(type):
         # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
         send_image(code='603363', name='【猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
                    item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png')
-        send_image(code='002548', name='【猪周期，跨越5周线】金新农', only_qushi_image=False)
-        send_image(code='300003', name='【仿制药】乐普医疗', only_qushi_image=False)
+        # send_image(code='002548', name='【猪周期，跨越5周线】金新农', only_qushi_image=False)
+        send_image(code='600332', name='【仿制药】白云山', only_qushi_image=False)
 
 
 # strategy("ZXG")
