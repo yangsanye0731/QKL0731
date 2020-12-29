@@ -103,6 +103,7 @@ for codeItem in all_code_index_x:
         count = count + 1
         print(count)
         print(codeItem)
+        codeItem = codeItem[0:6]
         code = codeItem
         data = common_mysqlUtil.select_all_code_one(code)
         if len(data) > 0:
