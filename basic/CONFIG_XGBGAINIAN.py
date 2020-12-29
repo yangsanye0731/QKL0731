@@ -86,10 +86,18 @@ async def main(url1, codeName):
 
 #######################################################################################################################
 ##########################################################################################################遍历A股所有股票
-all_code = ts.get_stock_basics()
-all_code_index = all_code[1:-1].index
+# all_code = ts.get_stock_basics()
+# all_code_index = all_code[1:-1].index
 count = 0
-all_code_index_x = num.array(all_code_index)
+# all_code_index_x = num.array(all_code_index)
+
+ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+pro = ts.pro_api()
+all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+# all_code = ts.get_stock_basics()
+all_code = all_code[1:-1].ts_code
+all_code_index_x = num.array(all_code)
+
 for codeItem in all_code_index_x:
     try:
         count = count + 1
