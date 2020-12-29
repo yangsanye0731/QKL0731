@@ -29,13 +29,17 @@ def send_image(code, name, only_qushi_image=False, item_image_url=''):
 def strategy(gainian_name):
     # 获取实时数据
     data1 = common_mysqlUtil.select_all_code_by_gainian(gainian_name)
+    print(data1)
 
     for i in range(data1.__len__()):
-        item_code = data1[i][0]
-        item_name = data1[i][1]
-        print(item_code)
-        print(item_name)
-        send_image(code=item_code, name=item_name, only_qushi_image=False)
+        try:
+            item_code = data1[i][0]
+            item_name = data1[i][1]
+            print(item_code)
+            print(item_name)
+            send_image(code=item_code, name=item_name, only_qushi_image=False)
+        except (ValueError, AttributeError, IOError, TypeError, NameError, IndexError, Exception) as e:
+            print(e)
 
-# strategy("ZXG")
+
 strategy("仿制药")
