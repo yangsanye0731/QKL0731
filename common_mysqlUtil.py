@@ -334,7 +334,8 @@ def select_all_code_by_gainian(gainian_name):
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_All_Code` WHERE `plate` like %" + gainian_name + "%"
+    sql = "SELECT `code`, `name`, `plate`, `mark`, `huanshoulv`, `epsup`, `yingyeup` FROM `superman`.`AGU_All_Code` WHERE `plate` like '%" + gainian_name + "%'"
+    print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
