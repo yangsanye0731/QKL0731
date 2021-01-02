@@ -79,12 +79,12 @@ def strategy(type):
         send_image(code='cyb', name='创业板指数', message=str_message)
         send_image(code='399300', name='深证指数', message=str_message)
         # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
-        send_image(code='603363', name='【猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
-                   item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
-        # send_image(code='002548', name='【猪周期，跨越5周线】金新农', only_qushi_image=False)
-        send_image(code='600332', name='【仿制药、大市值】白云山', only_qushi_image=False, message=str_message)
-        send_image(code='002223', name='【眼科医疗、医疗器械】鱼跃医疗', only_qushi_image=False, message=str_message)
-        send_image(code='300254', name='【仿制药、月度布林线触底】仟源医药', only_qushi_image=False, message=str_message)
+        # send_image(code='603363', name='【12月份选错猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
+        #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
+        # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
+        send_image(code='600332', name='【1月份仿制药、大市值】白云山', only_qushi_image=False, message=str_message)
+        send_image(code='002223', name='【1月份眼科医疗、医疗器械】鱼跃医疗', only_qushi_image=False, message=str_message)
+        send_image(code='300254', name='【1月份仿制药、月度布林线触底】仟源医药', only_qushi_image=False, message=str_message)
 
 
 # strategy("ZXG")
