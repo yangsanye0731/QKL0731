@@ -5,13 +5,13 @@ import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 import datetime
 
 
-def send_image_array(code, name, code2, name2, code3, name3, group_name, dingding_group_name="dingding01"):
+def send_image_array(code, name, code2, name2, code3, name3, group_name, message='', dingding_group_name="dingding01"):
     image_path = common_image.plt_image_geGuZhiBiao_array(code, name, code2, name2, code3, name3)
     image_url = "http://47.240.11.144/" + image_path[6:]
     print(image_url)
     common.dingding_markdown_msg_final(dingding_group_name,
                                        "触发" + group_name,
-                                       "触发" + group_name
+                                       "触发" + group_name + message
                                        + " ![screenshot]("
                                        + image_url + ")")
 
@@ -107,7 +107,7 @@ def strategy(type):
         longtoucodename = '乐普医疗'
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='002923', name2='润都股份', code3='002755',
-                         name3='奥赛康', group_name='仿制药系列', dingding_group_name="dingding01")
+                         name3='奥赛康', group_name='仿制药系列', message=str_message, dingding_group_name="dingding01")
 
         minute_value = datetime.datetime.now().minute
         if minute_value > 45:
