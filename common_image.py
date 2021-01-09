@@ -1190,6 +1190,10 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     closeArray_d = num.array(data_d['close'])
     doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
 
+    # 涨跌幅，价格
+    zhangdiefu = "%.2f" % (((closeArray_d[-1] - closeArray_d[-2]) / closeArray_d[-2]) * 100) + '%'
+    price = "%.2f" % closeArray_d[-1]
+
     data = tushare.get_k_data(code, ktype="W")
     ts = data[["open", "close", "high", "low", "volume"]]
     closeArray = num.array(data['close'])
@@ -1221,7 +1225,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
 
-    ax_kdj_d.set_xlabel(codeName + "KDJ（日）", fontproperties=myfont)
+    ax_kdj_d.set_xlabel("价格：" + price + " KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1238,7 +1242,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
     ax_kdj.plot(kdj.index, kdj["KDJ_J"], label="J")
 
-    ax_kdj.set_xlabel(codeName + "KDJ（周）", fontproperties=myfont)
+    ax_kdj.set_xlabel("涨跌幅：" + zhangdiefu + " KDJ（周）", fontproperties=myfont)
 
     changdu = len(ts)
     if changdu > 200:
@@ -1265,6 +1269,10 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ts_d = data_d[["open", "close", "high", "low", "volume"]]
     closeArray_d = num.array(data_d['close'])
     doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    # 涨跌幅，价格
+    zhangdiefu = "%.2f" % (((closeArray_d[-1] - closeArray_d[-2]) / closeArray_d[-2]) * 100) + '%'
+    price = "%.2f" % closeArray_d[-1]
 
     data = tushare.get_k_data(code2, ktype="W")
     ts = data[["open", "close", "high", "low", "volume"]]
@@ -1297,7 +1305,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_d_2.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
     ax_kdj_d_2.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
 
-    ax_kdj_d_2.set_xlabel(codeName2 + "KDJ（日）", fontproperties=myfont)
+    ax_kdj_d_2.set_xlabel("价格：" + price + " KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1314,7 +1322,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_2.plot(kdj.index, kdj["KDJ_D"], label="D")
     ax_kdj_2.plot(kdj.index, kdj["KDJ_J"], label="J")
 
-    ax_kdj_2.set_xlabel(codeName2 + "KDJ（周）", fontproperties=myfont)
+    ax_kdj_2.set_xlabel("涨跌幅：" + zhangdiefu + " KDJ（周）", fontproperties=myfont)
 
     changdu = len(ts)
     if changdu > 200:
@@ -1340,6 +1348,10 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ts_d = data_d[["open", "close", "high", "low", "volume"]]
     closeArray_d = num.array(data_d['close'])
     doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    # 涨跌幅，价格
+    zhangdiefu = "%.2f" % (((closeArray_d[-1] - closeArray_d[-2]) / closeArray_d[-2]) * 100) + '%'
+    price = "%.2f" % closeArray_d[-1]
 
     data = tushare.get_k_data(code3, ktype="W")
     ts = data[["open", "close", "high", "low", "volume"]]
@@ -1372,7 +1384,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_d_3.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
     ax_kdj_d_3.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
 
-    ax_kdj_d_3.set_xlabel(codeName3 + "KDJ（日）", fontproperties=myfont)
+    ax_kdj_d_3.set_xlabel("价格：" + price + " KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1389,7 +1401,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_3.plot(kdj.index, kdj["KDJ_D"], label="D")
     ax_kdj_3.plot(kdj.index, kdj["KDJ_J"], label="J")
 
-    ax_kdj_3.set_xlabel(codeName3 + "KDJ（周）", fontproperties=myfont)
+    ax_kdj_3.set_xlabel("涨跌幅：" + zhangdiefu + " KDJ（周）", fontproperties=myfont)
 
     changdu = len(ts)
     if changdu > 200:
