@@ -1155,4 +1155,270 @@ def plt_image_geGuZhiBiao(code, fullName):
     return image_path
 
 
+
+#######################################################################################################################
+##################################################################################################数组60、日、周线KDJ指标
+def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullName3):
+    codeName = fullName + "(" + code + ")"
+    codeName2 = fullName2 + "(" + code2 + ")"
+    codeName3 = fullName3 + "(" + code3 + ")"
+
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
+
+    fig = plt.figure(figsize=(15, 10))
+    # fig.suptitle(codeName, fontproperties=myfont_title)
+    # 1*1 的第一个图表
+    ax_kdj_60 = fig.add_subplot(3, 3, 1)
+    ax_kdj_d = fig.add_subplot(3, 3, 2)
+    ax_kdj = fig.add_subplot(3, 3, 3)
+
+    ax_kdj_60_2 = fig.add_subplot(3,3,4)
+    ax_kdj_d_2 = fig.add_subplot(3,3,5)
+    ax_kdj_2 = fig.add_subplot(3,3,6)
+
+    ax_kdj_60_3 = fig.add_subplot(3,3,7)
+    ax_kdj_d_3 = fig.add_subplot(3,3,8)
+    ax_kdj_3 = fig.add_subplot(3,3,9)
+
+    data_60 = tushare.get_k_data(code, ktype="60")
+    ts_60 = data_60[["open", "close", "high", "low", "volume"]]
+    closeArray_60 = num.array(data_60['close'])
+    doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+
+    data_d = tushare.get_k_data(code, ktype="D")
+    ts_d = data_d[["open", "close", "high", "low", "volume"]]
+    closeArray_d = num.array(data_d['close'])
+    doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    data = tushare.get_k_data(code, ktype="W")
+    ts = data[["open", "close", "high", "low", "volume"]]
+    closeArray = num.array(data['close'])
+    doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    kdj_60 = KDJ_zhibiao(data_60, closeArray_60)
+    kdj_d = KDJ_zhibiao(data_d, closeArray_d)
+    kdj = KDJ_zhibiao(data, closeArray)
+
+    # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
+    ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
+
+    ax_kdj_60.set_xlabel(codeName + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60.set_ylabel("KDJ", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if changdu > 200:
+        ax_kdj_60.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_60.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_60.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_60.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_60.set_xlim(500, changdu)
+
+    ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
+    ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
+
+    ax_kdj_d.set_xlabel(codeName + "KDJ（日）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if changdu > 200:
+        ax_kdj_d.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_d.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_d.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_d.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_d.set_xlim(500, changdu)
+
+    ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
+    ax_kdj.plot(kdj.index, kdj["KDJ_J"], label="J")
+
+    ax_kdj.set_xlabel(codeName + "KDJ（周）", fontproperties=myfont)
+
+    changdu = len(ts)
+    if changdu > 200:
+        ax_kdj.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj.set_xlim(500, changdu)
+
+    ###################################################################################################################
+    ###################################################################################################################
+    ###################################################################################################################
+    ###################################################################################################################
+    data_60 = tushare.get_k_data(code2, ktype="60")
+    ts_60 = data_60[["open", "close", "high", "low", "volume"]]
+    closeArray_60 = num.array(data_60['close'])
+    doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+
+    data_d = tushare.get_k_data(code2, ktype="D")
+    ts_d = data_d[["open", "close", "high", "low", "volume"]]
+    closeArray_d = num.array(data_d['close'])
+    doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    data = tushare.get_k_data(code2, ktype="W")
+    ts = data[["open", "close", "high", "low", "volume"]]
+    closeArray = num.array(data['close'])
+    doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    kdj_60 = KDJ_zhibiao(data_60, closeArray_60)
+    kdj_d = KDJ_zhibiao(data_d, closeArray_d)
+    kdj = KDJ_zhibiao(data, closeArray)
+
+    # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    ax_kdj_60_2.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
+    ax_kdj_60_2.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
+
+    ax_kdj_60_2.set_xlabel(codeName2 + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60_2.set_ylabel("KDJ", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if changdu > 200:
+        ax_kdj_60_2.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_60_2.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_60_2.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_60_2.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_60_2.set_xlim(500, changdu)
+
+    ax_kdj_d_2.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
+    ax_kdj_d_2.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
+
+    ax_kdj_d_2.set_xlabel(codeName2 + "KDJ（日）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if changdu > 200:
+        ax_kdj_d_2.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_d_2.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_d_2.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_d_2.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_d_2.set_xlim(500, changdu)
+
+    ax_kdj_2.plot(kdj.index, kdj["KDJ_D"], label="D")
+    ax_kdj_2.plot(kdj.index, kdj["KDJ_J"], label="J")
+
+    ax_kdj_2.set_xlabel(codeName2 + "KDJ（周）", fontproperties=myfont)
+
+    changdu = len(ts)
+    if changdu > 200:
+        ax_kdj_2.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_2.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_2.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_2.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_2.set_xlim(500, changdu)
+    ###################################################################################################################
+    ###################################################################################################################
+    ###################################################################################################################
+    ###################################################################################################################
+    data_60 = tushare.get_k_data(code3, ktype="60")
+    ts_60 = data_60[["open", "close", "high", "low", "volume"]]
+    closeArray_60 = num.array(data_60['close'])
+    doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+
+    data_d = tushare.get_k_data(code3, ktype="D")
+    ts_d = data_d[["open", "close", "high", "low", "volume"]]
+    closeArray_d = num.array(data_d['close'])
+    doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    data = tushare.get_k_data(code3, ktype="W")
+    ts = data[["open", "close", "high", "low", "volume"]]
+    closeArray = num.array(data['close'])
+    doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    kdj_60 = KDJ_zhibiao(data_60, closeArray_60)
+    kdj_d = KDJ_zhibiao(data_d, closeArray_d)
+    kdj = KDJ_zhibiao(data, closeArray)
+
+    # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    ax_kdj_60_3.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
+    ax_kdj_60_3.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
+
+    ax_kdj_60_3.set_xlabel(codeName3 + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60_3.set_ylabel("KDJ", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if changdu > 200:
+        ax_kdj_60_3.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_60_3.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_60_3.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_60_3.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_60_3.set_xlim(500, changdu)
+
+    ax_kdj_d_3.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
+    ax_kdj_d_3.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
+
+    ax_kdj_d_3.set_xlabel(codeName3 + "KDJ（日）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if changdu > 200:
+        ax_kdj_d_3.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_d_3.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_d_3.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_d_3.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_d_3.set_xlim(500, changdu)
+
+    ax_kdj_3.plot(kdj.index, kdj["KDJ_D"], label="D")
+    ax_kdj_3.plot(kdj.index, kdj["KDJ_J"], label="J")
+
+    ax_kdj_3.set_xlabel(codeName3 + "KDJ（周）", fontproperties=myfont)
+
+    changdu = len(ts)
+    if changdu > 200:
+        ax_kdj_3.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_3.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_3.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_3.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_3.set_xlim(500, changdu)
+    ###################################################################################################################
+    ###################################################################################################################
+    ###################################################################################################################
+    ###################################################################################################################
+
+
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + 'geGuZhiBiao'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
+    plt.close()
+    image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
+    return image_path
+
+
 # plt_image_geGuZhiBiao("300322", "硕贝德")
+# plt_image_geGuZhiBiao_array("300003", "乐普医疗", "002923", "润都股份", "002755", "奥赛康")

@@ -4,6 +4,17 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
+def send_image_array(code, name, code2, name2, code3, name3,  group_name, dingding_group_name="dingding01", ):
+    image_path = plt_image_geGuZhiBiao_array(code, name, code2, name2, code3, name3)
+    image_url = "http://47.240.11.144/" + image_path[6:]
+    print(image_url)
+    common.dingding_markdown_msg_final(dingding_group_name,
+                                       "触发" + group_name,
+                                       "触发" + group_name
+                                       + " ![screenshot]("
+                                       + image_url + ")")
+
+
 def send_image(code, name, only_qushi_image=False, item_image_url='', message='', dingding_group_name="dingding01"):
     zhangdiefu, price = common.zhangdiefu_and_price(code)
     if only_qushi_image:
@@ -89,6 +100,11 @@ def strategy(type):
         send_image(code='300003', name='【1月份仿制药龙头】乐普医疗', only_qushi_image=False, message=str_message)
         send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=False, message=str_message)
         send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=False, message=str_message)
+
+        send_image_array(code='300003', name='乐普医疗', code2='002923', name2='润都股份', code3='002755',
+                         name3='奥赛康', dingding_group_name="dingding01", group_name='仿制药')
+
+
 
 
 
