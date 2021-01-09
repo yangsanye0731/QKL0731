@@ -4,7 +4,7 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
-def send_image_array(code, name, code2, name2, code3, name3,  group_name, dingding_group_name="dingding01", ):
+def send_image_array(code, name, code2, name2, code3, name3,  group_name, dingding_group_name="dingding01"):
     image_path = plt_image_geGuZhiBiao_array(code, name, code2, name2, code3, name3)
     image_url = "http://47.240.11.144/" + image_path[6:]
     print(image_url)
