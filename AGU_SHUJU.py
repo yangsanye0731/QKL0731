@@ -86,9 +86,10 @@ def strategy(type):
         # send_image(code='603363', name='【12月份选错猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
         #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
         # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
+        send_image(code='300003', name='【1月份仿制药龙头】乐普医疗', only_qushi_image=False, message=str_message)
         send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=False, message=str_message)
         send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=False, message=str_message)
-        send_image(code='300254', name='【1月份仿制药、月度布林线触底】仟源医药', only_qushi_image=False, message=str_message)
+
 
 
 # strategy("ZXG")
