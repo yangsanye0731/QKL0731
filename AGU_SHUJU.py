@@ -90,16 +90,16 @@ def strategy(type):
     ##########################################################################################################指数指标图片
     flag = True
     if flag:
-        # send_image(code='sh', name='上证指数', message=str_message)
-        # send_image(code='cyb', name='创业板指数', message=str_message)
-        # send_image(code='399300', name='深证指数', message=str_message)
-        # # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
-        # # send_image(code='603363', name='【12月份选错猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
-        # #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
-        # # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
-        # send_image(code='300003', name='【1月份仿制药龙头】乐普医疗', only_qushi_image=False, message=str_message)
-        # send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=False, message=str_message)
-        # send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=False, message=str_message)
+        send_image(code='sh', name='上证指数', message=str_message)
+        send_image(code='cyb', name='创业板指数', message=str_message)
+        send_image(code='399300', name='深证指数', message=str_message)
+        # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
+        # send_image(code='603363', name='【12月份选错猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
+        #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
+        # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
+        send_image(code='300003', name='【1月份仿制药龙头】乐普医疗', only_qushi_image=True, message=str_message)
+        send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=True, message=str_message)
+        send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=True, message=str_message)
 
         send_image_array(code='300003', name='乐普医疗', code2='002923', name2='润都股份', code3='002755',
                          name3='奥赛康', group_name='仿制药系列', dingding_group_name="dingding01")
