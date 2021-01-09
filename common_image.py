@@ -1225,7 +1225,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
 
-    ax_kdj_d.set_xlabel("价格：" + price + " KDJ（日）", fontproperties=myfont)
+    ax_kdj_d.set_xlabel("当前价格：" + price + " KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1305,7 +1305,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_d_2.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
     ax_kdj_d_2.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
 
-    ax_kdj_d_2.set_xlabel("价格：" + price + " KDJ（日）", fontproperties=myfont)
+    ax_kdj_d_2.set_xlabel("当前价格：" + price + " KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1384,7 +1384,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_d_3.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
     ax_kdj_d_3.plot(kdj_d.index, kdj_d["KDJ_J"], label="J")
 
-    ax_kdj_d_3.set_xlabel("价格：" + price + " KDJ（日）", fontproperties=myfont)
+    ax_kdj_d_3.set_xlabel("当前价格：" + price + " KDJ（日）", fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
