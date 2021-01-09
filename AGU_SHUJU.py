@@ -4,15 +4,17 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 
 
-def send_image(code, name, only_qushi_image=False, item_image_url='', message=''):
+def send_image(code, name, only_qushi_image=False, item_image_url='', message='', dingding_group_name="dingding01"):
     zhangdiefu, price = common.zhangdiefu_and_price(code)
     if only_qushi_image:
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
         image_url = "http://47.240.11.144/" + image_path[6:]
         print(image_url)
-        common.dingding_markdown_msg_2("触发" + name + zhangdiefu, "触发" + name + zhangdiefu + " 价格：" + price + message
-                                       + " ![screenshot]("
-                                       + image_url + ")")
+        common.dingding_markdown_msg_final(dingding_group_name,
+                                           "触发" + name + zhangdiefu,
+                                           "触发" + name + zhangdiefu + " 价格：" + price + message
+                                           + " ![screenshot]("
+                                           + image_url + ")")
     else:
         image_path_ydzs = ydzs.plot_mean_ret(code)
         image_url_ydzs = "http://47.240.11.144/" + image_path_ydzs[6:]
@@ -20,10 +22,12 @@ def send_image(code, name, only_qushi_image=False, item_image_url='', message=''
         image_path = common_image.plt_image_geGuZhiBiao(code, name)
         image_url = "http://47.240.11.144/" + image_path[6:]
         print(image_url)
-        common.dingding_markdown_msg_2("触发" + name + zhangdiefu, "触发" + name + zhangdiefu + " 价格：" + price + message
-                                       + " ![screenshot](" + image_url + ")"
-                                       + " ![screenshot](" + image_url_ydzs + ")"
-                                       + " ![screenshot](" + item_image_url + ")")
+        common.dingding_markdown_msg_final(dingding_group_name,
+                                           "触发" + name + zhangdiefu,
+                                           "触发" + name + zhangdiefu + " 价格：" + price + message
+                                           + " ![screenshot](" + image_url + ")"
+                                           + " ![screenshot](" + image_url_ydzs + ")"
+                                           + " ![screenshot](" + item_image_url + ")")
 
 
 def strategy(type):

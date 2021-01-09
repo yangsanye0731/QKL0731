@@ -19,7 +19,7 @@ sys.path.append(rootPath)
 ############################################################################################################读取配置文件
 systemconfig_file_path = rootPath + '//resource//config//systemconfig.ini'
 cf = configparser.ConfigParser()
-cf.read(systemconfig_file_path)
+cf.read(systemconfig_file_path, encoding='utf-8')
 
 
 def insertRecord(sql):
