@@ -97,11 +97,14 @@ def strategy(type):
         # send_image(code='603363', name='【12月份选错猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
         #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
         # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
-        send_image(code='300003', name='【1月份仿制药龙头】乐普医疗', only_qushi_image=True, message=str_message)
+
+        longtoucode = '300003'
+        longtoucodename = '乐普医疗'
+        send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
         send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=True, message=str_message)
         send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=True, message=str_message)
 
-        send_image_array(code='300003', name='乐普医疗', code2='002923', name2='润都股份', code3='002755',
+        send_image_array(code=longtoucode, name=longtoucodename, code2='002923', name2='润都股份', code3='002755',
                          name3='奥赛康', group_name='仿制药系列', dingding_group_name="dingding01")
 
 
