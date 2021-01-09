@@ -2,9 +2,10 @@ import common
 import common_image
 import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
+import datetime
 
 
-def send_image_array(code, name, code2, name2, code3, name3,  group_name, dingding_group_name="dingding01"):
+def send_image_array(code, name, code2, name2, code3, name3, group_name, dingding_group_name="dingding01"):
     image_path = common_image.plt_image_geGuZhiBiao_array(code, name, code2, name2, code3, name3)
     image_url = "http://47.240.11.144/" + image_path[6:]
     print(image_url)
@@ -98,17 +99,25 @@ def strategy(type):
         #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
         # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
 
+        ################################################################################################################
+        ################################################################################################################
+        ################################################################################################################
+        ##########################################################################################################仿制药
         longtoucode = '300003'
         longtoucodename = '乐普医疗'
-        send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
-        send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=True, message=str_message)
-        send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=True, message=str_message)
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='002923', name2='润都股份', code3='002755',
                          name3='奥赛康', group_name='仿制药系列', dingding_group_name="dingding01")
 
-
-
+        minute_value = datetime.datetime.now().minute
+        if minute_value > 45:
+            send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
+            send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=True, message=str_message)
+            send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=True, message=str_message)
+        ################################################################################################################
+        ################################################################################################################
+        ################################################################################################################
+        ################################################################################################################
 
 
 # strategy("ZXG")
