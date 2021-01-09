@@ -104,20 +104,31 @@ def strategy(type):
         ################################################################################################################
         ##########################################################################################################仿制药
         longtoucode = '300003'
-        longtoucodename = '乐普医疗'
+        longtoucodename = '【龙头】乐普医疗'
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='002923', name2='润都股份', code3='002755',
                          name3='奥赛康', group_name='仿制药系列', message=str_message, dingding_group_name="dingding01")
 
         minute_value = datetime.datetime.now().minute
-        if minute_value > 45:
+        if minute_value > 56:
             send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
             send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=True, message=str_message)
             send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=True, message=str_message)
         ################################################################################################################
         ################################################################################################################
         ################################################################################################################
-        ################################################################################################################
+        #####################################################################################################医药跨越5周线
+        longtoucode = '300294'
+        longtoucodename = '【龙头】博雅生物'
+
+        send_image_array(code=longtoucode, name=longtoucodename, code2='603108', name2='润达医疗', code3='600216',
+                         name3='浙江医药', group_name='医药跨越5周线系列', message=str_message, dingding_group_name="dingding01")
+
+        minute_value = datetime.datetime.now().minute
+        if minute_value < 8:
+            send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
+            send_image(code='603108', name='【周期预测——医药跨越5周线系列】润都股份', only_qushi_image=True, message=str_message)
+            send_image(code='600216', name='【周期预测——医药跨越5周线系列】浙江医药', only_qushi_image=True, message=str_message)
 
 
 # strategy("ZXG")
