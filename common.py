@@ -3,6 +3,22 @@ import time
 import numpy as num
 import tushare as ts
 from dingtalkchatbot.chatbot import DingtalkChatbot
+import configparser
+
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
+
+#######################################################################################################################
+############################################################################################################读取配置文件
+systemconfig_file_path = rootPath + '//resource//config//systemconfig.ini'
+cf = configparser.ConfigParser()
+cf.read(systemconfig_file_path, encoding='utf-8')
 
 
 # 涨跌幅
@@ -10,6 +26,7 @@ def zhangdiefu(code):
     data_history_D = ts.get_k_data(code, ktype="D")
     closeArray_D = num.array(data_history_D['close'])
     return "%.2f" % (((closeArray_D[-1] - closeArray_D[-2]) / closeArray_D[-2]) * 100) + '%'
+
 
 def zhangdiefu_and_price(code):
     data_history_D = ts.get_k_data(code, ktype="D")
@@ -271,6 +288,19 @@ def dingding_markdown_msg_04(title, text):
     xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
 
 
+########################################################################################################################
+######################################################################################################### 统一钉钉消息发布
+def dingding_markdown_msg_final(groupname, title, text):
+    # WebHook地址
+    dingding_url = cf.get("DingDing", groupname)
+    webhook = dingding_url
+    # 初始化机器人小丁
+    xiaoding = DingtalkChatbot(webhook)
+    # Text消息@所有人
+    at_mobiles = ['17706417762']
+    xiaoding.send_markdown(title=title, text=text, is_at_all=False, at_mobiles=at_mobiles)
+
+
 def dingding_markdown_msg_link(title, text, url):
     # WebHook地址
     webhook = 'https://oapi.dingtalk.com/robot/' \
@@ -294,3 +324,4 @@ def dingding_markdown_msg_ene(title, text):
 
 
 # print(zhangdiefu('399006'))
+# dingding_markdown_msg_final("dingding01", "触发test", "触发test")
