@@ -140,9 +140,15 @@ def strategy(type):
         send_image_array(code=longtoucode, name=longtoucodename, code2='002015', name2='协鑫能科', code3='600282',
                          name3='南钢股份', group_name='近期行业观察机会系列', message=str_message, dingding_group_name="dingding01")
 
-        send_image(code=longtoucode, name=longtoucodename, only_qushi_image=False, message=str_message)
-        send_image(code='002015', name='【周期预测——近期行业观察机会系列】协鑫能科', only_qushi_image=False, message=str_message)
-        send_image(code='600282', name='【周期预测——近期行业观察机会系列】南钢股份', only_qushi_image=False, message=str_message)
+        ################################################################################################################
+        ################################################################################################################
+        ################################################################################################################
+        #############################################################################################################ETF
+        longtoucode = '159811'
+        longtoucodename = '5G50ETF'
+
+        send_image_array(code=longtoucode, name=longtoucodename, code2='159819', name2='AI智能', code3='512480',
+                         name3='半导体ETF', group_name='近期ETF系列', message=str_message, dingding_group_name="dingding01")
 
 # strategy("ZXG")
 strategy("TOP")
