@@ -122,13 +122,13 @@ def strategy(type):
         longtoucodename = '【龙头】博雅生物'
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='603108', name2='润达医疗', code3='600216',
-                         name3='浙江医药', group_name='医药跨越5周线系列', message=str_message, dingding_group_name="dingding01")
+                         name3='浙江医药', group_name='【周期预测——医药行业跨越5周线系列】', message=str_message, dingding_group_name="dingding01")
 
         minute_value = datetime.datetime.now().minute
         if minute_value < 8:
             send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
-            send_image(code='603108', name='【周期预测——医药跨越5周线系列】润都股份', only_qushi_image=True, message=str_message)
-            send_image(code='600216', name='【周期预测——医药跨越5周线系列】浙江医药', only_qushi_image=True, message=str_message)
+            send_image(code='603108', name='【周期预测——医药行业跨越5周线系列】润都股份', only_qushi_image=True, message=str_message)
+            send_image(code='600216', name='【周期预测——医药行业跨越5周线系列】浙江医药', only_qushi_image=True, message=str_message)
 
         ################################################################################################################
         ################################################################################################################
