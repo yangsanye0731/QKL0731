@@ -3,6 +3,7 @@ import common_image
 import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 import datetime
+import time
 
 
 def send_image_array(code, name, code2, name2, code3, name3, group_name, message='', dingding_group_name="dingding01"):
@@ -94,19 +95,20 @@ def strategy(type):
         data_config = common_mysqlUtil.select_agu_config()
         for config_item in data_config:
             print(config_item)
+            time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             send_image_array(code=config_item[1], name=config_item[2], code2=config_item[3], name2=config_item[4],
                              code3=config_item[5],
                              name3=config_item[6], group_name=config_item[0],
-                             message=str_message, dingding_group_name=config_item[9])
+                             message=str_message + time_str, dingding_group_name=config_item[9])
 
             minute_value = datetime.datetime.now().minute
             if config_item[7] == 'multi' and minute_value < int(config_item[8]):
                 send_image(code=config_item[1], name=config_item[2], only_qushi_image=True,
-                           message=str_message, dingding_group_name=config_item[9])
+                           message=str_message + time_str, dingding_group_name=config_item[9])
                 send_image(code=config_item[3], name=config_item[4], only_qushi_image=True,
-                           message=str_message, dingding_group_name=config_item[9])
+                           message=str_message + time_str, dingding_group_name=config_item[9])
                 send_image(code=config_item[5], name=config_item[6], only_qushi_image=True,
-                           message=str_message, dingding_group_name=config_item[9])
+                           message=str_message + time_str, dingding_group_name=config_item[9])
 
 
 strategy("TOP")
