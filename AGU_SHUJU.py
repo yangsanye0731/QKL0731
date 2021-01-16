@@ -117,29 +117,33 @@ def strategy(type):
         ################################################################################################################
         ################################################################################################################
         ################################################################################################################
-        #####################################################################################################医药跨越5周线
+        ##############################################################################################医药、仿制药跨越5周线
         longtoucode = '300294'
         longtoucodename = '【龙头】博雅生物'
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='603108', name2='润达医疗', code3='600216',
-                         name3='浙江医药', group_name='【周期预测——医药行业跨越5周线系列】',
+                         name3='浙江医药', group_name='【周期预测——医药行业跨越5周线系列】博雅生物、润达医疗、浙江医药',
                          message=str_message, dingding_group_name="dingding01")
 
         minute_value = datetime.datetime.now().minute
         if minute_value < 8:
             send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
-            send_image(code='603108', name='【周期预测——医药行业跨越5周线系列】润都股份', only_qushi_image=True, message=str_message)
+            send_image(code='603108', name='【周期预测——医药行业跨越5周线系列】润达医疗', only_qushi_image=True, message=str_message)
             send_image(code='600216', name='【周期预测——医药行业跨越5周线系列】浙江医药', only_qushi_image=True, message=str_message)
 
         ################################################################################################################
         ################################################################################################################
         ################################################################################################################
-        #####################################################################################################行业前期跟踪
+        #####################################################################################################社区团购行业
         longtoucode = '603708'
         longtoucodename = '【龙头】家家悦'
 
-        send_image_array(code=longtoucode, name=longtoucodename, code2='002015', name2='协鑫能科', code3='600282',
-                         name3='南钢股份', group_name='近期行业观察机会系列', message=str_message, dingding_group_name="dingding01")
+        send_image_array(code=longtoucode, name=longtoucodename, code2='601116', name2='三江购物', code3='002251',
+                         name3='步步高', group_name='【周期预测——社区团购】家家悦、三江购物、步步高',
+                         message=str_message, dingding_group_name="dingding01")
+
+        # send_image_array(code=longtoucode, name=longtoucodename, code2='002015', name2='协鑫能科', code3='600282',
+        #                  name3='南钢股份', group_name='近期行业观察机会系列', message=str_message, dingding_group_name="dingding01")
 
         ################################################################################################################
         ################################################################################################################
@@ -148,8 +152,9 @@ def strategy(type):
         longtoucode = '159811'
         longtoucodename = '5G50ETF'
 
-        send_image_array(code=longtoucode, name=longtoucodename, code2='159819', name2='AI智能', code3='512480',
-                         name3='半导体ETF', group_name='近期ETF系列', message=str_message, dingding_group_name="dingding01")
+        send_image_array(code=longtoucode, name=longtoucodename, code2='512200', name2='房地产ETF', code3='512480',
+                         name3='半导体ETF', group_name='【ETF系列】5GETF、房地产ETF、半导体ETF',
+                         message=str_message, dingding_group_name="dingding01")
 
 # strategy("ZXG")
 strategy("TOP")
