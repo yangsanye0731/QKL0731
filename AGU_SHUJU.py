@@ -103,11 +103,11 @@ def strategy(type):
 
             minute_value = datetime.datetime.now().minute
             if config_item[7] == 'multi' and minute_value < int(config_item[8]):
-                send_image(code=config_item[1], name=config_item[2], only_qushi_image=True,
+                send_image(code=config_item[1], name=config_item[2], only_qushi_image=False,
                            message=str_message + time_str, dingding_group_name=config_item[9])
-                send_image(code=config_item[3], name=config_item[4], only_qushi_image=True,
+                send_image(code=config_item[3], name=config_item[4], only_qushi_image=False,
                            message=str_message + time_str, dingding_group_name=config_item[9])
-                send_image(code=config_item[5], name=config_item[6], only_qushi_image=True,
+                send_image(code=config_item[5], name=config_item[6], only_qushi_image=False,
                            message=str_message + time_str, dingding_group_name=config_item[9])
 
 
