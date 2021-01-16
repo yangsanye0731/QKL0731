@@ -107,7 +107,8 @@ def strategy(type):
         longtoucodename = '【龙头】乐普医疗'
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='002923', name2='润都股份', code3='002755',
-                         name3='奥赛康', group_name='仿制药系列', message=str_message, dingding_group_name="dingding01")
+                         name3='奥赛康', group_name='【周期预测——仿制药系列】乐普医疗、润都股份、奥赛康',
+                         message=str_message, dingding_group_name="dingding01")
 
         minute_value = datetime.datetime.now().minute
         if minute_value > 56:
@@ -142,8 +143,12 @@ def strategy(type):
                          name3='步步高', group_name='【周期预测——社区团购】家家悦、三江购物、步步高',
                          message=str_message, dingding_group_name="dingding01")
 
-        # send_image_array(code=longtoucode, name=longtoucodename, code2='002015', name2='协鑫能科', code3='600282',
-        #                  name3='南钢股份', group_name='近期行业观察机会系列', message=str_message, dingding_group_name="dingding01")
+        ################################################################################################################
+        ################################################################################################################
+        ################################################################################################################
+        ##############################################################################################近期行业观察机会系列
+        send_image_array(code='688025', name='杰普特', code2='002015', name2='协鑫能科', code3='600282',
+                         name3='南钢股份', group_name='近期行业观察机会系列', message=str_message, dingding_group_name="dingding01_1")
 
         ################################################################################################################
         ################################################################################################################
