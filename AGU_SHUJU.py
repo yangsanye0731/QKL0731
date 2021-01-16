@@ -122,7 +122,8 @@ def strategy(type):
         longtoucodename = '【龙头】博雅生物'
 
         send_image_array(code=longtoucode, name=longtoucodename, code2='603108', name2='润达医疗', code3='600216',
-                         name3='浙江医药', group_name='【周期预测——医药行业跨越5周线系列】', message=str_message, dingding_group_name="dingding01")
+                         name3='浙江医药', group_name='【周期预测——医药行业跨越5周线系列】',
+                         message=str_message, dingding_group_name="dingding01")
 
         minute_value = datetime.datetime.now().minute
         if minute_value < 8:
