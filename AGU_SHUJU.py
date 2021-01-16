@@ -91,75 +91,13 @@ def strategy(type):
     ##########################################################################################################指数指标图片
     flag = True
     if flag:
-        send_image(code='sh', name='上证指数', message=str_message)
-        send_image(code='cyb', name='创业板指数', message=str_message)
-        send_image(code='399300', name='深证指数', message=str_message)
-        # send_image(code='300322', name='【跨越5月线】硕贝德', only_qushi_image=False)
-        # send_image(code='603363', name='【12月份选错猪周期，跨越5周线，主力持仓增长】傲农生物', only_qushi_image=False,
-        #            item_image_url='http://47.240.11.144/software/QKL0731/resource/images/ANSW1.png', message=str_message)
-        # send_image(code='002548', name='【12月份选错猪周期，跨越5周线】金新农', only_qushi_image=False)
+        data_config = common_mysqlUtil.select_agu_config()
+        for config_item in data_config:
+            print(config_item)
+            send_image_array(code=config_item[1], name=config_item[2], code2=config_item[3], name2=config_item[4],
+                             code3=config_item[5],
+                             name3=config_item[6], group_name=config_item[0],
+                             message=str_message, dingding_group_name=config_item[9])
 
-        ################################################################################################################
-        ################################################################################################################
-        ################################################################################################################
-        ##########################################################################################################仿制药
-        longtoucode = '300003'
-        longtoucodename = '【龙头】乐普医疗'
 
-        send_image_array(code=longtoucode, name=longtoucodename, code2='002923', name2='润都股份', code3='002755',
-                         name3='奥赛康', group_name='【周期预测——仿制药系列】乐普医疗、润都股份、奥赛康',
-                         message=str_message, dingding_group_name="dingding01")
-
-        minute_value = datetime.datetime.now().minute
-        if minute_value > 56:
-            send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
-            send_image(code='002923', name='【1月份仿制药】润都股份', only_qushi_image=True, message=str_message)
-            send_image(code='002755', name='【1月份仿制药】奥赛康', only_qushi_image=True, message=str_message)
-        ################################################################################################################
-        ################################################################################################################
-        ################################################################################################################
-        ##############################################################################################医药、仿制药跨越5周线
-        longtoucode = '300294'
-        longtoucodename = '【龙头】博雅生物'
-
-        send_image_array(code=longtoucode, name=longtoucodename, code2='603108', name2='润达医疗', code3='600216',
-                         name3='浙江医药', group_name='【周期预测——医药行业跨越5周线系列】博雅生物、润达医疗、浙江医药',
-                         message=str_message, dingding_group_name="dingding01")
-
-        minute_value = datetime.datetime.now().minute
-        if minute_value < 8:
-            send_image(code=longtoucode, name=longtoucodename, only_qushi_image=True, message=str_message)
-            send_image(code='603108', name='【周期预测——医药行业跨越5周线系列】润达医疗', only_qushi_image=True, message=str_message)
-            send_image(code='600216', name='【周期预测——医药行业跨越5周线系列】浙江医药', only_qushi_image=True, message=str_message)
-
-        ################################################################################################################
-        ################################################################################################################
-        ################################################################################################################
-        #####################################################################################################社区团购行业
-        longtoucode = '603708'
-        longtoucodename = '【龙头】家家悦'
-
-        send_image_array(code=longtoucode, name=longtoucodename, code2='601116', name2='三江购物', code3='002251',
-                         name3='步步高', group_name='【周期预测——社区团购】家家悦、三江购物、步步高',
-                         message=str_message, dingding_group_name="dingding01")
-
-        ################################################################################################################
-        ################################################################################################################
-        ################################################################################################################
-        ##############################################################################################近期行业观察机会系列
-        send_image_array(code='688025', name='杰普特', code2='002015', name2='协鑫能科', code3='600282',
-                         name3='南钢股份', group_name='近期行业观察机会系列', message=str_message, dingding_group_name="dingding01_1")
-
-        ################################################################################################################
-        ################################################################################################################
-        ################################################################################################################
-        #############################################################################################################ETF
-        longtoucode = '159811'
-        longtoucodename = '5G50ETF'
-
-        send_image_array(code=longtoucode, name=longtoucodename, code2='512200', name2='房地产ETF', code3='512480',
-                         name3='半导体ETF', group_name='【ETF系列】5GETF、房地产ETF、半导体ETF',
-                         message=str_message, dingding_group_name="dingding01")
-
-# strategy("ZXG")
 strategy("TOP")

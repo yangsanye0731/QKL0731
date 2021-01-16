@@ -342,6 +342,23 @@ def select_all_code_by_gainian(gainian_name):
     db.close()
     return data
 
+def select_agu_config():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect("localhost", userName, password, "superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL 查询
+    sql = "SELECT `group_name`, `code1`, `name1`, `code2`, `name2`, `code3`, `name3`, `code4`, `name4`, " \
+          "`dingding_group_name`, `status`, `index` FROM `superman`.`AGU_Config` WHERE `status` = '1' where 1=1"
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
 def update_xuangubao(name, shizhi, shiyinglv, huanshoulv, code, epsup, yingyeup):
     sql = ""
     if (len(name) == 0):
@@ -459,3 +476,5 @@ def insert_ZhiShuLog_record(code, name, type, price, plate, mark, zhangdiefu, ch
 # for count in data:
 #     print(count)
 # select_xuangubao()
+# data = select_agu_config()
+# print(data)
