@@ -1244,7 +1244,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
 
-    ax_kdj_60.set_xlabel("换手率：" + turnover_rate + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60.set_xlabel("昨日换手率：" + turnover_rate + "% KDJ（60）", fontproperties=myfont)
 
     changdu = len(ts_60)
     if changdu > 200:
@@ -1357,7 +1357,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_60_2.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     ax_kdj_60_2.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
 
-    ax_kdj_60_2.set_xlabel("换手率：" + turnover_rate + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60_2.set_xlabel("昨日换手率：" + turnover_rate + "% KDJ（60）", fontproperties=myfont)
 
     changdu = len(ts_60)
     if changdu > 200:
@@ -1468,7 +1468,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_60_3.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     ax_kdj_60_3.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
 
-    ax_kdj_60_3.set_xlabel("换手率：" + turnover_rate + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60_3.set_xlabel("昨日换手率：" + turnover_rate + "% KDJ（60）", fontproperties=myfont)
 
     changdu = len(ts_60)
     if changdu > 200:
