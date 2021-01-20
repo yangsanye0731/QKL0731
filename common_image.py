@@ -1163,6 +1163,15 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     codeName2 = fullName2 + "(" + code2 + ")"
     codeName3 = fullName3 + "(" + code3 + ")"
 
+    df = common.daily_basic(code)
+    # 判断DataFrame是否为空
+    turnover_rate = 0.0
+    if df.empty:
+        print("empty")
+    else:
+        turnover_rate = num.array(df['turnover_rate'])
+    turnover_rate = "%.2f" % turnover_rate
+
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
 
     fig = plt.figure(figsize=(15, 10))
@@ -1235,7 +1244,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
 
-    ax_kdj_60.set_xlabel(codeName + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60.set_xlabel("换手率：" + turnover_rate + "KDJ（60）", fontproperties=myfont)
 
     changdu = len(ts_60)
     if changdu > 200:
@@ -1287,6 +1296,15 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ###################################################################################################################
     ###################################################################################################################
     ###################################################################################################################
+    df = common.daily_basic(code2)
+    # 判断DataFrame是否为空
+    turnover_rate = 0.0
+    if df.empty:
+        print("empty")
+    else:
+        turnover_rate = num.array(df['turnover_rate'])
+    turnover_rate = "%.2f" % turnover_rate
+
     data_30 = tushare.get_k_data(code2, ktype="30")
     ts_30 = data_30[["open", "close", "high", "low", "volume"]]
     closeArray_30 = num.array(data_30['close'])
@@ -1339,7 +1357,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_60_2.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     ax_kdj_60_2.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
 
-    ax_kdj_60_2.set_xlabel(codeName2 + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60_2.set_xlabel("换手率：" + turnover_rate + "KDJ（60）", fontproperties=myfont)
 
     changdu = len(ts_60)
     if changdu > 200:
@@ -1390,6 +1408,15 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ###################################################################################################################
     ###################################################################################################################
     ###################################################################################################################
+    df = common.daily_basic(code3)
+    # 判断DataFrame是否为空
+    turnover_rate = 0.0
+    if df.empty:
+        print("empty")
+    else:
+        turnover_rate = num.array(df['turnover_rate'])
+    turnover_rate = "%.2f" % turnover_rate
+
     data_30 = tushare.get_k_data(code3, ktype="30")
     ts_30 = data_30[["open", "close", "high", "low", "volume"]]
     closeArray_30 = num.array(data_30['close'])
@@ -1441,7 +1468,7 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ax_kdj_60_3.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     ax_kdj_60_3.plot(kdj_60.index, kdj_60["KDJ_J"], label="J")
 
-    ax_kdj_60_3.set_xlabel(codeName3 + "KDJ（60）", fontproperties=myfont)
+    ax_kdj_60_3.set_xlabel("换手率：" + turnover_rate + "KDJ（60）", fontproperties=myfont)
 
     changdu = len(ts_60)
     if changdu > 200:
