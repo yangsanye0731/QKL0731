@@ -6,8 +6,8 @@ import datetime
 import time
 
 
-def send_image_array(code, name, code2, name2, code3, name3, group_name, message='', dingding_group_name="dingding01"):
-    image_path = common_image.plt_image_geGuZhiBiao_array(code, name, code2, name2, code3, name3)
+def send_image_array(code, name, code2, name2, code3, name3, code4, name4, code5, name5, group_name, message='', dingding_group_name="dingding01"):
+    image_path = common_image.plt_image_geGuZhiBiao_array(code, name, code2, name2, code3, name3, code4, name4, code5, name5)
     image_url = "http://47.240.11.144/" + image_path[6:]
     print(image_url)
     common.dingding_markdown_msg_final(dingding_group_name,
@@ -98,8 +98,9 @@ def strategy(type):
             time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             send_image_array(code=config_item[1], name=config_item[2], code2=config_item[3], name2=config_item[4],
                              code3=config_item[5],
-                             name3=config_item[6], group_name=config_item[0],
-                             message=str_message + time_str, dingding_group_name=config_item[9])
+                             name3=config_item[6], code4=config_item[7], name4=config_item[8], code5=config_item[9],
+                             name5=config_item[10], group_name=config_item[0],
+                             message=str_message + time_str, dingding_group_name=config_item[11])
 
             minute_value = datetime.datetime.now().minute
             if config_item[7] == 'multi' and minute_value < int(config_item[8]):

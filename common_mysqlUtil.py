@@ -350,7 +350,7 @@ def select_agu_config():
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `group_name`, `code1`, `name1`, `code2`, `name2`, `code3`, `name3`, `code4`, `name4`, " \
+    sql = "SELECT `group_name`, `code1`, `name1`, `code2`, `name2`, `code3`, `name3`, `code4`, `name4`, `code5`, `name5`, " \
           "`dingding_group_name`, `status`, `index` FROM `superman`.`AGU_Config` WHERE `status` = '1' order by `index` asc"
     print(sql)
     cursor.execute(sql)
