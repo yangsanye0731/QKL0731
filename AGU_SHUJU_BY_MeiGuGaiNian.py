@@ -64,5 +64,5 @@ def strategy(gainian_name):
 # strategy("边缘计算")
 
 # 1月中旬
-strategy("农业种植")
-
+# strategy("农业种植")
+strategy("石油")
