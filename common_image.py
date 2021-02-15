@@ -1155,7 +1155,6 @@ def plt_image_geGuZhiBiao(code, fullName):
     return image_path
 
 
-
 #######################################################################################################################
 ##################################################################################################数组60、日、周线KDJ指标
 def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullName3, code4, fullName4, code5, fullName5):
@@ -1177,6 +1176,13 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="10")
 
     fig = plt.figure(figsize=(20, 16))
+    fig.suptitle("步骤1：上证、创业板等指数30分钟、60分钟KDJ\n"
+                 "步骤二：查看板块主力资金进入大于10%，且处于较低位置\n"
+                 "步骤三：资金板块内分布不集中与个股，较均匀分不到不同股票上\n"
+                 "步骤三：寻找\n"
+                 "步骤四：买入\n"
+                 "步骤五：卖出",
+                 fontproperties=myfont)
     # fig.suptitle(codeName, fontproperties=myfont_title)
     # 1*1 的第一个图表
     ax_kdj_30 = fig.add_subplot(5, 4, 1)
@@ -1232,7 +1238,6 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     kdj_60 = KDJ_zhibiao(data_60, closeArray_60)
     kdj_d = KDJ_zhibiao(data_d, closeArray_d)
     kdj = KDJ_zhibiao(data, closeArray)
-
 
     ax_kdj_30.plot(kdj_30.index, kdj_30["KDJ_D"], label="D")
     ax_kdj_30.plot(kdj_30.index, kdj_30["KDJ_J"], label="J")
@@ -1345,7 +1350,6 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     kdj_60 = KDJ_zhibiao(data_60, closeArray_60)
     kdj_d = KDJ_zhibiao(data_d, closeArray_d)
     kdj = KDJ_zhibiao(data, closeArray)
-
 
     ax_kdj_30_2.plot(kdj_30.index, kdj_30["KDJ_D"], label="D")
     ax_kdj_30_2.plot(kdj_30.index, kdj_30["KDJ_J"], label="J")
@@ -1756,7 +1760,6 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     ###################################################################################################################
     ###################################################################################################################
 
-
     timeStr1 = time.strftime("%Y%m%d", time.localtime())
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + 'geGuZhiBiao'
     if not os.path.exists(path):
@@ -1767,7 +1770,6 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     plt.close()
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
-
 
 # plt_image_geGuZhiBiao("300322", "硕贝德")
 # plt_image_geGuZhiBiao_array("300003", "乐普医疗", "002923", "润都股份", "002755", "奥赛康", "300003", "乐普医疗", "002923", "润都股份")
