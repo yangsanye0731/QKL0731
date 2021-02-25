@@ -1176,15 +1176,15 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="10")
     myfont2 = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="15")
     fig = plt.figure(figsize=(20, 16))
-    plt.title("投资是对人性优劣的奖惩，投资世界改变不了的公司和改变世界的公司\n"
+    plt.title("【投资是对人性优劣的奖惩，投资世界改变不了的公司和改变世界的公司】【首先是量，周线量至少大于2】【投资好公司，趋势中的公司】\n"
                  "步骤一：查看上证、深证、创业板指数30分钟、60分钟KDJ走势; 30分钟快线处于0以下，慢线处于30以下，KDJ快线指标开始反转;\n"
                  "【当天资金情况】【盘中要感受主力资金的动向】\n"
                  "步骤二：查看【短线王】中各个板块【主力资金】进入情况，筛选【主力资金进入大于10%】，且板块价格处于较低位置的板块;\n"
                  "【如果选不出来，说明每个版块的主力资金都是流出的，不适合进入】\n"
                  "步骤三：查看主力资金进入大于10%板块中资金分布情况，筛选均匀分不到不同的龙头股票上【资金集中到单一股票的板块慎选】\n"
                  "步骤四：查看股票30分钟、15分钟内的主力资金进场情况，主力资金达到10%，且主力资金量达到400万以上的股票为优选股票\n"
-                 "步骤五：买入【配合未来事件，提前进行判断】【同一股票不能超30万】\n"
-                 "步骤六：卖出【KDJ第一次反转立即卖出，不管盈亏，卖出】【亏损超过3000元，及时止损】",
+                 "步骤五：买入【配合未来事件，提前进行判断】【资金派发到三只股票上】【同一股票不能超30万】\n"
+                 "步骤六：卖出【30分钟KDJ第一次反转立即卖出，不可分心;不管盈亏，卖出;本件事情优先级最高】【亏损超过3000元，及时止损】",
                  fontproperties=myfont2, color='red', fontweight='bold',pad=20)
     # fig.suptitle(codeName, fontproperties=myfont_title)
     # 1*1 的第一个图表
