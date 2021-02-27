@@ -73,8 +73,8 @@ def strategy(zhouqi, beishu):
 ##############################################################################################################主执行程序
 # count_result_b = strategy('W', 1.5)
 # strategy('D', 3)
-strategy('W', 3.75)
-# strategy('W', 2)
+# strategy('W', 3.75)
+strategy('W', 1.5)
 # strategy('D', 5)
 
 # bp = ByPy()
