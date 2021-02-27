@@ -35,7 +35,7 @@ def strategy(zhouqi, beishu):
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
-        # time.sleep(0.01)
+        time.sleep(0.01)
         count = count + 1
         print(count)
         data_history = ts.get_hist_data(codeItem, ktype=zhouqi)
