@@ -4,6 +4,9 @@ import common_mysqlUtil
 import datalab.s1_yueDuZeShi.yueDuZeShi as ydzs
 import datetime
 import time
+import tushare
+import numpy as num
+import common_zhibiao
 
 
 def send_image_array(code, name, code2, name2, code3, name3, code4, name4, code5, name5, group_name, message='', dingding_group_name="dingding01"):
@@ -105,11 +108,35 @@ def strategy(type):
             minute_value = datetime.datetime.now().minute
             if config_item[7] == 'multi' and minute_value < int(config_item[8]):
                 send_image(code=config_item[1], name=config_item[2], only_qushi_image=False,
-                           message=str_message + time_str, dingding_group_name=config_item[9])
+                           message=str_message + time_str, dingding_group_name=config_item[11])
                 send_image(code=config_item[3], name=config_item[4], only_qushi_image=False,
-                           message=str_message + time_str, dingding_group_name=config_item[9])
+                           message=str_message + time_str, dingding_group_name=config_item[11])
                 send_image(code=config_item[5], name=config_item[6], only_qushi_image=False,
-                           message=str_message + time_str, dingding_group_name=config_item[9])
+                           message=str_message + time_str, dingding_group_name=config_item[11])
+
+        # ene
+        data_config = common_mysqlUtil.select_agu_config(type='2')
+        for config_item in data_config:
+            print(config_item)
+            data = tushare.get_k_data(config_item[1], ktype="W")
+            ts = data[["open", "close", "high", "low", "volume"]]
+            closeArray = num.array(data['close'])
+            doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+            lowArray = num.array(data['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+            percent = common_zhibiao.ENE_zhibiao_line(doubleCloseArray, doubleLowArray)
+            print("============================" + str(percent))
+            ene_qushi=''
+            if percent < 3:
+                 ene_qushi = "【ENE小于中线3%】"
+            if percent < 2:
+                 ene_qushi = "【ENE小于中线2%】"
+            if percent < 1:
+                 ene_qushi = "【ENE小于中线1%】"
+            if ene_qushi.__len__() > 5:
+                send_image(code=config_item[1], name=config_item[2], only_qushi_image=False,
+                           message=ene_qushi + str_message + time_str, dingding_group_name=config_item[11])
 
 
 strategy("TOP")

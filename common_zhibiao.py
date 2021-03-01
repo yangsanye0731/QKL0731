@@ -31,6 +31,27 @@ def ENE_zhibiao(doubleCloseArray):
      else:
          ene_qushi = "%.2f" % ene[-3] +  "_"  + "%.2f" % ene[-2] + "_" + "%.2f" % ene[-1]
      return ene_qushi
+
+'''
+公共功能：ENE指标
+'''
+def ENE_zhibiao_line(doubleCloseArray, lowArray):
+     param_m1 = 11
+     param_m2 = 9
+     param_n = 10
+     sma_n = ta.SMA(doubleCloseArray, param_n)
+     upper = (1 + param_m1 / 100) * sma_n
+     lower = (1 - param_m2 / 100) * sma_n
+     ene = (upper + lower) / 2
+     upper = upper.round(2)
+     ene = ene.round(2)
+     print(ene)
+     lower = lower.round(2)
+     ene_qushi = ""
+
+     percent = (lowArray[-1] - ene[-1])/ene[-1] * 100
+     return percent
+
 '''
 公共功能：KDJ指标
 '''

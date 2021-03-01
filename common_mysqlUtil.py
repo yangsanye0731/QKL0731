@@ -342,16 +342,21 @@ def select_all_code_by_gainian(gainian_name):
     db.close()
     return data
 
-def select_agu_config():
+def select_agu_config(type='1'):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
     # 打开数据库连接
     db = pymysql.connect("localhost", userName, password, "superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
-    # 使用 execute()  方法执行 SQL 查询
-    sql = "SELECT `group_name`, `code1`, `name1`, `code2`, `name2`, `code3`, `name3`, `code4`, `name4`, `code5`, `name5`, " \
+    # 使用 execute()  方法执行 SQL
+    sql = ''
+    if type == '1':
+        sql = "SELECT `group_name`, `code1`, `name1`, `code2`, `name2`, `code3`, `name3`, `code4`, `name4`, `code5`, `name5`, " \
           "`dingding_group_name`, `status`, `index` FROM `superman`.`AGU_Config` WHERE `status` = '1' order by `index` asc"
+    if type == '2':
+        sql = "SELECT `group_name`, `code1`, `name1`, `code2`, `name2`, `code3`, `name3`, `code4`, `name4`, `code5`, `name5`, " \
+              "`dingding_group_name`, `status`, `index` FROM `superman`.`AGU_Config` WHERE `status` = '1' or `status` = '2' order by `index` asc"
     print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
