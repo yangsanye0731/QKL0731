@@ -135,7 +135,7 @@ def strategy(type):
             if percent < 1:
                  ene_qushi = "【ENE小于中线1%】"
             if ene_qushi.__len__() > 5:
-                send_image(code=config_item[1], name=config_item[2], only_qushi_image=False,
+                send_image(code=config_item[1], name=config_item[2], only_qushi_image=True,
                            message=ene_qushi + str_message + time_str, dingding_group_name=config_item[11])
 
 
