@@ -129,13 +129,73 @@ def strategy(type):
             print("============================" + str(percent))
             ene_qushi=''
             if percent < 3:
-                 ene_qushi = "【ENE小于中线3%】"
+                 ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + "】"
             if percent < 2:
-                 ene_qushi = "【ENE小于中线2%】"
+                 ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + "】"
             if percent < 1:
-                 ene_qushi = "【ENE小于中线1%】"
+                 ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + "】"
             if ene_qushi.__len__() > 5:
                 send_image(code=config_item[1], name=config_item[2], only_qushi_image=True,
+                           message=ene_qushi + str_message + time_str, dingding_group_name=config_item[11])
+
+            data = tushare.get_k_data(config_item[3], ktype="W")
+            ts = data[["open", "close", "high", "low", "volume"]]
+            closeArray = num.array(data['close'])
+            doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+            lowArray = num.array(data['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+            percent = common_zhibiao.ENE_zhibiao_line(doubleCloseArray, doubleLowArray)
+            print("============================" + str(percent))
+            ene_qushi = ''
+            if percent < 3:
+                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + "】"
+            if percent < 2:
+                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + "】"
+            if percent < 1:
+                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + "】"
+            if ene_qushi.__len__() > 5:
+                send_image(code=config_item[3], name=config_item[4], only_qushi_image=True,
+                           message=ene_qushi + str_message + time_str, dingding_group_name=config_item[11])
+
+            data = tushare.get_k_data(config_item[5], ktype="W")
+            ts = data[["open", "close", "high", "low", "volume"]]
+            closeArray = num.array(data['close'])
+            doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+            lowArray = num.array(data['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+            percent = common_zhibiao.ENE_zhibiao_line(doubleCloseArray, doubleLowArray)
+            print("============================" + str(percent))
+            ene_qushi = ''
+            if percent < 3:
+                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + "】"
+            if percent < 2:
+                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + "】"
+            if percent < 1:
+                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + "】"
+            if ene_qushi.__len__() > 5:
+                send_image(code=config_item[5], name=config_item[6], only_qushi_image=True,
+                           message=ene_qushi + str_message + time_str, dingding_group_name=config_item[11])
+
+            data = tushare.get_k_data(config_item[7], ktype="W")
+            ts = data[["open", "close", "high", "low", "volume"]]
+            closeArray = num.array(data['close'])
+            doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+            lowArray = num.array(data['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+            percent = common_zhibiao.ENE_zhibiao_line(doubleCloseArray, doubleLowArray)
+            print("============================" + str(percent))
+            ene_qushi = ''
+            if percent < 3:
+                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + "】"
+            if percent < 2:
+                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + "】"
+            if -2 < percent < 1:
+                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + "】"
+            if ene_qushi.__len__() > 5:
+                send_image(code=config_item[7], name=config_item[8], only_qushi_image=True,
                            message=ene_qushi + str_message + time_str, dingding_group_name=config_item[11])
 
 
