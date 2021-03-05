@@ -74,7 +74,7 @@ def strategy(zhouqi, beishu):
                 ene = ene.round(2)
                 # lower = lower.round(2)
 
-                if ene[-1] > ene[-2]:
+                if ene[-1] > ene[-2] and ene[-3] > ene[-2]:
                     fo2.write(codeItem + "\n")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
