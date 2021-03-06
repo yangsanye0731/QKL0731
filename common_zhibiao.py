@@ -49,7 +49,7 @@ def ENE_zhibiao_line(doubleCloseArray, lowArray):
      lower = lower.round(2)
      ene_qushi = ""
 
-     percent = (lowArray[-1] - ene[-1])/ene[-1] * 100
+     percent = (doubleCloseArray[-1] - ene[-1])/ene[-1] * 100
      return percent, "%.2f" % ene[-1]
 
 '''
