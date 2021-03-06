@@ -50,7 +50,7 @@ def ENE_zhibiao_line(doubleCloseArray, lowArray):
      ene_qushi = ""
 
      percent = (lowArray[-1] - ene[-1])/ene[-1] * 100
-     return percent
+     return percent, "%.2f" % ene[-1]
 
 '''
 公共功能：KDJ指标
