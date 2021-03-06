@@ -185,15 +185,15 @@ def strategy(type):
 
             lowArray = num.array(data['low'])
             doubleLowArray = num.asarray(lowArray, dtype='double')
-            percent = common_zhibiao.ENE_zhibiao_line(doubleCloseArray, doubleLowArray)
+            percent,ene = common_zhibiao.ENE_zhibiao_line(doubleCloseArray, doubleLowArray)
             print("============================" + str(percent))
             ene_qushi = ''
             if 2 <= percent < 3:
-                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + "】"
+                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + ", " + ene + "】"
             if 1 <= percent < 2:
-                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + "】"
+                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + ", " + ene + "】"
             if -2 < percent < 1:
-                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + "】"
+                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + ", " + ene + "】"
 
             if ene_qushi.__len__() > 5:
                 send_image(code=config_item[7], name=config_item[8], only_qushi_image=True,
