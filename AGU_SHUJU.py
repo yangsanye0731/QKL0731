@@ -189,11 +189,11 @@ def strategy(type):
             print("============================" + str(percent))
             ene_qushi = ''
             if 2 <= percent < 3:
-                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + ", " + ene + "】"
+                ene_qushi = "【ENE小于中线3%_" + "%.2f" % percent + "_" + ene + "】"
             if 1 <= percent < 2:
-                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + ", " + ene + "】"
+                ene_qushi = "【ENE小于中线2%_" + "%.2f" % percent + "_" + ene + "】"
             if -2 < percent < 1:
-                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + ", " + ene + "】"
+                ene_qushi = "【ENE小于中线1%_" + "%.2f" % percent + "_" + ene + "】"
 
             if ene_qushi.__len__() > 5:
                 send_image(code=config_item[7], name=config_item[8], only_qushi_image=True,
