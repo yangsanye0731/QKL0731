@@ -74,7 +74,7 @@ def strategy(zhouqi, beishu):
 # count_result_b = strategy('W', 1.5)
 # strategy('D', 3)
 # strategy('W', 3.75)
-strategy('M', 2)
+strategy('M', 1.5)
 # strategy('D', 5)
 
 # bp = ByPy()
