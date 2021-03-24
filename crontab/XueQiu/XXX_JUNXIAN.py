@@ -8,6 +8,7 @@ import pandas as pd
 import talib as ta
 from bypy import ByPy
 from pyppeteer import launch
+import random
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -94,7 +95,7 @@ async def index(page, cookie1, url, codeName):
 #############################################################################################################数据爬虫入口
 async def main(url, codeName):
     print(datetime.datetime.now())
-    # await asyncio.sleep(10 + random.randint(1, 10))
+    await asyncio.sleep(30 + random.randint(1, 10))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
