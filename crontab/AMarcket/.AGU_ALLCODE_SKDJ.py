@@ -3,6 +3,7 @@ import talib as ta
 import tushare as ts
 import time
 from bypy import ByPy
+import common_zhibiao
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -26,16 +27,18 @@ def strategy(zhouqi):
     all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
-
+    time_str = time.strftime("%Y%m%d", time.localtime())
+    fo = open("SKDJ_" + zhouqi + "_" + time_str + ".txt", "w")
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
         time.sleep(0.1)
         count = count + 1
         print(count)
-        data_history = ts.get_k_data(codeItem, ktype=zhouqi)
 
         try:
+            data_history = ts.get_hist_data(codeItem, ktype=zhouqi)
+            data_history = data_history.iloc[::-1]
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
 
@@ -45,18 +48,26 @@ def strategy(zhouqi):
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
-            # 均线
-            ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
-            ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
+            k0,d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
 
-            # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
-            if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
-                    and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "M",
-                                                     "【03全部代码】跨越5月线",
-                                                     "【03全部代码】跨越5月线")
-                count_b = count_b + 1
+            if k0[-1] < 30 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+                print(codeItem + "========================================")
+                print(k0[-1])
+                print(d0[-1])
+                fo.write(codeItem + "\n")
+
+            # # 均线
+            # ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+            # ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
+            #
+            # # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
+            # if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
+            #         and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
+            #     common_image.plt_image_tongyichutu_2(codeItem,
+            #                                          "M",
+            #                                          "【03全部代码】跨越5月线",
+            #                                          "【03全部代码】跨越5月线")
+            #     count_b = count_b + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return count_b

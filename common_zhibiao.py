@@ -62,6 +62,7 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
      high_list = data_history.high.rolling(9).max()
      high_list.fillna(value=data_history.high.expanding().max(), inplace=True)
      rsv = (doubleCloseArray - low_list) / (high_list - low_list) * 100
+     print(rsv)
      stock_data['KDJ_K'] = pd.DataFrame.ewm(rsv, com=2).mean()
      stock_data['KDJ_D'] = pd.DataFrame.ewm(stock_data['KDJ_K'], com=2).mean()
      stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']
@@ -71,6 +72,42 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
      KDJ_D = "%.2f" % dddd.KDJ_D[len(dddd) - 1]
      KDJ_J = "%.2f" % dddd.KDJ_J[len(dddd) - 1]
      return KDJ_K, KDJ_D, KDJ_J, KDJ_J_title
+
+
+def SKDJ_zhibiao(data_history, doubleCloseArray):
+     # RSV := (CLOSE - LLV(LOW, N)) / (HHV(HIGH, N) - LLV(LOW, N)) * 100;
+     # K: SMA(RSV, M1, 1);
+     # D: SMA(K, M2, 1);
+     # J: 3 * K - 2 * D;
+
+     stock_data = {}
+     # SKDJ_LOWV := LLV(LOW, SKDJN);
+     low_list = data_history.low.rolling(9).min()
+     low_list.fillna(value=data_history.low.expanding().min(), inplace=True)
+
+     # SKDJ_HIGHV := HHV(HIGH, SKDJN);
+     high_list = data_history.high.rolling(9).max()
+     high_list.fillna(value=data_history.high.expanding().max(), inplace=True)
+
+     # SKDJN := 9;
+     # SKDJM := 3;
+     # SKDJ_LOWV := LLV(LOW, SKDJN);
+     # SKDJ_HIGHV := HHV(HIGH, SKDJN);
+     # SKDJ_RSV := EMA((CLOSE - SKDJ_LOWV) / (SKDJ_HIGHV - SKDJ_LOWV) * 100, SKDJM);
+     rsv = (doubleCloseArray - low_list) / (high_list - low_list) * 100
+     skdj_rsv = ta.EMA(rsv, timeperiod=3)
+     # #K0: EMA(SKDJ_RSV, SKDJM), COLORWHITE;
+     # #D0: MA(K0, SKDJM), COLORYELLOW;
+     k0 = ta.EMA(skdj_rsv, timeperiod=3)
+     d0 = ta.EMA(k0, timeperiod=3)
+
+     # print("========================================================K")
+     # print(k0)
+     # print("========================================================D")
+     # print(d0)
+
+     return k0,d0
+
 
 
 '''
@@ -289,3 +326,37 @@ def zhibiao(code, type):
 # print(BULL_title)
 # print(BULL_middleband)
 # print(MA20_titile)
+
+
+# data_history = ts.get_hist_data('300322', ktype='W')
+# data_history = data_history.iloc[::-1]
+#
+# try:
+#      closeArray = num.array(data_history['close'])
+#      doubleCloseArray = num.asarray(closeArray, dtype='double')
+#
+#      highArray = num.array(data_history['high'])
+#      doubleHighArray = num.asarray(highArray, dtype='double')
+#
+#      openArray = num.array(data_history['open'])
+#      doubleOpenArray = num.asarray(openArray, dtype='double')
+#
+#      turnoverArray = num.array(data_history['turnover'])
+#      doubleTurnoverArray = num.asarray(turnoverArray, dtype='double')
+#
+#
+#
+#      k0,d0 = SKDJ_zhibiao(data_history, doubleCloseArray)
+#      print('300322' + "======================================================================")
+#      print('300322' + "======================================================================")
+#      print('300322' + "======================================================================")
+#      print(k0[-1])
+#      print(k0[-2])
+#      print(d0[-1])
+#      print(d0[-2])
+#
+#      # print('300322' + "======================================================================")
+#      # KDJ_zhibiao(data_history, doubleCloseArray)
+#
+# except (IOError, TypeError, NameError, IndexError, Exception) as e:
+#   print(e)
