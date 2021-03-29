@@ -51,7 +51,7 @@ def strategy(zhouqi, endstr):
             # print(data_history)
             k0,d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
 
-            if k0[-1] < 30 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+            if k0[-1] < 40 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
                 print(codeItem + "========================================")
                 print(k0[-1])
                 print(d0[-1])
@@ -78,10 +78,10 @@ def strategy(zhouqi, endstr):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
-count_result_b = strategy('D', '2021-03-24')
-bp = ByPy()
-timeStr1 = time.strftime("%Y%m%d", time.localtime())
-bp.mkdir(remotepath=timeStr1)
-bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【03全部代码】跨越5月线,主力持仓、换手率突增执行完成',
-                               '触发【03全部代码】跨越5月线,主力持仓、换手率突增执行完成')
+count_result_b = strategy('D', '2021-03-29')
+# bp = ByPy()
+# timeStr1 = time.strftime("%Y%m%d", time.localtime())
+# bp.mkdir(remotepath=timeStr1)
+# bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
+common.dingding_markdown_msg_2('触发【03全部代码】SKDJ金叉',
+                               '触发【03全部代码】SKDJ金叉')
