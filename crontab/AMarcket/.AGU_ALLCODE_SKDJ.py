@@ -83,5 +83,4 @@ count_result_b = strategy('D', '2021-03-29')
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
 # bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【03全部代码】SKDJ金叉',
-                               '触发【03全部代码】SKDJ金叉')
+common.dingding_markdown_msg_2('触发【03全部代码】SKDJ金叉', '触发【03全部代码】SKDJ金叉')
