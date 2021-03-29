@@ -17,7 +17,7 @@ import common_image
 
 #######################################################################################################################
 ###########################################################################################################跨域5月线策略
-def strategy(zhouqi):
+def strategy(zhouqi, endstr):
     # 局部变量初始化
     count = 0
     count_b = 0
@@ -28,7 +28,7 @@ def strategy(zhouqi):
     all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
     time_str = time.strftime("%Y%m%d", time.localtime())
-    fo = open("SKDJ_" + zhouqi + "_" + time_str + ".txt", "w")
+    fo = open("SKDJ_" + zhouqi + "_" + endstr + ".txt", "w")
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
@@ -37,7 +37,7 @@ def strategy(zhouqi):
         print(count)
 
         try:
-            data_history = ts.get_hist_data(codeItem, ktype=zhouqi)
+            data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
             data_history = data_history.iloc[::-1]
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -48,13 +48,17 @@ def strategy(zhouqi):
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
+            # print(data_history)
             k0,d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
 
             if k0[-1] < 30 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
                 print(codeItem + "========================================")
                 print(k0[-1])
                 print(d0[-1])
-                fo.write(codeItem + "\n")
+                MA_20 = ta.SMA(doubleCloseArray, timeperiod=20)
+                if MA_20[-1] > MA_20[-2]:
+                    fo.write(codeItem + "\n")
+
 
             # # 均线
             # ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
@@ -74,7 +78,7 @@ def strategy(zhouqi):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
-count_result_b = strategy('M')
+count_result_b = strategy('D', '2021-03-24')
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
 bp.mkdir(remotepath=timeStr1)
