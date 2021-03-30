@@ -33,7 +33,7 @@ def strategy(zhouqi, endstr):
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
-        time.sleep(0.1)
+        time.sleep(0.01)
         count = count + 1
         print(count)
 
@@ -52,7 +52,7 @@ def strategy(zhouqi, endstr):
             # print(data_history)
             k0,d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
 
-            if k0[-1] < 40 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+            if k0[-1] < 55 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
                 print(codeItem + "========================================")
                 print(k0[-1])
                 print(d0[-1])
