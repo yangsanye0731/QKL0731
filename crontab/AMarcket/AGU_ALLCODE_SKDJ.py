@@ -79,7 +79,8 @@ def strategy(zhouqi, endstr):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
-count_result_b = strategy('D', '2021-03-29')
+time_str1 = time.strftime("%Y-%m-%d", time.localtime())
+count_result_b = strategy('D', time_str1)
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
