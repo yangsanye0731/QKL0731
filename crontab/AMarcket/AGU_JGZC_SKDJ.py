@@ -85,6 +85,7 @@ def strategy(zhouqi, endstr):
 ##############################################################################################################主执行程序
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
 count_result_b = strategy('D', time_str1)
+count_result_b = strategy('W', time_str1)
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
