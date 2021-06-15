@@ -28,8 +28,7 @@ def exe(one_column_data, zhouqi, endstr, fo):
     print(one_column_data[2].value)
     codeItem = '{:0>6d}'.format(one_column_data[1].value)
     time.sleep(0.01)
-    # count = count + 1
-    # print(count)
+    print("==========================================================" + codeItem)
 
     try:
         data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
@@ -61,6 +60,11 @@ def exe(one_column_data, zhouqi, endstr, fo):
 def strategy(zhouqi, endstr):
     # 局部变量初始化
     fo = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo1 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo2 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo3 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo4 = open("SKDJ_社保等新进" + zhouqi + "_" + endstr + ".txt", "w")
+
     wb = openpyxl.load_workbook('JGZC.xlsx')
     # 获取所有工作表名
     names = wb.sheetnames
@@ -69,22 +73,19 @@ def strategy(zhouqi, endstr):
     sheet1 = wb[names[1]]
     sheet2 = wb[names[2]]
     sheet3 = wb[names[3]]
+    sheet4 = wb[names[4]]
 
-    for one_column_data in sheet.iter_rows():
-        exe(one_column_data,zhouqi,endstr, fo)
-    fo.close()
-
-    for one_column_data in sheet1.iter_rows():
-        exe(one_column_data,zhouqi,endstr, fo)
-    fo.close()
-
-    for one_column_data in sheet2.iter_rows():
-        exe(one_column_data,zhouqi,endstr, fo)
-    fo.close()
-
-    for one_column_data in sheet3.iter_rows():
-        exe(one_column_data,zhouqi,endstr, fo)
-    fo.close()
+    # for one_column_data in sheet.iter_rows():
+    #     exe(one_column_data,zhouqi, endstr, fo)
+    # for one_column_data in sheet1.iter_rows():
+    #     exe(one_column_data,zhouqi, endstr, fo)
+    # for one_column_data in sheet2.iter_rows():
+    #     exe(one_column_data,zhouqi, endstr, fo)
+    # for one_column_data in sheet3.iter_rows():
+    #     exe(one_column_data,zhouqi, endstr, fo)
+    for one_column_data in sheet4.iter_rows():
+        exe(one_column_data, zhouqi, endstr, fo4)
+    fo4.close()
 
     return count_b
 
