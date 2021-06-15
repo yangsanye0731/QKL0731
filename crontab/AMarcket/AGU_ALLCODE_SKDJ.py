@@ -33,7 +33,7 @@ def strategy(zhouqi, endstr):
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
-        time.sleep(0.01)
+        time.sleep(0.1)
         count = count + 1
         print(count)
 
@@ -62,7 +62,7 @@ def strategy(zhouqi, endstr):
 
 
             # # 均线
-            # ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+            # ma5 = ta.SMA(doubleCloseArray, timeperiod=5)[图片]
             # ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
             #
             # # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
@@ -81,6 +81,8 @@ def strategy(zhouqi, endstr):
 ##############################################################################################################主执行程序
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
 count_result_b = strategy('D', time_str1)
+count_result_b = strategy('W', time_str1)
+count_result_b = strategy('M', time_str1)
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
