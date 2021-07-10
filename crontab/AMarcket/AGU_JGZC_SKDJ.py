@@ -45,13 +45,25 @@ def exe(one_column_data, zhouqi, endstr, fo):
         # print(data_history)
         k0, d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
 
-        if k0[-1] < 55 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+        if k0[-1]>k0[-2] and k0[-3]>k0[-2]:
             print(codeItem + "========================================")
             print(k0[-1])
             print(d0[-1])
-            MA_20 = ta.SMA(doubleCloseArray, timeperiod=20)
-            if MA_20[-1] > MA_20[-2]:
-                fo.write(codeItem + "\n")
+            fo.write(codeItem + "==" + one_column_data[2].value + "==" + one_column_data[4].value + "\n")
+            common.dingding_markdown_msg_2('触发【高瓴资本、社保基金机构新进】【'+ zhouqi +'】级别SKDJ翻转'
+                                           + codeItem + "==" + one_column_data[2].value + "=="
+                                           + one_column_data[4].value,
+                                           '触发【高瓴资本、社保基金机构新进】【'+ zhouqi +'】级别SKDJ翻转'
+                                           + codeItem + "==" + one_column_data[2].value + "=="
+                                           + one_column_data[4].value)
+            time.sleep(5)
+        # if k0[-1] < 55 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+        #     print(codeItem + "========================================")
+        #     print(k0[-1])
+        #     print(d0[-1])
+        #     MA_20 = ta.SMA(doubleCloseArray, timeperiod=20)
+        #     if MA_20[-1] > MA_20[-2]:
+        #         fo.write(codeItem + "\n")
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
         print(e)
 
@@ -63,7 +75,7 @@ def strategy(zhouqi, endstr):
     fo1 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
     fo2 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
     fo3 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
-    fo4 = open("SKDJ_社保等新进" + zhouqi + "_" + endstr + ".txt", "w")
+    fo4 = open("SKDJ_社保等新进" + zhouqi + "_" + endstr + ".txt", "w", encoding='UTF-8')
 
     wb = openpyxl.load_workbook('JGZC.xlsx')
     # 获取所有工作表名
@@ -99,4 +111,4 @@ count_result_b = strategy('W', time_str1)
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
 # bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-common.dingding_markdown_msg_2('触发【03全部代码】SKDJ金叉', '触发【03全部代码】SKDJ金叉')
+common.dingding_markdown_msg_2('触发【高瓴资本、社保基金机构新进】SKDJ金叉', '触发【高瓴资本、社保基金机构新进】SKDJ金叉')
