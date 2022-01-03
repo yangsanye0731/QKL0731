@@ -62,7 +62,7 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
      high_list = data_history.high.rolling(9).max()
      high_list.fillna(value=data_history.high.expanding().max(), inplace=True)
      rsv = (doubleCloseArray - low_list) / (high_list - low_list) * 100
-     print(rsv)
+     # print(rsv)
      stock_data['KDJ_K'] = pd.DataFrame.ewm(rsv, com=2).mean()
      stock_data['KDJ_D'] = pd.DataFrame.ewm(stock_data['KDJ_K'], com=2).mean()
      stock_data['KDJ_J'] = 3 * stock_data['KDJ_K'] - 2 * stock_data['KDJ_D']

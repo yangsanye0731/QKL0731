@@ -100,18 +100,18 @@ def plot_mean_ret(code):
         print(v)
         print(v[0])
 
-    # plt.bar(attr, v, fc='r')
+    plt.bar(attr, v, fc='r')
 
-    # timeStr1 = time.strftime("%Y%m%d", time.localtime())
-    # path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + '月度择时策略'
-    # if not os.path.exists(path):
-    #     os.makedirs(path)
-    #
-    # suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
-    # plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
-    # plt.close()
-    # image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
-    # return image_path
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + '月度择时策略'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
+    plt.close()
+    image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
+    return image_path
 
 
 jsonDic = {}
@@ -127,13 +127,14 @@ def strategy():
     pro = ts.pro_api()
     all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
     # all_code = ts.get_stock_basics()
-    all_code = all_code[1:-1].ts_code
+    all_code = all_code[1:2].ts_code
     all_code_index_x = num.array(all_code)
 
     try:
         # 遍历
         for codeItem in all_code_index_x:
             codeItem = codeItem[0:6]
+            codeItem = '300294'
             print(codeItem)
             plot_mean_ret(codeItem)
 

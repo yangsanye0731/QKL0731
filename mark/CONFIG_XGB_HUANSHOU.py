@@ -10,12 +10,12 @@ from pyppeteer import launch
 import common_mysqlUtil
 
 async def save_cookie(cookie):
-    with open("cookie.json", 'w+', encoding="utf-8") as file:
+    with open("../basic/cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
 
 # 读取cookie
 async def load_cookie():
-    with open("cookie.json", 'r', encoding="utf-8") as file:
+    with open("../basic/cookie.json", 'r', encoding="utf-8") as file:
         cookie = json.load(file)
     return cookie
 

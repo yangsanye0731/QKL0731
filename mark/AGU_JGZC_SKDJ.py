@@ -23,7 +23,7 @@ time_str = time.strftime("%Y%m%d", time.localtime())
 
 #######################################################################################################################
 ####################################################################################################################EXE
-def exe(one_column_data, zhouqi, endstr, fo):
+def exe(one_column_data, zhouqi, endstr, fo, jianjie):
     print('{:0>6d}'.format(one_column_data[1].value))
     print(one_column_data[2].value)
     codeItem = '{:0>6d}'.format(one_column_data[1].value)
@@ -49,11 +49,13 @@ def exe(one_column_data, zhouqi, endstr, fo):
             print(codeItem + "========================================")
             print(k0[-1])
             print(d0[-1])
-            fo.write(codeItem + "==" + one_column_data[2].value + "==" + one_column_data[4].value + "\n")
-            common.dingding_markdown_msg_2('触发【高瓴资本、社保基金机构新进】【'+ zhouqi +'】级别SKDJ翻转'
+            fo.write(codeItem + "==" + '触发' + jianjie + '】【'+ zhouqi +'】级别SKDJ翻转'
+                                           + codeItem + "==" + one_column_data[2].value + "=="
+                                           + one_column_data[4].value + "\n")
+            common.dingding_markdown_msg_2('触发【' + jianjie + '】【'+ zhouqi +'】级别SKDJ翻转'
                                            + codeItem + "==" + one_column_data[2].value + "=="
                                            + one_column_data[4].value,
-                                           '触发【高瓴资本、社保基金机构新进】【'+ zhouqi +'】级别SKDJ翻转'
+                                           '触发【' + jianjie + '】【'+ zhouqi +'】级别SKDJ翻转'
                                            + codeItem + "==" + one_column_data[2].value + "=="
                                            + one_column_data[4].value)
             time.sleep(5)
@@ -73,9 +75,9 @@ def strategy(zhouqi, endstr):
     # 局部变量初始化
     fo = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
     fo1 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
-    fo2 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo2 = open("C:\\Users\\yangj\\Desktop\\" + "SKDJ_基金重仓_" + zhouqi + "_" + endstr + ".txt", "w")
     fo3 = open("SKDJ_JGZC_" + zhouqi + "_" + endstr + ".txt", "w")
-    fo4 = open("SKDJ_社保等新进" + zhouqi + "_" + endstr + ".txt", "w", encoding='UTF-8')
+    fo4 = open("C:\\Users\\yangj\\Desktop\\" + "SKDJ_社保等新进" + zhouqi + "_" + endstr + ".txt", "w", encoding='UTF-8')
 
     wb = openpyxl.load_workbook('JGZC.xlsx')
     # 获取所有工作表名
@@ -91,12 +93,13 @@ def strategy(zhouqi, endstr):
     #     exe(one_column_data,zhouqi, endstr, fo)
     # for one_column_data in sheet1.iter_rows():
     #     exe(one_column_data,zhouqi, endstr, fo)
-    # for one_column_data in sheet2.iter_rows():
-    #     exe(one_column_data,zhouqi, endstr, fo)
+    for one_column_data in sheet2.iter_rows():
+        exe(one_column_data, zhouqi, endstr, fo2, "基金重仓")
+    fo2.close()
     # for one_column_data in sheet3.iter_rows():
     #     exe(one_column_data,zhouqi, endstr, fo)
     for one_column_data in sheet4.iter_rows():
-        exe(one_column_data, zhouqi, endstr, fo4)
+        exe(one_column_data, zhouqi, endstr, fo4, "高瓴资本、社保基金机构新进")
     fo4.close()
 
     return count_b
