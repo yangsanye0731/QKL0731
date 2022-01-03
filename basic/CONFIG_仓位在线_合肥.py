@@ -117,6 +117,6 @@ async def main(url, keyword, zhouqi):
 #######################################################################################################################
 # ###############################################################################################################仓位在线
 asyncio.get_event_loop().run_until_complete(
-    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%B8%DF%D2%E3%D7%CA%B2%FA", "高毅", "M"))
+    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%BA%CF%B7%CA", "合肥", "M"))
 # asyncio.get_event_loop().run_until_complete(
-#     main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%B8%DF%D2%E3%D7%CA%B2%FA", "高毅", "W"))
+#     main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%BA%CF%B7%CA", "合肥", "W"))

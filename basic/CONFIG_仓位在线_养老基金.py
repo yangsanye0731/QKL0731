@@ -1,7 +1,7 @@
 import asyncio
 import os
 #######################################################################################################################
-################################################################################################配置程序应用所需要环境PATH
+# ###############################################################################################配置程序应用所需要环境PATH
 import sys
 import time
 
@@ -19,8 +19,8 @@ import common_image
 
 
 #######################################################################################################################
-#############################################################################请求选股宝股票页面，获取其对应的概念并更新数据库
-async def main(url, keyword):
+# ########################################################################################################请求仓位在线页面
+async def main(url, keyword, zhouqi):
     js1 = '''() =>{
               Object.defineProperties(navigator,{
               webdriver:{
@@ -77,13 +77,13 @@ async def main(url, keyword):
             continue
     await browser.close()
 
-    fo = open("仓位在线Base_" + keyword + "_" + time_str + ".txt", "w", encoding='UTF-8')
-    fo2 = open("仓位在线_" + keyword + "_" + time_str + ".txt", "w", encoding='UTF-8')
+    fo = open("仓位在线Base_" + keyword + "_" + zhouqi + "_" + time_str + ".txt", "w", encoding='UTF-8')
+    fo2 = open("仓位在线_" + keyword + "_" + zhouqi + "_" + time_str + ".txt", "w", encoding='UTF-8')
     print(list.__len__())
     for itemXunHuan in list:
         codeItem = itemXunHuan.get('guPiaoDaiMa')
         try:
-            data_history = ts.get_hist_data(codeItem, ktype='M')
+            data_history = ts.get_hist_data(codeItem, ktype=zhouqi)
             data_history = data_history.iloc[::-1]
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -97,7 +97,6 @@ async def main(url, keyword):
             # print(data_history)
             KDJ_K, KDJ_D, KDJ_J, KDJ_J_title = common_zhibiao.KDJ_zhibiao(data_history, doubleCloseArray)
 
-            print(KDJ_J)
             if float(KDJ_J) < 0:
                 fo2.write(codeItem + "\n")
                 print(codeItem + "========================================")
@@ -106,15 +105,18 @@ async def main(url, keyword):
                 print(KDJ_J)
                 fo.write(codeItem + "__" + itemXunHuan.get('gengXinRiQi') + "__"
                          + itemXunHuan.get('guDongMingCheng') + "__" + itemXunHuan.get('guPiaoMingCheng') + "\n")
+
                 common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "M",
-                                                     "【" + keyword + "】月KDJ小于0",
-                                                     "【" + keyword + "】月KDJ小于0")
+                                                     zhouqi,
+                                                     "【" + keyword + "】_" + zhouqi + "_KDJ小于0",
+                                                     "【" + keyword + "】_" + zhouqi + "_KDJ小于0")
         except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
             print(e)
 
 
 #######################################################################################################################
-##########################################################################################################遍历A股所有股票
+# ###############################################################################################################仓位在线
+# asyncio.get_event_loop().run_until_complete(
+#     main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%BB%F9%B1%BE%D1%F8%C0%CF%B1%A3%CF%D5%BB%F9%BD%F0", "养老", "M"))
 asyncio.get_event_loop().run_until_complete(
-    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%BB%F9%B1%BE%D1%F8%C0%CF%B1%A3%CF%D5%BB%F9%BD%F0", "养老"))
+    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%BB%F9%B1%BE%D1%F8%C0%CF%B1%A3%CF%D5%BB%F9%BD%F0", "养老", "W"))
