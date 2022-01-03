@@ -33,14 +33,14 @@ matplotlib.use('Agg')
 #######################################################################################################################
 ##############################################################################################################保存COOKIE
 async def save_cookie(cookie):
-    with open("cookie.json", 'w+', encoding="utf-8") as file:
+    with open("../crontab/XueQiu/cookie.json", 'w+', encoding="utf-8") as file:
         json.dump(cookie, file, ensure_ascii=False)
 
 
 #######################################################################################################################
 ##############################################################################################################读取COOKIE
 async def load_cookie():
-    with open("cookie.json", 'r', encoding="utf-8") as file:
+    with open("../crontab/XueQiu/cookie.json", 'r', encoding="utf-8") as file:
         cookie = json.load(file)
     return cookie
 
