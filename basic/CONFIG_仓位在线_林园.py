@@ -52,8 +52,8 @@ async def main(url, keyword):
             for item_level2 in elements_level2_title:
                 str = await (await item_level2.getProperty("textContent")).jsonValue()
                 if str.__len__() == 6 and (str.startswith('000') or str.startswith('002') or str.startswith('300')
-                                            or str.startswith('688') or str.startswith('600') or str.startswith('601')
-                                            or str.startswith('602') or str.startswith('603')):
+                                           or str.startswith('688') or str.startswith('600') or str.startswith('601')
+                                           or str.startswith('602') or str.startswith('603')):
                     # print("=====================股票代码：" + str)
                     item['guPiaoDaiMa'] = str
                 if str.__contains__("2021-") or str.__contains__("2020-"):
@@ -112,6 +112,7 @@ async def main(url, keyword):
                                                      "【" + keyword + "】月KDJ小于0")
         except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
             print(e)
+
 
 #######################################################################################################################
 ##########################################################################################################遍历A股所有股票

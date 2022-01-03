@@ -4,7 +4,6 @@ import os
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import time
-import talib as ta
 
 import numpy as num
 import tushare as ts
