@@ -1,23 +1,18 @@
-import numpy as num
-import talib as ta
-import tushare as ts
-import time
-from bypy import ByPy
-
-
+import os
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
 import sys
-import os
+import time
+
+import numpy as num
+import tushare as ts
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
 import common
-import common_image
 import common_zhibiao
 
-#######################################################################################################################
-###########################################################################################################跨域5月线策略
 def strategy(zhouqi, endstr):
     # 局部变量初始化
     count = 0
@@ -29,7 +24,7 @@ def strategy(zhouqi, endstr):
     all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
     time_str = time.strftime("%Y%m%d", time.localtime())
-    fo = open("SKDJ_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo = open("C:\\Users\\yangj\\Desktop\\" +  "KDJ_" + zhouqi + "_" + endstr + ".txt", "w")
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
@@ -50,15 +45,15 @@ def strategy(zhouqi, endstr):
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
             # print(data_history)
-            k0,d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
+            KDJ_K, KDJ_D, KDJ_J, KDJ_J_title= common_zhibiao.KDJ_zhibiao(data_history, doubleCloseArray)
 
-            if k0[-1] < 55 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+            print(KDJ_J)
+            if float(KDJ_J) < 0 :
                 print(codeItem + "========================================")
-                print(k0[-1])
-                print(d0[-1])
-                MA_20 = ta.SMA(doubleCloseArray, timeperiod=20)
-                if MA_20[-1] > MA_20[-2]:
-                    fo.write(codeItem + "\n")
+                print(KDJ_K)
+                print(KDJ_D)
+                print(KDJ_J)
+                fo.write(codeItem + "\n")
 
 
             # # 均线
@@ -80,9 +75,9 @@ def strategy(zhouqi, endstr):
 #######################################################################################################################
 ##############################################################################################################主执行程序
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
-count_result_b = strategy('D', time_str1)
-count_result_b = strategy('W', time_str1)
-count_result_b = strategy('M', time_str1)
+# count_result_b = strategy('D', time_str1)
+# count_result_b = strategy('W', time_str1)
+count_result_b = strategy('M', "2021-10-29")
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
