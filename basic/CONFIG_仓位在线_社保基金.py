@@ -11,6 +11,7 @@ from pyppeteer import launch
 
 import common_image
 import common_zhibiao
+import talib as ta
 
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
@@ -18,8 +19,8 @@ sys.path.append(rootPath)
 
 
 #######################################################################################################################
-#############################################################################请求选股宝股票页面，获取其对应的概念并更新数据库
-async def main(url, keyword):
+# ########################################################################################################请求仓位在线页面
+async def main(url, keyword, zhouqi):
     js1 = '''() =>{
               Object.defineProperties(navigator,{
               webdriver:{
@@ -27,12 +28,6 @@ async def main(url, keyword):
                   }
               })
           }'''
-
-    # js2 = '''() => {
-    #        alert (
-    #            window.navigator.webdriver
-    #        )
-    #    }'''
 
     browser = await launch(headless=True, args=['--no-sandbox'])
     # browser = await launch()
@@ -58,8 +53,8 @@ async def main(url, keyword):
             for item_level2 in elements_level2_title:
                 str = await (await item_level2.getProperty("textContent")).jsonValue()
                 if str.__len__() == 6 and (str.startswith('000') or str.startswith('002') or str.startswith('300')
-                                            or str.startswith('688') or str.startswith('600') or str.startswith('601')
-                                            or str.startswith('602') or str.startswith('603')):
+                                           or str.startswith('688') or str.startswith('600') or str.startswith('601')
+                                           or str.startswith('602') or str.startswith('603')):
                     # print("=====================股票代码：" + str)
                     item['guPiaoDaiMa'] = str
                 if str.__contains__("2021-") or str.__contains__("2020-"):
@@ -82,13 +77,13 @@ async def main(url, keyword):
             continue
     await browser.close()
 
-    fo = open("仓位在线Base_" + keyword + "_" + time_str + ".txt", "w", encoding='UTF-8')
-    fo2 = open("仓位在线_" + keyword + "_" + time_str + ".txt", "w", encoding='UTF-8')
+    fo = open("仓位在线Base_" + keyword + "_" + zhouqi + "_" + time_str + ".txt", "w", encoding='UTF-8')
+    fo2 = open("仓位在线_" + keyword + "_" + zhouqi + "_" + time_str + ".txt", "w", encoding='UTF-8')
     print(list.__len__())
     for itemXunHuan in list:
         codeItem = itemXunHuan.get('guPiaoDaiMa')
         try:
-            data_history = ts.get_hist_data(codeItem, ktype='M')
+            data_history = ts.get_hist_data(codeItem, ktype=zhouqi)
             data_history = data_history.iloc[::-1]
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -99,10 +94,10 @@ async def main(url, keyword):
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
+            # print(codeItem + "========================================")
             # print(data_history)
             KDJ_K, KDJ_D, KDJ_J, KDJ_J_title = common_zhibiao.KDJ_zhibiao(data_history, doubleCloseArray)
 
-            print(KDJ_J)
             if float(KDJ_J) < 0:
                 fo2.write(codeItem + "\n")
                 print(codeItem + "========================================")
@@ -112,13 +107,41 @@ async def main(url, keyword):
                 fo.write(codeItem + "__" + itemXunHuan.get('gengXinRiQi') + "__"
                          + itemXunHuan.get('guDongMingCheng') + "__" + itemXunHuan.get('guPiaoMingCheng') + "\n")
 
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "M",
-                                                     "【" + keyword + "】月KDJ小于0",
-                                                     "【" + keyword + "】月KDJ小于0")
+                if zhouqi == 'W':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "W",
+                                                         "【" + keyword + "】_" + "周KDJ小于0",
+                                                         "【" + keyword + "】_" + "周KDJ小于0")
+                if zhouqi == 'M':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "M",
+                                                         "【" + keyword + "】_" + "月KDJ小于0",
+                                                         "【" + keyword + "】_" + "月KDJ小于0")
+
+            # ###############################################################################################跨越5周/月线
+            ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+            ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
+
+            # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
+            if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
+                    and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
+                if zhouqi == 'W':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "W",
+                                                         "【" + keyword + "】_" + "跨越5周线",
+                                                         "【" + keyword + "】_" + "跨越5周线")
+                if zhouqi == 'M':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "M",
+                                                         "【" + keyword + "】_" + "跨越5月线",
+                                                         "【" + keyword + "】_" + "跨越5月线")
+
         except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
             print(e)
 
 #######################################################################################################################
-##########################################################################################################遍历A股所有股票
-asyncio.get_event_loop().run_until_complete(main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%C9%E7%B1%A3", "社保"))
+# ###############################################################################################################仓位在线
+asyncio.get_event_loop().run_until_complete(
+    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%C9%E7%B1%A3", "社保", "M"))
+asyncio.get_event_loop().run_until_complete(
+    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%C9%E7%B1%A3", "社保", "W"))

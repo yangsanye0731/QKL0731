@@ -16,6 +16,7 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 
 import common_image
+import talib as ta
 
 
 #######################################################################################################################
@@ -94,6 +95,7 @@ async def main(url, keyword, zhouqi):
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
+            # print(codeItem + "========================================")
             # print(data_history)
             KDJ_K, KDJ_D, KDJ_J, KDJ_J_title = common_zhibiao.KDJ_zhibiao(data_history, doubleCloseArray)
 
@@ -106,10 +108,35 @@ async def main(url, keyword, zhouqi):
                 fo.write(codeItem + "__" + itemXunHuan.get('gengXinRiQi') + "__"
                          + itemXunHuan.get('guDongMingCheng') + "__" + itemXunHuan.get('guPiaoMingCheng') + "\n")
 
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     zhouqi,
-                                                     "【" + keyword + "】_" + zhouqi + "_KDJ小于0",
-                                                     "【" + keyword + "】_" + zhouqi + "_KDJ小于0")
+                if zhouqi == 'W':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "W",
+                                                         "【" + keyword + "】_" + "周KDJ小于0",
+                                                         "【" + keyword + "】_" + "周KDJ小于0")
+                if zhouqi == 'M':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "M",
+                                                         "【" + keyword + "】_" + "月KDJ小于0",
+                                                         "【" + keyword + "】_" + "月KDJ小于0")
+
+            # ###############################################################################################跨越5周/月线
+            ma5 = ta.SMA(doubleCloseArray, timeperiod=5)
+            ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
+
+            # 跨越5周线, 最高点大于5周线, 开点小于5周线, 前两周五周线处于下降阶段
+            if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
+                    and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
+                if zhouqi == 'W':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "W",
+                                                         "【" + keyword + "】_" + "跨越5周线",
+                                                         "【" + keyword + "】_" + "跨越5周线")
+                if zhouqi == 'M':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "M",
+                                                         "【" + keyword + "】_" + "跨越5月线",
+                                                         "【" + keyword + "】_" + "跨越5月线")
+
         except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
             print(e)
 
@@ -118,5 +145,5 @@ async def main(url, keyword, zhouqi):
 # ###############################################################################################################仓位在线
 asyncio.get_event_loop().run_until_complete(
     main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%B8%DF%D2%E3%D7%CA%B2%FA", "高毅", "M"))
-# asyncio.get_event_loop().run_until_complete(
-#     main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%B8%DF%D2%E3%D7%CA%B2%FA", "高毅", "W"))
+asyncio.get_event_loop().run_until_complete(
+    main("http://cwzx.shdjt.com/cwcx.asp?gdmc=%B8%DF%D2%E3%D7%CA%B2%FA", "高毅", "W"))
