@@ -12,6 +12,7 @@ rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]
 sys.path.append(rootPath)
 import common
 import common_zhibiao
+import common_image
 
 def strategy(zhouqi, endstr):
     # 局部变量初始化
@@ -55,7 +56,16 @@ def strategy(zhouqi, endstr):
                 print(KDJ_J)
                 fo.write(codeItem + "\n")
 
-
+                if zhouqi == 'W':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                     "W",
+                                                     "【03全部代码】周KDJ指标小于0",
+                                                     "【03全部代码】周KDJ指标小于0")
+                if zhouqi == 'M':
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                     "M",
+                                                     "【03全部代码】月KDJ指标小于0",
+                                                     "【03全部代码】月KDJ指标小于0")
             # # 均线
             # ma5 = ta.SMA(doubleCloseArray, timeperiod=5)[图片]
             # ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
@@ -77,7 +87,7 @@ def strategy(zhouqi, endstr):
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
 # count_result_b = strategy('D', time_str1)
 # count_result_b = strategy('W', time_str1)
-count_result_b = strategy('M', "2021-10-29")
+count_result_b = strategy('M', "2022-01-30")
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
