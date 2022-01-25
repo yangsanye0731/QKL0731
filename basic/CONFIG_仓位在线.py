@@ -10,3 +10,4 @@ import CONFIG_仓位在线_国家集成电路产业投资基金股份有限公�
 import CONFIG_仓位在线_高毅资本
 import CONFIG_仓位在线_高瓴资本
 import CONFIG_仓位在线_先进制造产业投资基金
+import CONFIG_仓位在线_君联资本
