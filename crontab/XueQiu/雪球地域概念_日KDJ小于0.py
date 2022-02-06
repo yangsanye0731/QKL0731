@@ -77,10 +77,11 @@ async def index(page, cookie1, url, codeName):
                                                                           "【雪球指数】KDJ日线小于0" + time_str,
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
-            # image_url = "http://47.240.11.144/" + image_path[6:]
-            # common.dingding_markdown_msg_02('触发【01雪球指数】KDJ日线小于0' + time_str + codeName + '(' + codeItem + ')',
-            #                                 '触发【01雪球指数】KDJ日线小于0' + time_str + codeName + '(' + codeItem + ')'
-            #                                 + "\n\n> ![screenshot](" + image_url + ")")
+            image_url = "http://139.196.14.184/" + image_path[6:]
+            print(image_url)
+            common.dingding_markdown_msg_02('触发【01雪球指数】KDJ日线小于0' + time_str + codeName + '(' + codeItem + ')',
+                                            '触发【01雪球指数】KDJ日线小于0' + time_str + codeName + '(' + codeItem + ')'
+                                            + "\n\n> ![screenshot](" + image_url + ")")
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_02('触发【01雪球指数】KDJ日线小于0' + codeName + '(' + codeItem + ')报错了 ！！！！！！',
                                         '触发【01雪球指数】KDJ日线小于0' + codeName + '(' + codeItem + ')报错了 ！！！！！！')
