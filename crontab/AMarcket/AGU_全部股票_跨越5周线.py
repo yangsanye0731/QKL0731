@@ -9,11 +9,13 @@ from bypy import ByPy
 ################################################################################################配置程序应用所需要环境PATH
 import sys
 import os
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
 import common
 import common_image
+
 
 #######################################################################################################################
 ###########################################################################################################跨域5周线策略
@@ -64,22 +66,23 @@ def strategy(zhouqi):
                 fo.write(codeItem + "\n")
                 if zhouqi == 'W':
                     common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "W",
-                                                     "【03全部代码】跨越5周线",
-                                                     "【03全部代码】跨越5周线")
+                                                         "W",
+                                                         "【全部代码】跨越5周线",
+                                                         "【全部代码】跨越5周线")
                 if zhouqi == 'M':
                     common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "M",
-                                                     "【03全部代码】跨越5月线",
-                                                     "【03全部代码】跨越5月线")
+                                                         "M",
+                                                         "【全部代码】跨越5月线",
+                                                         "【全部代码】跨越5月线")
                 count_b = count_b + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return count_b, count_e
 
+
 #######################################################################################################################
 ##############################################################################################################主执行程序
-# count_result_b, count_result_e = strategy('W')
+count_result_b, count_result_e = strategy('W')
 count_result_b, count_result_e = strategy('M')
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
