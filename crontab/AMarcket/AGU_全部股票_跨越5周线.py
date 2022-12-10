@@ -13,6 +13,7 @@ import os
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
+print(rootPath)
 import common_image
 
 
