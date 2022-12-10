@@ -14,6 +14,7 @@ rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]
 sys.path.append(rootPath)
 import common_image
 import common
+import common_mysqlUtil
 
 
 #######################################################################################################################
@@ -21,10 +22,12 @@ import common
 def exec(argv):
     codeItem = argv[1]
     print(codeItem)
-    codeName = argv[2]
+    data = common_mysqlUtil.select_all_code_one(codeItem)
+    if len(data) > 0:
+        codeName = data[0][1]
     print(codeName)
     image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
-    image_url = "http://" + "8.218.97.91" + "/" + image_path[6:]
+    image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
 
     print(image_path)
     print(image_url)
