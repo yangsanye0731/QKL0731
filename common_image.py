@@ -926,6 +926,43 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
     dddd = pd.DataFrame(stock_data)
     return dddd
 
+def SKDJ_zhibiao(data_history, doubleCloseArray):
+    # RSV := (CLOSE - LLV(LOW, N)) / (HHV(HIGH, N) - LLV(LOW, N)) * 100;
+    # K: SMA(RSV, M1, 1);
+    # D: SMA(K, M2, 1);
+    # J: 3 * K - 2 * D;
+
+    stock_data = {}
+    # SKDJ_LOWV := LLV(LOW, SKDJN);
+    low_list = data_history.low.rolling(9).min()
+    low_list.fillna(value=data_history.low.expanding().min(), inplace=True)
+
+    # SKDJ_HIGHV := HHV(HIGH, SKDJN);
+    high_list = data_history.high.rolling(9).max()
+    high_list.fillna(value=data_history.high.expanding().max(), inplace=True)
+
+    # SKDJN := 9;
+    # SKDJM := 3;
+    # SKDJ_LOWV := LLV(LOW, SKDJN);
+    # SKDJ_HIGHV := HHV(HIGH, SKDJN);
+    # SKDJ_RSV := EMA((CLOSE - SKDJ_LOWV) / (SKDJ_HIGHV - SKDJ_LOWV) * 100, SKDJM);
+    rsv = (doubleCloseArray - low_list) / (high_list - low_list) * 100
+    skdj_rsv = talib.EMA(rsv, timeperiod=3)
+    # #K0: EMA(SKDJ_RSV, SKDJM), COLORWHITE;
+    # #D0: MA(K0, SKDJM), COLORYELLOW;
+    k0 = talib.EMA(skdj_rsv, timeperiod=3)
+    d0 = talib.EMA(k0, timeperiod=3)
+
+    stock_data['KDJ_K'] = k0
+    stock_data['KDJ_D'] = d0
+    dddd = pd.DataFrame(stock_data)
+    # print("========================================================K")
+    # print(k0)
+    # print("========================================================D")
+    # print(d0)
+
+    return dddd
+
 
 #######################################################################################################################
 #######################################################################################个股60、日、周线KDE、MACD、BULL指标
@@ -1128,6 +1165,102 @@ def plt_image_geGuZhiBiao(code, fullName):
 
     ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
     ax_kdj.plot(kdj.index, kdj["KDJ_J"], label="J")
+
+    ax_kdj.set_xlabel("KDJ（周）", fontproperties=myfont)
+
+    changdu = len(ts)
+    if changdu > 200:
+        ax_kdj.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj.set_xlim(500, changdu)
+
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + 'geGuZhiBiao'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
+    plt.close()
+    image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
+    return image_path
+
+#######################################################################################################################
+#######################################################################################个股60、日、周线KDE、MACD、BULL指标
+def plt_image_geGuZhiBiao_tradingview(code, fullName):
+    codeName = fullName + "(" + code + ")"
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
+
+    fig = plt.figure(figsize=(7, 10))
+    # fig.suptitle(codeName, fontproperties=myfont_title)
+    # 1*1 的第一个图表
+    ax_kdj_60 = fig.add_subplot(311)
+    ax_kdj_d = fig.add_subplot(312)
+    ax_kdj = fig.add_subplot(313)
+
+    data_60 = tushare.get_k_data(code, ktype="60")
+    ts_60 = data_60[["open", "close", "high", "low", "volume"]]
+    closeArray_60 = num.array(data_60['close'])
+    doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+
+    data_d = tushare.get_k_data(code, ktype="D")
+    ts_d = data_d[["open", "close", "high", "low", "volume"]]
+    closeArray_d = num.array(data_d['close'])
+    doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    data = tushare.get_k_data(code, ktype="W")
+    ts = data[["open", "close", "high", "low", "volume"]]
+    closeArray = num.array(data['close'])
+    doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    kdj_60 = SKDJ_zhibiao(data_60, closeArray_60)
+    kdj_d = SKDJ_zhibiao(data_d, closeArray_d)
+    kdj = SKDJ_zhibiao(data, closeArray)
+
+    # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
+
+    ax_kdj_60.set_xlabel("KDJ（60）", fontproperties=myfont)
+    ax_kdj_60.set_ylabel("KDJ", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if changdu > 200:
+        ax_kdj_60.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_60.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_60.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_60.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_60.set_xlim(500, changdu)
+
+    ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_K"], label="K")
+    ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
+
+    ax_kdj_d.set_xlabel("KDJ（日）", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if changdu > 200:
+        ax_kdj_d.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_d.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_d.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_d.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_d.set_xlim(500, changdu)
+
+    ax_kdj.plot(kdj.index, kdj["KDJ_K"], label="K")
+    ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
 
     ax_kdj.set_xlabel("KDJ（周）", fontproperties=myfont)
 
@@ -1769,5 +1902,5 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
-# plt_image_geGuZhiBiao("300322", "硕贝德")
+# plt_image_geGuZhiBiao_tradingview("002179", "中航光电")
 # plt_image_geGuZhiBiao_array("300003", "乐普医疗", "002923", "润都股份", "002755", "奥赛康", "300003", "乐普医疗", "002923", "润都股份")
