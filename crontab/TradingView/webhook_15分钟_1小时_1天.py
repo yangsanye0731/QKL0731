@@ -13,6 +13,7 @@ project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
 import common_image
+import common
 
 
 #######################################################################################################################
@@ -24,8 +25,12 @@ def exec(argv):
     print(codeName)
     image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
     image_url = "http://" + "8.218.97.91" + "/" + image_path[6:]
+
     print(image_path)
     print(image_url)
+    common.dingding_markdown_msg_03('触发TradingView策略' + codeName + '(' + codeItem + ')',
+                                    '触发TradingView策略' + codeName + '(' + codeItem + ')'
+                                    + "\n\n> ![screenshot](" + image_url + ")")
     return image_path
 
 

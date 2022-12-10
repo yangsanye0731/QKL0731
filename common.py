@@ -266,8 +266,7 @@ def dingding_markdown_msg_02(title, text):
 ##################################################################################################### 【03】指数ETF钉钉群
 def dingding_markdown_msg_03(title, text):
     # WebHook地址
-    webhook = 'https://oapi.dingtalk.com/robot/' \
-              'send?access_token=e6e0ace0004798b428470dda7a0d5760e0043f1bd087eec9d74848378bec043e'
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=44aed8fcbb24037e166ac9848c55bbe5a955ceea2a62efc5eb743040f70c07c1'
     # 初始化机器人小丁
     xiaoding = DingtalkChatbot(webhook)
     # Text消息@所有人
