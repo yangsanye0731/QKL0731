@@ -31,8 +31,10 @@ def exec(argv):
 
     print(image_path)
     print(image_url)
-    common.dingding_markdown_msg_03('触发TradingView策略' + codeName + '(' + codeItem + ')',
-                                    '触发TradingView策略' + codeName + '(' + codeItem + ')'
+    time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    zhangdiefu,price = common.zhangdiefu_and_price(codeItem)
+    common.dingding_markdown_msg_03(time_str + '触发TradingView策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + '涨跌幅：' + zhangdiefu,
+                                    time_str + '触发TradingView策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + '涨跌幅：' + zhangdiefu
                                     + "\n\n> ![screenshot](" + image_url + ")")
     return image_path
 

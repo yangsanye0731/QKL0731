@@ -1197,7 +1197,7 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     codeName = fullName + "(" + code + ")"
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
 
-    fig = plt.figure(figsize=(7, 10))
+    fig = plt.figure(figsize=(10, 10))
     # fig.suptitle(codeName, fontproperties=myfont_title)
     # 1*1 的第一个图表
     ax_kdj_60 = fig.add_subplot(311)
