@@ -33,7 +33,7 @@ def strategy(zhouqi, endstr):
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
-        time.sleep(0.1)
+        # time.sleep(0.1)
         count = count + 1
         print(count)
 
