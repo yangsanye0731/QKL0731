@@ -1226,8 +1226,8 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
-
-    ax_kdj_60.set_xlabel("KDJ（60）", fontproperties=myfont)
+    print("%.2f" % kdj_60.tail(1)["KDJ_K"])
+    ax_kdj_60.set_xlabel("KDJ（60），KDJ 快线：" + "%.2f" % kdj_60.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_60.tail(1)["KDJ_D"], fontproperties=myfont)
     ax_kdj_60.set_ylabel("KDJ", fontproperties=myfont)
 
     changdu = len(ts_60)
@@ -1245,7 +1245,7 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_K"], label="K")
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
 
-    ax_kdj_d.set_xlabel("KDJ（日）", fontproperties=myfont)
+    ax_kdj_d.set_xlabel("KDJ（日），KDJ 快线：" + "%.2f" % kdj_d.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_d.tail(1)["KDJ_D"], fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1262,7 +1262,7 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     ax_kdj.plot(kdj.index, kdj["KDJ_K"], label="K")
     ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
 
-    ax_kdj.set_xlabel("KDJ（周）", fontproperties=myfont)
+    ax_kdj.set_xlabel("KDJ（周），KDJ 快线：" + "%.2f" % kdj.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj.tail(1)["KDJ_D"], fontproperties=myfont)
 
     changdu = len(ts)
     if changdu > 200:
