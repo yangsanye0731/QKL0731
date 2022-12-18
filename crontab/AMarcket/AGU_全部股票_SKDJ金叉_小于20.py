@@ -29,7 +29,7 @@ def strategy(zhouqi, endstr):
     all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
     time_str = time.strftime("%Y%m%d", time.localtime())
-    fo = open("C:\\Users\\yangj\\Desktop\\" +  "SKDJ_小于20_" + zhouqi + "_" + endstr + ".txt", "w")
+    fo = open("SKDJ_小于20_" + zhouqi + "_" + endstr + ".txt", "w")
     # 遍历
     for codeItem in all_code_index_x:
         codeItem = codeItem[0:6]
