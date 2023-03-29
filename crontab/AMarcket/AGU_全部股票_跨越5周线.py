@@ -4,7 +4,6 @@ import talib as ta
 import tushare as ts
 import time
 from bypy import ByPy
-import common_mysqlUtil
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -16,6 +15,7 @@ rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]
 sys.path.append(rootPath)
 print(rootPath)
 import common_image
+import common_mysqlUtil
 
 
 #######################################################################################################################
