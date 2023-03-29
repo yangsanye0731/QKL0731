@@ -430,6 +430,11 @@ def update_all_code_plate(code, plate):
     print(sql)
     insertRecord(sql)
 
+def insert_all_code_sub(code, name, plate):
+    sql = "INSERT INTO `superman`.`AGU_All_Code_Sub`(`code`, `name`,`plate`) VALUES ('" + code + "','" + name + "','" + plate + "')"
+    print(sql)
+    insertRecord(sql)
+
 def update_all_code_huanshoulv(code, huanshoulv):
     sql = ""
     sql = "UPDATE `superman`.`AGU_All_Code` SET " \
@@ -472,6 +477,15 @@ def insert_ZhiShuLog_record(code, name, type, price, plate, mark, zhangdiefu, ch
           "'" + mark + "', " \
           "'" + zhangdiefu + "', " \
           "'" + chufa + "', " \
+          "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
+    print(sql)
+    insertRecord(sql)
+
+def insert_codeitem(codeitem, type):
+    sql = ""
+    sql = "INSERT INTO `superman`.`codeitem`(`codeitem`, `type`,`insert_time`) VALUES (" \
+          "'" + codeitem + "', " \
+          "'" + type + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
     print(sql)
     insertRecord(sql)

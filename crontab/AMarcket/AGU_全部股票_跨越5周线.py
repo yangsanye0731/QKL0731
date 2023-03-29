@@ -4,6 +4,7 @@ import talib as ta
 import tushare as ts
 import time
 from bypy import ByPy
+import common_mysqlUtil
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -64,6 +65,7 @@ def strategy(zhouqi):
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
                     and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 fo.write(codeItem + "\n")
+                common_mysqlUtil.insert_codeitem(codeItem, zhouqi)
                 if zhouqi == 'W':
                     common_image.plt_image_tongyichutu_2(codeItem,
                                                          "W",
