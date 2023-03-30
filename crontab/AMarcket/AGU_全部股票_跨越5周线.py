@@ -24,7 +24,7 @@ import common_mysqlUtil
 
 #######################################################################################################################
 ###########################################################################################################跨域5周线策略
-def strategy(zhouqi):
+def strategy(zhouqi, endstr):
     # 局部变量初始化
     count = 0
     count_b = 0
@@ -47,9 +47,12 @@ def strategy(zhouqi):
         # time.sleep(0.5)
         count = count + 1
         print(count)
-        data_history = ts.get_k_data(codeItem, ktype=zhouqi)
+        # data_history = ts.get_k_data(codeItem, ktype=zhouqi)
         # data_history_M = ts.get_k_data(codeItem, ktype='M')
         # data_history_D = ts.get_k_data(codeItem, ktype='D')
+
+        data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
+        data_history = data_history.iloc[::-1]
 
         try:
             closeArray = num.array(data_history['close'])
@@ -69,7 +72,7 @@ def strategy(zhouqi):
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
                     and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 fo.write(codeItem + "\n")
-                common_mysqlUtil.insert_codeitem(codeItem, zhouqi, "跨越5周线")
+                common_mysqlUtil.insert_codeitem(codeItem, zhouqi, "跨越5周线",endstr)
                 if zhouqi == 'W':
                     common_image.plt_image_tongyichutu_2(codeItem,
                                                          "W",
@@ -88,8 +91,10 @@ def strategy(zhouqi):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
-count_result_b, count_result_e = strategy('W')
-count_result_b, count_result_e = strategy('M')
+time_str1 = sys.argv[1]
+print(time_str1)
+count_result_b, count_result_e = strategy('W', time_str1)
+count_result_b, count_result_e = strategy('M', time_str1)
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
