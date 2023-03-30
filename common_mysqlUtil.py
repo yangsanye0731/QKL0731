@@ -481,11 +481,12 @@ def insert_ZhiShuLog_record(code, name, type, price, plate, mark, zhangdiefu, ch
     print(sql)
     insertRecord(sql)
 
-def insert_codeitem(codeitem, type):
+def insert_codeitem(codeitem, type, strategy):
     sql = ""
-    sql = "INSERT INTO `superman`.`codeitem`(`codeitem`, `type`,`insert_time`) VALUES (" \
+    sql = "INSERT INTO `superman`.`codeitem`(`codeitem`, `type`, `strategy`, `insert_time`) VALUES (" \
           "'" + codeitem + "', " \
           "'" + type + "', " \
+          "'" + strategy + "', " \
           "'" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "')"
     print(sql)
     insertRecord(sql)

@@ -69,7 +69,7 @@ def strategy(zhouqi):
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
                     and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 fo.write(codeItem + "\n")
-                common_mysqlUtil.insert_codeitem(codeItem, zhouqi)
+                common_mysqlUtil.insert_codeitem(codeItem, zhouqi, "跨越5周线")
                 if zhouqi == 'W':
                     common_image.plt_image_tongyichutu_2(codeItem,
                                                          "W",
