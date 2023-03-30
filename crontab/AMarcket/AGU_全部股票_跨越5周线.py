@@ -42,19 +42,19 @@ def strategy(zhouqi, endstr):
 
     # 遍历
     for codeItem in all_code_index_x:
-        codeItem = codeItem[0:6]
-        print(codeItem)
-        # time.sleep(0.5)
-        count = count + 1
-        print(count)
-        # data_history = ts.get_k_data(codeItem, ktype=zhouqi)
-        # data_history_M = ts.get_k_data(codeItem, ktype='M')
-        # data_history_D = ts.get_k_data(codeItem, ktype='D')
-
-        data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
-        data_history = data_history.iloc[::-1]
-
         try:
+            codeItem = codeItem[0:6]
+            print(codeItem)
+            # time.sleep(0.5)
+            count = count + 1
+            print(count)
+            # data_history = ts.get_k_data(codeItem, ktype=zhouqi)
+            # data_history_M = ts.get_k_data(codeItem, ktype='M')
+            # data_history_D = ts.get_k_data(codeItem, ktype='D')
+
+            data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
+            data_history = data_history.iloc[::-1]
+
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
 
