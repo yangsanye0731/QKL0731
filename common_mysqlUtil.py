@@ -6,7 +6,6 @@ import pymysql
 
 import common
 import common_zhibiao
-import common_zhibiao_BTC
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
 import sys
@@ -101,16 +100,17 @@ def selectCountRecord(type):
 
 def insert_zhishu_record(code, name, fullName, plate, mark, type):
     if ("USDT" in code):
-        price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, MACD_title, BULL_title, BULL_middleband = common_zhibiao_BTC.zhibiao(code, '4h')
-        price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao_BTC.zhibiao(code, '1h')
-        price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao_BTC.zhibiao(code, '30m')
-        zhangdiefu = "0%"
-        print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-        title = ""
-        content = ""
-        KDJ_J_title = "10000"
-        KDJ_J_title_60 = "10000"
-        KDJ_J_title_30 = "10000"
+        print("TODO")
+        # price, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, MACD_title, BULL_title, BULL_middleband = common_zhibiao_BTC.zhibiao(code, '4h')
+        # price_60, MA20_titile_60, MA30_titile_60, MA60_titile_60, qushi_5_10_20_30_60, MACD_title_60, BULL_title_60, BULL_middleband_60 = common_zhibiao_BTC.zhibiao(code, '1h')
+        # price_30, MA20_titile_30, MA30_titile_30, MA60_titile_30, qushi_5_10_20_30_30, MACD_title_30, BULL_title_30, BULL_middleband_30 = common_zhibiao_BTC.zhibiao(code, '30m')
+        # zhangdiefu = "0%"
+        # print(fullName + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        # title = ""
+        # content = ""
+        # KDJ_J_title = "10000"
+        # KDJ_J_title_60 = "10000"
+        # KDJ_J_title_30 = "10000"
     else:
         price_W, MA5_titile_W, MA20_titile_W, MA30_titile_W, MA60_titile_W, qushi_5_10_20_30_W, KDJ_J_title_W, MACD_title_W, BULL_title_W, BULL_middleband_W, ene_qushi_W = common_zhibiao.zhibiao(code, 'W')
         price, MA5_titile, MA20_titile, MA30_titile, MA60_titile, qushi_5_10_20_30, KDJ_J_title, MACD_title, BULL_title, BULL_middleband, ene_qushi = common_zhibiao.zhibiao(code, 'D')
