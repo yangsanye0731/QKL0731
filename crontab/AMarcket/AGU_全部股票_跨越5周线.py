@@ -77,12 +77,12 @@ def strategy(zhouqi, endstr):
                     common_image.plt_image_tongyichutu_2(codeItem,
                                                          "W",
                                                          "【全部代码】跨越5周线",
-                                                         "【全部代码】跨越5周线")
+                                                         "【全部代码】跨越5周线", time_str)
                 if zhouqi == 'M':
                     common_image.plt_image_tongyichutu_2(codeItem,
                                                          "M",
                                                          "【全部代码】跨越5月线",
-                                                         "【全部代码】跨越5月线")
+                                                         "【全部代码】跨越5月线", time_str)
                 count_b = count_b + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
@@ -91,10 +91,10 @@ def strategy(zhouqi, endstr):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
-time_str1 = sys.argv[1]
+time_str1 = time.strftime("%Y-%m-%d", time.localtime())
 print(time_str1)
 count_result_b, count_result_e = strategy('W', time_str1)
-count_result_b, count_result_e = strategy('M', time_str1)
+# count_result_b, count_result_e = strategy('M', time_str1)
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)

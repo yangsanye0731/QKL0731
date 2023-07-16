@@ -113,16 +113,7 @@ def strategy(zhouqi, endstr):
 #######################################################################################################################
 ##############################################################################################################主执行程序
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
-count_result_b, count_result_e = strategy('D', "2023-07-07")
-count_result_b, count_result_e = strategy('D', "2023-07-06")
-count_result_b, count_result_e = strategy('D', "2023-07-05")
-count_result_b, count_result_e = strategy('D', "2023-07-04")
-count_result_b, count_result_e = strategy('D', "2023-07-03")
-count_result_b, count_result_e = strategy('D', "2023-06-30")
-count_result_b, count_result_e = strategy('D', "2023-06-29")
-count_result_b, count_result_e = strategy('D', "2023-06-28")
-count_result_b, count_result_e = strategy('D', "2023-06-27")
-count_result_b, count_result_e = strategy('D', "2023-06-26")
+count_result_b, count_result_e = strategy('D', time_str1)
 
 
 # bp = ByPy()

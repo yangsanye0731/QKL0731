@@ -26,7 +26,7 @@ def insertRecord(sql):
     password = cf.get("MySql", "password")
     url = cf.get("MySql", "url")
     # 打开数据库连接
-    db = pymysql.connect(url, userName, password, "superman")
+    db = pymysql.connect(host="localhost", user=userName, password=password, database="superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
@@ -38,7 +38,7 @@ def deleteTopRecord(type):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(host="localhost", user=userName, password=password, database="superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询
