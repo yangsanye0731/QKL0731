@@ -315,7 +315,7 @@ def select_all_code_one(code):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
     # 打开数据库连接
-    db = pymysql.connect("localhost", userName, password, "superman")
+    db = pymysql.connect(host="localhost", user=userName, password=password, database="superman")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL 查询

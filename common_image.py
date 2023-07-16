@@ -431,7 +431,7 @@ def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, 
 
 #######################################################################################################################
 ##########################################################################################统一出图（图片顶部无营业额等数据）
-def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
+def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng,timedatestr):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0, 0, 0, 0, 0, 0
     re = ""
     codeName = ''
@@ -476,7 +476,7 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng):
     plt.xticks(rotation=75)
 
     # 设置坐标轴名称
-    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    timeStr1 = timedatestr
     plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额："
               + yoy + "%,换手率：" + turnover_rate + "%" + re, fontproperties=myfont)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
@@ -1901,6 +1901,8 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     plt.close()
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
+
+#plt_image_tongyichutu_2("000599","D","【全部代码】双均线144", "【全部代码】双均线144")
 
 # plt_image_geGuZhiBiao_tradingview("002179", "中航光电")
 # plt_image_geGuZhiBiao_array("300003", "乐普医疗", "002923", "润都股份", "002755", "奥赛康", "300003", "乐普医疗", "002923", "润都股份")
