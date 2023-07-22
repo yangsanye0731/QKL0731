@@ -20,6 +20,7 @@ sys.path.append(rootPath1)
 print(rootPath1)
 import common_image
 import common_mysqlUtil
+import common
 
 
 #######################################################################################################################
@@ -72,7 +73,7 @@ def strategy(zhouqi, endstr):
             if doubleHighArray[-1] > ma5[-1] > doubleOpenArray[-1] and ma5[-2] < ma5[-3] < ma5[-4] \
                     and doubleCloseArray[-1] > doubleOpenArray[-1] and ma60[-1] > ma60[-2]:
                 fo.write(codeItem + "\n")
-                common_mysqlUtil.insert_codeitem(codeItem, zhouqi, "跨越5周线",endstr)
+                common_mysqlUtil.insert_codeitem(codeItem, zhouqi, "跨越5周线", endstr)
                 if zhouqi == 'W':
                     common_image.plt_image_tongyichutu_2(codeItem,
                                                          "W",
@@ -92,14 +93,10 @@ def strategy(zhouqi, endstr):
 #######################################################################################################################
 ##############################################################################################################主执行程序
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
-print(time_str1)
 count_result_b, count_result_e = strategy('W', time_str1)
 # count_result_b, count_result_e = strategy('M', time_str1)
 # bp = ByPy()
 # timeStr1 = time.strftime("%Y%m%d", time.localtime())
 # bp.mkdir(remotepath=timeStr1)
 # bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-# common.dingding_markdown_msg_2('触发【03全部代码】跨越5周线容大感光,主力持仓突增，'
-#                                'B：' + count_result_b + ", E:" + count_result_e,
-#                                '触发【03全部代码】跨越5周线容大感光,主力持仓突增，'
-#                                'B：' + count_result_b + ", E:" + count_result_e)
+common.dingding_markdown_msg_02("AGU_全部股票_跨越5周线执行完成", "AGU_全部股票_跨越5周线执行完成")
