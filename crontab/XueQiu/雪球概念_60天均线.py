@@ -79,7 +79,7 @@ async def index(page, cookie1, url, codeName):
         sma144 = ta.EMA(ma144, timeperiod=144)
 
         time_str = time.strftime("%Y%m%d", time.localtime())
-        if (ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]):
+        if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
             image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
                                                                           "D",
                                                                           "【01雪球指数】双均线10交叉",
@@ -87,7 +87,7 @@ async def index(page, cookie1, url, codeName):
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
 
-        if (ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]):
+        if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
             image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
                                                                           "D",
                                                                           "【01雪球指数】双均线60交叉",
@@ -95,7 +95,7 @@ async def index(page, cookie1, url, codeName):
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
 
-        if (ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]):
+        if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
             image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
                                                                           "D",
                                                                           "【01雪球指数】双均线60交叉",
@@ -104,6 +104,7 @@ async def index(page, cookie1, url, codeName):
                                                                           "%.2f" % huanshoulv[-1])
 
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
+        common.dingding_markdown_msg_02("AGU_雪球概念_双均线执行异常", "AGU_雪球概念_双均线执行异常")
         print(e)
 
 
@@ -111,7 +112,7 @@ async def index(page, cookie1, url, codeName):
 #############################################################################################################数据爬虫入口
 async def main(url, codeName):
     print(datetime.datetime.now())
-    await asyncio.sleep(30 + random.randint(1, 80))
+    await asyncio.sleep(30 + random.randint(60, 200))
     print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
@@ -161,8 +162,4 @@ for key, value in const.XUEQIUGAINIAN:
 ################################################################################################################数据同步
 bp = ByPy()
 timeStr1 = time.strftime("%Y%m%d", time.localtime())
-# bp.mkdir(remotepath=timeStr1)
-# bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-# bp.upload(localpath=rootPath + os.sep + "images" + os.sep + timeStr1, remotepath=timeStr1)
-# common.dingding_markdown_msg_02('触发【01雪球指数】' + timeStr1 + '均线跨过20天均线执行完成',
-#                                 '触发【01雪球指数】' + timeStr1 + '均线跨过20天均线执行完成')
+common.dingding_markdown_msg_02("AGU_雪球概念_双均线执行完成", "AGU_雪球概念_双均线执行完成")
