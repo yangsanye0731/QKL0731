@@ -76,11 +76,6 @@ def strategy(zhouqi, endstr):
             if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
                 print("双均线10：" + codeItem)
                 fo_10.write(codeItem + "\n")
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "D",
-                                                     "【全部代码】双均线10",
-                                                     "【全部代码】双均线10", time_str)
-
                 data = {
                     's_code': codeItem,
                     's_name': codeName,
@@ -88,14 +83,15 @@ def strategy(zhouqi, endstr):
                 }
                 requests.post(url, data=data)
 
+                common_image.plt_image_tongyichutu_2(codeItem,
+                                                     "D",
+                                                     "【全部代码】双均线10",
+                                                     "【全部代码】双均线10", time_str)
+
+
             if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
                 print("双均线60：" + codeItem)
                 fo_60.write(codeItem + "\n")
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "D",
-                                                     "【全部代码】双均线60",
-                                                     "【全部代码】双均线60", time_str)
-
                 data = {
                     's_code': codeItem,
                     's_name': codeName,
@@ -103,20 +99,25 @@ def strategy(zhouqi, endstr):
                 }
                 requests.post(url, data=data)
 
+                common_image.plt_image_tongyichutu_2(codeItem,
+                                                     "D",
+                                                     "【全部代码】双均线60",
+                                                     "【全部代码】双均线60", time_str)
+
             if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
                 print("双均线144：" + codeItem)
                 fo_144.write(codeItem + "\n")
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "D",
-                                                     "【全部代码】双均线144",
-                                                     "【全部代码】双均线144", time_str)
-
                 data = {
                     's_code': codeItem,
                     's_name': codeName,
                     's_type': '144Day'
                 }
                 requests.post(url, data=data)
+
+                common_image.plt_image_tongyichutu_2(codeItem,
+                                                     "D",
+                                                     "【全部代码】双均线144",
+                                                     "【全部代码】双均线144", time_str)
 
                 count_b = count_b + 1
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
