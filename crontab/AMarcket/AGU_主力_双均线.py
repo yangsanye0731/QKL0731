@@ -21,6 +21,7 @@ print(rootPath1)
 import common_image
 import common
 import common_mysqlUtil
+import openpyxl
 
 
 #######################################################################################################################
@@ -45,84 +46,99 @@ def strategy(zhouqi, endstr):
 
     url = 'https://hook.us1.make.com/r7gj5cb1go2l7x23i44tnyivdj7sy7ei'
 
-    # 遍历
-    for codeItem in open('zhuli.txt'):
-        try:
-            codeItem = codeItem.strip('\n')
-            # time.sleep(0.5)
-            count = count + 1
-            print(count)
-            codeName = ''
-            data = common_mysqlUtil.select_all_code_one(codeItem)
-            if len(data) > 0:
-                codeName = data[0][1]
+    # 打开Excel文件
+    workbook = openpyxl.load_workbook('定向增发.xlsx')
+    # 选择工作表
+    sheet_names = workbook.sheetnames
+    print(sheet_names)
 
-            data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
-            data_history = data_history.iloc[::-1]
+    for sheet_name in sheet_names:
+        sheet = workbook[sheet_name]
+        # 遍历
+        # for codeItem in open('zhuli.txt'):
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+            try:
+                column1_value, column2_value, column3_value, column4_value, column5_value, \
+                column6_value, column7_value, column8_value, column9_value, column10_value, column11_value = row
+                codeItem = str(column1_value).strip('\n')
+                mark = "发行价格为" + str(column6_value) + ",发行时间为" + str(column9_value)[:10] + ",锁定期为" + column11_value
+                print(column1_value)
+                # time.sleep(0.5)
+                count = count + 1
+                print(count)
+                codeName = ''
+                data = common_mysqlUtil.select_all_code_one(codeItem)
+                if len(data) > 0:
+                    codeName = data[0][1]
 
-            closeArray = num.array(data_history['close'])
-            doubleCloseArray = num.asarray(closeArray, dtype='double')
+                data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
+                data_history = data_history.iloc[::-1]
 
-            # 均线
-            ma10 = ta.SMA(doubleCloseArray, timeperiod=10)
-            sma10 = ta.EMA(ma10, timeperiod=10)
+                closeArray = num.array(data_history['close'])
+                doubleCloseArray = num.asarray(closeArray, dtype='double')
 
-            ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
-            sma60 = ta.EMA(ma60, timeperiod=60)
+                # 均线
+                ma10 = ta.SMA(doubleCloseArray, timeperiod=10)
+                sma10 = ta.EMA(ma10, timeperiod=10)
 
-            ma144 = ta.SMA(doubleCloseArray, timeperiod=144)
-            sma144 = ta.EMA(ma144, timeperiod=144)
+                ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
+                sma60 = ta.EMA(ma60, timeperiod=60)
 
-            if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
-                print("双均线10：" + codeItem)
-                fo_10.write(codeItem + "\n")
-                data = {
-                    's_code': codeItem,
-                    's_name': codeName,
-                    's_type': '10Day'
-                }
-                requests.post(url, data=data)
+                ma144 = ta.SMA(doubleCloseArray, timeperiod=144)
+                sma144 = ta.EMA(ma144, timeperiod=144)
 
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "D",
-                                                     "【全部代码】双均线10",
-                                                     "【全部代码】双均线10", time_str)
+                if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
+                    print("双均线10：" + codeItem)
+                    fo_10.write(codeItem + "\n")
+                    # data = {
+                    #     's_code': codeItem,
+                    #     's_name': codeName,
+                    #     's_type': '10Day'
+                    # }
+                    # requests.post(url, data=data)
 
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "D",
+                                                         "【定向增发】双均线10",
+                                                         "【定向增发】双均线10", time_str, mark)
 
-            if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
-                print("双均线60：" + codeItem)
-                fo_60.write(codeItem + "\n")
-                data = {
-                    's_code': codeItem,
-                    's_name': codeName,
-                    's_type': '60Day'
-                }
-                requests.post(url, data=data)
+                if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
+                    print("双均线60：" + codeItem)
+                    fo_60.write(codeItem + "\n")
+                    # data = {
+                    #     's_code': codeItem,
+                    #     's_name': codeName,
+                    #     's_type': '60Day'
+                    # }
+                    # requests.post(url, data=data)
 
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "D",
-                                                     "【全部代码】双均线60",
-                                                     "【全部代码】双均线60", time_str)
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "D",
+                                                         "【定向增发】双均线60",
+                                                         "【定向增发】双均线60", time_str, mark)
 
-            if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
-                print("双均线144：" + codeItem)
-                fo_144.write(codeItem + "\n")
-                data = {
-                    's_code': codeItem,
-                    's_name': codeName,
-                    's_type': '144Day'
-                }
-                requests.post(url, data=data)
+                if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
+                    print("双均线144：" + codeItem)
+                    fo_144.write(codeItem + "\n")
+                    # data = {
+                    #     's_code': codeItem,
+                    #     's_name': codeName,
+                    #     's_type': '144Day'
+                    # }
+                    # requests.post(url, data=data)
 
-                common_image.plt_image_tongyichutu_2(codeItem,
-                                                     "D",
-                                                     "【全部代码】双均线144",
-                                                     "【全部代码】双均线144", time_str)
+                    common_image.plt_image_tongyichutu_2(codeItem,
+                                                         "D",
+                                                         "【定向增发】双均线144",
+                                                         "【定向增发】双均线144", time_str, mark)
 
-                count_b = count_b + 1
-        except (IOError, TypeError, NameError, IndexError, Exception) as e:
-            print(e)
-            common.dingding_markdown_msg_03("AGU_主力_双均线执行异常", "AGU_主力_双均线执行异常")
+                    count_b = count_b + 1
+            except (IOError, TypeError, NameError, IndexError, Exception) as e:
+                print(e)
+                common.dingding_markdown_msg_03("AGU_主力_双均线执行异常", "AGU_主力_双均线执行异常")
+
+        # 关闭工作簿
+        workbook.close()
     return count_b, count_e
 
 

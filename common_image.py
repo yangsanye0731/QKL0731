@@ -431,7 +431,7 @@ def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, 
 
 #######################################################################################################################
 ##########################################################################################统一出图（图片顶部无营业额等数据）
-def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng,timedatestr):
+def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, mark):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0, 0, 0, 0, 0, 0
     re = ""
     codeName = ''
@@ -462,17 +462,18 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng,timedatestr):
     ts = tushare.get_k_data(code, ktype=type)
     ts = ts[["open", "close", "high", "low", "volume"]]
 
-    # 画5日均线图
-    avg_1 = talib.MA(ts["close"], timeperiod=1)
-    avg_5 = talib.MA(ts["close"], timeperiod=5)
-    avg_10 = talib.MA(ts["close"], timeperiod=10)
-    avg_20 = talib.MA(ts["close"], timeperiod=20)
-    avg_30 = talib.MA(ts["close"], timeperiod=30)
+    # 画双均线图
+    avg_10 = talib.SMA(ts["close"], timeperiod=10)
+    avg_10_ema = talib.EMA(avg_10, timeperiod=10)
+    avg_60 = talib.SMA(ts["close"], timeperiod=60)
+    avg_60_ema = talib.EMA(avg_60, timeperiod=60)
 
     fig = plt.subplots(figsize=(15, 13))
-    plt.plot(avg_1, "b.-")
-    plt.plot(avg_5, "k.-")
-    plt.plot(avg_10, color="y")
+    # plt.plot(avg_1, "b.-")
+    plt.plot(avg_10_ema, color="k", linewidth=3)
+    plt.plot(avg_10, color="y", linewidth=3)
+    plt.plot(avg_60_ema, color="k", linewidth=6)
+    plt.plot(avg_60, color="y", linewidth=7)
     # plt.plot(avg_20,color="g")
     # plt.plot(avg_30,color="b")
     plt.xticks(rotation=75)
@@ -480,14 +481,19 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng,timedatestr):
     # 设置坐标轴名称
     timeStr1 = timedatestr
     plt.title(timeStr1 + "_" + codeName + '(' + code + ')EPS:' + eps + "%,营业额："
-              + yoy + "%,换手率：" + turnover_rate + "%" + re, fontproperties=myfont)
+              + yoy + "%,换手率：" + turnover_rate + "%" + re, fontproperties=myfont, pad=-20)
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
     plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
+
 
     # 设置坐标轴范围
     changdu = len(ts)
     if changdu > 200:
         plt.xlim(changdu - 100, changdu)
+
+    x_limits = plt.xlim()
+    y_limits = plt.ylim()
+    plt.text(x_limits[0], y_limits[0], mark, fontproperties=myfont)
 
     path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + pathType
     if not os.path.exists(path):
@@ -928,6 +934,7 @@ def KDJ_zhibiao(data_history, doubleCloseArray):
     dddd = pd.DataFrame(stock_data)
     return dddd
 
+
 def SKDJ_zhibiao(data_history, doubleCloseArray):
     # RSV := (CLOSE - LLV(LOW, N)) / (HHV(HIGH, N) - LLV(LOW, N)) * 100;
     # K: SMA(RSV, M1, 1);
@@ -1193,6 +1200,7 @@ def plt_image_geGuZhiBiao(code, fullName):
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
+
 #######################################################################################################################
 #######################################################################################个股60、日、周线KDE、MACD、BULL指标
 def plt_image_geGuZhiBiao_tradingview(code, fullName):
@@ -1229,7 +1237,9 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
     print("%.2f" % kdj_60.tail(1)["KDJ_K"])
-    ax_kdj_60.set_xlabel("KDJ（60），KDJ 快线：" + "%.2f" % kdj_60.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_60.tail(1)["KDJ_D"], fontproperties=myfont)
+    ax_kdj_60.set_xlabel(
+        "KDJ（60），KDJ 快线：" + "%.2f" % kdj_60.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_60.tail(1)["KDJ_D"],
+        fontproperties=myfont)
     ax_kdj_60.set_ylabel("KDJ", fontproperties=myfont)
 
     changdu = len(ts_60)
@@ -1247,7 +1257,8 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_K"], label="K")
     ax_kdj_d.plot(kdj_d.index, kdj_d["KDJ_D"], label="D")
 
-    ax_kdj_d.set_xlabel("KDJ（日），KDJ 快线：" + "%.2f" % kdj_d.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_d.tail(1)["KDJ_D"], fontproperties=myfont)
+    ax_kdj_d.set_xlabel("KDJ（日），KDJ 快线：" + "%.2f" % kdj_d.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_d.tail(1)["KDJ_D"],
+                        fontproperties=myfont)
 
     changdu = len(ts_d)
     if changdu > 200:
@@ -1264,7 +1275,8 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     ax_kdj.plot(kdj.index, kdj["KDJ_K"], label="K")
     ax_kdj.plot(kdj.index, kdj["KDJ_D"], label="D")
 
-    ax_kdj.set_xlabel("KDJ（周），KDJ 快线：" + "%.2f" % kdj.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj.tail(1)["KDJ_D"], fontproperties=myfont)
+    ax_kdj.set_xlabel("KDJ（周），KDJ 快线：" + "%.2f" % kdj.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj.tail(1)["KDJ_D"],
+                      fontproperties=myfont)
 
     changdu = len(ts)
     if changdu > 200:
@@ -1312,15 +1324,15 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     myfont2 = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="15")
     fig = plt.figure(figsize=(20, 16))
     plt.title("【投资是对人性优劣的奖惩，投资世界改变不了的公司和改变世界的公司】【首先是量，周线量至少大于2】【投资好公司，趋势中的公司】\n"
-                 "步骤一：查看上证、深证、创业板指数30分钟、60分钟KDJ走势; 30分钟快线处于0以下，慢线处于30以下，KDJ快线指标开始反转;\n"
-                 "【当天资金情况】【盘中要感受主力资金的动向】\n"
-                 "步骤二：查看【短线王】中各个板块【主力资金】进入情况，筛选【主力资金进入大于10%】，且板块价格处于较低位置的板块;\n"
-                 "【如果选不出来，说明每个版块的主力资金都是流出的，不适合进入】\n"
-                 "步骤三：查看主力资金进入大于10%板块中资金分布情况，筛选均匀分不到不同的龙头股票上【资金集中到单一股票的板块慎选】\n"
-                 "步骤四：查看股票30分钟、15分钟内的主力资金进场情况，主力资金达到10%，且主力资金量达到400万以上的股票为优选股票\n"
-                 "步骤五：买入【配合未来事件，提前进行判断】【资金派发到三只股票上】【同一股票不能超30万】\n"
-                 "步骤六：卖出【30分钟KDJ第一次反转立即卖出，不可分心;不管盈亏，卖出;本件事情优先级最高】【亏损超过3000元，及时止损】",
-                 fontproperties=myfont2, color='red', fontweight='bold',pad=20)
+              "步骤一：查看上证、深证、创业板指数30分钟、60分钟KDJ走势; 30分钟快线处于0以下，慢线处于30以下，KDJ快线指标开始反转;\n"
+              "【当天资金情况】【盘中要感受主力资金的动向】\n"
+              "步骤二：查看【短线王】中各个板块【主力资金】进入情况，筛选【主力资金进入大于10%】，且板块价格处于较低位置的板块;\n"
+              "【如果选不出来，说明每个版块的主力资金都是流出的，不适合进入】\n"
+              "步骤三：查看主力资金进入大于10%板块中资金分布情况，筛选均匀分不到不同的龙头股票上【资金集中到单一股票的板块慎选】\n"
+              "步骤四：查看股票30分钟、15分钟内的主力资金进场情况，主力资金达到10%，且主力资金量达到400万以上的股票为优选股票\n"
+              "步骤五：买入【配合未来事件，提前进行判断】【资金派发到三只股票上】【同一股票不能超30万】\n"
+              "步骤六：卖出【30分钟KDJ第一次反转立即卖出，不可分心;不管盈亏，卖出;本件事情优先级最高】【亏损超过3000元，及时止损】",
+              fontproperties=myfont2, color='red', fontweight='bold', pad=20)
     # fig.suptitle(codeName, fontproperties=myfont_title)
     # 1*1 的第一个图表
     ax_kdj_30 = fig.add_subplot(4, 4, 1)
@@ -1904,7 +1916,9 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
-#plt_image_tongyichutu_2("000599","D","【全部代码】双均线144", "【全部代码】双均线144")
+
+# plt_image_tongyichutu_2("601100", "D", "【全部代码】双均线144", "【全部代码】双均线144", '2023-08-05',
+#                         '这是备注信息这是备注信息这是备注信息这是备注信息这是备注信息')
 
 # plt_image_geGuZhiBiao_tradingview("002179", "中航光电")
 # plt_image_geGuZhiBiao_array("300003", "乐普医疗", "002923", "润都股份", "002755", "奥赛康", "300003", "乐普医疗", "002923", "润都股份")
