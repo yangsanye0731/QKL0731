@@ -34,7 +34,6 @@ def create_content(database_id, title, ce_lve_lei_xing, tu_pian, mark, gai_nian,
     database.retrieve_database(
         database_id=database_id, get_properties=True
     )
-    print(database.properties_list)
 
     PROPERTY = Properties()
     PROPERTY.set_title("title", title + "(" + common.zhangdiefu(code) + ")")

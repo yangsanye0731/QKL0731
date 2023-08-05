@@ -463,7 +463,6 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng,
     # ts = tushare.get_k_data(code, ktype=type)
     data_history = tushare.get_hist_data(code, ktype=type, end=timedatestr)
     data_history = data_history.iloc[::-1]
-    print(data_history)
     ts = data_history.reset_index()
     ts = ts[["open", "close", "high", "low", "volume"]]
 

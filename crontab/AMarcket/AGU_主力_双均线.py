@@ -30,7 +30,7 @@ common_notion.clear_database(database_id)
 
 #######################################################################################################################
 # ########################################################################################################## 跨域5周线策略
-def strategy(zhouqi, endstr):
+def strategy(zhouqi, endstr, hui_ce_yue_fen=time.strftime("%Y%m", time.localtime())):
     # 局部变量初始化
     count = 0
     count_b = 0
@@ -51,7 +51,7 @@ def strategy(zhouqi, endstr):
     url = 'https://hook.us1.make.com/r7gj5cb1go2l7x23i44tnyivdj7sy7ei'
 
     # 打开Excel文件
-    workbook = openpyxl.load_workbook('定向增发.xlsx')
+    workbook = openpyxl.load_workbook('定向增发_' + hui_ce_yue_fen + '.xlsx')
     # 选择工作表
     sheet_names = workbook.sheetnames
     print(sheet_names)
@@ -168,3 +168,6 @@ def strategy(zhouqi, endstr):
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
 count_result_b, count_result_e = strategy('D', time_str1)
 common.dingding_markdown_msg_03("AGU_主力_双均线执行完成", "AGU_主力_双均线执行完成")
+
+# 按月进行回测
+# count_result_b, count_result_e = strategy('D', time_str1, "202301")
