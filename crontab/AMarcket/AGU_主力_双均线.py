@@ -22,9 +22,11 @@ import common
 import common_mysqlUtil
 import openpyxl
 import common_notion
+
 # Notion数据库ID：任务跟踪（Auto）
 database_id = "163fe8f3baa744c2922f78657a7e7066"
 common_notion.clear_database(database_id)
+
 
 #######################################################################################################################
 # ########################################################################################################## 跨域5周线策略
@@ -56,8 +58,7 @@ def strategy(zhouqi, endstr):
 
     for sheet_name in sheet_names:
         sheet = workbook[sheet_name]
-        # 遍历
-        # for codeItem in open('zhuli.txt'):
+        # 遍历Excel文件
         for row in sheet.iter_rows(min_row=2, values_only=True):
             try:
                 column1_value, column2_value, column3_value, column4_value, column5_value, \
