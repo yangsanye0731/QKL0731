@@ -431,7 +431,8 @@ def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, 
 
 #######################################################################################################################
 ##########################################################################################统一出图（图片顶部无营业额等数据）
-def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, mark="备注", return_type="single"):
+def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng,
+                            timedatestr=time.strftime("%Y-%m-%d", time.localtime()), mark="备注", return_type="single"):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0, 0, 0, 0, 0, 0
     re = ""
     codeName = ''
@@ -459,7 +460,11 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, m
     turnover_rate = "0"
 
     myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="25")
-    ts = tushare.get_k_data(code, ktype=type)
+    # ts = tushare.get_k_data(code, ktype=type)
+    data_history = tushare.get_hist_data(code, ktype=type, end=timedatestr)
+    data_history = data_history.iloc[::-1]
+    print(data_history)
+    ts = data_history.reset_index()
     ts = ts[["open", "close", "high", "low", "volume"]]
 
     # 画双均线图
@@ -1920,7 +1925,8 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
-# plt_image_tongyichutu_2("601100", "D", "【全部代码】双均线144", "【全部代码】双均线144", '2023-08-05',
+
+# plt_image_tongyichutu_2("601100", "D", "【全部代码】双均线144", "【全部代码】双均线144",
 #                         '这是备注信息这是备注信息这是备注信息这是备注信息这是备注信息')
 
 # plt_image_geGuZhiBiao_tradingview("002179", "中航光电")
