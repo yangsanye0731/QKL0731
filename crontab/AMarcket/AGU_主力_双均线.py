@@ -100,15 +100,16 @@ def strategy(zhouqi, endstr):
                     # }
                     # requests.post(url, data=data)
 
-                    image_path = common_image.plt_image_tongyichutu_2(codeItem,
-                                                                      "D",
-                                                                      "【定向增发】双均线10",
-                                                                      "【定向增发】双均线10", time_str, mark)
+                    image_path, gai_nian = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                                "D",
+                                                                                "【定向增发】双均线10",
+                                                                                "【定向增发】双均线10", time_str, mark, 'multi')
 
                     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
                     print(image_url)
                     common_notion.create_content(database_id=database_id, title=column2_value,
-                                                 ce_lve_lei_xing='10天双均线金叉', tu_pian=image_url, mark=mark)
+                                                 ce_lve_lei_xing='10天双均线金叉', tu_pian=image_url,
+                                                 mark=mark, gai_nian=gai_nian, code=codeItem)
 
                 if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
                     print("双均线60：" + codeItem)
@@ -120,14 +121,15 @@ def strategy(zhouqi, endstr):
                     # }
                     # requests.post(url, data=data)
 
-                    image_path = common_image.plt_image_tongyichutu_2(codeItem,
-                                                                      "D",
-                                                                      "【定向增发】双均线60",
-                                                                      "【定向增发】双均线60", time_str, mark)
+                    image_path, gai_nian = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                                "D",
+                                                                                "【定向增发】双均线60",
+                                                                                "【定向增发】双均线60", time_str, mark, 'multi')
                     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
                     print(image_url)
                     common_notion.create_content(database_id=database_id, title=column2_value,
-                                                 ce_lve_lei_xing='60天双均线金叉', tu_pian=image_url, mark=mark)
+                                                 ce_lve_lei_xing='60天双均线金叉', tu_pian=image_url,
+                                                 mark=mark, gai_nian=gai_nian, code=codeItem)
 
                 if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
                     print("双均线144：" + codeItem)
@@ -139,15 +141,16 @@ def strategy(zhouqi, endstr):
                     # }
                     # requests.post(url, data=data)
 
-                    image_path = common_image.plt_image_tongyichutu_2(codeItem,
-                                                                      "D",
-                                                                      "【定向增发】双均线144",
-                                                                      "【定向增发】双均线144", time_str, mark)
+                    image_path, gai_nian = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                                "D",
+                                                                                "【定向增发】双均线144",
+                                                                                "【定向增发】双均线144", time_str, mark, 'multi')
 
                     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
                     print(image_url)
                     common_notion.create_content(database_id=database_id, title=column2_value,
-                                                 ce_lve_lei_xing='144天双均线金叉', tu_pian=image_url, mark=mark)
+                                                 ce_lve_lei_xing='144天双均线金叉', tu_pian=image_url,
+                                                 mark=mark, gai_nian=gai_nian, code=codeItem)
 
                 count_b = count_b + 1
 

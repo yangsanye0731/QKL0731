@@ -431,7 +431,7 @@ def plt_image_tongyichutu_PBX(code, type, pathType, guizeMingcheng, pbx4, pbx6, 
 
 #######################################################################################################################
 ##########################################################################################统一出图（图片顶部无营业额等数据）
-def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, mark):
+def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, mark="备注", return_type="single"):
     eps, epsup, yingyeup, eps_2, epsup_2, yingyeup_2 = 0, 0, 0, 0, 0, 0
     re = ""
     codeName = ''
@@ -485,7 +485,6 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, m
     plt.xlabel('日期，规则：' + guizeMingcheng, fontproperties=myfont)
     plt.ylabel('价格 ' + common.zhangdiefu(code), fontproperties=myfont)
 
-
     # 设置坐标轴范围
     changdu = len(ts)
     if changdu > 200:
@@ -504,7 +503,12 @@ def plt_image_tongyichutu_2(code, type, pathType, guizeMingcheng, timedatestr, m
     plt.close()
 
     image_path = path + os.sep + timeStr1 + "_" + codeName + suiji_str + ".png"
-    return image_path
+    if return_type == 'single':
+        return image_path
+    elif return_type == 'multi':
+        return image_path, re
+    else:
+        return image_path
 
 
 #######################################################################################################################
@@ -530,7 +534,7 @@ def plt_image_tongyichutu_3(code, type, pathType, guizeMingcheng):
     if len(data) > 0:
         plate = data[0][2]
         codeName = data[0][1]
-        if (len(plate) > 0):
+        if len(plate) > 0:
             json_list = json.loads(plate)
             items = json_list.items()
             count = 1
@@ -1915,7 +1919,6 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
     plt.close()
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
-
 
 # plt_image_tongyichutu_2("601100", "D", "【全部代码】双均线144", "【全部代码】双均线144", '2023-08-05',
 #                         '这是备注信息这是备注信息这是备注信息这是备注信息这是备注信息')
