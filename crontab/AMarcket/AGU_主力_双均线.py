@@ -3,7 +3,6 @@ import numpy as num
 import talib as ta
 import tushare as ts
 import time
-import requests
 
 #######################################################################################################################
 # ############################################################################################### 配置程序应用所需要环境PATH
@@ -22,7 +21,10 @@ import common_image
 import common
 import common_mysqlUtil
 import openpyxl
-
+import common_notion
+# Notion数据库ID：任务跟踪（Auto）
+database_id = "163fe8f3baa744c2922f78657a7e7066"
+common_notion.clear_database(database_id)
 
 #######################################################################################################################
 # ########################################################################################################## 跨域5周线策略
@@ -97,10 +99,15 @@ def strategy(zhouqi, endstr):
                     # }
                     # requests.post(url, data=data)
 
-                    common_image.plt_image_tongyichutu_2(codeItem,
-                                                         "D",
-                                                         "【定向增发】双均线10",
-                                                         "【定向增发】双均线10", time_str, mark)
+                    image_path = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                      "D",
+                                                                      "【定向增发】双均线10",
+                                                                      "【定向增发】双均线10", time_str, mark)
+
+                    image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+                    print(image_url)
+                    common_notion.create_content(database_id=database_id, title=column2_value,
+                                                 ce_lve_lei_xing='10天双均线金叉', tu_pian=image_url, mark=mark)
 
                 if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
                     print("双均线60：" + codeItem)
@@ -112,10 +119,14 @@ def strategy(zhouqi, endstr):
                     # }
                     # requests.post(url, data=data)
 
-                    common_image.plt_image_tongyichutu_2(codeItem,
-                                                         "D",
-                                                         "【定向增发】双均线60",
-                                                         "【定向增发】双均线60", time_str, mark)
+                    image_path = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                      "D",
+                                                                      "【定向增发】双均线60",
+                                                                      "【定向增发】双均线60", time_str, mark)
+                    image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+                    print(image_url)
+                    common_notion.create_content(database_id=database_id, title=column2_value,
+                                                 ce_lve_lei_xing='60天双均线金叉', tu_pian=image_url, mark=mark)
 
                 if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
                     print("双均线144：" + codeItem)
@@ -127,12 +138,18 @@ def strategy(zhouqi, endstr):
                     # }
                     # requests.post(url, data=data)
 
-                    common_image.plt_image_tongyichutu_2(codeItem,
-                                                         "D",
-                                                         "【定向增发】双均线144",
-                                                         "【定向增发】双均线144", time_str, mark)
+                    image_path = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                      "D",
+                                                                      "【定向增发】双均线144",
+                                                                      "【定向增发】双均线144", time_str, mark)
 
-                    count_b = count_b + 1
+                    image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+                    print(image_url)
+                    common_notion.create_content(database_id=database_id, title=column2_value,
+                                                 ce_lve_lei_xing='144天双均线金叉', tu_pian=image_url, mark=mark)
+
+                count_b = count_b + 1
+
             except (IOError, TypeError, NameError, IndexError, Exception) as e:
                 print(e)
                 common.dingding_markdown_msg_03("AGU_主力_双均线执行异常", "AGU_主力_双均线执行异常")
