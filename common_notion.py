@@ -21,13 +21,12 @@ sys.path.append(rootPath)
 curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
-print(rootPath1)
 import common
 
 integrations_token = "secret_rxaAzcdjzdVq4pe1hrkqkhzxJlm2isBh96Z4rxdB9Cc"
 
 
-def create_content(database_id, title, ce_lve_lei_xing, tu_pian, mark, gai_nian, code):
+def create_content(database_id, title, ce_lve_lei_xing, tu_pian, mark, gai_nian, code, create_time):
     database = Database(
         integrations_token=integrations_token
     )
@@ -41,7 +40,7 @@ def create_content(database_id, title, ce_lve_lei_xing, tu_pian, mark, gai_nian,
     PROPERTY.set_rich_text("备注", mark)
     gai_nian = gai_nian.strip()
     PROPERTY.set_rich_text("概念", gai_nian)
-    PROPERTY.set_rich_text("插入时间", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    PROPERTY.set_rich_text("插入时间", create_time)
     PROPERTY.set_files("图片", files_list=[tu_pian])
     P = Page(integrations_token=integrations_token)
     P.create_page(database_id=database_id, properties=PROPERTY)
@@ -53,7 +52,6 @@ def clear_database(database_id):
     )
     database.find_all_page(database_id=database_id)
     for item in database.result["results"]:
-        print(item["id"])
         P = Page(integrations_token=integrations_token)
         P.archive_page(page_id=item["id"], archived=True)
 
