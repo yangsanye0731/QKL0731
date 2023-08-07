@@ -127,9 +127,7 @@ async def index(page, cookie1, url, codeName, endstr):
 #######################################################################################################################
 #############################################################################################################数据爬虫入口
 async def main(url, codeName, endstr):
-    print(datetime.datetime.now())
     await asyncio.sleep(30 + random.randint(60, 200))
-    print(datetime.datetime.now())
     js1 = '''() =>{
            Object.defineProperties(navigator,{
            webdriver:{
