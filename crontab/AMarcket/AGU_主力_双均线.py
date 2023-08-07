@@ -173,7 +173,7 @@ if __name__ == "__main__":
         common_notion.clear_database(database_id)
 
         time_str1 = time.strftime("%Y-%m-%d", time.localtime())
-        strategy(zhouqi='D', endstr=time_str1,database_id=database_id)
+        strategy(zhouqi='D', endstr=time_str1, database_id=database_id)
         common.dingding_markdown_msg_03("AGU_主力_双均线执行完成", "AGU_主力_双均线执行完成")
     else:
         logging.info("开始策略回测逻辑")

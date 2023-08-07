@@ -1,12 +1,11 @@
 import asyncio
-import datetime
+from datetime import datetime, timedelta
 import json
 import time
 
 import numpy as num
 import pandas as pd
 import talib as ta
-from bypy import ByPy
 from pyppeteer import launch
 import random
 
@@ -20,7 +19,7 @@ rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]
 sys.path.append(rootPath)
 import common
 import common_image
-import common_zhibiao
+import common_notion
 from common_constants import const
 
 
@@ -41,7 +40,7 @@ async def load_cookie():
 
 #######################################################################################################################
 ################################################################################################################数据解析
-async def index(page, cookie1, url, codeName):
+async def index(page, cookie1, url, codeName, endstr):
     try:
         for cookie in cookie1:
             await page.setCookie(cookie)
@@ -52,6 +51,11 @@ async def index(page, cookie1, url, codeName):
         data_history = pd.DataFrame(json_list.get('data').get('item'),
                                     columns=['timestamp', 'volume', 'open', 'high', 'low', 'close', 'chg', 'percent',
                                              'turnoverrate', 'amount', 'volume_post', 'amount_post'])
+
+        # 将毫秒级时间戳转换为秒级时间戳，并创建一个表示指定日期的时间戳
+        target_date = pd.Timestamp(endstr)
+        target_timestamp = target_date.timestamp() * 1000  # 转换为毫秒级时间戳
+        data_history = data_history[data_history['timestamp'] <= target_timestamp]
 
         closeArray = num.array(data_history['close'])
         doubleCloseArray = num.asarray(closeArray, dtype='double')
@@ -86,6 +90,10 @@ async def index(page, cookie1, url, codeName):
                                                                           "【01雪球指数】双均线10交叉" + time_str,
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
+            image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+            common_notion.create_content(database_id="355a99d2c49a49749fc329cc2606fcda", title=codeName,
+                                         ce_lve_lei_xing='10天双均线金叉', tu_pian=image_url,
+                                         mark="", gai_nian="雪球概念", code=None, create_time=endstr)
 
         if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
             image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
@@ -94,6 +102,10 @@ async def index(page, cookie1, url, codeName):
                                                                           "【01雪球指数】双均线60交叉" + time_str,
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
+            image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+            common_notion.create_content(database_id="355a99d2c49a49749fc329cc2606fcda", title=codeName,
+                                         ce_lve_lei_xing='60天双均线金叉', tu_pian=image_url,
+                                         mark="", gai_nian="雪球概念", code=None, create_time=endstr)
 
         if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
             image_path = common_image.plt_image_tongyichutu_zhishu_xueqiu(data_history['close'], codeItem, codeName,
@@ -102,6 +114,10 @@ async def index(page, cookie1, url, codeName):
                                                                           "【01雪球指数】双均线60交叉" + time_str,
                                                                           str(zhangdiefu[-1]),
                                                                           "%.2f" % huanshoulv[-1])
+            image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+            common_notion.create_content(database_id="355a99d2c49a49749fc329cc2606fcda", title=codeName,
+                                         ce_lve_lei_xing='144天双均线金叉', tu_pian=image_url,
+                                         mark="", gai_nian="雪球概念", code=None, create_time=endstr)
 
     except (IOError, TypeError, NameError, IndexError, TimeoutError, Exception) as e:
         common.dingding_markdown_msg_02("AGU_雪球概念_双均线执行异常", "AGU_雪球概念_双均线执行异常")
@@ -110,7 +126,7 @@ async def index(page, cookie1, url, codeName):
 
 #######################################################################################################################
 #############################################################################################################数据爬虫入口
-async def main(url, codeName):
+async def main(url, codeName, endstr):
     print(datetime.datetime.now())
     await asyncio.sleep(30 + random.randint(60, 200))
     print(datetime.datetime.now())
@@ -140,26 +156,38 @@ async def main(url, codeName):
     cookies2 = await page.cookies()
     await save_cookie(cookies2)
     cookie = await load_cookie()
-    await index(page, cookie, url, codeName)
+    await index(page, cookie, url, codeName, endstr)
     await browser.close()
 
 
 #######################################################################################################################
 #############################################################################################################遍历雪球概念
-count = 0
-for key, value in const.XUEQIUGAINIAN:
-    codeItem = key
-    count = count + 1
-    print(codeItem)
-    print(value)
-    print(count)
-    curtime = str(int(time.time() * 1000))
-    asyncio.get_event_loop().run_until_complete(main(
-        'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key +
-        '&begin=' + curtime + '&period=day&type=before&count=-10000', value))
+
+# 按月进行回测,回测1月份数据
+# 设置起始日期为2023年1月1日
+start_date = datetime(2023, 7, 15)
+
+# 计算结束日期为2023年2月1日（不包含2月1日）
+end_date = datetime(2023, 7, 20)
+
+# 循环遍历日期
+current_date = start_date
+while current_date < end_date:
+    time_str1 = current_date.strftime('%Y-%m-%d')
+
+    count = 0
+    for key, value in const.XUEQIUGAINIAN:
+        codeItem = key
+        count = count + 1
+        print(codeItem)
+        print(value)
+        print(count)
+        curtime = str(int(time.time() * 1000))
+        asyncio.get_event_loop().run_until_complete(main(
+            'https://stock.xueqiu.com/v5/stock/chart/kline.json?symbol=' + key +
+            '&begin=' + curtime + '&period=day&type=before&count=-10000', value, time_str1))
+    current_date += timedelta(days=1)
 
 #######################################################################################################################
 ################################################################################################################数据同步
-bp = ByPy()
-timeStr1 = time.strftime("%Y%m%d", time.localtime())
 common.dingding_markdown_msg_02("AGU_雪球概念_双均线执行完成", "AGU_雪球概念_双均线执行完成")

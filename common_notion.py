@@ -35,13 +35,17 @@ def create_content(database_id, title, ce_lve_lei_xing, tu_pian, mark, gai_nian,
     )
 
     PROPERTY = Properties()
-    PROPERTY.set_title("title", title + "(" + common.zhangdiefu(code) + ")")
+    if code is not None:
+        PROPERTY.set_title("title", title + "(" + common.zhangdiefu(code) + ")")
+    else:
+        PROPERTY.set_title("title", title)
     PROPERTY.set_rich_text("策略类型", ce_lve_lei_xing)
     PROPERTY.set_rich_text("备注", mark)
     gai_nian = gai_nian.strip()
     PROPERTY.set_rich_text("概念", gai_nian)
     PROPERTY.set_rich_text("插入时间", create_time)
-    PROPERTY.set_files("图片", files_list=[tu_pian])
+    if tu_pian is not None:
+        PROPERTY.set_files("图片", files_list=[tu_pian])
     P = Page(integrations_token=integrations_token)
     P.create_page(database_id=database_id, properties=PROPERTY)
 
@@ -55,5 +59,9 @@ def clear_database(database_id):
         P = Page(integrations_token=integrations_token)
         P.archive_page(page_id=item["id"], archived=True)
 
+
 # create_content("163fe8f3baa744c2922f78657a7e7066","title", "ce_lve_lei_xing", "tu_pian", "mark")
 # clear_database("163fe8f3baa744c2922f78657a7e7066")
+# create_content(database_id="355a99d2c49a49749fc329cc2606fcda", title="codeName",
+#                ce_lve_lei_xing='60天双均线金叉', tu_pian=None,
+#                mark="", gai_nian="雪球概念", code=None, create_time="2023-08-01")
