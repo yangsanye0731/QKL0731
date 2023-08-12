@@ -18,6 +18,8 @@ import common
 import common_mysqlUtil
 from datetime import datetime, timedelta
 import logging
+import warnings
+warnings.filterwarnings("ignore")
 
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -27,7 +29,6 @@ logging.getLogger().setLevel(logging.INFO)
 #######################################################################################################################
 ###########################################################################################################跨域5周线策略
 def exec(codeItem):
-    print(codeItem)
     data = common_mysqlUtil.select_all_code_one(codeItem)
     if len(data) > 0:
         codeName = data[0][1]

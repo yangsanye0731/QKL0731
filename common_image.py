@@ -1243,7 +1243,6 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
     ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_D"], label="D")
-    print("%.2f" % kdj_60.tail(1)["KDJ_K"])
     ax_kdj_60.set_xlabel(
         "KDJ（60），KDJ 快线：" + "%.2f" % kdj_60.tail(1)["KDJ_K"] + "，慢线：" + "%.2f" % kdj_60.tail(1)["KDJ_D"],
         fontproperties=myfont)
