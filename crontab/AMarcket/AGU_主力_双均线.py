@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 import logging
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.ERROR)
 
 #######################################################################################################################
 # ############################################################################################### 配置程序应用所需要环境PATH

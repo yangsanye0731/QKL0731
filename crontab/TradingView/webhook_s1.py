@@ -95,20 +95,23 @@ def exec_d(codeItem, zhangdiefu, price):
 
 
 def main(choice):
-    data = []
-    headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "ma10[-3]", "ma10[-2]", "ma10[-1]"]
     if choice == '1':
+        data = []
+        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "ma10[-3]", "ma10[-2]", "ma10[-1]"]
         my_list = dic.get('chicang_list').split(",")
         index = 0
         while index < len(my_list):
             image_url_path, table_item_data1 = exec(my_list[index])
             data.append(table_item_data1)
             index += 1
+        table = tabulate(data, headers, tablefmt="grid")
     elif choice == '2':
+        data = []
+        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "ma10[-3]", "ma10[-2]", "ma10[-1]"]
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
+        table = tabulate(data, headers, tablefmt="grid")
 
-    table = tabulate(data, headers, tablefmt="grid")
     print(table)
 
 
@@ -122,9 +125,8 @@ if __name__ == "__main__":
             exec(sys.argv[1])
     else:
         print("==============操作系统面板命令行==================")
+        print("(0) 注意信息")
         print("(1) 当前情况")
-        print("(2) 整体情况")
-        print("(3) 行业情况")
         print("===============================================")
 
         choice = input("请输入命令编号: ").strip().lower()
