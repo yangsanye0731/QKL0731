@@ -167,8 +167,8 @@ def another_operation(param):
             time.sleep(1)
             common.dingding_markdown_msg_04(title, text)
             time.sleep(60)
-            common_mysqlUtil.release_lock()
-            logging.info("释放锁成功")
+        common_mysqlUtil.release_lock()
+        logging.info("释放锁成功")
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
         logging.info("获取锁失败")
 
