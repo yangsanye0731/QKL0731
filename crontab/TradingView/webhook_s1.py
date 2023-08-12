@@ -45,7 +45,7 @@ def exec(codeItem):
 
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
-    logging.info("编码： %s,名称：%s", codeItem, codeName)
+    logging.debug("编码： %s,名称：%s", codeItem, codeName)
 
     # 日线
     table_item_data = exec_d(codeItem, zhangdiefu, price)
@@ -149,7 +149,7 @@ def another_operation(param):
         start_time = time.time()
         title = "触发一级响应,进入一级响应SOP"
         text = "触发一级响应,进入一级响应SOP"
-        while time.time() - start_time < 36:
+        while time.time() - start_time < 3600:
             common.dingding_markdown_msg_04(title, text)
             time.sleep(1)
             common.dingding_markdown_msg_04(title, text)

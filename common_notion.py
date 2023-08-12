@@ -78,7 +78,7 @@ def find_config_item_from_database(database_id):
         value = item["properties"]["value"]["rich_text"][0]["plain_text"]
         dic[name] = value
 
-    logging.info("配置项集合：%s", dic)
+    logging.debug("配置项集合：%s", dic)
     return dic
 
 
