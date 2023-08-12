@@ -19,6 +19,7 @@ import common_mysqlUtil
 from datetime import datetime, timedelta
 import logging
 import warnings
+import threading
 
 warnings.filterwarnings("ignore")
 
@@ -26,6 +27,7 @@ warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger().setLevel(logging.WARN)
 import common_notion
+
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 
@@ -72,6 +74,7 @@ def exec_d(codeItem, zhangdiefu, price):
 
     ma144_60 = ta.SMA(doubleCloseArray_60, timeperiod=144)
     sma144_60 = ta.EMA(ma144_60, timeperiod=144)
+    state_60 = state(ma10_60, sma10_60)
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
@@ -88,16 +91,36 @@ def exec_d(codeItem, zhangdiefu, price):
 
     ma144 = ta.SMA(doubleCloseArray, timeperiod=144)
     sma144 = ta.EMA(ma144, timeperiod=144)
+    state_D = state(ma10, sma10)
 
-    table_item_data = [zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], ma10[-3], ma10[-2], ma10[-1]]
+    table_item_data = [zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2], ma10[-1],
+                       state_D]
 
     return table_item_data
+
+
+def state(ma10, sma10):
+    item_state = ""
+    if ma10[-3] < ma10[-2] < ma10[-1]:
+        item_state = "上升"
+    if ma10[-3] < ma10[-2] > ma10[-1]:
+        item_state = "顶部"
+    if ma10[-3] > ma10[-2] > ma10[-1]:
+        item_state = "下降"
+    if ma10[-3] > ma10[-2] < ma10[-1]:
+        item_state = "底部"
+    if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
+        item_state = "上穿"
+    if ma10[-1] < sma10[-1] and ma10[-2] > sma10[-2]:
+        item_state = "下穿"
+    return item_state
 
 
 def main(choice):
     if choice == '1':
         data = []
-        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "ma10[-3]", "ma10[-2]", "ma10[-1]"]
+        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
+                   "ma10[-1]", "state_d"]
         my_list = dic.get('chicang_list').split(",")
         index = 0
         while index < len(my_list):
@@ -107,12 +130,43 @@ def main(choice):
         table = tabulate(data, headers, tablefmt="grid")
     elif choice == '2':
         data = []
-        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "ma10[-3]", "ma10[-2]", "ma10[-1]"]
+        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
+                   "ma10[-1]", "state_d"]
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
 
     print(table)
+    return data
+
+
+# 定义一个函数，作为线程要执行的操作
+def another_operation(param):
+    # 获取当前时间
+    start_time = time.time()
+    title = "触发一级响应,进入一级响应SOP"
+    text = "触发一级响应,进入一级响应SOP"
+    while time.time() - start_time < 3600:
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(1)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(1)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(1)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(1)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(5)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(1)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(1)
+        common.dingding_markdown_msg_04(title, text)
+        time.sleep(60)
+
+
+def has_active_threads():
+    return threading.active_count() > 1
 
 
 #######################################################################################################################
@@ -120,7 +174,21 @@ def main(choice):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == '1':
-            main('1')
+            data = main('1')
+            for row in data:
+                zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
+                c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
+                c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
+
+                if (c1 or c2) and not has_active_threads():
+                    param_value = "一级响应启动"
+                    # 创建一个线程，并指定要执行的函数
+                    thread = threading.Thread(target=another_operation, args=(param_value,))
+                    # 启动线程
+                    thread.start()
+                    break
+                else:
+                    print("已经有线程正在运行，不启动新线程")
         else:
             exec(sys.argv[1])
     else:
