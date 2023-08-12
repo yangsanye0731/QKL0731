@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-logging.getLogger().setLevel(logging.WARN)
+logging.getLogger().setLevel(logging.INFO)
 import common_notion
 
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
@@ -142,27 +142,35 @@ def main(choice):
 
 # 定义一个函数，作为线程要执行的操作
 def another_operation(param):
-    # 获取当前时间
-    start_time = time.time()
-    title = "触发一级响应,进入一级响应SOP"
-    text = "触发一级响应,进入一级响应SOP"
-    while time.time() - start_time < 3600:
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(1)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(1)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(1)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(1)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(5)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(1)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(1)
-        common.dingding_markdown_msg_04(title, text)
-        time.sleep(60)
+    try:
+        common_mysqlUtil.acquire_lock()
+        logging.info("获取锁成功")
+        # 获取当前时间
+        start_time = time.time()
+        title = "触发一级响应,进入一级响应SOP"
+        text = "触发一级响应,进入一级响应SOP"
+        while time.time() - start_time < 36:
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(1)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(1)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(1)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(1)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(5)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(1)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(1)
+            common.dingding_markdown_msg_04(title, text)
+            time.sleep(60)
+            common_mysqlUtil.release_lock()
+            logging.info("释放锁成功")
+    except (IOError, TypeError, NameError, IndexError, Exception) as e:
+        logging.info("获取锁失败")
+
 
 
 def has_active_threads():
