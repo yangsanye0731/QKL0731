@@ -19,11 +19,14 @@ import common_mysqlUtil
 from datetime import datetime, timedelta
 import logging
 import warnings
+
 warnings.filterwarnings("ignore")
 
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-logging.getLogger().setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.WARN)
+import common_notion
+dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 
 #######################################################################################################################
@@ -40,12 +43,11 @@ def exec(codeItem):
 
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
-    logging.debug("编码： %s,名称：%s", codeItem, codeName)
+    logging.info("编码： %s,名称：%s", codeItem, codeName)
 
     # 日线
     table_item_data = exec_d(codeItem, zhangdiefu, price)
 
-    logging.debug("ZDF： %s,  JG：%s", zhangdiefu, price)
     # 发送钉钉消息
     common.dingding_markdown_msg_03(
         time_str + '触发TradingView策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
@@ -96,7 +98,7 @@ def main(choice):
     data = []
     headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "ma10[-3]", "ma10[-2]", "ma10[-1]"]
     if choice == '1':
-        my_list = ['399006', '300482', '300835']
+        my_list = dic.get('chicang_list').split(",")
         index = 0
         while index < len(my_list):
             image_url_path, table_item_data1 = exec(my_list[index])
@@ -120,8 +122,9 @@ if __name__ == "__main__":
             exec(sys.argv[1])
     else:
         print("==============操作系统面板命令行==================")
-        print("(1) 当前持仓")
-        print("(2) WanFuShengWu")
+        print("(1) 当前情况")
+        print("(2) 整体情况")
+        print("(3) 行业情况")
         print("===============================================")
 
         choice = input("请输入命令编号: ").strip().lower()
