@@ -150,6 +150,7 @@ def another_operation(param):
         title = "触发一级响应,进入一级响应SOP"
         text = "触发一级响应,进入一级响应SOP"
         while time.time() - start_time < 3600:
+            logging.info("消息发送中，%s", str(time.time() - start_time))
             common.dingding_markdown_msg_04(title, text)
             time.sleep(1)
             common.dingding_markdown_msg_04(title, text)
