@@ -75,7 +75,6 @@ def strategy(zhouqi, endstr, database_id, hui_ce_yue_fen=time.strftime("%Y%m", t
 
             data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
             data_history = data_history.iloc[::-1]
-            print(data_history)
 
             closeArray = num.array(data_history['close'])
             doubleCloseArray = num.asarray(closeArray, dtype='double')
