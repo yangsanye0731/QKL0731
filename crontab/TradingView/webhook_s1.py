@@ -30,16 +30,34 @@ import common_notion
 
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
+jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'),
+                ('399234', '水电指数'), ('399235', '建筑指数'), ('399239', 'IT指数'), ('399365', '国证农业'),
+                ('399241', '地产指数'), ('399248', '文化指数'), ('399353', '国证物流'), ('399363', '计算机指数'),
+                ('399368', '国证军工'), ('399382', '1000材料'), ('399394', '国证医药'), ('399395', '国证有色'),
+                ('399396', '国证食品'), ('399412', '国证新能'), ('399432', '国证汽车与零配件'), ('399434', '国证传媒'),
+                ('399437', '国证证券'), ('399431', '国证银行'), ('399997', '中证白酒'), ('600519', '白酒_茅台'),
+                ('399434', '国证传媒'), ('399435', '国证农林牧渔'), ('399441', '国证生物医药'), ('399693', '安防产业'),
+                ('399804', '中证体育'), ('399807', '中证高铁'), ('399812', '中证养老'), ('399976', '中证新能源汽车'),
+                ('399970', '中证移动互联网'), ('399989', '中证医疗'),
+                ('399993', '中证生物科技'), ('399996', '中证智能家居'), ('399998', '中证煤炭'), ('601088', '煤炭_神华'),
+                ('512480', '半导体ETF'), ('512760', '半导体50ETF'), ('512930', 'AIETF'), ('515050', '5GETF'),
+                ('512690', '酒ETF'), ('518880', '黄金ETF'), ('515110', '一带一路国企ETF'), ('159995', '芯片ETF'),
+                ('515000', '科技ETF'), ('515030', '新能源车ETF'), ('512170', '医疗ETF'), ('512660', '军工ETF'),
+                ('515880', '通信ETF'), ('515980', '人工智能ETF')]
+
 
 #######################################################################################################################
 ###########################################################################################################跨域5周线策略
 def exec(codeItem):
+    if codeItem.startswith("399") or codeItem.startswith("51"):
+        for key, value in jsonDicCode1:
+            if key == codeItem:
+                codeName = value
+
     data = common_mysqlUtil.select_all_code_one(codeItem)
     if len(data) > 0:
         codeName = data[0][1]
 
-    if codeItem == '399006':
-        codeName = "创业板指"
     image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
 
@@ -48,17 +66,17 @@ def exec(codeItem):
     logging.debug("编码： %s,名称：%s", codeItem, codeName)
 
     # 日线
-    table_item_data = exec_d(codeItem, zhangdiefu, price)
+    table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
 
     # 发送钉钉消息
     common.dingding_markdown_msg_03(
-        time_str + '触发TradingView策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
-        time_str + '触发TradingView策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
+        time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
+        time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
         + "\n\n> ![screenshot](" + image_url + ")")
     return image_path, table_item_data
 
 
-def exec_d(codeItem, zhangdiefu, price):
+def exec_d(codeItem, zhangdiefu, price, codeName):
     # ======================================================60分钟数据
     data_history_60 = ts.get_k_data(codeItem, ktype='60')
 
@@ -93,7 +111,7 @@ def exec_d(codeItem, zhangdiefu, price):
     sma144 = ta.EMA(ma144, timeperiod=144)
     state_D = state(ma10, sma10)
 
-    table_item_data = [zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2], ma10[-1],
+    table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2], ma10[-1],
                        state_D]
 
     return table_item_data
@@ -119,7 +137,7 @@ def state(ma10, sma10):
 def main(choice):
     if choice == '1':
         data = []
-        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
+        headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d"]
         my_list = dic.get('chicang_list').split(",")
         index = 0
@@ -130,7 +148,7 @@ def main(choice):
         table = tabulate(data, headers, tablefmt="grid")
     elif choice == '2':
         data = []
-        headers = ["ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
+        headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d"]
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
@@ -173,11 +191,6 @@ def another_operation(param):
         logging.info("获取锁失败")
 
 
-
-def has_active_threads():
-    return threading.active_count() > 1
-
-
 #######################################################################################################################
 ##############################################################################################################主执行程序
 if __name__ == "__main__":
@@ -185,19 +198,17 @@ if __name__ == "__main__":
         if sys.argv[1] == '1':
             data = main('1')
             for row in data:
-                zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
+                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
                 c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
                 c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
 
-                if (c1 or c2) and not has_active_threads():
+                if c1 or c2:
                     param_value = "一级响应启动"
                     # 创建一个线程，并指定要执行的函数
                     thread = threading.Thread(target=another_operation, args=(param_value,))
                     # 启动线程
                     thread.start()
                     break
-                else:
-                    print("已经有线程正在运行，不启动新线程")
         else:
             exec(sys.argv[1])
     else:
