@@ -93,6 +93,7 @@ def strategy(zhouqi, endstr, database_id, hui_ce_yue_fen=time.strftime("%Y%m", t
 
             ma144 = ta.SMA(doubleCloseArray, timeperiod=144)
             sma144 = ta.EMA(ma144, timeperiod=144)
+            zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
 
             if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
                 logging.debug("双均线10：code为：%s,名称为：%s", codeItem, codeName)
@@ -114,6 +115,11 @@ def strategy(zhouqi, endstr, database_id, hui_ce_yue_fen=time.strftime("%Y%m", t
                                              ce_lve_lei_xing='10天双均线金叉', tu_pian=image_url,
                                              mark=mark, gai_nian=gai_nian, code=codeItem, create_time=time_str)
 
+                common.dingding_markdown_msg_03(
+                    time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
+                    time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
+                    + "\n\n> ![screenshot](" + image_url + ")")
+
             if ma60[-1] > sma60[-1] and ma60[-2] < sma60[-2]:
                 logging.debug("双均线60：code为：%s,名称为：%s", codeItem, codeName)
                 fo_60.write(codeItem + "\n")
@@ -132,6 +138,11 @@ def strategy(zhouqi, endstr, database_id, hui_ce_yue_fen=time.strftime("%Y%m", t
                 common_notion.create_content(database_id=database_id, title=codeName,
                                              ce_lve_lei_xing='60天双均线金叉', tu_pian=image_url,
                                              mark=mark, gai_nian=gai_nian, code=codeItem, create_time=time_str)
+
+                common.dingding_markdown_msg_03(
+                    time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
+                    time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
+                    + "\n\n> ![screenshot](" + image_url + ")")
 
             if ma144[-1] > sma144[-1] and ma144[-2] < sma144[-2]:
                 logging.debug("双均线144：code为：%s,名称为：%s", codeItem, codeName)
@@ -152,6 +163,11 @@ def strategy(zhouqi, endstr, database_id, hui_ce_yue_fen=time.strftime("%Y%m", t
                 common_notion.create_content(database_id=database_id, title=codeName,
                                              ce_lve_lei_xing='144天双均线金叉', tu_pian=image_url,
                                              mark=mark, gai_nian=gai_nian, code=codeItem, create_time=time_str)
+
+                common.dingding_markdown_msg_03(
+                    time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
+                    time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
+                    + "\n\n> ![screenshot](" + image_url + ")")
 
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
