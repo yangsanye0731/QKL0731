@@ -5,6 +5,7 @@ import talib as ta
 import tushare as ts
 import time
 from datetime import datetime, timedelta
+import random
 import logging
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -27,6 +28,7 @@ import common
 import common_mysqlUtil
 import common_notion
 
+dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 #######################################################################################################################
 # ########################################################################################################## 跨域5周线策略
@@ -189,7 +191,10 @@ if __name__ == "__main__":
 
         time_str1 = time.strftime("%Y-%m-%d", time.localtime())
         strategy(zhouqi='D', endstr=time_str1, database_id=database_id)
-        common.dingding_markdown_msg_03("触发AGU_行业指数_双均线执行完成", "触发AGU_行业指数_双均线执行完成")
+
+        my_list = dic.get('tixing_list').split(";")
+        text = "【触发行业Tips】" + random.choice(my_list)
+        common.dingding_markdown_msg_03(text, text)
     else:
         logging.info("开始策略回测逻辑")
         # Notion数据库ID：任务跟踪（Auto）（回测）
@@ -216,3 +221,6 @@ if __name__ == "__main__":
             time_str2 = current_date.strftime('%Y%m')
             strategy(zhouqi='D', endstr=time_str1, database_id=database_id, hui_ce_yue_fen=time_str2)
             current_date += timedelta(days=1)
+            my_list = dic.get('tixing_list').split(";")
+            text = "【触发行业Tips】" + random.choice(my_list)
+            common.dingding_markdown_msg_03(text, text)

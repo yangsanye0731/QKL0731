@@ -4,6 +4,7 @@ import talib as ta
 import tushare as ts
 import time
 from tabulate import tabulate
+import random
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -218,6 +219,10 @@ if __name__ == "__main__":
                     # 启动线程
                     thread.start()
                     break
+
+            my_list = dic.get('tixing_list').split(";")
+            text = "【触发Tips】" + random.choice(my_list)
+            common.dingding_markdown_msg_03(text, text)
         else:
             exec(sys.argv[1])
     else:
