@@ -79,7 +79,7 @@ def exec(codeItem):
     table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
 
     # 发送钉钉消息
-    time.sleep(0.1)
+    time.sleep(0.5)
     common.dingding_markdown_msg_03(
         time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
         time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
