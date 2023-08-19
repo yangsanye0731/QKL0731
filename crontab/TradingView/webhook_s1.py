@@ -82,8 +82,8 @@ def exec(codeItem):
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M:%S", time.localtime())
     common.dingding_markdown_msg_03(
-        time_str + '触发' + codeName + '(' + codeItem + ')' + '当前：' + price + ' ' + zhangdiefu,
-        time_str + '触发' + codeName + '(' + codeItem + ')' + '当前：' + price + ' ' + zhangdiefu
+        time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu,
+        time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu
         + "\n\n> ![screenshot](" + image_url + ")")
     return image_path, table_item_data
 
