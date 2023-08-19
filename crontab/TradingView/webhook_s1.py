@@ -77,13 +77,14 @@ def exec(codeItem):
 
     # 日线
     table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
+    # table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2], ma10[-1], state_D]
 
     # 发送钉钉消息
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M:%S", time.localtime())
     common.dingding_markdown_msg_03(
-        time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu,
-        time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu
+        time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' + table_item_data[10],
+        time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' + table_item_data[10]
         + "\n\n> ![screenshot](" + image_url + ")")
     return image_path, table_item_data
 
