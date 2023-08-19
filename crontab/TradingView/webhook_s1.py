@@ -79,6 +79,7 @@ def exec(codeItem):
     table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
 
     # 发送钉钉消息
+    time.sleep(0.1)
     common.dingding_markdown_msg_03(
         time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
         time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
@@ -222,6 +223,7 @@ if __name__ == "__main__":
 
             my_list = dic.get('tixing_list').split(";")
             text = "【触发Tips】" + random.choice(my_list)
+            time.sleep(2)
             common.dingding_markdown_msg_03(text, text)
         else:
             exec(sys.argv[1])
