@@ -80,9 +80,10 @@ def exec(codeItem):
 
     # 发送钉钉消息
     time.sleep(0.5)
+    time_str_1 = time.strftime("%H:%M:%S", time.localtime())
     common.dingding_markdown_msg_03(
-        time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu,
-        time_str + '触发策略' + codeName + '(' + codeItem + ')' + '当前价格：' + price + ' 涨跌幅：' + zhangdiefu
+        time_str + '触发' + codeName + '(' + codeItem + ')' + '当前：' + price + ' ' + zhangdiefu,
+        time_str + '触发' + codeName + '(' + codeItem + ')' + '当前：' + price + ' ' + zhangdiefu
         + "\n\n> ![screenshot](" + image_url + ")")
     return image_path, table_item_data
 
