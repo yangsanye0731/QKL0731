@@ -49,16 +49,17 @@ def sell(code, price, count):
 
 def maximize():
     app = Application(backend='uia')
-    app.connect(title='东方财富终端')
-    app['东方财富终端'].wrapper_object().maximize()
+    print(app.process)
+    app.connect(title='东方财富证券交易')
+    app['东方财富证券交易'].wrapper_object().maximize()
     print(app.windows())
     time.sleep(20)
 
 
 def minimize():
     app = Application(backend='uia')
-    app.connect(title='东方财富终端')
-    app['东方财富终端'].wrapper_object().minimize()
+    app.connect(title='东方财富证券交易')
+    app['东方财富证券交易'].wrapper_object().minimize()
 
 
 if __name__ == "__main__":
