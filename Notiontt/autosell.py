@@ -47,30 +47,31 @@ def sell(code, price, count):
     click(coords=(1015, 557))
 
 
-def maximize():
+def maximize(title_str):
     app = Application(backend='uia')
-    print(app.process)
-    app.connect(title='东方财富证券交易')
-    app['东方财富证券交易'].wrapper_object().maximize()
+    app.connect(title=title_str, timeout=120)
+    app[title_str].wrapper_object().maximize()
     print(app.windows())
-    time.sleep(20)
+    time.sleep(1)
 
 
-def minimize():
+def minimize(title_str):
     app = Application(backend='uia')
-    app.connect(title='东方财富证券交易')
-    app['东方财富证券交易'].wrapper_object().minimize()
+    app.connect(title=title_str, timeout=120)
+    app[title_str].wrapper_object().minimize()
 
 
 if __name__ == "__main__":
-    maximize()
-    sell("300482", "25.01", "100")
-    time.sleep(30)
-    sell("300482", "25.02", "100")
-    time.sleep(20)
-    sell("300482", "25.03", "100")
-    time.sleep(50)
-    sell("300482", "25.04", "100")
-    time.sleep(40)
-    sell("300482", "25.05", "100")
-    minimize()
+    # title_str = "东方财富终端"
+    title_str = "东方财富证券交易"
+    maximize(title_str)
+    # sell("300482", "25.01", "100")
+    # time.sleep(30)
+    # sell("300482", "25.02", "100")
+    # time.sleep(20)
+    # sell("300482", "25.03", "100")
+    # time.sleep(50)
+    # sell("300482", "25.04", "100")
+    # time.sleep(40)
+    # sell("300482", "25.05", "100")
+    minimize(title_str)
