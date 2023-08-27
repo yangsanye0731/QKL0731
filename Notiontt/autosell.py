@@ -87,16 +87,16 @@ def minimize(title_str):
 
 
 if __name__ == "__main__":
-    # title_str = "东方财富终端"
-    title_str = "东方财富证券交易"
-    maximize(title_str)
-    sell("300482", "25.01", "100")
-    time.sleep(random.randrange(10))
-    sell("300482", "25.02", "100")
-    time.sleep(random.randrange(10))
-    sell("300482", "25.03", "100")
-    time.sleep(random.randrange(10))
-    sell("300482", "25.04", "100")
-    time.sleep(random.randrange(10))
-    sell("300482", "25.05", "100")
-    minimize(title_str)
+    if len(sys.argv) > 1:
+        code = sys.argv[1]
+        price = sys.argv[2]
+        count = sys.argv[3]
+        # title_str = "东方财富终端"
+        title_str = "东方财富证券交易"
+        maximize(title_str)
+        sell(code, price, count)
+        minimize(title_str)
+    else:
+        print("=====")
+
+
