@@ -3,6 +3,7 @@ from pywinauto import Application
 from pywinauto.mouse import click, double_click, right_click, move
 from pywinauto.keyboard import send_keys
 
+
 def sell(code, price, count):
     # 在全屏情况下点击卖出菜单
     click(coords=(40, 150))  # 在 (100, 200) 坐标处点击
@@ -46,7 +47,22 @@ def sell(code, price, count):
     click(coords=(1015, 557))
 
 
+def maximize():
+    app = Application(backend='uia')
+    app.connect(title='东方财富终端')
+    app['东方财富终端'].wrapper_object().maximize()
+    time.sleep(20)
+
+
+def minimize():
+    app = Application(backend='uia')
+    app.connect(title='东方财富终端')
+    app['东方财富终端'].wrapper_object().minimize()
+    time.sleep(20)
+
+
 if __name__ == "__main__":
+    minimize()
     sell("300482", "25.01", "100")
     time.sleep(30)
     sell("300482", "25.02", "100")
@@ -56,3 +72,4 @@ if __name__ == "__main__":
     sell("300482", "25.04", "100")
     time.sleep(40)
     sell("300482", "25.05", "100")
+    minimize()
