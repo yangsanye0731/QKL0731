@@ -16,21 +16,23 @@ def discharge():
     click(coords=(1015, 557))
 
 
-def maximize():
+def maximize(title_str):
     app = Application(backend='uia')
-    app.connect(title='东方财富终端')
-    app['东方财富终端'].wrapper_object().maximize()
-    time.sleep(20)
+    app.connect(title=title_str, timeout=120)
+    app[title_str].wrapper_object().maximize()
+    print(app.windows())
+    time.sleep(1)
 
 
-def minimize():
+def minimize(title_str):
     app = Application(backend='uia')
-    app.connect(title='东方财富终端')
-    app['东方财富终端'].wrapper_object().minimize()
-    time.sleep(20)
+    app.connect(title=title_str, timeout=120)
+    app[title_str].wrapper_object().minimize()
 
 
 if __name__ == "__main__":
-    maximize()
+    # title_str = "东方财富终端"
+    title_str = "东方财富证券交易"
+    maximize(title_str)
     discharge()
-    minimize()
+    minimize(title_str)
