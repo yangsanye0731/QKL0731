@@ -51,6 +51,7 @@ def maximize():
     app = Application(backend='uia')
     app.connect(title='东方财富终端')
     app['东方财富终端'].wrapper_object().maximize()
+    print(app.windows())
     time.sleep(20)
 
 
@@ -58,11 +59,10 @@ def minimize():
     app = Application(backend='uia')
     app.connect(title='东方财富终端')
     app['东方财富终端'].wrapper_object().minimize()
-    time.sleep(20)
 
 
 if __name__ == "__main__":
-    minimize()
+    maximize()
     sell("300482", "25.01", "100")
     time.sleep(30)
     sell("300482", "25.02", "100")
