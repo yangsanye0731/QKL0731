@@ -1,12 +1,16 @@
 # client.py
 import rpyc
 
-conn = rpyc.connect("localhost", 18861)  # 连接到服务器
-remote_service = conn.root
+def execute_remote_command(command):
+    conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
+    remote_service = conn.root
 
-x = 5
-y = 3
-result = remote_service.multiply(x, y)
-print(f"{x} multiplied by {y} is {result}")
+    result = remote_service.exposed_execute_command(command)
+    conn.close()
+    return result
 
-conn.close()
+if __name__ == "__main__":
+    command_to_execute = "python notiontessx.py"  # 替换为你要执行的实际命令
+    output = execute_remote_command(command_to_execute)
+    print("Remote command output:")
+    print(output)
