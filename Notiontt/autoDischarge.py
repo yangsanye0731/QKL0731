@@ -43,7 +43,7 @@ def discharge_buy():
     # 撤买
     click(coords=(392, 113))
     time.sleep(0.2)
-    click(coords=(938, 563))
+    click(coords=(975, 563))
     # 点击确定
     time.sleep(0.3)
     click(coords=(1015, 557))
