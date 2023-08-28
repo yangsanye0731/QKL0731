@@ -61,6 +61,9 @@ def sell(code, price, count):
     # 点击鼠标左键，点击卖出完成确认按钮
     click(coords=(1015, 557))
 
+    # 点击ESC
+    send_keys("{ESC}")
+
     # 发送消息
     send_dingding_msg(code, price, count)
 
