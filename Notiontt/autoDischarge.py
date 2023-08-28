@@ -20,16 +20,27 @@ import common
 
 # 撤卖
 def discharge_sell():
-    # 点击撤销
+    # 点击撤销菜单
     click(coords=(50, 180))  # 在 (100, 200) 坐标处点击
     time.sleep(0.3)
+
+    # 点击刷新
+    click(coords=(552, 114))
+    time.sleep(0.2)
+
     # 撤卖
     click(coords=(466, 108))
     time.sleep(0.4)
-    click(coords=(938, 563))
-    # 点击确定
+
+    # 您确定撤销这x笔委托吗？
+    click(coords=(936, 558))
     time.sleep(0.2)
-    click(coords=(1015, 557))
+
+    # 点击确定按钮
+    click(coords=(1017, 550))
+
+    # 点击ESC
+    send_keys("{ESC}")
 
     # 发送钉钉消息
     send_dingding_msg("撤卖")
@@ -37,16 +48,28 @@ def discharge_sell():
 
 # 撤买
 def discharge_buy():
-    # 点击撤销
+    # 点击撤销菜单
     click(coords=(50, 180))  # 在 (100, 200) 坐标处点击
     time.sleep(0.4)
-    # 撤买
+
+    # 点击刷新
+    click(coords=(552, 114))
+    time.sleep(0.2)
+
+    # 点击撤买按钮
     click(coords=(392, 113))
     time.sleep(0.2)
-    click(coords=(975, 563))
-    # 点击确定
-    time.sleep(0.3)
-    click(coords=(1015, 557))
+
+    # 您确定撤销这x笔委托吗？
+    click(coords=(936, 558))
+    time.sleep(0.2)
+
+    # 点击确定按钮
+    click(coords=(1017, 550))
+
+    # 点击ESC
+    send_keys("{ESC}")
+
     # 发送钉钉消息
     send_dingding_msg("撤买")
 
