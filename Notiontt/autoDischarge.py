@@ -22,7 +22,7 @@ import common
 def discharge_sell():
     # 点击撤销菜单
     click(coords=(50, 180))  # 在 (100, 200) 坐标处点击
-    time.sleep(0.3)
+    time.sleep(0.1)
 
     # 点击刷新
     click(coords=(552, 114))
@@ -30,7 +30,7 @@ def discharge_sell():
 
     # 撤卖
     click(coords=(466, 108))
-    time.sleep(0.4)
+    time.sleep(0.1)
 
     # 您确定撤销这x笔委托吗？
     click(coords=(936, 558))
@@ -50,15 +50,15 @@ def discharge_sell():
 def discharge_buy():
     # 点击撤销菜单
     click(coords=(50, 180))  # 在 (100, 200) 坐标处点击
-    time.sleep(0.4)
+    time.sleep(0.1)
 
     # 点击刷新
     click(coords=(552, 114))
-    time.sleep(0.2)
+    time.sleep(0.1)
 
     # 点击撤买按钮
     click(coords=(392, 113))
-    time.sleep(0.2)
+    time.sleep(0.1)
 
     # 您确定撤销这x笔委托吗？
     click(coords=(936, 558))
@@ -101,6 +101,6 @@ if __name__ == "__main__":
     title_str = "东方财富证券交易"
     maximize(title_str)
     discharge_sell()
-    time.sleep(random.randrange(10))
+    time.sleep(random.randrange(5))
     discharge_buy()
     minimize(title_str)
