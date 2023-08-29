@@ -22,7 +22,7 @@ import common
 def buy(code, price, count):
     # 在全屏模式下点击买入菜单
     click(coords=(70, 120))  # 在 (100, 200) 坐标处点击
-    random.randint(1, 5)
+    random.randint(5, 10)
     # 点击鼠标左键，进入证券代码文本输入框
     click(coords=(300, 165))
     # 在证券代码输入全选，并删除
@@ -115,6 +115,7 @@ if __name__ == "__main__":
                 youxiaoshu = 3
             price_buy = round(price_float * (1 - 0.001 * num), youxiaoshu)
             buy(code, str(price_buy), str(fenshu))
+            time.sleep(2)
 
         # 最小化窗口
         minimize(title_str)
