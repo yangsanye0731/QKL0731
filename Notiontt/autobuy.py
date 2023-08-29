@@ -26,9 +26,9 @@ def buy(code, price, count):
     click(coords=(300, 165))
     # 在证券代码输入全选，并删除
     send_keys("^a")
-    time.sleep(0.4)
+    time.sleep(0.1)
     send_keys("{DELETE}")
-    time.sleep(0.3)
+    time.sleep(0.2)
     send_keys(code, pause=0.5)
 
     # 点击鼠标左键，进入买入价格文本框
@@ -36,27 +36,27 @@ def buy(code, price, count):
     # 在文本框中双击并删除
     time.sleep(0.2)
     double_click(coords=(300, 264))
-    time.sleep(0.4)
+    time.sleep(0.1)
     send_keys("{DELETE}")
-    time.sleep(0.5)
+    time.sleep(0.1)
     # 输入买入价格，这里是【变量】
-    send_keys(price, pause=0.5)
+    send_keys(price, pause=0.1)
 
     # 点击鼠标左键，进入买入数量行
     click(coords=(300, 325))
     # 在文本框中输入全选与删除
     send_keys("^a")
-    time.sleep(0.6)
+    time.sleep(0.2)
     send_keys("{DELETE}")
     time.sleep(0.3)
     # 输入要卖出的数量，这里是【变量】
-    send_keys(count, pause=0.5)
+    send_keys(count, pause=0.1)
     # 点击鼠标左键，点击卖出按钮
     click(coords=(400, 400))
-    time.sleep(0.4)
+    time.sleep(0.2)
     # 点击鼠标左键，点击卖出按钮
     click(coords=(904, 607))
-    time.sleep(0.6)
+    time.sleep(0.1)
     # 点击鼠标左键，点击卖出完成确认按钮
     click(coords=(1015, 557))
 
@@ -79,7 +79,7 @@ def maximize(title_str):
     app.connect(title=title_str, timeout=120)
     app[title_str].wrapper_object().maximize()
     print(app.windows())
-    time.sleep(1)
+    time.sleep(0.2)
 
 
 def minimize(title_str):
@@ -89,14 +89,33 @@ def minimize(title_str):
 
 
 if __name__ == "__main__":
-    # title_str = "东方财富终端"
-    title_str = "东方财富证券交易"
-    maximize(title_str)
-    buy("159819", "0.755", "100")
-    time.sleep(random.randrange(10))
-    buy("159819", "0.755", "100")
-    time.sleep(random.randrange(10))
-    buy("159819", "0.755", "100")
-    time.sleep(random.randrange(10))
-    buy("159819", "0.755", "100")
-    minimize(title_str)
+    if len(sys.argv) > 1:
+        code = sys.argv[1]
+        price = sys.argv[2]
+        price_float = float(price)
+        count = sys.argv[3]
+        count_int = int(count)
+
+        # title_str = "东方财富终端"
+        title_str = "东方财富证券交易"
+        # 最大化窗口
+        maximize(title_str)
+
+        fenshu = count_int
+        if count_int >= 1000:
+            fenshu = 100
+        if count_int >= 3000:
+            fenshu = 200
+
+        quotient, remainder = divmod(count_int, fenshu)
+        for num in range(0, quotient):
+            youxiaoshu = 2
+            if price_float < 1:
+                youxiaoshu = 3
+            price_buy = round(price_float * (1 - 0.001 * num), youxiaoshu)
+            buy(code, str(price_buy), str(fenshu))
+
+        # 最小化窗口
+        minimize(title_str)
+    else:
+        print("=====")
