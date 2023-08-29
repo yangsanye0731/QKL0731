@@ -22,6 +22,7 @@ import common
 def sell(code, price, count):
     # 在全屏情况下点击卖出菜单
     click(coords=(40, 150))  # 在 (100, 200) 坐标处点击
+    random.randint(1, 5)
     # 点击鼠标左键进入证券代码行
     click(coords=(300, 165))
     # 在文本框中输入全选与删除

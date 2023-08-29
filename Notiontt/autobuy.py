@@ -22,6 +22,7 @@ import common
 def buy(code, price, count):
     # 在全屏模式下点击买入菜单
     click(coords=(70, 120))  # 在 (100, 200) 坐标处点击
+    random.randint(1, 5)
     # 点击鼠标左键，进入证券代码文本输入框
     click(coords=(300, 165))
     # 在证券代码输入全选，并删除
