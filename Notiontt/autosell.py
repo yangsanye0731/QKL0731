@@ -32,6 +32,7 @@ def sell(code, price, count):
     time.sleep(0.5)
     # 输入股票代码，这里是【变量】
     send_keys(code, pause=0.5)
+    time.sleep(1)
 
     # 点击鼠标左键，进入卖出价格文本框
     click(coords=(300, 264))

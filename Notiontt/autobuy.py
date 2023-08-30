@@ -31,6 +31,7 @@ def buy(code, price, count):
     send_keys("{DELETE}")
     time.sleep(0.2)
     send_keys(code, pause=0.5)
+    time.sleep(1)
 
     # 点击鼠标左键，进入买入价格文本框
     click(coords=(300, 264))
