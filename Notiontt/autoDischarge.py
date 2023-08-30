@@ -22,19 +22,19 @@ import common
 def discharge_sell():
     # 点击撤销菜单
     click(coords=(50, 180))  # 在 (100, 200) 坐标处点击
-    time.sleep(0.1)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 点击刷新
     click(coords=(552, 114))
-    time.sleep(0.2)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 撤卖
     click(coords=(466, 108))
-    time.sleep(0.1)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 您确定撤销这x笔委托吗？
     click(coords=(936, 558))
-    time.sleep(0.2)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 点击确定按钮
     click(coords=(1017, 550))
@@ -50,19 +50,19 @@ def discharge_sell():
 def discharge_buy():
     # 点击撤销菜单
     click(coords=(50, 180))  # 在 (100, 200) 坐标处点击
-    time.sleep(0.1)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 点击刷新
     click(coords=(552, 114))
-    time.sleep(0.1)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 点击撤买按钮
     click(coords=(392, 113))
-    time.sleep(0.1)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 您确定撤销这x笔委托吗？
     click(coords=(936, 558))
-    time.sleep(0.2)
+    time.sleep(round(random.uniform(0.2, 1), 1))
 
     # 点击确定按钮
     click(coords=(1017, 550))
