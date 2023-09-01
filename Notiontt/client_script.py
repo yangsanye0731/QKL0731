@@ -23,10 +23,13 @@ import common_mysqlSSHUtil
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger().setLevel(logging.INFO)
 
+turnnel = common_mysqlSSHUtil.get_tunnel()
+turnnel.start()
+
 while True:
     try:
         sql = "SELECT operate_id, code, operate, is_operate, gmt_create FROM `superman`.`operate` WHERE `is_operate` = '否' order by gmt_create asc"
-        data = common_mysqlSSHUtil.select_record(sql)
+        data = common_mysqlSSHUtil.select_record_with_tunnel(turnnel, sql)
         if data.__len__() < 1:
             logging.info("操作日志异常,待操作记录为空，请稍后")
             time.sleep(30)
@@ -42,7 +45,7 @@ while True:
             return_code = subprocess.call(config_item[2], shell=True)
             print(return_code)
             logging.info("更新操作日志状态")
-            common_mysqlSSHUtil.insert_record("update operate set is_operate='是' where operate_id=" + str(config_item[0]) + ";")
+            common_mysqlSSHUtil.insert_record_with_tunnel("update operate set is_operate='是' where operate_id=" + str(config_item[0]) + ";")
             time.sleep(60)
     except subprocess.CalledProcessError as e:
         print("Error executing command: {e.output}")
