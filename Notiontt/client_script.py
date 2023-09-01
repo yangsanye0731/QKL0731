@@ -32,11 +32,11 @@ while True:
             time.sleep(30)
             continue
 
-        if data.__len__() > 1:
-            common.dingding_markdown_msg_03("触发操作日志异常", "触发操作日志异常,有操作没有执行完成，请稍后")
-            logging.info("操作日志异常,有操作没有执行完成，请稍后")
-            time.sleep(60)
-            continue
+        # if data.__len__() > 1:
+        #     common.dingding_markdown_msg_03("触发操作日志异常", "触发操作日志异常,有操作没有执行完成，请稍后")
+        #     logging.info("操作日志异常,有操作没有执行完成，请稍后")
+        #     time.sleep(60)
+        #     continue
         for config_item in data:
             logging.info("操作日志命令：%s", config_item[2])
             return_code = subprocess.call(config_item[2], shell=True)
