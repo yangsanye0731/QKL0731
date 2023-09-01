@@ -16,7 +16,7 @@ import common
 
 def execute_remote_command(command):
     conn = rpyc.connect("192.168.233.129", 18861)  # 替换为服务器的IP地址
-    conn._config['sync_request_timeout'] = 240
+    conn._config['sync_request_timeout'] = 1200
     remote_service = conn.root
 
     result = remote_service.exposed_execute_command(command)
