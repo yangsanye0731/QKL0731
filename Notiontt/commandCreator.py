@@ -48,17 +48,27 @@ def create_content(database_id, title, operate, is_operate, create_time):
     P.create_page(database_id=database_id, properties=PROPERTY)
 
 
-def exe(type_input, code):
+def exe(type_input, code, price=None, count=None):
     string_input = "python "
     if type_input == 'd':
         string_input = string_input + "autoDischarge.py"
     else:
         code_input = code
-        price_input = "25.00"
+
+        # 设置价格
+        if price is None:
+            zhangdiefu, price_result = common.zhangdiefu_and_price(code)
+            price_input = price_result
+        else:
+            price_input = price
+
         # 获取配置项
-        dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
-        my_list = dic.get('chicang_list').split(",")
-        count_input = "3000"
+        # dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
+        # my_list = dic.get('chicang_list').split(",")
+        if count is None:
+            count_input = "1000"
+        else:
+            count_input = count
 
         if type_input == 's':
             string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + count_input
@@ -71,13 +81,25 @@ def exe(type_input, code):
     # 生成命令
     # create_content(database_id="c7d5a0173e1948e3a8a52a2af6411260", title=code, operate=string_input, is_operate='否', create_time=time.strftime("%Y-%m-%d", time.localtime()))
     common_mysqlSSHUtil.insert_record(
-        "INSERT INTO operate (`code`, `operate`, `is_operate`, `gmt_create`) VALUES ('" + code + "', '" + string_input + "', '" + "否" + "', '" + time.strftime("%Y-%m-%d", time.localtime()) + "');")
+        "INSERT INTO operate (`code`, `operate`, `is_operate`, `gmt_create`) VALUES ('" + code + "', '" + string_input + "', '" + "否" + "', '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "');")
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        type = sys.argv[1]
-        code = sys.argv[2]
-        exe(type, code)
+        if len(sys.argv) == 3:
+            type = sys.argv[1]
+            code = sys.argv[2]
+            exe(type_input=type, code=code)
+        if len(sys.argv) == 4:
+            type = sys.argv[1]
+            code = sys.argv[2]
+            count = sys.argv[3]
+            exe(type_input=type, code=code, count=count)
+        if len(sys.argv) == 5:
+            type = sys.argv[1]
+            code = sys.argv[2]
+            count = sys.argv[3]
+            price = sys.argv[4]
+            exe(type_input=type, code=code, count=count, price=price)
     else:
         print("======================")

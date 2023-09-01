@@ -25,7 +25,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 while True:
     try:
-        sql = "SELECT operate_id, code, operate, is_operate, gmt_create FROM `superman`.`operate` WHERE `is_operate` = '否' order by gmt_create desc"
+        sql = "SELECT operate_id, code, operate, is_operate, gmt_create FROM `superman`.`operate` WHERE `is_operate` = '否' order by gmt_create asc"
         data = common_mysqlSSHUtil.select_record(sql)
         if data.__len__() < 1:
             logging.info("操作日志异常,待操作记录为空，请稍后")
@@ -45,4 +45,4 @@ while True:
             common_mysqlSSHUtil.insert_record("update operate set is_operate='是' where operate_id=" + str(config_item[0]) + ";")
     except subprocess.CalledProcessError as e:
         print("Error executing command: {e.output}")
-    time.sleep(45)
+    time.sleep(60)
