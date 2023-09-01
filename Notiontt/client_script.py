@@ -43,6 +43,7 @@ while True:
             print(return_code)
             logging.info("更新操作日志状态")
             common_mysqlSSHUtil.insert_record("update operate set is_operate='是' where operate_id=" + str(config_item[0]) + ";")
+            time.sleep(60)
     except subprocess.CalledProcessError as e:
         print("Error executing command: {e.output}")
     time.sleep(60)
