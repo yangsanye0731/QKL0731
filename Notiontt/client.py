@@ -29,8 +29,8 @@ type_input = input("请输入您的信息：s  b  d：")
 if type_input == 'd':
     string_input = string_input + "autoDischarge.py"
     output = execute_remote_command(string_input)
-    print("Remote command output:")
-    print(output)
+    # print("Remote command output:")
+    # print(output)
 else:
     code_input = input("请输入您的信息：")
     price_input = input("请输入您的信息：")
@@ -42,41 +42,5 @@ else:
         string_input = string_input + "autobuy.py " + code_input + " " + price_input + " " + count_input
 
     output = execute_remote_command(string_input)
-    print("Remote command output:")
-    print(output)
-
-# if __name__ == "__main__":
-#     if len(sys.argv) > 1:
-#         type = sys.argv[1]
-#         if type == 'b':
-#             code = sys.argv[2]
-#             price = sys.argv[3]
-#             count = sys.argv[4]
-#             command_to_execute = "python autobuy.py"
-#         elif type == 's':
-#             code = sys.argv[2]
-#             price = sys.argv[3]
-#             count = sys.argv[4]
-#             command_to_execute = "python autosell.py " + code + " " + price + " " + count
-#         elif type == 'd':
-#             command_to_execute = "python autoDischarge.py"
-#
-#         output = execute_remote_command(command_to_execute)
-#         # print("Remote command output:")
-#         # print(output)
-#     else:
-#         print("常用命令：")
-#         print("python client.py d")
-#         print("python client.py s 300482 24.00 1000")
-#         print("python client.py b 300482 24.00 1000")
-
-# command_to_execute = "python autosell.py 300482 24.61 2000"
-# output = execute_remote_command(command_to_execute)
-# command_to_execute = "python autosell.py 300482 23.99 100"
-# output = execute_remote_command(command_to_execute)
-# command_to_execute = "python autosell.py 300482 23.99 100"
-# output = execute_remote_command(command_to_execute)
-# command_to_execute = "python autobuy.py"
-# output = execute_remote_command(command_to_execute)
-# command_to_execute = "python autoDischarge.py"
-# output = execute_remote_command(command_to_execute)
+    # print("Remote command output:")
+    # print(output)
