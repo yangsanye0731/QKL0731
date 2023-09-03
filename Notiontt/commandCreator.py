@@ -27,6 +27,7 @@ import logging
 
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger().setLevel(logging.INFO)
 
 integrations_token = "secret_rxaAzcdjzdVq4pe1hrkqkhzxJlm2isBh96Z4rxdB9Cc"
 
@@ -76,7 +77,7 @@ def exe(type_input, code, price=None, count=None):
             string_input = string_input + "autobuy.py " + code_input + " " + price_input + " " + count_input
         else:
             return "参数错误"
-    print(string_input)
+    logging.info("命令： %s", string_input)
 
     # 生成命令
     # create_content(database_id="c7d5a0173e1948e3a8a52a2af6411260", title=code, operate=string_input, is_operate='否', create_time=time.strftime("%Y-%m-%d", time.localtime()))
