@@ -14,20 +14,18 @@ sys.path.append(rootPath)
 curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
-import common
 import logging
 import common_mysqlSSHUtil
-
 
 # 配置日志输出格式和级别
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger().setLevel(logging.INFO)
 
-turnnel = common_mysqlSSHUtil.get_tunnel()
-turnnel.start()
-
 while True:
     try:
+        turnnel = common_mysqlSSHUtil.get_tunnel()
+        turnnel.start()
+
         sql = "SELECT operate_id, code, operate, is_operate, gmt_create FROM `superman`.`operate` WHERE `is_operate` = '否' order by gmt_create asc"
         data = common_mysqlSSHUtil.select_record_with_tunnel(turnnel, sql)
         if data.__len__() < 1:
