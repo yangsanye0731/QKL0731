@@ -98,8 +98,8 @@ if __name__ == "__main__":
         count = sys.argv[3]
         count_int = int(count)
 
-        title_str = "东方财富终端"
-        # title_str = "东方财富证券交易"
+        # title_str = "东方财富终端"
+        title_str = "东方财富证券交易"
         # 最大化窗口
         maximize(title_str)
 
