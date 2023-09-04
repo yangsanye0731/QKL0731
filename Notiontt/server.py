@@ -19,9 +19,6 @@ sys.path.append(rootPath)
 curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
-import common
-import common_notion
-import common_mysqlSSHUtil
 
 import logging
 
@@ -63,11 +60,11 @@ class RemoteCommandsService(rpyc.Service):
             # 同步Notion
             create_content(database_id="c7d5a0173e1948e3a8a52a2af6411260", title="code", operate=command,
                            is_operate='是', create_time=time.strftime("%Y-%m-%d", time.localtime()))
-            # 记录操作日志
-            common_mysqlSSHUtil.insert_record(
-                "INSERT INTO operate (`code`, `operate`, `is_operate`, `gmt_create`) VALUES ('" + "code" + "', '" +
-                command + "', '" + "是" + "', '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "');")
-            # 返回信息
+            # # 记录操作日志
+            # common_mysqlSSHUtil.insert_record(
+            #     "INSERT INTO operate (`code`, `operate`, `is_operate`, `gmt_create`) VALUES ('" + "code" + "', '" +
+            #     command + "', '" + "是" + "', '" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "');")
+            # # 返回信息
             return result
         except subprocess.CalledProcessError as e:
             return f"Error executing command: {e.output}"
