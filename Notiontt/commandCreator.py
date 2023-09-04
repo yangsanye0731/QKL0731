@@ -103,4 +103,4 @@ if __name__ == "__main__":
             price = sys.argv[4]
             exe(type_input=type, code=code, count=count, price=price)
     else:
-        print("======================")
+        print("请输入参数：如：s 300482")
