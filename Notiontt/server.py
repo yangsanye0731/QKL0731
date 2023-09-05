@@ -59,7 +59,7 @@ class RemoteCommandsService(rpyc.Service):
             print(result)
             # 同步Notion
             create_content(database_id="c7d5a0173e1948e3a8a52a2af6411260", title="code", operate=command,
-                           is_operate='是', create_time=time.strftime("%Y-%m-%d", time.localtime()))
+                           is_operate='是', create_time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
             # # 记录操作日志
             # common_mysqlSSHUtil.insert_record(
             #     "INSERT INTO operate (`code`, `operate`, `is_operate`, `gmt_create`) VALUES ('" + "code" + "', '" +
