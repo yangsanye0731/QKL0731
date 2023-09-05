@@ -159,10 +159,10 @@ if __name__ == "__main__":
 
         # 按月进行回测,回测1月份数据
         # 设置起始日期为2023年1月1日
-        start_date = datetime(2023, 7, 1)
+        start_date = datetime(2023, 8, 1)
 
         # 计算结束日期为2023年2月1日（不包含2月1日）
-        end_date = datetime(2023, 7, 10)
+        end_date = datetime(2023, 8, 31)
 
         # 循环遍历日期
         current_date = start_date
