@@ -1307,6 +1307,144 @@ def plt_image_geGuZhiBiao_tradingview(code, fullName):
     image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
     return image_path
 
+#######################################################################################################################
+#######################################################################################个股60、日、周线KDE、MACD、BULL指标
+def plt_image_geGuZhiBiao_tradingview2(code, fullName):
+    codeName = fullName + "(" + code + ")"
+    myfont = matplotlib.font_manager.FontProperties(fname=rootPath + os.sep + "simsun.ttc", size="14")
+
+    fig = plt.figure(figsize=(10, 10))
+    # fig.suptitle(codeName, fontproperties=myfont_title)
+    # 1*1 的第一个图表
+    ax_kdj_60 = fig.add_subplot(311)
+    ax_kdj_d = fig.add_subplot(312)
+    ax_kdj = fig.add_subplot(313)
+
+    data_60 = tushare.get_k_data(code, ktype="60")
+    ts_60 = data_60[["open", "close", "high", "low", "volume"]]
+    closeArray_60 = num.array(data_60['close'])
+    doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
+
+    data_d = tushare.get_k_data(code, ktype="D")
+    ts_d = data_d[["open", "close", "high", "low", "volume"]]
+    closeArray_d = num.array(data_d['close'])
+    doubleCloseArray_d = num.asarray(closeArray_d, dtype='double')
+
+    data = tushare.get_k_data(code, ktype="W")
+    ts = data[["open", "close", "high", "low", "volume"]]
+    closeArray = num.array(data['close'])
+    doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    # ax_kdj_60.plot(kdj_60.index, kdj_60["KDJ_K"], label="K")
+    avg_20_60 = talib.SMA(closeArray_60, timeperiod=20)
+    # avg_10_ema = talib.EMA(avg_10, timeperiod=20)
+    avg_60_60 = talib.SMA(closeArray_60, timeperiod=60)
+    # avg_60_ema = talib.EMA(avg_60, timeperiod=60)
+    avg_120_60 = talib.SMA(closeArray_60, timeperiod=120)
+    # avg_120_ema = talib.EMA(avg_120, timeperiod=120)
+
+    columns = ['ddd']
+    df_60 = pd.DataFrame(closeArray_60,columns=columns)
+    df_60_tail = df_60.tail(200)
+
+    ax_kdj_60.plot(df_60.index, avg_20_60, label="20", linewidth=2, color='red')
+    ax_kdj_60.plot(df_60.index, avg_60_60, label="60",linewidth=2, color='green')
+    ax_kdj_60.plot(df_60.index, avg_120_60, label="120",linewidth=2, color='blue')
+    ax_kdj_60.set_ylim(df_60_tail['ddd'].min(), df_60_tail['ddd'].max())
+    ax_kdj_60.set_xlabel(
+        "均线（60），20均线：" + "%.2f" % avg_20_60[-1] + "  60均线：" + "%.2f" % avg_60_60[-1] + "  120均线：" + "%.2f" % avg_120_60[-1],
+        fontproperties=myfont)
+    ax_kdj_60.set_ylabel("双均线", fontproperties=myfont)
+
+    changdu = len(ts_60)
+    if changdu > 200:
+        ax_kdj_60.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_60.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_60.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_60.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_60.set_xlim(500, changdu)
+
+    avg_20_d = talib.SMA(closeArray_d, timeperiod=20)
+    # avg_10_ema = talib.EMA(avg_10, timeperiod=20)
+    avg_60_d = talib.SMA(closeArray_d, timeperiod=60)
+    # avg_60_ema = talib.EMA(avg_60, timeperiod=60)
+    avg_120_d = talib.SMA(closeArray_d, timeperiod=120)
+    # avg_120_ema = talib.EMA(avg_120, timeperiod=120)
+
+    columns = ['ddd']
+    df_d = pd.DataFrame(closeArray_d, columns=columns)
+    df_d_tail = df_d.tail(200)
+
+    ax_kdj_d.plot(df_d.index, avg_20_d, label="20", linewidth=2, color='red')
+    ax_kdj_d.plot(df_d.index, avg_60_d, label="60", linewidth=2, color='green')
+    ax_kdj_d.plot(df_d.index, avg_120_d, label="120", linewidth=2, color='blue')
+    ax_kdj_d.set_ylim(df_d_tail['ddd'].min(), df_d_tail['ddd'].max())
+    ax_kdj_d.set_xlabel(
+        "均线（日），20均线：" + "%.2f" % avg_20_d[-1] + "  60均线：" + "%.2f" % avg_60_d[-1] + "  120均线：" + "%.2f" % avg_120_d[
+            -1],
+        fontproperties=myfont)
+    ax_kdj_d.set_ylabel("双均线", fontproperties=myfont)
+
+    changdu = len(ts_d)
+    if changdu > 200:
+        ax_kdj_d.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj_d.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj_d.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj_d.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj_d.set_xlim(500, changdu)
+
+    avg_20 = talib.SMA(closeArray, timeperiod=20)
+    # avg_10_ema = talib.EMA(avg_10, timeperiod=20)
+    avg_60 = talib.SMA(closeArray, timeperiod=60)
+    # avg_60_ema = talib.EMA(avg_60, timeperiod=60)
+    avg_120 = talib.SMA(closeArray, timeperiod=120)
+    # avg_120_ema = talib.EMA(avg_120, timeperiod=120)
+
+    columns = ['ddd']
+    df = pd.DataFrame(closeArray, columns=columns)
+    df_tail = df.tail(200)
+
+    ax_kdj.plot(df.index, avg_20, label="20", linewidth=2, color='red')
+    ax_kdj.plot(df.index, avg_60, label="60", linewidth=2, color='green')
+    ax_kdj.plot(df.index, avg_120, label="120", linewidth=2, color='blue')
+    ax_kdj.set_ylim(df_tail['ddd'].min(), df_tail['ddd'].max())
+    ax_kdj.set_xlabel(
+        "均线（周），20均线：" + "%.2f" % avg_20[-1] + "  60均线：" + "%.2f" % avg_60[-1] + "  120均线：" + "%.2f" % avg_120[
+            -1],
+        fontproperties=myfont)
+    ax_kdj_d.set_ylabel("双均线", fontproperties=myfont)
+
+    changdu = len(ts)
+    if changdu > 200:
+        ax_kdj.set_xlim(100, changdu)
+    if changdu > 300:
+        ax_kdj.set_xlim(200, changdu)
+    if changdu > 400:
+        ax_kdj.set_xlim(300, changdu)
+    if changdu > 500:
+        ax_kdj.set_xlim(400, changdu)
+    if changdu > 600:
+        ax_kdj.set_xlim(500, changdu)
+
+    timeStr1 = time.strftime("%Y%m%d", time.localtime())
+    path = rootPath + os.sep + "images" + os.sep + timeStr1 + os.sep + 'geGuZhiBiao'
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    suiji_str = ''.join(random.sample('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 5))
+    plt.savefig(path + os.sep + timeStr1 + "_" + code + suiji_str + ".png")
+    plt.close()
+    image_path = path + os.sep + timeStr1 + "_" + code + suiji_str + ".png"
+    return image_path
+
 
 #######################################################################################################################
 ##################################################################################################数组60、日、周线KDJ指标
@@ -1926,5 +2064,5 @@ def plt_image_geGuZhiBiao_array(code, fullName, code2, fullName2, code3, fullNam
 # plt_image_tongyichutu_2("601100", "D", "【全部代码】双均线144", "【全部代码】双均线144",
 #                         '这是备注信息这是备注信息这是备注信息这是备注信息这是备注信息')
 
-# plt_image_geGuZhiBiao_tradingview("002179", "中航光电")
+# plt_image_geGuZhiBiao_tradingview2("002179", "中航光电")
 # plt_image_geGuZhiBiao_array("300003", "乐普医疗", "002923", "润都股份", "002755", "奥赛康", "300003", "乐普医疗", "002923", "润都股份")

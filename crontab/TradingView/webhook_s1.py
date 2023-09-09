@@ -69,7 +69,9 @@ def exec(codeItem):
         codeName = data[0][1]
 
     image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
+    image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+    image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
 
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
@@ -85,7 +87,8 @@ def exec(codeItem):
     common.dingding_markdown_msg_03(
         time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' + table_item_data[10],
         time_str_1 + '触发' + codeName + '(' + codeItem + ')' + '当前:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' + table_item_data[10]
-        + "\n\n> ![screenshot](" + image_url + ")")
+        + "\n\n> ![screenshot](" + image_url + ")"
+        + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
 
 
