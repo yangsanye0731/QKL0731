@@ -38,6 +38,7 @@ if __name__ == "__main__":
     # app = Application().start("D:\\eastmoney\\swc8\\maintrade.exe")
     app = Application().start("C:\\eastmoney\\dfcfzq\\maintrade.exe")
     time.sleep(random.randint(5, 10))
+    click(coords=(958, 686))
     send_keys("{ESC}")
     time.sleep(random.randint(5, 10))
     # 提示信息退出
