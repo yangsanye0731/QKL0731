@@ -37,9 +37,7 @@ if __name__ == "__main__":
     # 打开应用
     # app = Application().start("D:\\eastmoney\\swc8\\maintrade.exe")
     app = Application().start("C:\\eastmoney\\dfcfzq\\maintrade.exe")
-
-
-    time.sleep(random.randint(5, 10))
+    time.sleep(random.randint(20, 30))
     # 提示信息退出50913
     send_keys("{ESC}")
     # 输入密码
