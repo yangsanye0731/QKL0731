@@ -25,12 +25,14 @@ def execute_remote_command(command):
 
 
 string_input = "python "
-type_input = input("请输入您的信息：s、b、 d、mysql ：")
+type_input = input("请输入您的信息：s、b、 d、mysql、o ：")
 if type_input == 'd':
     string_input = string_input + "autoDischarge.py"
     output = execute_remote_command(string_input)
     # print("Remote command output:")
     # print(output)
+elif type_input == 'o':
+    string_input = string_input + "autoopen.py"
 elif type_input == 'mysql':
     string_input = string_input + "client_script.py"
 else:
