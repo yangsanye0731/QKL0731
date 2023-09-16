@@ -33,6 +33,7 @@ if type_input == 'd':
     # print(output)
 elif type_input == 'o':
     string_input = string_input + "autoopen.py"
+    output = execute_remote_command(string_input)
 elif type_input == 'mysql':
     string_input = string_input + "client_script.py"
 else:
