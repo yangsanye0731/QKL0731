@@ -2,6 +2,7 @@
 import rpyc
 import subprocess
 import time
+import datetime
 
 from notion_database.database import Database
 from notion_database.page import Page
@@ -57,9 +58,12 @@ class RemoteCommandsService(rpyc.Service):
         try:
             result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
             print(result)
-            # 同步Notion
-            create_content(database_id="c7d5a0173e1948e3a8a52a2af6411260", title="code", operate=command,
-                           is_operate='是', create_time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+            if "autobuy.py" in command or "autosell.py" in command:
+                # 同步Notion
+                word_list = command.split()
+                create_content(database_id="c7d5a0173e1948e3a8a52a2af6411260", title=word_list[2], operate=command,
+                               is_operate='是', create_time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
             # # 记录操作日志
             # common_mysqlSSHUtil.insert_record(
             #     "INSERT INTO operate (`code`, `operate`, `is_operate`, `gmt_create`) VALUES ('" + "code" + "', '" +
