@@ -15,6 +15,7 @@ import common
 import common_image
 import common_zhibiao
 import pandas as pd
+import talib
 
 
 #######################################################################################################################
@@ -30,7 +31,7 @@ def strategy(zhouqi, endstr):
     all_code = all_code[1:-1].ts_code
     all_code_index_x = num.array(all_code)
     time_str = time.strftime("%Y%m%d", time.localtime())
-    fo = open("全部股票_季线SKDJ金叉_" + zhouqi + "_" + time_str + ".txt", "w")
+    fo = open("全部股票_季线DC下轨_" + zhouqi + "_" + time_str + ".txt", "w")
     # 遍历
     for codeItem in all_code_index_x:
         print(codeItem)
@@ -63,23 +64,18 @@ def strategy(zhouqi, endstr):
             openArray = num.array(data_history['open'])
             doubleOpenArray = num.asarray(openArray, dtype='double')
 
-            # print(data_history)
-            k0, d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
+            lowArray = num.array(data_history['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+            dc_high = talib.MAX(highArray, timeperiod=20)
+            dc_low = talib.MIN(doubleLowArray, timeperiod=20)
 
-            if k0[-1] < 55 and k0[-2] < d0[-2] and k0[-1] > d0[-1]:
+            if doubleLowArray[-1] == dc_low[-1]:
                 print(codeItem + "========================================")
-                print(k0[-1])
-                print(d0[-1])
-                MA_20 = ta.SMA(doubleCloseArray, timeperiod=20)
-                image_path, gai_nian = common_image.plt_image_tongyichutu_2(codeItem,
-                                                                            "D",
-                                                                            "【全部股票】SKDJ金叉_季度",
-                                                                            "【全部股票】SKDJ金叉_季度", time_str, "", 'multi')
+                common_image.plt_image_tongyichutu_2(codeItem,
+                                                     "D",
+                                                     "【全部股票】DC下轨_季度",
+                                                     "【全部股票】DC下轨_季度", time_str, "", 'multi')
                 fo.write(codeItem + "\n")
-                fo.write(gai_nian + "\n")
-
-
-
         except (IOError, TypeError, NameError, IndexError, Exception) as e:
             print(e)
     return count_b
@@ -88,7 +84,7 @@ def strategy(zhouqi, endstr):
 #######################################################################################################################
 ##############################################################################################################主执行程序
 time_str1 = time.strftime("%Y-%m-%d", time.localtime())
-count_result_b = strategy('D', time_str1)
+count_result_b = strategy('M', time_str1)
 # count_result_b = strategy('W', time_str1)
 # count_result_b = strategy('M', time_str1)
 # bp = ByPy()
