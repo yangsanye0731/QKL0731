@@ -15,15 +15,14 @@ import common
 
 
 def execute_remote_command(command):
-    # conn = rpyc.connect("192.168.233.128", 18861)  # 替换为服务器的IP地址
-    conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
+    conn = rpyc.connect("192.168.233.128", 18861)  # 替换为服务器的IP地址
+    # conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
     conn._config['sync_request_timeout'] = 1200
     remote_service = conn.root
 
     result = remote_service.exposed_execute_command(command)
     conn.close()
     return result
-
 
 string_input = "python "
 type_input = input("请输入您的信息：s、b、 d、mysql、o ：")
@@ -39,14 +38,15 @@ elif type_input == 'mysql':
     string_input = string_input + "client_script.py"
 else:
     code_input = input("请输入您的信息：")
-    price_input = input("请输入您的信息：")
-    count_input = input("请输入您的信息：")
+    zhangdiefu, price = common.zhangdiefu_and_price(code_input)
+    price_input = str(price)
+    count_input = "1000"
 
     if type_input == 's':
         string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + count_input
     elif type_input == 'b':
         string_input = string_input + "autobuy.py " + code_input + " " + price_input + " " + count_input
-
+    print(string_input)
     output = execute_remote_command(string_input)
     # print("Remote command output:")
     # print(output)
