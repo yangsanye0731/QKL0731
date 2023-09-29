@@ -59,7 +59,7 @@ def sell(code, price, count):
     time.sleep(round(random.uniform(0.2, 1), 1))
     # 点击鼠标左键，点击卖出按钮
     click(coords=(899, 644))
-
+    time.sleep(round(random.uniform(1, 2), 1))
     # 点击ESC
     send_keys("{ESC}")
 
