@@ -1,4 +1,4 @@
-# server.py
+# encoding=utf-8
 import rpyc
 import subprocess
 import time
@@ -56,7 +56,7 @@ class RemoteCommandsService(rpyc.Service):
 
     def exposed_execute_command(self, command):
         try:
-            result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
+            result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True, encoding='utf-8')
             print(result)
 
             if "autobuy.py" in command or "autosell.py" in command:
