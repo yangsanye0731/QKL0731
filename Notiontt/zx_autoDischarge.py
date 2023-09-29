@@ -59,7 +59,6 @@ def discharge_buy():
     send_dingding_msg("撤买")
 
 
-
 def send_dingding_msg(type):
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     common.dingding_markdown_msg_03(
