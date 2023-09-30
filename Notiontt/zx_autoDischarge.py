@@ -62,7 +62,7 @@ def discharge_buy():
 def send_dingding_msg(type):
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     common.dingding_markdown_msg_03(
-        time_str + '触发自动插销' + '类型：' + type,
+        time_str + '触发自动撤销' + '类型：' + type,
         time_str + '触发自动撤销' + '类型：' + type)
 
 
