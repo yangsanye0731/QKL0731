@@ -29,6 +29,16 @@ def execute_remote_command(command):
     conn.close()
     return result
 
+def auto_operate(p_type, p_code, p_price, p_count):
+    string_input = "python "
+    p_price = str(p_price)
+    p_count = str(p_count)
+    if p_type == 's':
+        string_input = string_input + "zx_autosell.py " + p_code + " " + p_price + " " + p_count
+    elif p_type == 'b':
+        string_input = string_input + "zx_autobuy.py " + p_code + " " + p_price + " " + p_count
+    print("操作命令：" + string_input)
+    output = execute_remote_command(string_input)
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:

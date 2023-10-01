@@ -23,6 +23,8 @@ import warnings
 import threading
 import Notiontt.zx_autobuy as zx_autobuy
 import Notiontt.zx_autosell as zx_autosell
+import Notiontt.client as client
+import Notiontt.zx_client as zx_client
 
 warnings.filterwarnings("ignore")
 
@@ -248,14 +250,23 @@ def autobuy(code):
     zx_result = dic.get('zx_auto_list')
     if code in zx_result:
         zhangdiefu, price = common.zhangdiefu_and_price(code)
-        zx_autobuy.auto_operate(code, price, 1000)
+        zx_client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
 
+    result = dic.get('auto_list')
+    if code in result:
+        zhangdiefu, price = common.zhangdiefu_and_price(code)
+        client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
 
 def autosell(code):
     zx_result = dic.get('zx_auto_list')
     if code in zx_result:
         zhangdiefu, price = common.zhangdiefu_and_price(code)
-        zx_autosell.auto_operate(code, price, 1000)
+        zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+
+    result = dic.get('auto_list')
+    if code in result:
+        zhangdiefu, price = common.zhangdiefu_and_price(code)
+        client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
 
 
 #######################################################################################################################
