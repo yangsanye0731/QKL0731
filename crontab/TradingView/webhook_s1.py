@@ -245,12 +245,17 @@ def another_operation(param):
 
 
 def autobuy(code):
-    zhangdiefu, price = common.zhangdiefu_and_price(code)
-    zx_autobuy.auto_operate(code, price, 1000)
+    zx_result = dic.get('zx_auto_list')
+    if code in zx_result:
+        zhangdiefu, price = common.zhangdiefu_and_price(code)
+        zx_autobuy.auto_operate(code, price, 1000)
+
 
 def autosell(code):
-    zhangdiefu, price = common.zhangdiefu_and_price(code)
-    zx_autosell.auto_operate(code, price, 1000)
+    zx_result = dic.get('zx_auto_list')
+    if code in zx_result:
+        zhangdiefu, price = common.zhangdiefu_and_price(code)
+        zx_autosell.auto_operate(code, price, 1000)
 
 
 #######################################################################################################################
