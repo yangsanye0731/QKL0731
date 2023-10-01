@@ -24,7 +24,7 @@ cf.read(systemconfig_file_path, encoding='utf-8')
 
 def acquire_lock():
     sql = "INSERT INTO `superman`.`AGU_All_Code`(`code`, `name`) VALUES ('" + "mylock_lock" + "','" + "mylock_lock" + "\')"
-    print(sql)
+    # print(sql)
     insertRecord(sql)
 
 
