@@ -21,6 +21,8 @@ from datetime import datetime, timedelta
 import logging
 import warnings
 import threading
+import Notiontt.zx_autobuy as zx_autobuy
+import Notiontt.zx_autosell as zx_autosell
 
 warnings.filterwarnings("ignore")
 
@@ -85,8 +87,10 @@ def exec(codeItem):
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
-        time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' + table_item_data[10],
-        time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' + table_item_data[10]
+        time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
+        table_item_data[10],
+        time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
+        table_item_data[10]
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
@@ -99,6 +103,12 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     closeArray_60 = num.array(data_history_60['close'])
     doubleCloseArray_60 = num.asarray(closeArray_60, dtype='double')
 
+    highArray_60 = num.array(data_history_60['high'])
+    doubleHighArray_60 = num.asarray(highArray_60, dtype='double')
+
+    lowArray_60 = num.array(data_history_60['low'])
+    doubleLowArray_60 = num.asarray(lowArray_60, dtype='double')
+
     # 均线
     ma10_60 = ta.SMA(doubleCloseArray_60, timeperiod=10)
     sma10_60 = ta.EMA(ma10_60, timeperiod=10)
@@ -110,11 +120,25 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     sma144_60 = ta.EMA(ma144_60, timeperiod=144)
     state_60 = state(ma10_60, sma10_60)
 
+    # 60分钟操作机会1：触碰到唐奇安底线
+    # dc_high_60 = ta.MAX(doubleHighArray_60, timeperiod=20)
+    # dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
+    # if doubleLowArray_60[-1] == dc_low_60[-1] or (doubleLowArray_60[-1] - dc_low_60[-1]) / dc_low_60[-1] < 0.01:
+    #     logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
+    # if doubleHighArray_60[-1] == dc_high_60[-1] or (dc_high_60[-1] - doubleHighArray_60[-1]) / doubleHighArray_60[-1] < 0.01:
+    #     logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
+
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
 
     closeArray = num.array(data_history['close'])
     doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+    highArray = num.array(data_history['high'])
+    doubleHighArray = num.asarray(highArray, dtype='double')
+
+    lowArray = num.array(data_history['low'])
+    doubleLowArray = num.asarray(lowArray, dtype='double')
 
     # 均线
     ma10 = ta.SMA(doubleCloseArray, timeperiod=10)
@@ -127,7 +151,20 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     sma144 = ta.EMA(ma144, timeperiod=144)
     state_D = state(ma10, sma10)
 
-    table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2], ma10[-1],
+    # 日线操作机会1：触碰到唐奇安底线
+    dc_high = ta.MAX(doubleHighArray, timeperiod=20)
+    dc_low = ta.MIN(doubleLowArray, timeperiod=20)
+    if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
+        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
+        # 自动买入
+        autobuy(codeItem)
+    if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
+        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
+        # 自动卖出
+        autosell(codeItem)
+
+    table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
+                       ma10[-1],
                        state_D]
 
     return table_item_data
@@ -170,7 +207,7 @@ def main(choice):
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
 
-    print(table)
+    # logging.info(table)
     return data
 
 
@@ -178,13 +215,13 @@ def main(choice):
 def another_operation(param):
     try:
         common_mysqlUtil.acquire_lock()
-        logging.info("获取锁成功")
+        logging.debug("获取锁成功")
         # 获取当前时间
         start_time = time.time()
         title = "触发一级响应,进入一级响应SOP"
         text = "触发一级响应,进入一级响应SOP"
         while time.time() - start_time < 3600:
-            logging.info("消息发送中，%s", str(time.time() - start_time))
+            logging.debug("消息发送中，%s", str(time.time() - start_time))
             common.dingding_markdown_msg_04(title, text)
             time.sleep(1)
             common.dingding_markdown_msg_04(title, text)
@@ -202,9 +239,18 @@ def another_operation(param):
             common.dingding_markdown_msg_04(title, text)
             time.sleep(60)
         common_mysqlUtil.release_lock()
-        logging.info("释放锁成功")
+        logging.debug("释放锁成功")
     except (IOError, TypeError, NameError, IndexError, Exception) as e:
-        logging.info("获取锁失败")
+        logging.debug("获取锁失败")
+
+
+def autobuy(code):
+    zhangdiefu, price = common.zhangdiefu_and_price(code)
+    zx_autobuy.auto_operate(code, price, 1000)
+
+def autosell(code):
+    zhangdiefu, price = common.zhangdiefu_and_price(code)
+    zx_autosell.auto_operate(code, price, 1000)
 
 
 #######################################################################################################################
