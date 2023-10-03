@@ -11,7 +11,7 @@ curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 
-rootPath2 = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s1.py')
+rootPath2 = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s3.py')
 
 # main_script.py
 import subprocess
