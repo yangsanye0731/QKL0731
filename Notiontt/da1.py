@@ -16,7 +16,7 @@ rootPath2 = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s1.py')
 # main_script.py
 import subprocess
 print("获取实时数据")
-args = ['1']
+args = ['2']
 # 使用 subprocess 运行另一个 Python 文件
 result = subprocess.run(["python", rootPath2] + args)
 # # 获取执行结果

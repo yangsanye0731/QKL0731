@@ -35,6 +35,8 @@ import common_notion
 
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
+global_variable_is_auto = False
+
 jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'), ('399233', '制造指数'),
                 ('399234', '水电指数'), ('399235', '建筑指数'), ('399236', '批零指数'), ('399237', '运输指数'), ('399238', '餐饮指数'),
                 ('399239', 'IT指数'), ('399365', '国证农业'),
@@ -247,26 +249,28 @@ def another_operation(param):
 
 
 def autobuy(code):
-    zx_result = dic.get('zx_auto_list')
-    if zx_result is not None and code in zx_result:
-        zhangdiefu, price = common.zhangdiefu_and_price(code)
-        zx_client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
+    if global_variable_is_auto:
+        zx_result = dic.get('zx_auto_list')
+        if zx_result is not None and code in zx_result:
+            zhangdiefu, price = common.zhangdiefu_and_price(code)
+            zx_client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
 
-    result = dic.get('auto_list')
-    if result is not None and code in result:
-        zhangdiefu, price = common.zhangdiefu_and_price(code)
-        client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
+        result = dic.get('auto_list')
+        if result is not None and code in result:
+            zhangdiefu, price = common.zhangdiefu_and_price(code)
+            client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
 
 def autosell(code):
-    zx_result = dic.get('zx_auto_list')
-    if zx_result is not None and code in zx_result:
-        zhangdiefu, price = common.zhangdiefu_and_price(code)
-        zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+    if global_variable_is_auto:
+        zx_result = dic.get('zx_auto_list')
+        if zx_result is not None and code in zx_result:
+            zhangdiefu, price = common.zhangdiefu_and_price(code)
+            zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
 
-    result = dic.get('auto_list')
-    if result is not None and code in result:
-        zhangdiefu, price = common.zhangdiefu_and_price(code)
-        client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+        result = dic.get('auto_list')
+        if result is not None and code in result:
+            zhangdiefu, price = common.zhangdiefu_and_price(code)
+            client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
 
 
 #######################################################################################################################
@@ -274,6 +278,26 @@ def autosell(code):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == '1':
+            data = main('1')
+            for row in data:
+                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
+                c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
+                c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
+
+                if c1 or c2:
+                    param_value = "一级响应启动"
+                    # 创建一个线程，并指定要执行的函数
+                    thread = threading.Thread(target=another_operation, args=(param_value,))
+                    # 启动线程
+                    thread.start()
+                    break
+
+            my_list = dic.get('tixing_list').split(";")
+            text = "【触发Tips】" + random.choice(my_list)
+            time.sleep(2)
+            common.dingding_markdown_msg_03(text, text)
+        elif sys.argv[1] == '2':
+            global_variable_is_auto = True
             data = main('1')
             for row in data:
                 name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
