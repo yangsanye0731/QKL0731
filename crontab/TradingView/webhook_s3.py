@@ -92,9 +92,9 @@ def exec(codeItem):
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10],
+        table_item_data[10] + ' 唐奇安:' + table_item_data[11],
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10]
+        table_item_data[10] + ' 唐奇安:' + table_item_data[11]
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
@@ -158,18 +158,21 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     # 日线操作机会1：触碰到唐奇安底线
     dc_high = ta.MAX(doubleHighArray, timeperiod=20)
     dc_low = ta.MIN(doubleLowArray, timeperiod=20)
+    state_dc_d = ""
     if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
+        state_dc_d = "DC日线底线"
         # 自动买入
         autobuy(codeItem)
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
+        state_dc_d = "DC日线高线"
         # 自动卖出
         autosell(codeItem)
 
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1],
-                       state_D]
+                       state_D, state_dc_d]
 
     return table_item_data
 
@@ -195,7 +198,7 @@ def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d"]
+                   "ma10[-1]", "state_d", "state_dc_d"]
         my_list = dic.get('chicang_list').split(",")
         index = 0
         while index < len(my_list):
@@ -280,7 +283,7 @@ if __name__ == "__main__":
         if sys.argv[1] == '1':
             data = main('1')
             for row in data:
-                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
+                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, state_dc_D = row
                 c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
                 c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
 
@@ -300,7 +303,7 @@ if __name__ == "__main__":
             global_variable_is_auto = True
             data = main('1')
             for row in data:
-                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D = row
+                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, state_dc_D = row
                 c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
                 c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
 
