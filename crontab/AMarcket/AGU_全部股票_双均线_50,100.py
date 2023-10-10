@@ -1,0 +1,152 @@
+# encoding=utf-8
+import numpy as num
+import talib as ta
+import tushare as ts
+import time
+import openpyxl
+
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
+import sys
+import os
+
+project_name = 'QKL0731'
+rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
+sys.path.append(rootPath)
+
+curPath1 = os.path.abspath(os.path.dirname(__file__))
+rootPath1 = os.path.split(curPath1)[0]
+sys.path.append(rootPath1)
+print(rootPath1)
+import common_image
+import common_mysqlUtil
+import common
+import common_notion
+import logging
+from datetime import datetime, timedelta
+
+# 配置日志输出格式和级别
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.getLogger().setLevel(logging.INFO)
+import traceback
+
+
+#######################################################################################################################
+###########################################################################################################跨域5周线策略
+def strategy(zhouqi, endstr, database_id):
+    # 局部变量初始化
+    count = 0
+    count_b = 0
+    count_e = 0
+
+    ts.set_token('a0a3a3ee133d6623bf9072236a5a8423c1c021d00aba3eb0c7bdfa5e')
+    pro = ts.pro_api()
+    all_code = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
+    # all_code = ts.get_stock_basics()
+    all_code = all_code[1:-1].ts_code
+    all_code_index_x = num.array(all_code)
+
+    time_str = endstr
+    fo_60 = open("双均线50_100_DC_" + zhouqi + "_" + time_str + ".txt", "w")
+    workbook = openpyxl.load_workbook('C:\\Users\\yangj\\Desktop\\MyExcel.xlsx')
+    sheet = workbook.create_sheet(title=endstr)
+
+    # 遍历
+    for codeItem in all_code_index_x:
+        try:
+            codeItem = codeItem[0:6]
+            print(codeItem)
+            # time.sleep(0.5)
+            count = count + 1
+            print(count)
+
+            data_history = ts.get_hist_data(codeItem, ktype=zhouqi, end=endstr)
+            data_history = data_history.iloc[::-1]
+
+            closeArray = num.array(data_history['close'])
+            doubleCloseArray = num.asarray(closeArray, dtype='double')
+
+            codeName = ''
+            data = common_mysqlUtil.select_all_code_one(codeItem)
+            if len(data) > 0:
+                codeName = data[0][1]
+
+            highArray = num.array(data_history['high'])
+            doubleHighArray = num.asarray(highArray, dtype='double')
+
+            # openArray = num.array(data_history['open'])
+            # doubleOpenArray = num.asarray(openArray, dtype='double')
+
+            lowArray = num.array(data_history['low'])
+            doubleLowArray = num.asarray(lowArray, dtype='double')
+
+            # 均线
+            ma50 = ta.SMA(doubleCloseArray, timeperiod=50)
+            sma50 = ta.EMA(ma50, timeperiod=50)
+
+            ma100 = ta.SMA(doubleCloseArray, timeperiod=100)
+            sma100 = ta.EMA(ma100, timeperiod=100)
+
+            mark = ""
+            if ma50[-1] > ma100[-1] > ma100[-2]:
+                dc_high = ta.MAX(doubleHighArray, timeperiod=20)
+                dc_low = ta.MIN(doubleLowArray, timeperiod=20)
+                if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
+                    print("双均线50,100，DC：" + codeItem)
+                    fo_60.write(codeItem + "\n")
+                    image_path, gai_nian = common_image.plt_image_tongyichutu_2(codeItem,
+                                                                                "D",
+                                                                                "【全部代码】双均线50,100,DC",
+                                                                                "【全部代码】双均线50,100,DC", time_str, mark,
+                                                                                'multi')
+                    data_to_insert = [codeItem, codeName, gai_nian]
+                    sheet.append(data_to_insert)
+                    # image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+                    # logging.debug("图片URL：%s", image_path)
+                    # common_notion.create_content(database_id=database_id, title=codeName,
+                    #                              ce_lve_lei_xing='双均线60,120', tu_pian=image_url,
+                    #                              mark=mark, gai_nian=gai_nian, code=codeItem, create_time=time_str)
+
+                count_b = count_b + 1
+        except (IOError, TypeError, NameError, IndexError, Exception) as e:
+            print(e)
+            traceback.print_exc()
+            # common.dingding_markdown_msg_03("触发AGU_全部股票_双均线执行异常", "触发AGU_全部股票_双均线执行异常")
+    workbook.save('C:\\Users\\yangj\\Desktop\\MyExcel.xlsx')
+    return count_b, count_e
+
+
+#######################################################################################################################
+##############################################################################################################主执行程序
+if __name__ == "__main__":
+    # 获取命令行参数数量（不包括脚本文件名）
+    num_args = len(sys.argv) - 1
+    if num_args < 1:
+        time_str1 = time.strftime("%Y-%m-%d", time.localtime())
+        database_id = "32967c2c42a84cec94d65e8c7cf163f2"
+        count_result_b, count_result_e = strategy('D', time_str1, database_id)
+        # image_url = "http://" + "8.218.97.91:8080" + "software/QKL0731/crontab/AMarcket/双均线10" + image_path[6:]
+        # common_notion.create_content(database_id=database_id, title=time_str1 + "文件",
+        #                              ce_lve_lei_xing='10天双均线金叉', tu_pian=image_url,
+        #                              mark=mark, gai_nian=gai_nian, code=codeItem, create_time=time_str)
+
+        common.dingding_markdown_msg_02("触发AGU_全部股票_双均线执行完成", "触发AGU_全部股票_双均线执行完成")
+    else:
+        logging.info("开始策略回测逻辑")
+        # Notion数据库ID：任务跟踪（Auto）（回测）
+        database_id = "472afd1c0f3541fea9f4e132ae1a430e"
+
+        # 按月进行回测,回测1月份数据
+        # 设置起始日期为2023年1月1日
+        start_date = datetime(2023, 8, 1)
+
+        # 计算结束日期为2023年2月1日（不包含2月1日）
+        end_date = datetime(2023, 8, 31)
+
+        # 循环遍历日期
+        current_date = start_date
+        while current_date < end_date:
+            time_str1 = current_date.strftime('%Y-%m-%d')
+            time_str2 = current_date.strftime('%Y%m')
+            strategy(zhouqi='D', endstr=time_str1, database_id=database_id)
+            current_date += timedelta(days=1)
