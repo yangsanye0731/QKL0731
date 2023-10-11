@@ -5,6 +5,9 @@ from pywinauto.keyboard import send_keys
 from pywinauto import findwindows
 import random
 from PIL import ImageGrab
+from pathlib import Path
+import ocr_util as ocr
+import openpyxl
 
 #######################################################################################################################
 # ############################################################################################### 配置程序应用所需要环境PATH
@@ -37,14 +40,30 @@ def image(code):
     send_keys(code, pause=round(random.uniform(0.2, 1), 1))
     time.sleep(round(random.uniform(0.2, 1), 1))
     send_keys("{ENTER}")
-    time.sleep(2)
+    time.sleep(5)
     # 截取整个屏幕
-    screenshot = ImageGrab.grab()
+    # 指定要截取的区域的坐标和大小
+    x1, y1, x2, y2 = 1600, 990, 1670, 1015
+    # 使用 ImageGrab.grab() 截取屏幕上的区域
+    screenshot = ImageGrab.grab(bbox=(x1, y1, x2, y2))
+    # 创建文件夹
+    time_str = time.strftime("%Y-%m-%d", time.localtime())
+    folder_path = "images\\" + time_str
+
+    # 使用 Path() 创建文件夹
+    path = Path(folder_path)
+    path.mkdir(parents=True, exist_ok=True)
+    absolute_path = path.resolve()
+
+    image_file_path = os.path.join(absolute_path, code + ".png")
     # 保存截图为文件
-    screenshot.save("screenshot.png")
+    screenshot.save(image_file_path)
+    text = ocr.ocr(image_file_path)
+    print(text)
     # 关闭截图
     screenshot.close()
-    time.sleep(16)
+    time.sleep(2)
+    return text
 
 
 def send_dingding_msg(code, price, count):
@@ -72,19 +91,27 @@ def minimize(title_str):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        title_str = "300482"
+        title_str = "399006"
         # 最大化窗口
         maximize(title_str)
-        image("XAUUSD")
-        image("600547")
+        excel_file_path = 'C:\\Users\\yangj\\Desktop\\my.xlsx'
+        workbook = openpyxl.load_workbook(excel_file_path)
+        sheet = workbook.active
 
-        image("XAGUSD")
-        image("000426")
+        time_str1 = time.strftime("%Y年%m月%d日%H时%M分", time.localtime())
+        sheet.cell(row=1, column=sheet.max_column + 1, value=time_str1)
+        row_count = 2
+        for row in sheet.iter_rows(min_row=2, values_only=True, max_col=3):
+            column1_value, column2_value, column3_value = row
+            code = str(column2_value)
+            text = image(code)
+            sheet.cell(row=row_count, column=sheet.max_column, value=text)
+            row_count = row_count + 1
 
-        image("COPPER")
-        image("000630")
-
-        image(title_str)
+        # 保存 Excel 文件
+        workbook.save(excel_file_path)
+        # 关闭工作簿
+        workbook.close()
         # 最小化窗口
         minimize(title_str)
     else:
