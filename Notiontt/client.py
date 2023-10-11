@@ -29,6 +29,7 @@ def execute_remote_command(command):
     conn.close()
     return result
 
+
 def auto_operate(p_type, p_code, p_price, p_count):
     string_input = "python "
     p_price = str(p_price)
@@ -39,6 +40,7 @@ def auto_operate(p_type, p_code, p_price, p_count):
         string_input = string_input + "autobuy.py " + p_code + " " + p_price + " " + p_count
     print("操作命令：" + string_input)
     output = execute_remote_command(string_input)
+
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
@@ -63,6 +65,22 @@ if __name__ == "__main__":
         zhangdiefu, price = common.zhangdiefu_and_price(code_input)
         price_input = str(price)
         count_input = "1000"
+
+        if type_input == 's':
+            string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + count_input
+        elif type_input == 'b':
+            string_input = string_input + "autobuy.py " + code_input + " " + price_input + " " + count_input
+        print("操作命令：" + string_input)
+        output = execute_remote_command(string_input)
+        # print("Remote command output:")
+        # print(output)
+    elif len(sys.argv) == 4:
+        string_input = "python "
+        type_input = sys.argv[1]
+        code_input = sys.argv[2]
+        zhangdiefu, price = common.zhangdiefu_and_price(code_input)
+        price_input = str(price)
+        count_input = sys.argv[3]
 
         if type_input == 's':
             string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + count_input
