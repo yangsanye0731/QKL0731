@@ -80,7 +80,7 @@ def maximize(title_str):
     app.connect(title=title_str, timeout=120)
     app[title_str].wrapper_object().maximize()
     print(app.windows())
-    time.sleep(1)
+    time.sleep(2)
 
 
 def minimize(title_str):
@@ -89,19 +89,18 @@ def minimize(title_str):
     app[title_str].wrapper_object().minimize()
 
 
-def auto_operate(p_code, p_price, p_count):
+def auto_operate(p_code, p_price, p_count, p_level):
     title_str = "中信证券至胜全能版"
     # 最大化窗口
     maximize(title_str)
 
     fenshu = p_count
     if p_count >= 1000:
-        fenshu = 100
-    if p_count >= 3000:
-        fenshu = 200
+        fenshu = 100 * p_level
 
     p_price = float(p_price)
     quotient, remainder = divmod(p_count, fenshu)
+    print(quotient)
     for num in range(0, quotient):
         youxiaoshu = 2
         if p_price < 1:
@@ -120,6 +119,8 @@ if __name__ == "__main__":
         price_float = float(price)
         count = sys.argv[3]
         count_int = int(count)
-        auto_operate(code, price_float, count_int)
+        level = sys.argv[4]
+        level_int = int(level)
+        auto_operate(code, price_float, count_int, level_int)
     else:
         print("=====")
