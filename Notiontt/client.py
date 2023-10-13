@@ -1,4 +1,4 @@
-# client.py
+# encoding=utf-8
 import rpyc
 
 import sys

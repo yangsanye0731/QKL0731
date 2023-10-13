@@ -1,3 +1,4 @@
+# encoding=utf-8
 import time
 from pywinauto import Application
 from pywinauto.mouse import click, double_click, right_click, move
