@@ -70,9 +70,9 @@ if __name__ == "__main__":
         if type_input == 's':
             string_input = string_input + "zx_autosell.py " + code_input + " " + price_input + " " + count_input
         elif type_input == 's1':
-            string_input = string_input + "zx_autosell_quick.py " + code_input + " " + price_input + " " + count_input + " " + "3"
+            string_input = string_input + "zx_autosell_quick.py " + code_input + " " + price_input + " " + 5000 + " " + "1"
         elif type_input == 's2':
-            string_input = string_input + "zx_autosell_quick.py " + code_input + " " + price_input + " " + count_input + " " + "6"
+            string_input = string_input + "zx_autosell_quick.py " + code_input + " " + price_input + " " + 10000 + " " + "2"
         elif type_input == 'b':
             string_input = string_input + "zx_autobuy.py " + code_input + " " + price_input + " " + count_input
         elif type_input == 'b1':
@@ -83,8 +83,8 @@ if __name__ == "__main__":
                            + "6000" + " " + "6"
         print("操作命令：" + string_input)
         output = execute_remote_command(string_input)
-        print("Remote command output:")
-        print(output)
+        # print("Remote command output:")
+        # print(output)
     # 手动添加命令参数，如：python zx_client
     else:
         string_input = "python "
