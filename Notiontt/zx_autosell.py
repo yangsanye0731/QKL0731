@@ -100,11 +100,16 @@ def auto_operate(p_code, p_price, p_count):
         fenshu = 200
     if p_count >= 3000:
         fenshu = 300
+    if p_count >= 10000:
+        fenshu = 500
+    if p_count >= 20000:
+        fenshu = 900
 
     p_price = float(p_price)
     quotient, remainder = divmod(p_count, fenshu)
     for num in range(0, quotient):
-        price_sell = round(p_price * (1 + 0.001 * num), 2)
+        # price_sell = round(p_price * (1 + 0.001 * num), 2)
+        zhangdiefu, price_sell = common.zhangdiefu_and_price(code)
         sell(p_code, str(price_sell), str(fenshu))
         time.sleep(2)
 

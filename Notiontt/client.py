@@ -14,12 +14,12 @@ sys.path.append(rootPath1)
 import common
 import common_notion
 
-dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
-
 import warnings
 
 # Suppress the FutureWarning
 warnings.simplefilter(action='ignore', category=FutureWarning)
+
+dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 
 def execute_remote_command(command):
