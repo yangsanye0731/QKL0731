@@ -25,7 +25,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 def execute_remote_command(command):
     conn = rpyc.connect("192.168.233.128", 18861)  # 替换为服务器的IP地址
     # conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
-    conn._config['sync_request_timeout'] = 1200
+    conn._config['sync_request_timeout'] = 12000
     remote_service = conn.root
 
     result = remote_service.exposed_execute_command(command)
