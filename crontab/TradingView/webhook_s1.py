@@ -86,9 +86,9 @@ def exec(codeItem):
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐奇安:' + table_item_data[11],
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐奇安:' + table_item_data[11]
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
@@ -118,13 +118,16 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     sma144_60 = ta.EMA(ma144_60, timeperiod=144)
     state_60 = state(ma10_60, sma10_60)
 
-    # 60分钟操作机会1：触碰到唐奇安底线
-    # dc_high_60 = ta.MAX(doubleHighArray_60, timeperiod=20)
-    # dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
-    # if doubleLowArray_60[-1] == dc_low_60[-1] or (doubleLowArray_60[-1] - dc_low_60[-1]) / dc_low_60[-1] < 0.01:
-    #     logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
-    # if doubleHighArray_60[-1] == dc_high_60[-1] or (dc_high_60[-1] - doubleHighArray_60[-1]) / doubleHighArray_60[-1] < 0.01:
-    #     logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
+    #60分钟操作机会1：触碰到唐奇安底线
+    state_dc_h = ""
+    dc_high_60 = ta.MAX(doubleHighArray_60, timeperiod=20)
+    dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
+    if doubleLowArray_60[-1] == dc_low_60[-1]:
+        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
+        state_dc_h = "DC小时底线"
+    if doubleHighArray_60[-1] == dc_high_60[-1]:
+        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
+        state_dc_h = "DC小时高线"
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
@@ -162,7 +165,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
 
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1],
-                       state_D, state_dc_d]
+                       state_D, state_dc_h, state_dc_d]
 
     return table_item_data
 
@@ -188,7 +191,7 @@ def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
         my_list = dic.get('chicang_list').split(",")
         index = 0
         while index < len(my_list):
@@ -199,7 +202,7 @@ def main(choice):
     elif choice == '2':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")

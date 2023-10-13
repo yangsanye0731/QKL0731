@@ -212,7 +212,7 @@ def main(choice):
     elif choice == '2':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
