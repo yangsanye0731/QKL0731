@@ -12,6 +12,9 @@ curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 import common
+import common_notion
+
+dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 import warnings
 
@@ -65,6 +68,13 @@ if __name__ == "__main__":
         zhangdiefu, price = common.zhangdiefu_and_price(code_input)
         price_input = str(price)
         count_input = "1000"
+
+        my_list = dic.get('auto_list').split(",")
+        for item in my_list:
+            item_list = item.split(":")
+            if item_list[0] == code_input:
+                count_input = item_list[1]
+                break;
 
         if type_input == 's':
             string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + count_input

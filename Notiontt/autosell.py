@@ -111,6 +111,22 @@ if __name__ == "__main__":
             fenshu = 200
         if count_int >= 3000:
             fenshu = 300
+        if count_int >= 4000:
+            fenshu = 400
+        if count_int >= 5000:
+            fenshu = 500
+        if count_int >= 6000:
+            fenshu = 600
+        if count_int >= 7000:
+            fenshu = 700
+        if count_int >= 8000:
+            fenshu = 800
+        if count_int >= 9000:
+            fenshu = 900
+        if count_int >= 10000:
+            fenshu = 1000
+        if count_int >= 11000:
+            fenshu = 1100
 
         quotient, remainder = divmod(count_int, fenshu)
         for num in range(0, quotient):
