@@ -94,7 +94,7 @@ if __name__ == "__main__":
         title_str = "399006"
         # 最大化窗口
         maximize(title_str)
-        excel_file_path = 'C:\\Users\\yangj\\Desktop\\my.xlsx'
+        excel_file_path = 'C:\\Users\\yangj\\Desktop\\buy\\my.xlsx'
         workbook = openpyxl.load_workbook(excel_file_path)
         sheet = workbook.active
 
@@ -104,6 +104,7 @@ if __name__ == "__main__":
         for row in sheet.iter_rows(min_row=2, values_only=True, max_col=3):
             column1_value, column2_value, column3_value = row
             code = str(column2_value)
+            print(code)
             text = image(code)
             if text == 'y':
                 text = '中立'
