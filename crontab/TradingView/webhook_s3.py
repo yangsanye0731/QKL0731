@@ -134,6 +134,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     if doubleHighArray_60[-1] == dc_high_60[-1]:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
         state_dc_h = "DC小时高线"
+        autosell(codeItem)
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
@@ -166,7 +167,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
         state_dc_d = "DC日线底线"
         # 自动买入
-        autobuy(codeItem)
+        # autobuy(codeItem)
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
         state_dc_d = "DC日线高线"
