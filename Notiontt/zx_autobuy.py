@@ -22,42 +22,39 @@ import common
 def buy(code, price, count):
     # 在全屏模式下点击买入菜单
     click(coords=(37, 76))  # 在 (100, 200) 坐标处点击
-    time.sleep(random.randint(1, 2))
+    time.sleep(1)
     # 点击鼠标左键，进入证券代码文本输入框
     double_click(coords=(310, 111))
     # 在证券代码输入全选，并删除
     time.sleep(0.1)
     send_keys("{DELETE}")
-    time.sleep(round(random.uniform(0.2, 1), 1))
-    send_keys(code, pause=round(random.uniform(0.2, 0.5), 1))
+    time.sleep(round(random.uniform(0.2, 0.3), 1))
+    send_keys(code, pause=round(random.uniform(0.2, 0.3), 1))
     time.sleep(1)
 
     # 点击鼠标左键，进入买入价格文本框
     click(coords=(322, 153))
     # 在文本框中双击并删除
-    time.sleep(0.2)
     double_click(coords=(311, 155))
-    time.sleep(round(random.uniform(0.2, 1), 1))
     send_keys("{DELETE}")
-    time.sleep(round(random.uniform(0.2, 1), 1))
     # 输入买入价格，这里是【变量】
-    send_keys(price, pause=round(random.uniform(0.2, 0.5), 1))
+    send_keys(price, pause=round(random.uniform(0.2, 0.3), 1))
 
     # 点击鼠标左键，进入买入数量行
     click(coords=(327, 200))
     # 在文本框中输入全选与删除8
     send_keys("^a")
-    time.sleep(round(random.uniform(0.2, 1), 1))
+    time.sleep(round(random.uniform(0.2, 0.3), 1))
     send_keys("{DELETE}")
     time.sleep(0.3)
     # 输入要卖出的数量，这里是【变量】
-    send_keys(count, pause=round(random.uniform(0.2, 0.5), 1))
+    send_keys(count, pause=round(random.uniform(0.2, 0.3), 1))
     # 点击鼠标左键，点击买入按钮
     click(coords=(332, 250))
-    time.sleep(round(random.uniform(0.2, 1), 1))
+    time.sleep(round(random.uniform(0.2, 0.3), 1))
     # 点击鼠标左键，点击买入完成确认按钮
     click(coords=(900, 644))
-    time.sleep(round(random.uniform(0.2, 1), 1))
+    time.sleep(round(random.uniform(0.2, 0.3), 1))
     # 点击鼠标左键，买入完成，关闭对话框
     click(coords=(951, 598))
 
@@ -80,7 +77,6 @@ def maximize(title_str):
     app.connect(title=title_str, timeout=120)
     app[title_str].wrapper_object().maximize()
     print(app.windows())
-    time.sleep(1)
 
 
 def minimize(title_str):
