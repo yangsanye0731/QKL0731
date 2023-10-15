@@ -73,6 +73,8 @@ class RemoteCommandsService(rpyc.Service):
         except subprocess.CalledProcessError as e:
             print(e.output)
             # return f"Error executing command: {e.output}"
+        except UnicodeDecodeError as e:
+            print(e.output)
 
 
 if __name__ == "__main__":
