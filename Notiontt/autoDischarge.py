@@ -9,8 +9,6 @@ import random
 import sys
 import os
 
-import common_constants
-
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
@@ -19,6 +17,7 @@ curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 import common
+import common_constants
 
 
 # 撤卖
@@ -75,7 +74,6 @@ def discharge_buy():
 
     # 发送钉钉消息
     send_dingding_msg("撤买")
-
 
 
 def send_dingding_msg(type):
