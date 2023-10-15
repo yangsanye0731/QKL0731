@@ -74,7 +74,7 @@ class RemoteCommandsService(rpyc.Service):
             print(e.output)
             # return f"Error executing command: {e.output}"
         except UnicodeDecodeError as e:
-            print(e.output)
+            print("编码异常处理")
 
 
 if __name__ == "__main__":
