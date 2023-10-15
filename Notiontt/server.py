@@ -56,8 +56,8 @@ class RemoteCommandsService(rpyc.Service):
 
     def exposed_execute_command(self, command):
         try:
-            result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
-            print(result.decode("utf-8", errors="replace"))
+            result = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True, encoding='utf-8')
+            # print(result)
 
             if "autobuy.py" in command or "autosell.py" in command:
                 # 同步Notion

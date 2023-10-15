@@ -18,6 +18,7 @@ curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 import common
+import common_constants
 
 
 def buy(code, price, count):
@@ -99,8 +100,7 @@ if __name__ == "__main__":
         count = sys.argv[3]
         count_int = int(count)
 
-        # title_str = "东方财富终端"
-        title_str = "东方财富证券交易"
+        title_str = common_constants.global_variable_dong_fang_cai_fu
         # 最大化窗口
         maximize(title_str)
 
