@@ -8,6 +8,7 @@ from PIL import ImageGrab
 from pathlib import Path
 import ocr_util as ocr
 import openpyxl
+from openpyxl.styles import Font, Color, PatternFill
 
 #######################################################################################################################
 # ############################################################################################### 配置程序应用所需要环境PATH
@@ -22,6 +23,7 @@ curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 import common
+import common_strategy
 
 
 def image(code):
@@ -103,18 +105,46 @@ if __name__ == "__main__":
         row_count = 2
         for row in sheet.iter_rows(min_row=2, values_only=True, max_col=3):
             column1_value, column2_value, column3_value = row
-            code = str(column2_value)
-            print(code)
-            text = image(code)
+            codeItem = str(column2_value)
+            print(codeItem)
+            # tradingView技术指标
+            text = image(codeItem)
             if text == 'y':
                 text = '中立'
-            sheet.cell(row=row_count, column=sheet.max_column, value=text)
+
+            # 唐奇安小时线、唐奇安日线
+            time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
+            table_item_data = common_strategy.code_matrix_table(codeItem, zhangdiefu, price, column3_value)
+            state_dc_h = table_item_data[11]
+            if state_dc_h is None:
+                state_dc_h = ""
+            state_dc_d = table_item_data[12]
+            if state_dc_d is None:
+                state_dc_d = ""
+            if text is None:
+                text = ""
+            print(state_dc_h)
+            print(state_dc_d)
+            print(text)
+
+            text = text + ", 唐H：" + state_dc_h + ", 唐日：" + state_dc_d
+            red_fill = PatternFill(start_color="FF0000", end_color="FFFF00", fill_type="solid")
+            # green_fill = PatternFill(start_color="FF0000", end_color="FF0000", fill_type="solid")
+
+            cur_cell = sheet.cell(row=row_count, column=sheet.max_column, value=text)
+            if "底线" in text:
+                cur_cell.fill = red_fill
             row_count = row_count + 1
 
-        # 保存 Excel 文件
-        workbook.save(excel_file_path)
-        # 关闭工作簿
-        workbook.close()
+        try:
+            # 保存 Excel 文件
+            workbook.save(excel_file_path)
+            # 关闭工作簿
+            workbook.close()
+        except PermissionError as e:
+            print("该文件没有权限操作，请关闭")
+
         # 最小化窗口
         minimize(title_str)
         time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
