@@ -71,7 +71,8 @@ class RemoteCommandsService(rpyc.Service):
             # # 返回信息
             return result
         except subprocess.CalledProcessError as e:
-            return f"Error executing command: {e.output}"
+            print(e.output)
+            # return f"Error executing command: {e.output}"
 
 
 if __name__ == "__main__":
