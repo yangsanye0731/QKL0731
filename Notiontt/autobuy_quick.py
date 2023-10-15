@@ -10,6 +10,8 @@ import random
 import sys
 import os
 
+import common_constants
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
@@ -101,8 +103,7 @@ if __name__ == "__main__":
         count_int = int(count)
         level_int = int(level)
 
-        # title_str = "东方财富终端"
-        title_str = "东方财富证券交易"
+        title_str = common_constants.global_variable_dong_fang_cai_fu
         # 最大化窗口
         maximize(title_str)
 

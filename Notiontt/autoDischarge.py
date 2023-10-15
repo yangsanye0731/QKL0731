@@ -9,6 +9,8 @@ import random
 import sys
 import os
 
+import common_constants
+
 project_name = 'QKL0731'
 rootPath = str(os.path.abspath(os.path.dirname(__file__)).split(project_name)[0]) + project_name
 sys.path.append(rootPath)
@@ -98,8 +100,7 @@ def minimize(title_str):
 
 
 if __name__ == "__main__":
-    # title_str = "东方财富终端"
-    title_str = "东方财富证券交易"
+    title_str = common_constants.global_variable_dong_fang_cai_fu
     maximize(title_str)
     discharge_sell()
     time.sleep(random.randrange(5))
