@@ -90,11 +90,9 @@ def exec(codeItem):
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + 'SKH:' + table_item_data[13] + ' 唐日:' +
-        table_item_data[12] + 'SKD:' + table_item_data[14],
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[14],
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + 'SKH:' + table_item_data[13] + ' 唐日:' +
-        table_item_data[12] + 'SKD:' + table_item_data[14],
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[14]
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
@@ -171,9 +169,11 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
 
     k0_60, d0_60 = common_zhibiao.SKDJ_zhibiao(data_history_60, doubleCloseArray_60)
     k0, d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
+    state_skd_60 = "%.2f" % k0_60[len(k0_60) - 1]
+    state_skd_d = "%.2f" % k0[len(k0) - 1]
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1],
-                       state_D, state_dc_h, state_dc_d, k0_60, k0]
+                       state_D, state_dc_h, state_dc_d, state_skd_60, state_skd_d]
 
     return table_item_data
 
@@ -199,7 +199,7 @@ def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "k0_60", "k0"]
         # 从Notion配置项中获取数据
         my_list = dic.get('chicang_list').split(",")
         index = 0
@@ -211,7 +211,7 @@ def main(choice):
     elif choice == '2':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "k0_60", "k0"]
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
@@ -261,7 +261,8 @@ if __name__ == "__main__":
         if sys.argv[1] == '1':
             data = main('1')
             for row in data:
-                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, state_dc_D = row
+                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, \
+                state_dc_h, state_dc_D, k0_60, k0 = row
                 c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
                 c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
 
