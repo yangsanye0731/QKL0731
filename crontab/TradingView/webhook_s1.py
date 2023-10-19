@@ -21,6 +21,7 @@ from datetime import datetime, timedelta
 import logging
 import warnings
 import threading
+import common_zhibiao
 
 warnings.filterwarnings("ignore")
 
@@ -29,6 +30,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 logging.getLogger().setLevel(logging.INFO)
 import common_notion
 
+#######################################################################################################################
+################################################################################################################公共配置
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'), ('399233', '制造指数'),
@@ -63,11 +66,12 @@ def exec(codeItem):
         for key, value in jsonDicCode1:
             if key == codeItem:
                 codeName = value
-
+    # 获取名称
     data = common_mysqlUtil.select_all_code_one(codeItem)
     if len(data) > 0:
         codeName = data[0][1]
 
+    # 生成图片
     image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
     image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
@@ -86,9 +90,11 @@ def exec(codeItem):
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + 'SKH:' + table_item_data[13] + ' 唐日:' +
+        table_item_data[12] + 'SKD:' + table_item_data[14],
         time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + 'SKH:' + table_item_data[13] + ' 唐日:' +
+        table_item_data[12] + 'SKD:' + table_item_data[14],
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
@@ -118,16 +124,16 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     sma144_60 = ta.EMA(ma144_60, timeperiod=144)
     state_60 = state(ma10_60, sma10_60)
 
-    #60分钟操作机会1：触碰到唐奇安底线
+    # 60分钟操作机会1：触碰到唐奇安底线
     state_dc_h = ""
     dc_high_60 = ta.MAX(doubleHighArray_60, timeperiod=20)
     dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
     if doubleLowArray_60[-1] == dc_low_60[-1]:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
-        state_dc_h = "DC小时底线"
+        state_dc_h = "小时底线"
     if doubleHighArray_60[-1] == dc_high_60[-1]:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
-        state_dc_h = "DC小时高线"
+        state_dc_h = "小时高线"
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
@@ -158,14 +164,16 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     state_dc_d = ""
     if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
-        state_dc_d = "DC日线底线"
+        state_dc_d = "日线底线"
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
         logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
-        state_dc_d = "DC日线高线"
+        state_dc_d = "日线高线"
 
+    k0_60, d0_60 = common_zhibiao.SKDJ_zhibiao(data_history_60, doubleCloseArray_60)
+    k0, d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1],
-                       state_D, state_dc_h, state_dc_d]
+                       state_D, state_dc_h, state_dc_d, k0_60, k0]
 
     return table_item_data
 
@@ -192,6 +200,7 @@ def main(choice):
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
+        # 从Notion配置项中获取数据
         my_list = dic.get('chicang_list').split(",")
         index = 0
         while index < len(my_list):
@@ -246,6 +255,7 @@ def another_operation(param):
 
 #######################################################################################################################
 ##############################################################################################################主执行程序
+# 买入
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == '1':
