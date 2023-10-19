@@ -170,7 +170,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     k0_60, d0_60 = common_zhibiao.SKDJ_zhibiao(data_history_60, doubleCloseArray_60)
     k0, d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
     state_skd_60 = "%.2f" % k0_60[len(k0_60) - 1]
-    state_skd_d = "%.2f" % k0[len(k0) - 1]
+    state_skd_d = "%.2f" % k0[len(k0) - 2]  + "->" + "%.2f" % k0[len(k0) - 1]
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1],
                        state_D, state_dc_h, state_dc_d, state_skd_60, state_skd_d]
