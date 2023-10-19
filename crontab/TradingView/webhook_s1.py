@@ -127,10 +127,10 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     dc_high_60 = ta.MAX(doubleHighArray_60, timeperiod=20)
     dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
     if doubleLowArray_60[-1] == dc_low_60[-1]:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
         state_dc_h = "小时底线"
     if doubleHighArray_60[-1] == dc_high_60[-1]:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
         state_dc_h = "小时高线"
 
     # ======================================================日线数据
@@ -161,10 +161,10 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     dc_low = ta.MIN(doubleLowArray, timeperiod=20)
     state_dc_d = ""
     if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
         state_dc_d = "日线底线"
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
         state_dc_d = "日线高线"
 
     k0_60, d0_60 = common_zhibiao.SKDJ_zhibiao(data_history_60, doubleCloseArray_60)
@@ -182,6 +182,17 @@ def state(ma10, sma10):
     item_state = ""
     if ma10[-3] < ma10[-2] < ma10[-1]:
         item_state = "上升"
+        if ma10[-2] > ma10[-3]:
+            item_state = "上升1"
+            if ma10[-3] > ma10[-4]:
+                item_state = "上升2"
+                if ma10[-4] > ma10[-5]:
+                    item_state = "上升3"
+                    if ma10[-5] > ma10[-6]:
+                        item_state = "上升4"
+                        if ma10[-6] > ma10[-7]:
+                            item_state = "上升5"
+
     if ma10[-3] < ma10[-2] > ma10[-1]:
         item_state = "顶部"
     if ma10[-3] > ma10[-2] > ma10[-1]:
