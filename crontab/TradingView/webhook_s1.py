@@ -203,7 +203,7 @@ def state(ma10, sma10):
     if ma10[-3] > ma10[-2] > ma10[-1]:
         item_state = "下降"
     if ma10[-3] > ma10[-2] < ma10[-1]:
-        item_state = "底部📌"
+        item_state = "底部🚀"
     if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
         item_state = "上穿"
     if ma10[-1] < sma10[-1] and ma10[-2] > sma10[-2]:
