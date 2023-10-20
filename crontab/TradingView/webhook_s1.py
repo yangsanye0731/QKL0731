@@ -182,15 +182,21 @@ def state(ma10, sma10):
     if ma10[-3] < ma10[-2] < ma10[-1]:
         item_state = "上升"
         if ma10[-2] > ma10[-3]:
-            item_state = "上升1"
+            item_state = "上升1🚀"
             if ma10[-3] > ma10[-4]:
-                item_state = "上升2"
+                item_state = "上升2🚀"
                 if ma10[-4] > ma10[-5]:
                     item_state = "上升3"
                     if ma10[-5] > ma10[-6]:
                         item_state = "上升4"
                         if ma10[-6] > ma10[-7]:
                             item_state = "上升5"
+                            if ma10[-7] > ma10[-8]:
+                                item_state = "上升6"
+                                if ma10[-8] > ma10[-9]:
+                                    item_state = "上升7"
+                                    if ma10[-9] > ma10[-10]:
+                                        item_state = "上升8"
 
     if ma10[-3] < ma10[-2] > ma10[-1]:
         item_state = "顶部"
