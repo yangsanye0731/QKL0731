@@ -127,7 +127,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
     if doubleLowArray_60[-1] == dc_low_60[-1]:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
-        state_dc_h = "小时底线"
+        state_dc_h = "小时底线📌"
     if doubleHighArray_60[-1] == dc_high_60[-1]:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
         state_dc_h = "小时高线"
@@ -161,7 +161,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     state_dc_d = ""
     if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
-        state_dc_d = "日线底线"
+        state_dc_d = "日线底线📌"
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
         state_dc_d = "日线高线"
@@ -203,7 +203,7 @@ def state(ma10, sma10):
     if ma10[-3] > ma10[-2] > ma10[-1]:
         item_state = "下降"
     if ma10[-3] > ma10[-2] < ma10[-1]:
-        item_state = "底部"
+        item_state = "底部📌"
     if ma10[-1] > sma10[-1] and ma10[-2] < sma10[-2]:
         item_state = "上穿"
     if ma10[-1] < sma10[-1] and ma10[-2] > sma10[-2]:
