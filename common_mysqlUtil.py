@@ -557,6 +557,31 @@ def insert_codeitem(codeitem, type, strategy, endstr):
     print(sql)
     insertRecord(sql)
 
+
+def select_buy():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect(host="localhost", user=userName, password=password, database="superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL
+    sql = ''
+    sql = "SELECT code, name, modify_time from `superman`.`buy` WHERE `is_delete` = 0 order by modify_time desc"
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
+
+def update_buy(code):
+    sql = "UPDATE `superman`.`buy` SET `modify_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S",
+                                                                          time.localtime()) + "' WHERE `code` = " + code
+    print(sql)
+    insertRecord(sql)
+
 # insertRecord("INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `zhangdifu`, `30zhi`, `60zhi`) VALUES ('2', '2', '2', '2');")
 # data = select_zhishu_count_record()
 # for count in data:

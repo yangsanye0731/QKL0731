@@ -32,6 +32,7 @@ import common_notion
 
 #######################################################################################################################
 ################################################################################################################公共配置
+# Notion配置
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
 
 jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'), ('399233', '制造指数'),
@@ -84,14 +85,19 @@ def exec(codeItem):
     # 日线
     table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
 
+    # 更新buy顺序数据
+    update_buy(codeItem, table_item_data)
+
     # 发送钉钉消息
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
         time_str_1 + '触发' + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[14],
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[
+            14],
         time_str_1 + '触发' + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[14]
+        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[
+            14]
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
     return image_path, table_item_data
@@ -211,13 +217,29 @@ def state(ma10, sma10):
     return item_state
 
 
+def list_buy():
+    code_list = []
+    data = common_mysqlUtil.select_buy()
+    for i in range(len(data)):
+        codeItem = str(data[i][0])
+        code_list.append(codeItem)
+    return code_list
+
+
+def update_buy(codeItem, table_data):
+    if "🚀" in table_data[6] or "🚀" in table_data[10]:
+        common_mysqlUtil.update_buy(codeItem)
+
+
 def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "k0_60", "k0"]
         # 从Notion配置项中获取数据
-        my_list = dic.get('chicang_list').split(",")
+        # my_list = dic.get('chicang_list').split(",")
+        # 从数据库中获取数据
+        my_list = list_buy()
         index = 0
         while index < len(my_list):
             image_url_path, table_item_data1 = exec(my_list[index])
