@@ -582,6 +582,30 @@ def update_buy(code):
     print(sql)
     insertRecord(sql)
 
+
+def select_sell():
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect(host="localhost", user=userName, password=password, database="superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL
+    sql = ''
+    sql = "SELECT code, name, channel, count, sell_id, modify_time from `superman`.`sell` WHERE `is_delete` = 0"
+    print(sql)
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
+
+def update_sell(id, update_count):
+    sql = "UPDATE `superman`.`sell` SET `count` = '" + update_count + "' WHERE `sell_id` = " + str(id)
+    print(sql)
+    insertRecord(sql)
+
 # insertRecord("INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `zhangdifu`, `30zhi`, `60zhi`) VALUES ('2', '2', '2', '2');")
 # data = select_zhishu_count_record()
 # for count in data:

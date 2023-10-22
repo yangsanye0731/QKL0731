@@ -293,11 +293,14 @@ def autosell(code):
             if codeItem == code:
                 if data[i][2] == '中信证券' and data[i][3] > 100:
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
-                    zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+                    zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
+                    common_mysqlUtil.update_sell(data[i][4], "0")
 
                 if data[i][2] == '东方财富' and data[i][3] > 100:
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
-                    client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+                    client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
+                    common_mysqlUtil.update_sell(data[i][4], "0")
+
 
 
 #######################################################################################################################
