@@ -74,11 +74,6 @@ def exec(codeItem):
     if len(data) > 0:
         codeName = data[0][1]
 
-    image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
-    image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
-    image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
-    image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
-
     zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
     logging.debug("编码： %s,名称：%s", codeItem, codeName)
 
@@ -89,22 +84,20 @@ def exec(codeItem):
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
 
-    if "高线" in table_item_data[11] or "高线" in table_item_data[12] or "顶部" in table_item_data[6]:
+    if "高线" in table_item_data[11] or "顶部" in table_item_data[6]:
         common.dingding_markdown_msg_03(
             time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
                 6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
             time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
                 6] + 'D:' +
-            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
-            + "\n\n> ![screenshot](" + image_url + ")"
-            + "\n\n> ![screenshot](" + image_url2 + ")")
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
         logging.info(time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                      + table_item_data[6] + 'D:' +
                      table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
         autosell(codeItem)
-    return image_path, table_item_data
+    return table_item_data
 
 
 def exec_d(codeItem, zhangdiefu, price, codeName):
@@ -222,7 +215,7 @@ def main(choice):
         my_list = list_sell()
         index = 0
         while index < len(my_list):
-            image_url_path, table_item_data1 = exec(my_list[index])
+            table_item_data1 = exec(my_list[index])
             data.append(table_item_data1)
             index += 1
         table = tabulate(data, headers, tablefmt="grid")
@@ -230,7 +223,7 @@ def main(choice):
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
-        image_url_path, table_item_data = exec("300482")
+        table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
 
@@ -300,7 +293,6 @@ def autosell(code):
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
                     client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
                     common_mysqlUtil.update_sell(data[i][4], "0")
-
 
 
 #######################################################################################################################
