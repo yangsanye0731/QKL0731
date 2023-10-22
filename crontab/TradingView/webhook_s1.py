@@ -92,10 +92,10 @@ def exec(codeItem):
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
     common.dingding_markdown_msg_03(
-        time_str_1 + '触发' + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
+        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
         table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[
             14],
-        time_str_1 + '触发' + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
+        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
         table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12] + " SKD:" + table_item_data[
             14]
         + "\n\n> ![screenshot](" + image_url + ")"
@@ -133,10 +133,10 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
     if doubleLowArray_60[-1] == dc_low_60[-1]:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
-        state_dc_h = "小时底线📌"
+        state_dc_h = "时底线"
     if doubleHighArray_60[-1] == dc_high_60[-1]:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
-        state_dc_h = "小时高线"
+        state_dc_h = "时高线"
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
