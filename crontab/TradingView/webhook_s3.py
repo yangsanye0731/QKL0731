@@ -33,10 +33,10 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 logging.getLogger().setLevel(logging.INFO)
 import common_notion
 
+#######################################################################################################################
+################################################################################################配置程序应用所需要环境PATH
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
-
-global_variable_is_auto = False
-
+global_variable_is_auto = True
 jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'), ('399233', '制造指数'),
                 ('399234', '水电指数'), ('399235', '建筑指数'), ('399236', '批零指数'), ('399237', '运输指数'), ('399238', '餐饮指数'),
                 ('399239', 'IT指数'), ('399365', '国证农业'),
@@ -79,24 +79,31 @@ def exec(codeItem):
     image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
     image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
 
-    time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
     logging.debug("编码： %s,名称：%s", codeItem, codeName)
 
     # 日线
     table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
-    # table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2], ma10[-1], state_D]
 
     # 发送钉钉消息
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
-    common.dingding_markdown_msg_03(
-        time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
-        time_str_1 + '触发' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
-        + "\n\n> ![screenshot](" + image_url + ")"
-        + "\n\n> ![screenshot](" + image_url2 + ")")
+
+    if "高线" in table_item_data[11] or "高线" in table_item_data[12] or "顶部" in table_item_data[6]:
+        common.dingding_markdown_msg_03(
+            time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+                6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
+            time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+                6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
+            + "\n\n> ![screenshot](" + image_url + ")"
+            + "\n\n> ![screenshot](" + image_url2 + ")")
+
+        logging.info(time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+                     + table_item_data[6] + 'D:' +
+                     table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
+        autosell(codeItem)
     return image_path, table_item_data
 
 
@@ -124,17 +131,16 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     sma144_60 = ta.EMA(ma144_60, timeperiod=144)
     state_60 = state(ma10_60, sma10_60)
 
-    #60分钟操作机会1：触碰到唐奇安底线
+    # 60分钟操作机会1：触碰到唐奇安底线
     state_dc_h = ""
     dc_high_60 = ta.MAX(doubleHighArray_60, timeperiod=20)
     dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
     if doubleLowArray_60[-1] == dc_low_60[-1]:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
-        state_dc_h = "DC小时底线"
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
+        state_dc_h = "小时底线"
     if doubleHighArray_60[-1] == dc_high_60[-1]:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
-        state_dc_h = "DC小时高线"
-        autosell(codeItem)
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
+        state_dc_h = "小时高线"
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
@@ -164,15 +170,13 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     dc_low = ta.MIN(doubleLowArray, timeperiod=20)
     state_dc_d = ""
     if doubleLowArray[-1] == dc_low[-1] or (doubleLowArray[-1] - dc_low[-1]) / dc_low[-1] < 0.01:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
-        state_dc_d = "DC日线底线"
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线底线")
+        state_dc_d = "日线底线"
         # 自动买入
         # autobuy(codeItem)
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
-        logging.info("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
-        state_dc_d = "DC日线高线"
-        # 自动卖出
-        autosell(codeItem)
+        logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
+        state_dc_d = "日线高线"
 
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1],
@@ -198,12 +202,24 @@ def state(ma10, sma10):
     return item_state
 
 
+def list_sell():
+    code_list = []
+    data = common_mysqlUtil.select_sell()
+    for i in range(len(data)):
+        codeItem = str(data[i][0])
+        code_list.append(codeItem)
+    return code_list
+
+
 def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
-        my_list = dic.get('chicang_list').split(",")
+        # 从Notion配置项中获取数据
+        # my_list = dic.get('chicang_list').split(",")
+        # 从数据库中获取数据
+        my_list = list_sell()
         index = 0
         while index < len(my_list):
             image_url_path, table_item_data1 = exec(my_list[index])
@@ -267,17 +283,21 @@ def autobuy(code):
             zhangdiefu, price = common.zhangdiefu_and_price(code)
             client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
 
+
 def autosell(code):
     if global_variable_is_auto:
-        zx_result = dic.get('zx_auto_list')
-        if zx_result is not None and code in zx_result:
-            zhangdiefu, price = common.zhangdiefu_and_price(code)
-            zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+        zhangdiefu, price = common.zhangdiefu_and_price(code)
+        data = common_mysqlUtil.select_sell()
+        for i in range(len(data)):
+            codeItem = str(data[i][0])
+            if codeItem == code:
+                if data[i][2] == '中信证券' and data[i][3] > 100:
+                    zhangdiefu, price = common.zhangdiefu_and_price(code)
+                    zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
 
-        result = dic.get('auto_list')
-        if result is not None and code in result:
-            zhangdiefu, price = common.zhangdiefu_and_price(code)
-            client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
+                if data[i][2] == '东方财富' and data[i][3] > 100:
+                    zhangdiefu, price = common.zhangdiefu_and_price(code)
+                    client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=1000)
 
 
 #######################################################################################################################
@@ -286,19 +306,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == '1':
             data = main('1')
-            for row in data:
-                name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, state_dc_D = row
-                c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
-                c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
-
-                if c1 or c2:
-                    param_value = "一级响应启动"
-                    # 创建一个线程，并指定要执行的函数
-                    thread = threading.Thread(target=another_operation, args=(param_value,))
-                    # 启动线程
-                    thread.start()
-                    break
-
             my_list = dic.get('tixing_list').split(";")
             text = "【触发Tips】" + random.choice(my_list)
             time.sleep(2)
