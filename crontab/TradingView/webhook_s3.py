@@ -84,7 +84,7 @@ def exec(codeItem):
     time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
 
-    if "高线" in table_item_data[11] or "顶部" in table_item_data[6]:
+    if "高线" in table_item_data[11] or "高线" in table_item_data[12] or "顶部" in table_item_data[6]:
         common.dingding_markdown_msg_03(
             time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
                 6] + 'D:' +
