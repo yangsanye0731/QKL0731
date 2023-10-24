@@ -86,17 +86,21 @@ def exec(codeItem):
 
     if "高线" in table_item_data[11] or "高线" in table_item_data[12] or "顶部" in table_item_data[6]:
         common.dingding_markdown_msg_03(
-            time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+            time_str_1 + '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
                 6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
-            time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+            time_str_1 + '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
                 6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
-        logging.info(time_str_1 + '触发【自动卖出】' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+        logging.info(time_str_1 + '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                      + table_item_data[6] + 'D:' +
                      table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-        autosell(codeItem)
+
+        # 是否自动操作
+        if global_variable_is_auto:
+            time.sleep(120)
+            autosell(codeItem)
     return table_item_data
 
 
