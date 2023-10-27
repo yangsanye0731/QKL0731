@@ -593,7 +593,6 @@ def select_sell():
     # 使用 execute()  方法执行 SQL
     sql = ''
     sql = "SELECT code, name, channel, count, sell_id, modify_time from `superman`.`sell` WHERE `is_delete` = 0"
-    print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
     cursor.close()
@@ -603,7 +602,6 @@ def select_sell():
 
 def update_sell(id, update_count):
     sql = "UPDATE `superman`.`sell` SET `count` = '" + update_count + "' WHERE `sell_id` = " + str(id)
-    print(sql)
     insertRecord(sql)
 
 # insertRecord("INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `zhangdifu`, `30zhi`, `60zhi`) VALUES ('2', '2', '2', '2');")
