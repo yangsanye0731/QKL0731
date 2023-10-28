@@ -81,18 +81,28 @@ def exec(codeItem):
     table_item_data = exec_d(codeItem, zhangdiefu, price, codeName)
 
     # 发送钉钉消息
-    time.sleep(0.5)
     time_str_1 = time.strftime("%H:%M", time.localtime())
-    if "高线" in table_item_data[11] or "高线" in table_item_data[12] or "顶部" in table_item_data[6]:
+    # 卖出策略_当触发高线，并下跌超过0.5%时卖出
+    sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu)
+    # 卖出策略_当触发线路反转时全部卖出
+    sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu)
+    return table_item_data
+
+
+def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
+    # 当触发高线，并下跌超过0.5%时卖出
+    xiadielv_h = (table_item_data[13] - float(price)) / table_item_data[13] > 0.005
+    xiadielv_d = (table_item_data[14] - float(price)) / table_item_data[14] > 0.005
+    if ("高线" in table_item_data[11] and xiadielv_h) or ("高线" in table_item_data[12] and xiadielv_d):
         common.dingding_markdown_msg_03(
-            time_str_1 + '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
-                6] + 'D:' +
+            '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
-            time_str_1 + '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
-                6] + 'D:' +
+            '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
-        logging.info(time_str_1 + '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+        logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                      + table_item_data[6] + 'D:' +
                      table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
@@ -100,7 +110,27 @@ def exec(codeItem):
         if global_variable_is_auto:
             time.sleep(30)
             autosell(codeItem)
-    return table_item_data
+
+
+def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
+    # 当触发线路反转时全部卖出
+    if "顶部" in table_item_data[6]:
+        common.dingding_markdown_msg_03(
+            '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
+            '🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
+
+        logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+                     + table_item_data[6] + 'D:' +
+                     table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
+
+        # 是否自动操作
+        if global_variable_is_auto:
+            time.sleep(30)
+            autosell(codeItem)
 
 
 def exec_d(codeItem, zhangdiefu, price, codeName):
@@ -175,8 +205,7 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
         state_dc_d = "日线高线"
 
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
-                       ma10[-1],
-                       state_D, state_dc_h, state_dc_d]
+                       ma10[-1], state_D, state_dc_h, state_dc_d, dc_high_60[-1], dc_high[-1]]
 
     return table_item_data
 
@@ -211,7 +240,7 @@ def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "dc_high_60[-1]", "dc_high[-1]"]
         # 从Notion配置项中获取数据
         # my_list = dic.get('chicang_list').split(",")
         # 从数据库中获取数据
@@ -225,7 +254,7 @@ def main(choice):
     elif choice == '2':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "dc_high_60[-1]", "dc_high[-1]"]
         table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
