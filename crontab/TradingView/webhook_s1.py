@@ -250,7 +250,7 @@ def list_buy():
 
 
 def update_buy(codeItem, table_data):
-    if "🚀" in table_data[15]:
+    if "🚀" in table_data[6]:
         if codeItem != '399006':
             common_mysqlUtil.update_buy_60_fanzhuan(codeItem, "10")
 
@@ -258,7 +258,7 @@ def update_buy(codeItem, table_data):
         if codeItem != '399006':
             common_mysqlUtil.update_buy_60_fanzhuan(codeItem, "50")
 
-    if "🚀" in table_data[6]:
+    if "🚀" in table_data[15]:
         if codeItem != '399006':
             common_mysqlUtil.update_buy_60_fanzhuan(codeItem, "100")
 
