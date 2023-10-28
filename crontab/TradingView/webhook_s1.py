@@ -91,11 +91,11 @@ def exec(codeItem):
     # 发送钉钉消息
     time.sleep(0.5)
     common.dingding_markdown_msg_03(
-        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + 'W:' + table_item_data[15] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
+        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + ' D:' +
+        table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
         + " SKD:" + table_item_data[14],
-        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + 'D:' +
-        table_item_data[10] + 'W:' + table_item_data[15] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
+        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + ' D:' +
+        table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
         + " SKD:" + table_item_data[14]
         + "\n\n> ![screenshot](" + image_url + ")"
         + "\n\n> ![screenshot](" + image_url2 + ")")
@@ -324,7 +324,7 @@ if __name__ == "__main__":
             data = main('1')
             for row in data:
                 name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, \
-                state_dc_h, state_dc_D, k0_60, k0 = row
+                state_dc_h, state_dc_D, k0_60, k0, state_W= row
                 c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
                 c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
 
