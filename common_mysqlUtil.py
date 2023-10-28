@@ -567,7 +567,7 @@ def select_buy():
     cursor = db.cursor()
     # 使用 execute()  方法执行 SQL
     sql = ''
-    sql = "SELECT code, name, modify_time from `superman`.`buy` WHERE `is_delete` = 0 order by modify_time desc"
+    sql = "SELECT code, name, modify_time from `superman`.`buy` WHERE `is_delete` = 0 order by 60_fanzhuan desc, modify_time desc"
     print(sql)
     cursor.execute(sql)
     data = cursor.fetchall()
@@ -579,6 +579,18 @@ def select_buy():
 def update_buy(code):
     sql = "UPDATE `superman`.`buy` SET `modify_time` = '" + time.strftime("%Y-%m-%d %H:%M:%S",
                                                                           time.localtime()) + "' WHERE `code` = " + code
+    print(sql)
+    insertRecord(sql)
+
+
+def update_buy_60_fanzhuan(code, type):
+    sql = "UPDATE `superman`.`buy` SET `60_fanzhuan` = " + type + " WHERE `code` = " + code
+    print(sql)
+    insertRecord(sql)
+
+
+def update_buy_60_fanzhuan_NULL(code):
+    sql = "UPDATE `superman`.`buy` SET `60_fanzhuan` = NULL WHERE `code` = " + code
     print(sql)
     insertRecord(sql)
 

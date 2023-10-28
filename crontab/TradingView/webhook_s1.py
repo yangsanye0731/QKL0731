@@ -250,9 +250,24 @@ def list_buy():
 
 
 def update_buy(codeItem, table_data):
+    if "🚀" in table_data[15]:
+        if codeItem != '399006':
+            common_mysqlUtil.update_buy_60_fanzhuan(codeItem, "10")
+
+    if "🚀" in table_data[10]:
+        if codeItem != '399006':
+            common_mysqlUtil.update_buy_60_fanzhuan(codeItem, "50")
+
+    if "🚀" in table_data[6]:
+        if codeItem != '399006':
+            common_mysqlUtil.update_buy_60_fanzhuan(codeItem, "100")
+
     if "🚀" in table_data[6] or "🚀" in table_data[10] or "🚀" in table_data[15]:
         if codeItem != '399006':
             common_mysqlUtil.update_buy(codeItem)
+    else:
+        if codeItem != '399006':
+            common_mysqlUtil.update_buy_60_fanzhuan_NULL(codeItem)
 
 
 def main(choice):
@@ -324,7 +339,7 @@ if __name__ == "__main__":
             data = main('1')
             for row in data:
                 name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, \
-                state_dc_h, state_dc_D, k0_60, k0, state_W= row
+                state_dc_h, state_dc_D, k0_60, k0, state_W = row
                 c1 = "顶部" in state_60 or "底部" in state_60 or "上穿" in state_60 or "下穿" in state_60
                 c2 = "顶部" in state_D or "底部" in state_D or "上穿" in state_D or "下穿" in state_D
 
