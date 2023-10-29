@@ -13,6 +13,7 @@ rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 import common
 import common_notion
+import common_mysqlUtil
 
 import warnings
 
@@ -27,9 +28,10 @@ def execute_remote_command(command):
     # conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
     conn._config['sync_request_timeout'] = 12000
     remote_service = conn.root
-
+    common_mysqlUtil.update_config("auto_sell", "false")
     result = remote_service.exposed_execute_command(command)
     conn.close()
+    common_mysqlUtil.update_config("auto_sell", "true")
     return result
 
 
@@ -92,6 +94,7 @@ if __name__ == "__main__":
                            + "6000" + " " + "6"
 
         print("操作命令：" + string_input)
+
         output = execute_remote_command(string_input)
         # print("Remote command output:")
         # print(output)

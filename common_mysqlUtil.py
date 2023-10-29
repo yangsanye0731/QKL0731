@@ -612,6 +612,11 @@ def select_sell():
     return data
 
 
+def update_sell(id, update_count):
+    sql = "UPDATE `superman`.`sell` SET `count` = '" + update_count + "' WHERE `sell_id` = " + str(id)
+    insertRecord(sql)
+
+
 def get_config(config_key):
     userName = cf.get("MySql", "userName")
     password = cf.get("MySql", "password")
@@ -629,8 +634,8 @@ def get_config(config_key):
     return data
 
 
-def update_sell(id, update_count):
-    sql = "UPDATE `superman`.`sell` SET `count` = '" + update_count + "' WHERE `sell_id` = " + str(id)
+def update_config(config_key, config_value):
+    sql = "UPDATE `superman`.`config` SET `config_value` = '" + config_value + "' WHERE `config_key` = '" + config_key + "'"
     insertRecord(sql)
 
 # insertRecord("INSERT INTO `superman`.`AGU_ZhiShu`(`mingcheng`, `zhangdifu`, `30zhi`, `60zhi`) VALUES ('2', '2', '2', '2');")
