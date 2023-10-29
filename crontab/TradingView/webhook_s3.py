@@ -36,7 +36,6 @@ import common_notion
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
 dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260d37a")
-global_variable_is_auto = True
 jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231', '农林指数'), ('399232', '采矿指数'), ('399233', '制造指数'),
                 ('399234', '水电指数'), ('399235', '建筑指数'), ('399236', '批零指数'), ('399237', '运输指数'), ('399238', '餐饮指数'),
                 ('399239', 'IT指数'), ('399365', '国证农业'),
@@ -92,6 +91,7 @@ def exec(codeItem):
 def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
     # 当触发高线，并下跌超过0.5%时卖出
     xiadielv_h = (table_item_data[13] - float(price)) / table_item_data[13] > 0.005
+    xiadielv_h = True
     xiadielv_d = (table_item_data[14] - float(price)) / table_item_data[14] > 0.005
     if ("高线" in table_item_data[11] and xiadielv_h) or ("高线" in table_item_data[12] and xiadielv_d):
         common.dingding_markdown_msg_03(
@@ -102,12 +102,11 @@ def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
             table_item_data[6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
-        logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
-                     + table_item_data[6] + 'D:' +
-                     table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-
         # 是否自动操作
-        if global_variable_is_auto:
+        if "true" in get_auto_state("auto_sell"):
+            logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+                         + table_item_data[6] + 'D:' +
+                         table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
             time.sleep(30)
             autosell(codeItem)
 
@@ -128,7 +127,10 @@ def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
                      table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
         # 是否自动操作
-        if global_variable_is_auto:
+        if "true" in get_auto_state("auto_sell"):
+            logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+                         + table_item_data[6] + 'D:' +
+                         table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
             time.sleep(30)
             autosell(codeItem)
 
@@ -236,6 +238,15 @@ def list_sell():
     return code_list
 
 
+def get_auto_state(config_key):
+    data = common_mysqlUtil.get_config(config_key)
+    for i in range(len(data)):
+        config_value = str(data[i][2])
+        if config_value is not None:
+            return config_value
+            break;
+
+
 def main(choice):
     if choice == '1':
         data = []
@@ -297,7 +308,7 @@ def another_operation(param):
 
 
 def autobuy(code):
-    if global_variable_is_auto:
+    if "true" in get_auto_state("auto_sell"):
         zx_result = dic.get('zx_auto_list')
         if zx_result is not None and code in zx_result:
             zhangdiefu, price = common.zhangdiefu_and_price(code)
@@ -310,7 +321,7 @@ def autobuy(code):
 
 
 def autosell(code):
-    if global_variable_is_auto:
+    if "true" in get_auto_state("auto_sell"):
         zhangdiefu, price = common.zhangdiefu_and_price(code)
         data = common_mysqlUtil.select_sell()
         for i in range(len(data)):
@@ -338,7 +349,6 @@ if __name__ == "__main__":
             time.sleep(2)
             common.dingding_markdown_msg_03(text, text)
         elif sys.argv[1] == '2':
-            global_variable_is_auto = True
             data = main('1')
             for row in data:
                 name, zhangdiefu, price, ma10_60_3, ma10_60_2, ma10_60, state_60, ma10_3, ma10_2, ma10, state_D, state_dc_D = row
