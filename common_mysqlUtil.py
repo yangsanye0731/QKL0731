@@ -612,6 +612,23 @@ def select_sell():
     return data
 
 
+def get_config(config_key):
+    userName = cf.get("MySql", "userName")
+    password = cf.get("MySql", "password")
+    # 打开数据库连接
+    db = pymysql.connect(host="localhost", user=userName, password=password, database="superman")
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    # 使用 execute()  方法执行 SQL
+    sql = ''
+    sql = "SELECT config_id, config_key, config_value from `superman`.`config` WHERE `config_key` = '" + config_key + "'"
+    cursor.execute(sql)
+    data = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return data
+
+
 def update_sell(id, update_count):
     sql = "UPDATE `superman`.`sell` SET `count` = '" + update_count + "' WHERE `sell_id` = " + str(id)
     insertRecord(sql)
