@@ -91,7 +91,6 @@ def exec(codeItem):
 def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
     # 当触发高线，并下跌超过0.5%时卖出
     xiadielv_h = (table_item_data[13] - float(price)) / table_item_data[13] > 0.005
-    xiadielv_h = True
     xiadielv_d = (table_item_data[14] - float(price)) / table_item_data[14] > 0.005
     if ("高线" in table_item_data[11] and xiadielv_h) or ("高线" in table_item_data[12] and xiadielv_d):
         common.dingding_markdown_msg_03(
