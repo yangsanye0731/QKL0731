@@ -248,7 +248,7 @@ def state(ma10, sma10):
 
 
 def update_all_trend(codeItem, table_item_data):
-    if codeItem == '600547':
+    if codeItem == '399006':
         global chuangyeban_60_qushi # 声明要使用全局变量
         if "上升" in table_item_data[6] or "上穿" in table_item_data[6] or "底部" in table_item_data[6]:
             chuangyeban_60_qushi = "🔴"
