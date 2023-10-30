@@ -59,6 +59,8 @@ jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231
                 ('515000', '科技ETF'), ('515030', '新能源车ETF'), ('512170', '医疗ETF'), ('512660', '军工ETF'),
                 ('515880', '通信ETF'), ('515980', '人工智能ETF')]
 
+chuangyeban_60_qushi = ""
+
 
 #######################################################################################################################
 ###########################################################################################################跨域5周线策略
@@ -88,13 +90,18 @@ def exec(codeItem):
     # 更新buy顺序数据
     update_buy(codeItem, table_item_data)
 
+    # 更新整体趋势
+    update_all_trend(codeItem, table_item_data)
+
     # 发送钉钉消息
     time.sleep(0.5)
     common.dingding_markdown_msg_03(
-        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + ' D:' +
+        chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+            6] + ' D:' +
         table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
         + " SKD:" + table_item_data[14],
-        codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[6] + ' D:' +
+        chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+            6] + ' D:' +
         table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
         + " SKD:" + table_item_data[14]
         + "\n\n> ![screenshot](" + image_url + ")"
@@ -238,6 +245,15 @@ def state(ma10, sma10):
     if ma10[-1] < sma10[-1] and ma10[-2] > sma10[-2]:
         item_state = "下穿"
     return item_state
+
+
+def update_all_trend(codeItem, table_item_data):
+    if codeItem == '600547':
+        global chuangyeban_60_qushi # 声明要使用全局变量
+        if "上升" in table_item_data[6] or "上穿" in table_item_data[6] or "底部" in table_item_data[6]:
+            chuangyeban_60_qushi = "🔴"
+        if "下降" in table_item_data[6] or "下穿" in table_item_data[6] or "顶部" in table_item_data[6]:
+            chuangyeban_60_qushi = "🟢"
 
 
 def list_buy():
