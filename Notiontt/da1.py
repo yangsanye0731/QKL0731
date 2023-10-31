@@ -19,8 +19,8 @@ import subprocess
 print("获取实时数据")
 args = ['1']
 
-start_time = "09:30:00"
-end_time = "15:00:00"
+start_time = "07:30:00"
+end_time = "23:59:00"
 
 while True:
     current_time = time.strftime("%H:%M:%S")
@@ -32,6 +32,6 @@ while True:
         output = result.stdout
         print(output)
 
-    time.sleep(60)  # 暂停1分钟，避免无限循环过快消耗资源
+    time.sleep(5)  # 暂停1分钟，避免无限循环过快消耗资源
 
 
