@@ -70,12 +70,12 @@ if __name__ == "__main__":
         price_input = str(price)
         count_input = "1000"
 
-        my_list = dic.get('zx_auto_list').split(",")
-        for item in my_list:
-            item_list = item.split(":")
-            if item_list[0] == code_input:
-                count_input = item_list[1]
-                break;
+        # my_list = dic.get('zx_auto_list').split(",")
+        # for item in my_list:
+        #     item_list = item.split(":")
+        #     if item_list[0] == code_input:
+        #         count_input = item_list[1]
+        #         break;
 
         if type_input == 's':
             string_input = string_input + "zx_autosell.py " + code_input + " " + price_input + " " + count_input
