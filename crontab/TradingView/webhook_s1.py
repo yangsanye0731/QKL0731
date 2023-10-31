@@ -367,10 +367,10 @@ if __name__ == "__main__":
                     thread.start()
                     break
 
-            my_list = dic.get('tixing_list').split(";")
-            text = "【触发Tips】" + random.choice(my_list)
-            time.sleep(2)
-            common.dingding_markdown_msg_03(text, text)
+            # my_list = dic.get('tixing_list').split(";")
+            # text = "【触发Tips】" + random.choice(my_list)
+            # time.sleep(2)
+            # common.dingding_markdown_msg_03(text, text)
         else:
             exec(sys.argv[1])
     else:

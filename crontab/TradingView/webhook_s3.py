@@ -343,10 +343,10 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == '1':
             data = main('1')
-            my_list = dic.get('tixing_list').split(";")
-            text = "【触发Tips】" + random.choice(my_list)
-            time.sleep(2)
-            common.dingding_markdown_msg_03(text, text)
+            # my_list = dic.get('tixing_list').split(";")
+            # text = "【触发Tips】" + random.choice(my_list)
+            # time.sleep(2)
+            # common.dingding_markdown_msg_03(text, text)
         elif sys.argv[1] == '2':
             data = main('1')
             for row in data:
