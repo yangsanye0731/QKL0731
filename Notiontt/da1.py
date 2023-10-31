@@ -19,8 +19,8 @@ import subprocess
 print("获取实时数据")
 args = ['1']
 
-start_time = "07:30:00"
-end_time = "23:59:00"
+start_time = "09:00:00"
+end_time = "15:00:00"
 
 while True:
     current_time = time.strftime("%H:%M:%S")
