@@ -81,9 +81,9 @@ if __name__ == "__main__":
         if type_input == 's':
             string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + count_input
         elif type_input == 's1':
-            string_input = string_input + "autosell_quick.py " + code_input + " " + price_input + " " + 5000 + " " + "1"
+            string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + "5000"
         elif type_input == 's2':
-            string_input = string_input + "autosell_quick.py " + code_input + " " + price_input + " " + 10000 + " " + "2"
+            string_input = string_input + "autosell.py " + code_input + " " + price_input + " " + "10000"
         elif type_input == 'b':
             string_input = string_input + "autobuy.py " + code_input + " " + price_input + " " + count_input
         elif type_input == 'b1':
