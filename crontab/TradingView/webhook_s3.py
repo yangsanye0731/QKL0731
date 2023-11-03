@@ -130,7 +130,6 @@ def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
             logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                          + table_item_data[6] + 'D:' +
                          table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-            time.sleep(30)
             autosell(codeItem)
 
 
@@ -150,12 +149,6 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     # 均线
     ma10_60 = ta.SMA(doubleCloseArray_60, timeperiod=10)
     sma10_60 = ta.EMA(ma10_60, timeperiod=10)
-
-    ma60_60 = ta.SMA(doubleCloseArray_60, timeperiod=60)
-    sma60_60 = ta.EMA(ma60_60, timeperiod=60)
-
-    ma144_60 = ta.SMA(doubleCloseArray_60, timeperiod=144)
-    sma144_60 = ta.EMA(ma144_60, timeperiod=144)
     state_60 = state(ma10_60, sma10_60)
 
     # 60分钟操作机会1：触碰到唐奇安底线
@@ -164,10 +157,10 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     dc_low_60 = ta.MIN(doubleLowArray_60, timeperiod=20)
     if doubleLowArray_60[-1] == dc_low_60[-1]:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线底线")
-        state_dc_h = "小时底线"
+        state_dc_h = "时底线"
     if doubleHighArray_60[-1] == dc_high_60[-1]:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安小时线高线")
-        state_dc_h = "小时高线"
+        state_dc_h = "时高线📌"
 
     # ======================================================日线数据
     data_history = ts.get_k_data(codeItem, ktype='D')
@@ -184,12 +177,6 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     # 均线
     ma10 = ta.SMA(doubleCloseArray, timeperiod=10)
     sma10 = ta.EMA(ma10, timeperiod=10)
-
-    ma60 = ta.SMA(doubleCloseArray, timeperiod=60)
-    sma60 = ta.EMA(ma60, timeperiod=60)
-
-    ma144 = ta.SMA(doubleCloseArray, timeperiod=144)
-    sma144 = ta.EMA(ma144, timeperiod=144)
     state_D = state(ma10, sma10)
 
     # 日线操作机会1：触碰到唐奇安底线
@@ -203,10 +190,27 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
         # autobuy(codeItem)
     if doubleHighArray[-1] == dc_high[-1] or (dc_high[-1] - doubleHighArray[-1]) / dc_high[-1] < 0.01:
         logging.debug("【交易机会】" + codeItem + codeName + "将触碰到唐奇安日线高线")
-        state_dc_d = "日线高线"
+        state_dc_d = "日线高线📌"
+
+    # ======================================================周线数据
+    data_history_W = ts.get_k_data(codeItem, ktype='W')
+
+    closeArray_W = num.array(data_history_W['close'])
+    doubleCloseArray_W = num.asarray(closeArray_W, dtype='double')
+
+    highArray_W = num.array(data_history_W['high'])
+    doubleHighArray_W = num.asarray(highArray_W, dtype='double')
+
+    lowArray_W = num.array(data_history_W['low'])
+    doubleLowArray_W = num.asarray(lowArray_W, dtype='double')
+
+    # 均线
+    ma10_W = ta.SMA(doubleCloseArray_W, timeperiod=10)
+    sma10_W = ta.EMA(ma10_W, timeperiod=10)
+    state_W = state(ma10_W, sma10_W)
 
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
-                       ma10[-1], state_D, state_dc_h, state_dc_d, dc_high_60[-1], dc_high[-1]]
+                       ma10[-1], state_D, state_dc_h, state_dc_d, dc_high_60[-1], dc_high[-1], state_W]
 
     return table_item_data
 
@@ -250,7 +254,7 @@ def main(choice):
     if choice == '1':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "dc_high_60[-1]", "dc_high[-1]"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "dc_high_60[-1]", "dc_high[-1]", "state_W"]
         # 从Notion配置项中获取数据
         # my_list = dic.get('chicang_list').split(",")
         # 从数据库中获取数据
@@ -264,7 +268,7 @@ def main(choice):
     elif choice == '2':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
-                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "dc_high_60[-1]", "dc_high[-1]"]
+                   "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "dc_high_60[-1]", "dc_high[-1]", "state_W"]
         table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
