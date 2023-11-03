@@ -106,7 +106,6 @@ def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
             logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                          + table_item_data[6] + 'D:' +
                          table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-            time.sleep(30)
             autosell(codeItem)
 
 
