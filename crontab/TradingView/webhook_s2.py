@@ -75,10 +75,10 @@ def exec(codeItem):
         codeName = data[0][1]
 
     # 生成图片
-    image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
-    image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
-    image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
-    image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
+    # image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
+    # image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
+    # image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
+    # image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
 
     # 价格与涨跌幅
     zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
@@ -100,9 +100,8 @@ def exec(codeItem):
         chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
             6] + ' D:' +
         table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
-        + " SKD:" + table_item_data[14]
-        + "\n\n> ![screenshot](" + image_url + ")"
-        + "\n\n> ![screenshot](" + image_url2 + ")")
+        + " SKD:" + table_item_data[14])
+    image_path = "image_path"
     return image_path, table_item_data
 
 
@@ -294,7 +293,7 @@ def main(choice):
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
 
-    logging.info(table)
+    # logging.info(table)
     return data
 
 
