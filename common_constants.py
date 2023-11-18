@@ -19,9 +19,10 @@ class Const:
 
         self.__dict__[key] = value
 
+
 # 终端名称全局变量
-# global_variable_dong_fang_cai_fu = "东方财富终端"
-global_variable_dong_fang_cai_fu = "东方财富证券交易"
+global_variable_dong_fang_cai_fu = "东方财富终端"
+# global_variable_dong_fang_cai_fu = "东方财富证券交易"
 
 xqgn = [('BK0688', '光刻胶'), ('BK0539', '集成电路'), ('BK0636', '大豆'), ('BK0629', '高送转预期'),
         ('BK0647', '网络切片'), ('BK0606', '啤酒'), ('BK0669', '华为海思'), ('BK0602', '语音技术'),

@@ -24,8 +24,8 @@ dic = common_notion.find_config_item_from_database("18fcc6b54f574e97b1d6fe907260
 
 
 def execute_remote_command(command):
-    conn = rpyc.connect("192.168.233.128", 18861)  # 替换为服务器的IP地址
-    # conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
+    # conn = rpyc.connect("192.168.233.128", 18861)  # 替换为服务器的IP地址
+    conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
     conn._config['sync_request_timeout'] = 12000
     remote_service = conn.root
     common_mysqlUtil.update_config("auto_sell", "false")

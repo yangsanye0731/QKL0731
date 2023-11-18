@@ -32,6 +32,7 @@ warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger().setLevel(logging.INFO)
 import common_notion
+import pygame
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -242,11 +243,12 @@ def list_sell():
 
 def get_auto_state(config_key):
     data = common_mysqlUtil.get_config(config_key)
+    result = ""
     for i in range(len(data)):
         config_value = str(data[i][2])
         if config_value is not None:
-            return config_value
-            break;
+            result = config_value
+    return result
 
 
 def main(choice):
@@ -330,14 +332,33 @@ def autosell(code):
             codeItem = str(data[i][0])
             if codeItem == code:
                 if data[i][2] == '中信证券' and data[i][3] > 100:
+                    playsound()
+                    time.sleep(30)
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
                     zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
                     common_mysqlUtil.update_sell(data[i][4], "0")
 
                 if data[i][2] == '东方财富' and data[i][3] > 100:
+                    playsound()
+                    time.sleep(30)
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
                     client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
                     common_mysqlUtil.update_sell(data[i][4], "0")
+
+
+def playsound():
+    pygame.init()
+
+    # 初始化音频
+    pygame.mixer.init()
+    # 加载音频文件
+    sound = pygame.mixer.Sound('D:\\workspace\\python\\QKL0731\\crontab\\TradingView\\y1871.wav')
+
+    # 播放音频
+    sound.play()
+    # 暂停音频
+    pygame.time.wait(int(sound.get_length() * 1000))  # 等待音频结束
+    pygame.mixer.quit()
 
 
 #######################################################################################################################
