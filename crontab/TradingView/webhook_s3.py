@@ -121,10 +121,6 @@ def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
             table_item_data[6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
-        logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
-                     + table_item_data[6] + 'D:' +
-                     table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-
         # 是否自动操作
         if "true" in get_auto_state("auto_sell"):
             logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
