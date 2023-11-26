@@ -200,42 +200,42 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
 def state(ma10, sma10):
     item_state = ""
     if ma10[-3] < ma10[-2] < ma10[-1]:
-        item_state = "上升"
+        item_state = "升"
         if ma10[-2] > ma10[-3]:
-            item_state = "上升1🚀"
+            item_state = "升1🚀"
             if ma10[-3] > ma10[-4]:
-                item_state = "上升2"
+                item_state = "升2"
                 if ma10[-4] > ma10[-5]:
-                    item_state = "上升3"
+                    item_state = "升3"
                     if ma10[-5] > ma10[-6]:
-                        item_state = "上升4"
+                        item_state = "升4"
                         if ma10[-6] > ma10[-7]:
-                            item_state = "上升5"
+                            item_state = "升5"
                             if ma10[-7] > ma10[-8]:
-                                item_state = "上升6"
+                                item_state = "升6"
                                 if ma10[-8] > ma10[-9]:
-                                    item_state = "上升7"
+                                    item_state = "升7"
                                     if ma10[-9] > ma10[-10]:
-                                        item_state = "上升8"
+                                        item_state = "升8"
 
     if ma10[-3] < ma10[-2] > ma10[-1]:
         item_state = "顶部"
     if ma10[-3] > ma10[-2] > ma10[-1]:
-        item_state = "下降"
+        item_state = "降"
         if ma10[-2] < ma10[-3]:
-            item_state = "下降1"
+            item_state = "降1"
             if ma10[-3] < ma10[-4]:
-                item_state = "下降2"
+                item_state = "降2"
                 if ma10[-4] < ma10[-5]:
-                    item_state = "下降3"
+                    item_state = "降3"
                     if ma10[-5] < ma10[-6]:
-                        item_state = "下降4"
+                        item_state = "降4"
                         if ma10[-6] < ma10[-7]:
-                            item_state = "下降5"
+                            item_state = "降5"
                             if ma10[-7] < ma10[-8]:
-                                item_state = "下降6"
+                                item_state = "降6"
                                 if ma10[-8] < ma10[-9]:
-                                    item_state = "下降7"
+                                    item_state = "降7"
                                     if ma10[-9] < ma10[-10]:
                                         item_state < "下降8"
     if ma10[-3] > ma10[-2] < ma10[-1]:
