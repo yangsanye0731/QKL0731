@@ -4,6 +4,7 @@ import talib as ta
 import tushare as ts
 import time
 from tabulate import tabulate
+from prettytable import PrettyTable
 import random
 import pandas as pd
 
@@ -82,8 +83,8 @@ def exec(codeItem):
     try:
         # 生成图片
         image_path = ""
-        # image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
-        # image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
+        image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
+        image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
         # image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
         # image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
     except Exception as e:
@@ -309,6 +310,7 @@ def update_buy(codeItem, table_data):
 def main(choice):
     if choice == '1':
         data = []
+        preTab = PrettyTable()
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
                    "ma10[-1]", "state_d", "state_dc_h", "state_dc_d", "k0_60", "k0", "state_W", "state_dc_W"]
         # 从Notion配置项中获取数据
@@ -332,6 +334,7 @@ def main(choice):
                 print(my_list[index])
                 image_url_path, table_item_data1 = exec(my_list[index])
                 data.append(table_item_data1)
+                preTab.add_row(table_item_data1)
 
             except Exception as e:
                 print(e)
@@ -341,7 +344,11 @@ def main(choice):
                 continue
             finally:
                 index += 1
-        table = tabulate(data, headers, tablefmt="grid")
+        preTab.field_names= headers
+        df = pd.DataFrame(preTab._rows, columns=preTab.field_names)
+        excel_file_path = "logs.xlsx"
+        df.to_excel(excel_file_path, index=False)
+        print(preTab)
     elif choice == '2':
         data = []
         headers = ["name", "ZDF", "JG", "ma10_60[-3]", "ma10_60[-2]", "ma10_60[-1]", "state_60", "ma10[-3]", "ma10[-2]",
@@ -349,8 +356,6 @@ def main(choice):
         image_url_path, table_item_data = exec("300482")
         data.append(table_item_data)
         table = tabulate(data, headers, tablefmt="grid")
-
-    print(table)
 
     return data
 
