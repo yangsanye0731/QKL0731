@@ -346,7 +346,8 @@ def main(choice):
                 index += 1
         preTab.field_names= headers
         df = pd.DataFrame(preTab._rows, columns=preTab.field_names)
-        excel_file_path = "logs.xlsx"
+        timeStr1 = time.strftime("%Y%m%d", time.localtime())
+        excel_file_path = "logs_" + timeStr1 + " .xlsx"
         df.to_excel(excel_file_path, index=False)
         print(preTab)
     elif choice == '2':
