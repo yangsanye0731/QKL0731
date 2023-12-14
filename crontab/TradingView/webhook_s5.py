@@ -7,6 +7,7 @@ from tabulate import tabulate
 from prettytable import PrettyTable
 import random
 import pandas as pd
+import requests
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -83,8 +84,8 @@ def exec(codeItem):
     try:
         # 生成图片
         image_path = ""
-        image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
-        image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
+        # image_path = common_image.plt_image_geGuZhiBiao_tradingview(codeItem, codeName)
+        # image_path2 = common_image.plt_image_geGuZhiBiao_tradingview2(codeItem, codeName)
         # image_url = "http://" + "8.218.97.91:8080" + "/" + image_path[6:]
         # image_url2 = "http://" + "8.218.97.91:8080" + "/" + image_path2[6:]
     except Exception as e:
@@ -317,15 +318,27 @@ def main(choice):
         # my_list = dic.get('chicang_list').split(",")
         # 从数据库中获取数据
 
-        workbook = openpyxl.load_workbook('2023-12-03东方1000.xlsx')
-        sheet = workbook["Sheet1"]
-        # 遍历Excel文件
+        # workbook = openpyxl.load_workbook('2023-12-03东方1000.xlsx')
+        # sheet = workbook["Sheet1"]
         my_list = []
-        for row in sheet.iter_rows(min_row=1 , values_only=True):
-            column1_value, column2_value, column3_value = row
-            codeItem = str(column2_value).strip('\n')
-            print(codeItem.zfill(6))
-            my_list.append(codeItem.zfill(6))
+
+        # 遍历Excel文件获取列表
+        # for row in sheet.iter_rows(min_row=1 , values_only=True):
+        #     column1_value, column2_value, column3_value = row
+        #     codeItem = str(column2_value).strip('\n')
+        #     print(codeItem.zfill(6))
+        #     my_list.append(codeItem.zfill(6))
+
+        # 调用接口
+        for i in range(1, 21):
+            response = requests.get(
+                "https://data.eastmoney.com/dataapi/xuangu/list?st=POPULARITY_RANK&sr=1&ps=50&p=" + str(
+                    i) + "&sty=SECUCODE%2CSECURITY_CODE%2CSECURITY_NAME_ABBR%2CNEW_PRICE%2CCHANGE_RATE%2CVOLUME_RATIO%2CHIGH_PRICE%2CLOW_PRICE%2CPRE_CLOSE_PRICE%2CVOLUME%2CDEAL_AMOUNT%2CTURNOVERRATE%2CPOPULARITY_RANK&filter=(POPULARITY_RANK%3E0)(POPULARITY_RANK%3C%3D1000)&source=SELECT_SECURITIES&client=WEB")
+            data_history_item = pd.DataFrame(response.json().get("result").get("data"),
+                                             columns=['SECURITY_CODE'])
+            list = data_history_item['SECURITY_CODE'].to_numpy()
+            for item in list:
+                my_list.append(item)
 
         index = 0
         while index < len(my_list):
@@ -346,7 +359,7 @@ def main(choice):
                 index += 1
         preTab.field_names= headers
         df = pd.DataFrame(preTab._rows, columns=preTab.field_names)
-        timeStr1 = time.strftime("%Y%m%d", time.localtime())
+        timeStr1 = time.strftime("%Y%m%d%H", time.localtime())
         excel_file_path = "logs_" + timeStr1 + " .xlsx"
         df.to_excel(excel_file_path, index=False)
         print(preTab)
