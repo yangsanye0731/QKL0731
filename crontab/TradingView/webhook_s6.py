@@ -358,11 +358,12 @@ def main(choice):
         # 调用接口
         for i in range(1, 21):
             response = requests.get(
-                "https://data.eastmoney.com/dataapi/xuangu/list?st=POPULARITY_RANK&sr=1&ps=50&p=" + str(
-                    i) + "&sty=SECUCODE%2CSECURITY_CODE%2CSECURITY_NAME_ABBR%2CNEW_PRICE%2CCHANGE_RATE%2CVOLUME_RATIO%2CHIGH_PRICE%2CLOW_PRICE%2CPRE_CLOSE_PRICE%2CVOLUME%2CDEAL_AMOUNT%2CTURNOVERRATE%2CPOPULARITY_RANK&filter=(POPULARITY_RANK%3E0)(POPULARITY_RANK%3C%3D1000)&source=SELECT_SECURITIES&client=WEB")
-            data_history_item = pd.DataFrame(response.json().get("result").get("data"),
-                                             columns=['SECURITY_CODE'])
-            list = data_history_item['SECURITY_CODE'].to_numpy()
+                "https://push2.eastmoney.com/api/qt/clist/get?fid=f184&po=1&pz=50&pn="
+                + str(i) + "&np=1&fltt=2&invt=2&ut=b2884a393a59ad64002292a3e90d46a5&fs=m%3A0%2Bt%3A6%2Bf%3A!2%2Cm%3A0%2Bt%3A13%2Bf%3A!2%2Cm%3A0%2Bt%3A80%2Bf%3A!2%2Cm%3A1%2Bt%3A2%2Bf%3A!2%2Cm%3A1%2Bt%3A23%2Bf%3A!2%2Cm%3A0%2Bt%3A7%2Bf%3A!2%2Cm%3A1%2Bt%3A3%2Bf%3A!2&fields=f12%2Cf14%2Cf2%2Cf3%2Cf62%2Cf184%2Cf66%2Cf69%2Cf72%2Cf75%2Cf78%2Cf81%2Cf84%2Cf87%2Cf204%2Cf205%2Cf124%2Cf1%2Cf13")
+
+            data_history_item = pd.DataFrame(response.json().get("data").get("diff"),
+                                             columns=['f12'])
+            list = data_history_item['f12'].to_numpy()
             for item in list:
                 my_list.append(item)
 
