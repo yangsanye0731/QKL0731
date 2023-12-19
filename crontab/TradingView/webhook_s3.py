@@ -33,6 +33,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 logging.getLogger().setLevel(logging.INFO)
 import common_notion
 import pygame
+import common_zhibiao
 
 #######################################################################################################################
 ################################################################################################配置程序应用所需要环境PATH
@@ -82,11 +83,23 @@ def exec(codeItem):
 
     # 发送钉钉消息
     time_str_1 = time.strftime("%H:%M", time.localtime())
+    # 测试
+    # sell_strategy_test(table_item_data, codeItem, codeName, price, zhangdiefu)
     # 卖出策略_当触发高线，并下跌超过0.5%时卖出
     sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu)
     # 卖出策略_当触发线路反转时全部卖出
     sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu)
     return table_item_data
+
+
+def sell_strategy_test(table_item_data, codeItem, codeName, price, zhangdiefu):
+    # 是否自动操作
+    if "true" in get_auto_state("auto_sell"):
+        print("===========================")
+        logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
+                     + table_item_data[6] + 'D:' +
+                     table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
+        autosell(codeItem)
 
 
 def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
@@ -321,25 +334,42 @@ def autobuy(code):
 
 
 def autosell(code):
+    print("============================================")
     if "true" in get_auto_state("auto_sell"):
         zhangdiefu, price = common.zhangdiefu_and_price(code)
         data = common_mysqlUtil.select_sell()
         for i in range(len(data)):
             codeItem = str(data[i][0])
             if codeItem == code:
-                if data[i][2] == '中信证券' and data[i][3] > 100:
+                count = get_count(code, data[i][3])
+                if data[i][2] == '中信证券' and count > 100:
                     playsound()
                     time.sleep(30)
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
-                    zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
+                    zx_client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=count)
                     common_mysqlUtil.update_sell(data[i][4], "0")
 
-                if data[i][2] == '东方财富' and data[i][3] > 100:
+                if data[i][2] == '东方财富' and count > 100:
                     playsound()
                     time.sleep(30)
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
-                    client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=data[i][3])
+                    client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=count)
                     common_mysqlUtil.update_sell(data[i][4], "0")
+
+
+def get_count(codeItem, cur_count):
+    s_count = 0
+    if cur_count > 100:
+        data_history = ts.get_k_data(codeItem, ktype='D')
+        closeArray = num.array(data_history['close'])
+        doubleCloseArray = num.asarray(closeArray, dtype='double')
+        k0, d0 = common_zhibiao.SKDJ_zhibiao(data_history, doubleCloseArray)
+
+        if k0 is not None:
+            print(k0[len(k0) - 1])
+            s_count = cur_count * k0[len(k0) - 1] / 100
+            s_count = int(round(s_count, -2))
+    return s_count
 
 
 def playsound():
