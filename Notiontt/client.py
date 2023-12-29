@@ -28,10 +28,10 @@ def execute_remote_command(command):
     conn = rpyc.connect("localhost", 18861)  # 替换为服务器的IP地址
     conn._config['sync_request_timeout'] = 12000
     remote_service = conn.root
-    common_mysqlUtil.update_config("auto_sell", "false")
+    # common_mysqlUtil.update_config("auto_sell", "false")
     result = remote_service.exposed_execute_command(command)
     conn.close()
-    common_mysqlUtil.update_config("auto_sell", "true")
+    # common_mysqlUtil.update_config("auto_sell", "true")
     return result
 
 

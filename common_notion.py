@@ -79,7 +79,26 @@ def find_config_item_from_database(database_id):
         dic[name] = value
 
     logging.debug("配置项集合：%s", dic)
+    # print(dic)
     return dic
+
+
+# 工作台新闻事件
+def create_content_gongzuotai_news(database_id, title, leixing, laiyuan):
+    database = Database(
+        integrations_token=integrations_token
+    )
+    database.retrieve_database(
+        database_id=database_id, get_properties=True
+    )
+
+    PROPERTY = Properties()
+    PROPERTY.set_title("title", title)
+    PROPERTY.set_multi_select("类型", leixing)
+    PROPERTY.set_rich_text("来源", laiyuan)
+    PROPERTY.set_date("时间", time.strftime("%Y%m%d", time.localtime()))
+    P = Page(integrations_token=integrations_token)
+    P.create_page(database_id=database_id, properties=PROPERTY)
 
 
 # find_config_item_from_database('18fcc6b54f574e97b1d6fe907260d37a')
@@ -88,3 +107,6 @@ def find_config_item_from_database(database_id):
 # create_content(database_id="355a99d2c49a49749fc329cc2606fcda", title="codeName",
 #                ce_lve_lei_xing='60天双均线金叉', tu_pian=None,
 #                mark="", gai_nian="雪球概念", code=None, create_time="2023-08-01")
+
+# create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title="事件名称",
+#                                leixing='S', laiyuan="开源")

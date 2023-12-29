@@ -337,6 +337,8 @@ def autosell(code):
     print("============================================")
     if "true" in get_auto_state("auto_sell"):
         zhangdiefu, price = common.zhangdiefu_and_price(code)
+        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=code,
+                               leixing='S', laiyuan="Python")
         data = common_mysqlUtil.select_sell()
         for i in range(len(data)):
             codeItem = str(data[i][0])
