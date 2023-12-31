@@ -89,6 +89,8 @@ def exec(codeItem):
     sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu)
     # 卖出策略_当触发线路反转时全部卖出
     sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu)
+    # 买入策略_小时线ma10均线开始反转
+    buy_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu)
     return table_item_data
 
 
@@ -140,6 +142,21 @@ def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
                          + table_item_data[6] + 'D:' +
                          table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
             autosell(codeItem)
+
+
+def buy_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
+    # 小时线ma10均线开始反转
+    if "底部" in table_item_data[6]:
+        common.dingding_markdown_msg_03(
+            '🔋🔋【自动买入】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
+            '🔋🔋【自动买入】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
+
+        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=codeItem,
+                                                     leixing='B', laiyuan="Python")
 
 
 def exec_d(codeItem, zhangdiefu, price, codeName):
@@ -217,7 +234,8 @@ def exec_d(codeItem, zhangdiefu, price, codeName):
     ma10_W = ta.SMA(doubleCloseArray_W, timeperiod=10)
     sma10_W = ta.EMA(ma10_W, timeperiod=10)
     state_W = state(ma10_W, sma10_W)
-
+    # 0：名称 1：涨跌幅 2：价格 3：小时线-3 4：小时线-2 5：小时线-1 6：小时线10均线状态 7：日线-3 8：日线-2 9：日线-1
+    # 10：日线10均线状态 11：小时唐奇安线状态 12：日线唐奇安线状态 13：唐奇安小时线上轨 14：唐奇安日线上轨 15：周线10均线状态
     table_item_data = [codeName, zhangdiefu, price, ma10_60[-3], ma10_60[-2], ma10_60[-1], state_60, ma10[-3], ma10[-2],
                        ma10[-1], state_D, state_dc_h, state_dc_d, dc_high_60[-1], dc_high[-1], state_W]
 
