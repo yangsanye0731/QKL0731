@@ -12,6 +12,7 @@ curPath1 = os.path.abspath(os.path.dirname(__file__))
 rootPath1 = os.path.split(curPath1)[0]
 sys.path.append(rootPath1)
 
+tradingview_path = os.path.join(rootPath1, 'crontab', 'TradingView')
 rootPath_sell = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s3.py')
 rootPath_buy = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s2.py')
 rootPath_dongfangcaifu_top1000 = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s5.py')
@@ -43,7 +44,7 @@ def exe_dfcf_top1000():
     while True:
         current_time = time.strftime("%H:%M:%S")
         if start_time_0 <= current_time < end_time_0 or start_time_1 <= current_time < end_time_1:
-            result = subprocess.Popen(["python", rootPath_dongfangcaifu_top1000] + args_1)
+            result = subprocess.Popen(["python", rootPath_dongfangcaifu_top1000] + args_1, cwd=tradingview_path)
             output = result.stdout
             print(output)
             break
