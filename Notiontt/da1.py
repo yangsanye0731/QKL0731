@@ -30,7 +30,7 @@ print(output)
 
 # ###########################################################################################################启动
 
-# ###########################################################################################################启动 15点半启动
+# ###########################################################################################################启动 11：40、15：30启动
 def exe_dfcf_top1000():
     args_1 = ['1']
 
@@ -39,7 +39,6 @@ def exe_dfcf_top1000():
 
     start_time_1 = "15:30:00"
     end_time_1 = "16:00:00"
-
 
     while True:
         current_time = time.strftime("%H:%M:%S")
@@ -69,7 +68,26 @@ def exe_sell():
         time.sleep(150)  # 暂停1分钟，避免无限循环过快消耗资源
 
 
+# ###########################################################################################################循环校验 买入
+def exe_buy():
+    args = ['1']
+    start_time = "09:00:00"
+    mid_time1 = "11:30:00"
+    mid_time2 = "13:00:00"
+    end_time = "16:00:00"
+    while True:
+        current_time = time.strftime("%H:%M:%S")
+        if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
+            result = subprocess.Popen(["python", rootPath_buy] + args)
+            output = result.stdout
+            print(output)
+
+        time.sleep(150)  # 暂停1分钟，避免无限循环过快消耗资源
+
+
 t1 = threading.Thread(target=exe_dfcf_top1000)
 t2 = threading.Thread(target=exe_sell)
+t3 = threading.Thread(target=exe_buy)
 t1.start()
 t2.start()
+t3.start()
