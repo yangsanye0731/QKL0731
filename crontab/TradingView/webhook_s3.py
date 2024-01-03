@@ -60,13 +60,13 @@ jsonDicCode1 = [('399001', '深证成指'), ('399006', '创业板指'), ('399231
                 ('512480', '半导体ETF'), ('512760', '半导体50ETF'), ('512930', 'AIETF'), ('515050', '5GETF'),
                 ('512690', '酒ETF'), ('518880', '黄金ETF'), ('515110', '一带一路国企ETF'), ('159995', '芯片ETF'),
                 ('515000', '科技ETF'), ('515030', '新能源车ETF'), ('512170', '医疗ETF'), ('512660', '军工ETF'),
-                ('515880', '通信ETF'), ('515980', '人工智能ETF')]
+                ('515880', '通信ETF'), ('515980', '人工智能ETF'), ('159852', '软件ETF'), ('159840', '锂电池ETF')]
 
 
 #######################################################################################################################
 ###########################################################################################################跨域5周线策略
 def exec(codeItem):
-    if codeItem.startswith("399") or codeItem.startswith("51"):
+    if codeItem.startswith("399") or codeItem.startswith("51") or codeItem.startswith("15"):
         for key, value in jsonDicCode1:
             if key == codeItem:
                 codeName = value
@@ -101,7 +101,7 @@ def sell_strategy_test(table_item_data, codeItem, codeName, price, zhangdiefu):
         logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                      + table_item_data[6] + 'D:' +
                      table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-        autosell(codeItem)
+        autosell(codeItem, codeName)
 
 
 def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
@@ -122,7 +122,7 @@ def sell_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
             logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                          + table_item_data[6] + 'D:' +
                          table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-            autosell(codeItem)
+            autosell(codeItem, codeName)
 
 
 def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
@@ -141,7 +141,7 @@ def sell_strategy2(table_item_data, codeItem, codeName, price, zhangdiefu):
             logging.info('🔋🔋【自动卖出】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:'
                          + table_item_data[6] + 'D:' +
                          table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
-            autosell(codeItem)
+            autosell(codeItem, codeName)
 
 
 def buy_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
@@ -155,8 +155,7 @@ def buy_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
             table_item_data[6] + 'D:' +
             table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
 
-        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=codeItem,
-                                                     leixing='B', laiyuan="Python")
+        insert_operate_item(codeItem, codeName, "B")
 
 
 def exec_d(codeItem, zhangdiefu, price, codeName):
@@ -351,12 +350,11 @@ def autobuy(code):
             client.auto_operate(p_type="b", p_code=code, p_price=price, p_count=1000)
 
 
-def autosell(code):
+def autosell(code, codeName):
     print("============================================")
     if "true" in get_auto_state("auto_sell"):
         zhangdiefu, price = common.zhangdiefu_and_price(code)
-        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=code,
-                               leixing='S', laiyuan="Python")
+        insert_operate_item(code, codeName, "S")
         data = common_mysqlUtil.select_sell()
         for i in range(len(data)):
             codeItem = str(data[i][0])
@@ -375,6 +373,22 @@ def autosell(code):
                     zhangdiefu, price = common.zhangdiefu_and_price(code)
                     client.auto_operate(p_type="s", p_code=code, p_price=price, p_count=count)
                     common_mysqlUtil.update_sell(data[i][4], "0")
+
+
+def insert_operate_item(code, codeName, type):
+    if ("002230" in code or "159852" in code or "399006" in code) and "S" in type:
+        # 科大讯飞
+        playsound()
+        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=code,
+                                                 name=codeName, leixinglist=[type,"科大讯飞"], laiyuan="Python")
+    elif ("002192" in code or "159840" in code or "399006" in code) and "S" in type:
+        # 融捷股份
+        playsound()
+        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=code,
+                                                 name=codeName, leixinglist=[type,"融捷股份"], laiyuan="Python")
+    else:
+        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=code,
+                                                     name=codeName, leixing=type, laiyuan="Python")
 
 
 def get_count(codeItem, cur_count):
