@@ -14,7 +14,7 @@ sys.path.append(rootPath1)
 
 tradingview_path = os.path.join(rootPath1, 'crontab', 'TradingView')
 rootPath_sell = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s3.py')
-rootPath_buy = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s2.py')
+rootPath_buy = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s1.py')
 rootPath_dongfangcaifu_top1000 = os.path.join(rootPath1, 'crontab', 'TradingView', 'webhook_s5.py')
 rootPath_server = os.path.join(rootPath1, 'Notiontt', 'server.py')
 
@@ -57,7 +57,7 @@ def exe_sell():
     start_time = "09:00:00"
     mid_time1 = "11:30:00"
     mid_time2 = "13:00:00"
-    end_time = "16:00:00"
+    end_time = "22:00:00"
     while True:
         current_time = time.strftime("%H:%M:%S")
         if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
@@ -74,7 +74,7 @@ def exe_buy():
     start_time = "09:00:00"
     mid_time1 = "11:30:00"
     mid_time2 = "13:00:00"
-    end_time = "16:00:00"
+    end_time = "20:00:00"
     while True:
         current_time = time.strftime("%H:%M:%S")
         if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
@@ -82,7 +82,7 @@ def exe_buy():
             output = result.stdout
             print(output)
 
-        time.sleep(150)  # 暂停1分钟，避免无限循环过快消耗资源
+        time.sleep(270)  # 暂停1分钟，避免无限循环过快消耗资源
 
 
 t1 = threading.Thread(target=exe_dfcf_top1000)
