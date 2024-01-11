@@ -21,6 +21,7 @@ rootPath_server = os.path.join(rootPath1, 'Notiontt', 'server.py')
 # main_script.py
 import subprocess
 import threading
+import auto_client
 
 # ###########################################################################################################启动 server
 result = subprocess.Popen(["python", rootPath_server])
@@ -57,7 +58,7 @@ def exe_sell():
     start_time = "09:00:00"
     mid_time1 = "11:30:00"
     mid_time2 = "13:00:00"
-    end_time = "22:00:00"
+    end_time = "15:00:00"
     while True:
         current_time = time.strftime("%H:%M:%S")
         if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
@@ -74,7 +75,7 @@ def exe_buy():
     start_time = "09:00:00"
     mid_time1 = "11:30:00"
     mid_time2 = "13:00:00"
-    end_time = "20:00:00"
+    end_time = "15:00:00"
     while True:
         current_time = time.strftime("%H:%M:%S")
         if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
@@ -85,9 +86,26 @@ def exe_buy():
         time.sleep(270)  # 暂停1分钟，避免无限循环过快消耗资源
 
 
+# ###########################################################################################################NOtion 执行
+def exe_auto_notion():
+    args = ['1']
+    start_time = "09:00:00"
+    mid_time1 = "11:30:00"
+    mid_time2 = "13:00:00"
+    end_time = "21:00:00"
+    while True:
+        current_time = time.strftime("%H:%M:%S")
+        if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
+            auto_client.op_exe()
+
+        time.sleep(120)  # 暂停1分钟，避免无限循环过快消耗资源
+
+
 t1 = threading.Thread(target=exe_dfcf_top1000)
 t2 = threading.Thread(target=exe_sell)
 t3 = threading.Thread(target=exe_buy)
+t4 = threading.Thread(target=exe_auto_notion)
 t1.start()
 t2.start()
 t3.start()
+t4.start()
