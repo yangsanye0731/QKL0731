@@ -84,7 +84,7 @@ def find_config_item_from_database(database_id):
 
 
 # 工作台新闻事件
-def create_content_gongzuotai_news(database_id, title, leixing, laiyuan):
+def create_content_gongzuotai_news(database_id, title, name, laiyuan, leixing=None, leixinglist=None):
     database = Database(
         integrations_token=integrations_token
     )
@@ -95,6 +95,9 @@ def create_content_gongzuotai_news(database_id, title, leixing, laiyuan):
     PROPERTY = Properties()
     PROPERTY.set_title("title", title)
     PROPERTY.set_multi_select("类型", leixing)
+    if leixinglist is not None:
+        PROPERTY.set_multi_select("类型", leixinglist)
+    PROPERTY.set_rich_text("关联公司", name)
     PROPERTY.set_rich_text("来源", laiyuan)
     PROPERTY.set_date("时间", time.strftime("%Y%m%d", time.localtime()))
     P = Page(integrations_token=integrations_token)
@@ -109,4 +112,4 @@ def create_content_gongzuotai_news(database_id, title, leixing, laiyuan):
 #                mark="", gai_nian="雪球概念", code=None, create_time="2023-08-01")
 
 # create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title="事件名称",
-#                                leixing='S', laiyuan="开源")
+#                                name='11111', leixinglist=["S", "B"], laiyuan="开源")
