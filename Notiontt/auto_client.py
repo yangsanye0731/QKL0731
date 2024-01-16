@@ -46,7 +46,7 @@ def query_database_by_op_status(status):
                                     "and": [
                                         {
                                             "property": "执行状态",
-                                            "select": {
+                                            "checkbox": {
                                                 "equals": status
                                             }
                                         },
@@ -67,7 +67,7 @@ def query_database_by_op_status(status):
             command = select_item["plain_text"]
         PROPERTY = Properties()
         PROPERTY.set_rich_text("命令", command)
-        PROPERTY.set_select("执行状态", "status")
+        PROPERTY.set_checkbox("执行状态", status)
 
         p_array.append(PropertyItem(id, command, PROPERTY))
 
@@ -77,14 +77,14 @@ def query_database_by_op_status(status):
 def op_exe():
     print("执行自动Notion命令")
     # 获取待执行的列表
-    p_array = query_database_by_op_status("待执行")
+    p_array = query_database_by_op_status(False)
     for propertyItem in p_array:
         # 执行命令
         print("执行命令：" + propertyItem.command)
         execute_remote_command(propertyItem.command)
         # 更新状态
         PROPERTY = propertyItem.property
-        PROPERTY.set_select("执行状态", "已执行")
+        PROPERTY.set_checkbox("执行状态", True)
         P = Page(integrations_token="secret_rxaAzcdjzdVq4pe1hrkqkhzxJlm2isBh96Z4rxdB9Cc")
         P.update_page(page_id=propertyItem.id, properties=PROPERTY)
 
