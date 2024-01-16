@@ -95,18 +95,37 @@ def exec(codeItem):
 
     # 发送钉钉消息
     time.sleep(0.5)
-    common.dingding_markdown_msg_03(
-        chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
-            6] + ' D:' +
-        table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
-        + " SKD:" + table_item_data[14],
-        chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
-            6] + ' D:' +
-        table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
-        + " SKD:" + table_item_data[14]
-        + "\n\n> ![screenshot](" + image_url + ")"
-        + "\n\n> ![screenshot](" + image_url2 + ")")
+    if "399006" in codeItem or "002230" in codeItem:
+        common.dingding_markdown_msg_03(
+            chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+                6] + ' D:' +
+            table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
+            + " SKD:" + table_item_data[14],
+            chuangyeban_60_qushi + codeName + codeItem + ' ' + price + ' ' + zhangdiefu + ' H:' + table_item_data[
+                6] + ' D:' +
+            table_item_data[10] + ' W:' + table_item_data[15] + '\n唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12]
+            + " SKD:" + table_item_data[14]
+            + "\n\n> ![screenshot](" + image_url + ")"
+            + "\n\n> ![screenshot](" + image_url2 + ")")
+
+    # 买入策略_小时线ma10均线开始反转
+    buy_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu)
     return image_path, table_item_data
+
+
+def buy_strategy1(table_item_data, codeItem, codeName, price, zhangdiefu):
+    # 小时线ma10均线开始反转
+    if "底部" in table_item_data[6]:
+        common.dingding_markdown_msg_03(
+            '🔋🔋【自动买入】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12],
+            '🔋🔋【自动买入】🔋🔋' + codeName + codeItem + '当:' + price + ' ' + zhangdiefu + ' H:' +
+            table_item_data[6] + 'D:' +
+            table_item_data[10] + ' 唐H:' + table_item_data[11] + ' 唐日:' + table_item_data[12])
+
+        common_notion.create_content_gongzuotai_news(database_id="d5b07ccfeae24968a0105689d0cc8786", title=codeItem,
+                                                     name=codeName, leixing='B', laiyuan="Python")
 
 
 def exec_d(codeItem, zhangdiefu, price, codeName):
@@ -249,7 +268,7 @@ def state(ma10, sma10):
 
 def update_all_trend(codeItem, table_item_data):
     if codeItem == '399006':
-        global chuangyeban_60_qushi # 声明要使用全局变量
+        global chuangyeban_60_qushi  # 声明要使用全局变量
         if "上升" in table_item_data[6] or "上穿" in table_item_data[6] or "底部" in table_item_data[6]:
             chuangyeban_60_qushi = "🔴"
         if "下降" in table_item_data[6] or "下穿" in table_item_data[6] or "顶部" in table_item_data[6]:
