@@ -9,6 +9,7 @@ from pathlib import Path
 import ocr_util as ocr
 import requests
 import pandas as pd
+from prettytable import PrettyTable
 
 #######################################################################################################################
 # ############################################################################################### 配置程序应用所需要环境PATH
@@ -92,6 +93,10 @@ def minimize(title_str):
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
+
+        preTab = PrettyTable()
+        headers = ["name", "zhibiao"]
+
         title_str = "399006"
         # 最大化窗口
         maximize(title_str)
@@ -112,22 +117,17 @@ if __name__ == "__main__":
             print(codeItem)
             # tradingView技术指标
             text = image(codeItem)
-
-            # # 唐奇安小时线、唐奇安日线
-            # time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-            # zhangdiefu, price = common.zhangdiefu_and_price(codeItem)
-            # table_item_data = common_strategy.code_matrix_table(codeItem, zhangdiefu, price, "")
-            # state_dc_h = table_item_data[11]
-            # if state_dc_h is None:
-            #     state_dc_h = ""
-            # state_dc_d = table_item_data[12]
-            # if state_dc_d is None:
-            #     state_dc_d = ""
-            # if text is None:
-            #     text = ""
-            # print(state_dc_h)
-            # print(state_dc_d)
             print(text)
+            table_item_data = [codeItem, text]
+            preTab.add_row(table_item_data)
+
+        preTab.field_names = headers
+        df = pd.DataFrame(preTab._rows, columns=preTab.field_names)
+        timeStr1 = time.strftime("%Y%m%d%H", time.localtime())
+        excel_file_path = "logs_tradingview_" + timeStr1 + " .xlsx"
+        df.to_excel(excel_file_path, index=False)
+        print(preTab)
+
 
         # 最小化窗口
         minimize(title_str)
