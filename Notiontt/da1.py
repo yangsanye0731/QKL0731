@@ -89,16 +89,16 @@ def exe_buy():
 # ###########################################################################################################NOtion 执行
 def exe_auto_notion():
     args = ['1']
-    start_time = "09:00:00"
+    start_time = "08:00:00"
     mid_time1 = "11:30:00"
     mid_time2 = "13:00:00"
-    end_time = "21:00:00"
+    end_time = "15:00:00"
     while True:
         current_time = time.strftime("%H:%M:%S")
         if start_time <= current_time < mid_time1 or mid_time2 <= current_time < end_time:
             auto_client.op_exe()
 
-        time.sleep(120)  # 暂停1分钟，避免无限循环过快消耗资源
+        time.sleep(30)  # 暂停1分钟，避免无限循环过快消耗资源
 
 
 t1 = threading.Thread(target=exe_dfcf_top1000)
